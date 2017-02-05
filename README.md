@@ -66,10 +66,10 @@ class RecentProductsWidget extends BaseWidget
     protected $minifyOutput = true; // minifies the html before storing it in the cache to save storage space.
 
     // The data returned here would be available in widget view file.
-    protected function data($param1=null)
+    protected function data($param1=5)
     {
         // It's the perfect place to query the database for your widget...
-        return Product::all();
+        return Product::orderBy('id', 'desc')->take($param1)->get();;
 
     }
 }
@@ -113,7 +113,7 @@ And then you can render it in your view (home.blade.php) like this:
     <br>
     {!! $recentProductsWidget !!}
     <p> if you need to pass parameters to data method :</p>
-    {!! $recentProductsWidget('param1') !!}
+    {!! $recentProductsWidget(10) !!}
 </div>
 ```
 
