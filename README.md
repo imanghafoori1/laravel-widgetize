@@ -50,6 +50,8 @@ AAAAAAAAAhh...
 
 ###Example : How to create a Widget?
 
+>__You can use : `php artisan make:widget MyWidget` to make your widget class.__
+
 Sample widget class :
 ```php
 namespace App\Widgets;
