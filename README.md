@@ -25,8 +25,8 @@ AAAAAAAAAhh...
 2. It helps you to conforms to `Open-closed principle`. (Because if you want to add a widget on your page you do not need to touch the controller code. Instead you create a new widget class from scratch.)
 3. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
 4. It executes the widget code `Lazily`. Meaning that the widget's data method `protected function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `{!! $widgetObj !!}`, So for example if you comment out `{!! $widgetObj !!}` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
-5. It optionally `minifies the output` of the widget. Removing the white spaces.
-6. It support the `nested widgets` tree structure. (Use can inject and use widgets within widgets)
+5. It optionally `minifies` the output of the widget. Removing the white spaces. (In order to save cache storage space and bandwidth)
+6. It support the `nested widgets` tree structure. (Use can inject and use widgets within widgets.)
 
 
 
