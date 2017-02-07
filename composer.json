@@ -3,7 +3,6 @@
     "description": "A minimal package to give a better structure and caching opportunity for your laravel apps.",
     "type": "project",
 	"license": "MIT",
-	"version": "1.0.0",
     "authors": [
         {
             "name": "imanghafoori",
