@@ -14,7 +14,7 @@ abstract class BaseWidget
     protected $minifyOutput;
     protected $cacheLifeTime = 0;
     protected $html;
-    protected $context_as = null;
+    protected $context_as = '$data';
     
     protected function addIdentifierToHtml()
     {
@@ -45,8 +45,8 @@ abstract class BaseWidget
     private function getViewName()
     {
 	if ($this->template === null) {
-            $className = str_replace('App\\Widgets\\','', get_called_class());
-            $className = str_replace(['\\','/'],'.', $className);
+            $className = str_replace('App\\Widgets\\','', get_called_class()); // class name without namespace.
+            $className = str_replace(['\\','/'],'.', $className); // replace slashes with dots
             return 'Widgets::'.$className;
         }
 	       
@@ -59,10 +59,10 @@ abstract class BaseWidget
 //                '/<!--[^\[](.*?)[^\]]-->/s' => '',
 "/<\?php/"   => '<?php ',
 "/\n([\S])/" => '$1',
-"/\r/"       => '',
-"/\n/"       => '',
-"/\t/"       => '',
-"/\s+/"      => ' ',
+"/\r/"       => '', // remove carrage return
+"/\n/"       => '', // remove new lines
+"/\t/"       => '', // remove tab
+"/\s+/"      => ' ', // remove spaces
         ];
         
         $this->html = preg_replace(array_keys($replace), array_values($replace), $this->html);
@@ -78,7 +78,7 @@ abstract class BaseWidget
     {
         $this->html = view($this->getViewName(), [$this->contextVariable() => $data ])->render();
         
-        if ($this->minifyOutput) {
+        if ($this->minifyOutput == true) {
             $this->minifyHtml();
         }
         $this->addIdentifierToHtml();
