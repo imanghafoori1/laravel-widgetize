@@ -26,19 +26,29 @@ abstract class BaseWidget
 "<!-- '$name' Widget End --> <!--   --> <!-- ~ -->
 ";
     }
-    
+	
+    /**
+	 * this method is called when you try to print the object like an string in blade files.
+	 * like this : {!! $myWidgetObj !!}
+	 */ 
     public function __toString()
     {
         return $this->__invoke();
     }
-    
+	
+	 /**
+	 * this method is called when you try to invoke the object like a function in blade files.
+	 * like this : {!! $myWidgetObj('param1') !!}
+	 */ 
     public function __invoke()
     {
+		
         $phpCode = function () {
-            $data = $this->data(func_get_args());
-            return $this->renderTemplate($data);
+            $data = $this->data(func_get_args()); // Here we call the data method on the widget class.
+            return $this->renderTemplate($data); // Then render the template with the data.
         };
         
+		// We first chack the cache before trying to run the expensive $phpCode...
         return $this->cacheResult($phpCode);
     }
     
@@ -78,9 +88,13 @@ abstract class BaseWidget
     {
         $this->html = view($this->getViewName(), [$this->contextVariable() => $data ])->render();
         
+		
+		// we try to minify the html before storing it in cache.
         if ($this->minifyOutput == true) {
             $this->minifyHtml();
         }
+		
+		// we add some comments to be able to easily identify the widget in browser's developer tool.
         $this->addIdentifierToHtml();
         
         return $this->html;
@@ -104,8 +118,9 @@ abstract class BaseWidget
     
     private function contextVariable()
     {
+	
         if ($this->context_as){
-            return $varName = str_replace('$', '', $this->context_as);
+            return $varName = str_replace('$', '', $this->context_as); // removes the $ sign.
         }
         return 'data';
     }
