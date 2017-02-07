@@ -9,6 +9,7 @@ class DummyClass extends BaseWidget
     protected $template = null;
     protected $minifyOutput = true;
     protected $cacheLifeTime = 1;
+	protected $friendlyName = 'DummyClass';
     protected $context_as = '$data';
 	
 	protected data()
