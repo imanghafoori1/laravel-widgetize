@@ -2,9 +2,17 @@
 
 namespace DummyNamespace;
 
-use Illuminate\Database\Eloquent\Model;
+use Imanghafoori\Widgets\BaseWidget;
 
-class DummyClass extends BaseRepository
+class DummyClass extends BaseWidget
 {
-    //
+    protected $template = null;
+    protected $minifyOutput = true;
+    protected $cacheLifeTime = 1;
+    protected $context_as = '$data';
+	
+	protected data()
+	{
+		return [];
+	}
 }

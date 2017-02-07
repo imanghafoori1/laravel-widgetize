@@ -29,7 +29,7 @@ class WidgetsServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		$this->app->singleton('command.imanghafoori.widget', function ($app) {
-            return $app['imanghafoori\Widgets\WidgetGenerator'];
+            return $app['Imanghafoori\Widgets\WidgetGenerator'];
         });
 		
         $this->commands('command.imanghafoori.widget');

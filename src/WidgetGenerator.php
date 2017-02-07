@@ -1,6 +1,6 @@
 <?php
 
-namespace 
+namespace Imanghafoori\Widgets;
 
 use Illuminate\Console\GeneratorCommand as LaravelGeneratorCommand;
 
@@ -11,8 +11,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
      *
      * @var string
      */
-    protected $signature = 'make:widget
-    	{name : The name of the widget class}';
+    protected $signature = 'make:widget	{name : The name of the widget class}';
 
     /**
      * The console command description.
