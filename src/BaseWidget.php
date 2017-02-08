@@ -10,10 +10,10 @@ abstract class BaseWidget
 {
     abstract protected function data();
     
-    protected $template      = null;
+    protected $template = null;
     protected $minifyOutput;
     protected $cacheLifeTime = 0;
-    protected $html;
+    private $html;
     protected $context_as = '$data';
     
     protected function addIdentifierToHtml()
@@ -33,24 +33,28 @@ abstract class BaseWidget
 	 */ 
     public function __toString()
     {
-        return $this->__invoke();
+        return $this->generateHtml();
     }
 	
 	 /**
-	 * this method is called when you try to invoke the object like a function in blade files.
+	 * This method is called when you try to invoke the object like a function in blade files.
 	 * like this : {!! $myWidgetObj('param1') !!}
 	 */ 
     public function __invoke()
     {
-		
-        $phpCode = function () {
+		return $this->generateHtml(func_get_args());
+    }
+	
+	private function generateHtml()
+    {
+		$phpCode = function () {
             $data = $this->data(func_get_args()); // Here we call the data method on the widget class.
-            return $this->renderTemplate($data); // Then render the template with the data.
+            return $this->renderTemplate($data); // Then render the template with the returned data.
         };
         
 		// We first chack the cache before trying to run the expensive $phpCode...
         return $this->cacheResult($phpCode);
-    }
+	}
     
     private function getViewName()
     {
@@ -86,15 +90,16 @@ abstract class BaseWidget
     
     private function renderTemplate($data)
     {
+		// Here we render the view file to raw html.
         $this->html = view($this->getViewName(), [$this->contextVariable() => $data ])->render();
         
 		
-		// we try to minify the html before storing it in cache.
+		// We may try to minify the html before storing it in cache to save space.
         if ($this->minifyOutput == true) {
             $this->minifyHtml();
         }
 		
-		// we add some comments to be able to easily identify the widget in browser's developer tool.
+		// We add some comments to be able to easily identify the widget in browser's developer tool.
         $this->addIdentifierToHtml();
         
         return $this->html;
@@ -102,6 +107,10 @@ abstract class BaseWidget
     
     private function cacheResult($phpCode)
     {
+		if(app()->environment('testing') or $this->cacheLifeTime === 0){
+			return $phpCode();
+		}
+		
         if ($this->cacheLifeTime > 0) {
             return Cache::remember($this->makeCacheKey(func_get_args()), $this->cacheLifeTime, $phpCode);
         }
@@ -109,11 +118,6 @@ abstract class BaseWidget
         if ($this->cacheLifeTime == 'forever' or $this->cacheLifeTime < 0) {
             return Cache::rememberForever($this->makeCacheKey(func_get_args()), $phpCode);
         }
-        
-        if ($this->cacheLifeTime === 0) {
-            return $phpCode();
-        }
-        
     }
     
     private function contextVariable()
