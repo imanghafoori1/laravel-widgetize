@@ -6,17 +6,17 @@
 
 
 ### So what is our problem ?
-#### Problem 1 : Controllers get crowded :(
->Imagine An online shop like amazon which shows the list of products (in the main column) popular products, related products,etc (in the sidebar), user data and basket data (in the navbar) and a tree of product categories (in the menu) and etc... And in traditional MVC model you have a single controller method to provide all the widgets with data. You can immidiately see that you are violating the SRP (Single Responsibility Priciple)!!! The trouble is worse when the client changes his mind over time and asks the deveploper to add, remove and modify those widgets on the page. And it always happens. Clients change their minds.The developoer's job is to be ready to cop with that as effortlessly as possible.
+#### Problem 1 : Controllers easily get crowded :(
+>Imagine An online shop like amazon which shows the list of products (in the main column) popular products, related products,etc (in the sidebar), user data and basket data (in the navbar) and a tree of product categories (in the menu) and etc... And in traditional MVC model you have a single controller method to provide all the widgets with data. You can immidiately see that you are violating the SRP (Single Responsibility Priciple)!!! The trouble is worse when the client changes his mind over time and asks the deveploper to add, remove and modify those widgets on the page. And it always happens. Clients change their minds.The developoer's job is to be ready to cope with that as effortlessly as possible.
 
-#### Problem 2 : Caching is hard :( 
+#### Problem 2 : Page caching is always hard :( 
 >Trying to cache the pages which include user specific data (for example the username on the top menu) is a often fruitless. Because each user sees slightly different page from other users. Or in cases when we have some parts of the page(recent products section) which update frequently and some other parts which change rarly... we have to expire the entire page cache to match the most most frequently updated one. :(
 AAAAAAAAAhh...
 
 ========================
 
 #### So, How to fight against those ? ;(
->__The main idea is simple... Each widget should have it's own controller class, view partial and cache config, isolated from others.__
+>__The main idea is simple, Instead of one controller method to handle all widgets of the page, Each widget should have it's own controller class, view partial and cache config, isolated from others.__
 >That's it !! :)
 
 ### How this package is going to help us ? (@_@)
