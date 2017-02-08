@@ -141,5 +141,6 @@ The actual result is the same piece of HTML, which is the result of rendering th
 Pro tip: After `{!! $myWidget('param1') !!}` is executed in your view file, the `data` method is called on your widget class with the correspoding parameters. `But only if it is Not already cached` or the `protected $cacheLifeTime` is set to 0.
 If the widget HTML output is already in the cache it prints out the HTML with out executing `data` method (hence performing database queries) or even rendering the blade file.
 You may want to look at the BaseWidget source code and read the comments for more information.
+
 =============
 
