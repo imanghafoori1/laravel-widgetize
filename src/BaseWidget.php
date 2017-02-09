@@ -9,14 +9,12 @@ use Illuminate\Support\Facades\Cache;
 abstract class BaseWidget
 {
     protected $template = null;
-    protected $minifyOutput = null;
+    protected $minifyOutput = true;
     protected $cacheLifeTime = 0;
     protected $contextAs = '$data';
     protected $presenter = 'default';
     private $html;
     private $viewData;
-
-    abstract protected function data();
 
     /**
      * BaseWidget constructor.
@@ -27,6 +25,27 @@ abstract class BaseWidget
         $this->normalizePresenter();
         $this->normalizeTemplate();
         $this->normalizeContextAs();
+    }
+
+    private function normalizePresenter()
+    {
+        if ($this->presenter === 'default') {
+            $this->presenter = get_called_class() . 'Presenter';
+        }
+    }
+
+    private function normalizeTemplate()
+    {
+        if ($this->template === null) {
+            $className = str_replace('App\\Widgets\\', '', get_called_class()); // class name without namespace.
+            $className = str_replace(['\\', '/'], '.', $className); // replace slashes with dots
+            $this->template = 'Widgets::' . $className;
+        }
+    }
+
+    private function normalizeContextAs()
+    {
+        $this->contextAs = str_replace('$', '', $this->contextAs); // removes the $ sign.
     }
 
     /**
@@ -40,21 +59,12 @@ abstract class BaseWidget
         return $this->generateHtml(...$args);
     }
 
-    /**
-     * This method is called when you try to print the object like an string in blade files.
-     * like this : {!! $myWidgetObj !!}
-     */
-    public function __toString()
-    {
-        return $this->generateHtml();
-    }
-
     private function generateHtml(...$args)
     {
         // Everything inside this function is executed only when the cache is not available.
-        $phpCode = function () use($args){
-            $data = $this->prepareDataForView($args);
-            return $this->renderTemplate($data); // Then render the template with the returned data.
+        $phpCode = function () use ($args) {
+            $this->prepareDataForView($args);
+            return $this->renderTemplate(); // Then render the template with the returned data.
         };
 
         $key = $this->makeCacheKey($args);
@@ -72,9 +82,12 @@ abstract class BaseWidget
     {
         $this->viewData = $this->data(...$args); // Here we call the data method on the widget class.
         if (class_exists($this->presenter)) {
+            // We make an object and call the `present` method on it.
             $this->viewData = resolve($this->presenter)->present($this->viewData);
         }
     }
+
+    abstract protected function data();
 
     private function renderTemplate()
     {
@@ -82,12 +95,14 @@ abstract class BaseWidget
         $this->html = view($this->template, [$this->contextAs => $this->viewData])->render();
 
         // We may try to minify the html before storing it in cache to save space.
-        if ($this->minifyOutput == true) {
+        if ($this->minifyOutput == true and env('WIDGET_MINIFICATION', false)) {
             $this->minifyHtml();
         }
 
         // We add some comments to be able to easily identify the widget in browser's developer tool.
-        $this->addIdentifierToHtml();
+        if(env('WIDGET_IDENTIFIER',false)){
+            $this->addIdentifierToHtml();
+        }
 
         return $this->html;
     }
@@ -125,38 +140,30 @@ abstract class BaseWidget
     private function cacheResult($key, $phpCode)
     {
         // The caching is turned off when we are running tests
-        if (app()->environment('testing') or $this->cacheLifeTime === 0) {
+        if ((env('WIDGET_CACHE', false) == false) or (app()->environment('testing')) or ($this->cacheLifeTime === 0)) {
             return $phpCode();
         }
 
-        if ($this->cacheLifeTime > 0) {
-            return Cache::remember($key, $this->cacheLifeTime, $phpCode);
-        }
+        if (env('WIDGET_CACHE', false) == true) {
 
-        if ($this->cacheLifeTime == 'forever' or $this->cacheLifeTime < 0) {
-            return Cache::rememberForever($key, $phpCode);
-        }
-    }
+            if ($this->cacheLifeTime > 0) {
+                return Cache::remember($key, $this->cacheLifeTime, $phpCode);
+            }
 
-    private function normalizePresenter()
-    {
-        if ($this->presenter === 'default') {
-            $this->presenter = get_called_class() . 'Presenter';
+            if ($this->cacheLifeTime == 'forever' or $this->cacheLifeTime < 0) {
+                return Cache::rememberForever($key, $phpCode);
+            }
         }
     }
 
-    private function normalizeTemplate()
+    /**
+     * This method is called when you try to print the object like an string in blade files.
+     * like this : {!! $myWidgetObj !!}
+     */
+    public
+    function __toString()
     {
-        if ($this->template === null) {
-            $className = str_replace('App\\Widgets\\', '', get_called_class()); // class name without namespace.
-            $className = str_replace(['\\', '/'], '.', $className); // replace slashes with dots
-            $this->template = 'Widgets::' . $className;
-        }
-    }
-
-    private function normalizeContextAs()
-    {
-        $this->contextAs = str_replace('$', '', $this->contextAs); // removes the $ sign.
+        return $this->generateHtml();
     }
 
 }
