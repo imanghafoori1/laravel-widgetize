@@ -12,7 +12,7 @@ class DummyClass extends BaseWidget
 	protected $friendlyName = 'DummyClass';
     protected $context_as = '$data';
 	
-	protected data()
+	protected function data()
 	{
 		return [];
 	}
