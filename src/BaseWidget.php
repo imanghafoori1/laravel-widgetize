@@ -40,7 +40,7 @@ abstract class BaseWidget
     }
 
     /**
-     * this method is called when you try to print the object like an string in blade files.
+     * This method is called when you try to print the object like an string in blade files.
      * like this : {!! $myWidgetObj !!}
      */
     public function __toString()
@@ -60,7 +60,7 @@ abstract class BaseWidget
             return $this->renderTemplate($data); // Then render the template with the returned data.
         };
 
-        $key = $this->makeCacheKey(func_get_args());
+        $key = $this->makeCacheKey($args);
 
         // We first chack the cache before trying to run the expensive $phpCode...
         return $this->cacheResult($key, $phpCode);
@@ -109,7 +109,7 @@ abstract class BaseWidget
 
     private function makeCacheKey($arg)
     {
-        return md5(json_encode($arg, JSON_FORCE_OBJECT) . $this->template . __CLASS__);
+        return md5(json_encode($arg, JSON_FORCE_OBJECT) . $this->template . get_called_class());
     }
 
     private function cacheResult($key, $phpCode)
