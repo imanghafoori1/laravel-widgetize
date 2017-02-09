@@ -14,6 +14,7 @@ abstract class BaseWidget
     protected $contextAs = '$data';
     protected $presenter = 'default';
     private $html;
+    private $viewData;
 
     abstract protected function data();
 
@@ -52,11 +53,7 @@ abstract class BaseWidget
     {
         // Everything inside this function is executed only when the cache is not available.
         $phpCode = function () use($args){
-            $data = $this->data(...$args); // Here we call the data method on the widget class.
-            if (class_exists($this->presenter)) {
-                $data = resolve($this->presenter)->present($data);
-            }
-
+            $data = $this->prepareDataForView($args);
             return $this->renderTemplate($data); // Then render the template with the returned data.
         };
 
@@ -66,10 +63,23 @@ abstract class BaseWidget
         return $this->cacheResult($key, $phpCode);
     }
 
-    private function renderTemplate($data)
+    /**
+     * @param $this
+     * @param $args
+     * @return mixed
+     */
+    private function prepareDataForView($args)
+    {
+        $this->viewData = $this->data(...$args); // Here we call the data method on the widget class.
+        if (class_exists($this->presenter)) {
+            $this->viewData = resolve($this->presenter)->present($this->viewData);
+        }
+    }
+
+    private function renderTemplate()
     {
         // Here we render the view file to raw html.
-        $this->html = view($this->template, [$this->contextAs => $data])->render();
+        $this->html = view($this->template, [$this->contextAs => $this->viewData])->render();
 
         // We may try to minify the html before storing it in cache to save space.
         if ($this->minifyOutput == true) {
