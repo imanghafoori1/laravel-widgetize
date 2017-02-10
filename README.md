@@ -13,10 +13,14 @@
 >Trying to cache the pages which include user specific data (for example the username on the top menu) is a often fruitless. Because each user sees slightly different page from other users. Or in cases when we have some parts of the page(recent products section) which update frequently and some other parts which change rarly... we have to expire the entire page cache to match the most most frequently updated one. :(
 AAAAAAAAAhh...
 
+
+#### Problem 3 : View templates easily get littered with if/else blocks (&_&)
+>We ideally want our view files to be as logicless as possible and very much like the final output HTML. if/else blocks and other computations are always irritating within our views. specially for static page designers in our team. We just want to print out already defined variables wiout the to decide what to print. Anyway the data we store in database are sometimes far from ready to be printed on the page.
+
 ========================
 
 #### So, How to fight against those ? ;(
->__The main idea is simple, Instead of one controller method to handle all widgets of the page, Each widget should have it's own controller class, view partial and cache config, isolated from others.__
+>__The main idea is simple, Instead of one controller method to handle all widgets of the page, Each widget should have it's own `controller class`, `view partial`, `view presenter class` and `cache config`, isolated from others.__
 >That's it !! :)
 
 ### How this package is going to help us ? (@_@)
@@ -37,6 +41,11 @@ AAAAAAAAAhh...
 >Add `Imanghafoori\Widgets\WidgetsServiceProvider::class` to the providers array in your config/app.php
 >Now you are free to extend the `Imanghafoori\Widgets\BaseWidget` abstract class which enforces to implement the protected `data` method in your sub-class.
 
+### Configuration:
+you can set the variables in your .env file to globally set some configs for you widgets and override them if needed.
+WIDGET_MINIFICATION=true (you can turn off HTML minification in production)
+WIDGET_CACHE=true (you can turn caching on and off for all widgets.)
+WIDGET_IDENTIFIER=true (you can turn off widget identifiers in production)
 
 
 ###Guideline:
