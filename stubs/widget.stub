@@ -10,8 +10,8 @@ class DummyClass extends BaseWidget
     protected $cacheLifeTime = 1;
 	protected $friendlyName = 'DummyClass';
     protected $context_as = '$data';
-	
-	protected function data()
+
+	public function data()
 	{
 		return [];
 	}

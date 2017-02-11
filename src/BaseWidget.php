@@ -13,6 +13,7 @@ abstract class BaseWidget
     protected $cacheLifeTime = 0;
     protected $contextAs = '$data';
     protected $presenter = 'default';
+    protected $controller = null;
     private $html;
     private $viewData;
 
@@ -22,6 +23,7 @@ abstract class BaseWidget
      */
     public function __construct()
     {
+        $this->normalizeController();
         $this->normalizePresenter();
         $this->normalizeTemplate();
         $this->normalizeContextAs();
@@ -80,14 +82,13 @@ abstract class BaseWidget
      */
     private function prepareDataForView($args)
     {
-        $this->viewData = $this->data(...$args); // Here we call the data method on the widget class.
+        $this->viewData = app()->call( $this->controller, $args); // Here we call the data method on the widget class.
+
         if (class_exists($this->presenter)) {
             // We make an object and call the `present` method on it.
             $this->viewData = resolve($this->presenter)->present($this->viewData);
         }
     }
-
-    abstract protected function data();
 
     private function renderTemplate()
     {
@@ -160,10 +161,18 @@ abstract class BaseWidget
      * This method is called when you try to print the object like an string in blade files.
      * like this : {!! $myWidgetObj !!}
      */
-    public
-    function __toString()
+    public function __toString()
     {
         return $this->generateHtml();
+    }
+
+    private function normalizeController()
+    {
+        if ($this->controller) {
+            $this->controller = ($this->controller) . '@data';
+        } else {
+            $this->controller = [$this, 'data'];
+        }
     }
 
 }

@@ -28,7 +28,7 @@ AAAAAAAAAhh...
 1. It helps you to conforms to SRP (`single responsibility principle`) in your controllers (Because each widget class is only responsible for one and only one widget of the page but before you had a single controller method that was resposible for all the widgets. Effectively exploding one controller method into multiple widget classes.)
 2. It helps you to conforms to `Open-closed principle`. (Because if you want to add a widget on your page you do not need to touch the controller code. Instead you create a new widget class from scratch.)
 3. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
-4. It executes the widget code `Lazily`. Meaning that the widget's data method `protected function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `{!! $widgetObj !!}`, So for example if you comment out `{!! $widgetObj !!}` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
+4. It executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `{!! $widgetObj !!}`, So for example if you comment out `{!! $widgetObj !!}` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
 5. It optionally `minifies` the output of the widget. Removing the white spaces. (In order to save cache storage space and bandwidth)
 6. It support the `nested widgets` tree structure. (Use can inject and use widgets within widgets.)
 
@@ -39,7 +39,7 @@ AAAAAAAAAhh...
 `composer require imanghafoori/laravel-widgetize`
 
 >Add `Imanghafoori\Widgets\WidgetsServiceProvider::class` to the providers array in your config/app.php
->Now you are free to extend the `Imanghafoori\Widgets\BaseWidget` abstract class which enforces to implement the protected `data` method in your sub-class.
+>Now you are free to extend the `Imanghafoori\Widgets\BaseWidget` abstract class which enforces to implement the public `data` method in your sub-class.
 
 ### Configuration:
 you can set the variables in your .env file to globally set some configs for you widgets and override them if needed.
@@ -80,7 +80,7 @@ class RecentProductsWidget extends BaseWidget
     protected $minifyOutput = true; // minifies the html before storing it in the cache to save storage space.
 
     // The data returned here would be available in widget view file.
-    protected function data($param1=5)
+    public function data($param1=5)
     {
         // It's the perfect place to query the database for your widget...
         return Product::orderBy('id', 'desc')->take($param1)->get();;
