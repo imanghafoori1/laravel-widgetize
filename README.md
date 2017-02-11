@@ -80,10 +80,11 @@ class RecentProductsWidget extends BaseWidget
     protected $minifyOutput = true; // minifies the html before storing it in the cache to save storage space.
 
     // The data returned here would be available in widget view file.
+    // You can use dependancy injection here like you do in your typical controllers.
     public function data($param1=5)
     {
         // It's the perfect place to query the database for your widget...
-        return Product::orderBy('id', 'desc')->take($param1)->get();;
+        return Product::orderBy('id', 'desc')->take($param1)->get();
 
     }
 }
@@ -100,6 +101,7 @@ This means that you can put your view partials beside your widget class. like th
 you can group the in folders if you want to: 
 
 | app\Widgets\Homepage\RecentProductsWidget.php
+
 | app\Widgets\Homepage\RecentProductsWidget.blade.php
 
 =================
