@@ -43,9 +43,12 @@ AAAAAAAAAhh...
 
 ### Configuration:
 you can set the variables in your .env file to globally set some configs for you widgets and override them if needed.
-WIDGET_MINIFICATION=true (you can turn off HTML minification in production)
-WIDGET_CACHE=true (you can turn caching on and off for all widgets.)
-WIDGET_IDENTIFIER=true (you can turn off widget identifiers in production)
+
+__WIDGET_MINIFICATION=true__ (you can turn off HTML minification in development)
+
+__WIDGET_CACHE=true__ (you can turn caching on and off for all widgets.)
+
+__WIDGET_IDENTIFIER=true__ (you can turn off widget identifiers in production)
 
 
 ###Guideline:
