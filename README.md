@@ -1,7 +1,7 @@
 
 ### When to use it ?
 
->This package helps you in stuations that you want to create crowded web pages with multiple widgets (on sidebar, menu, ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help.Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to refactor your monster code and tame it into managable pieces or boost the performance 4x-10x times faster. ;)
+>This package helps you in situations that you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-10x__ times faster. ;)
 
 
 
@@ -10,12 +10,12 @@
 >Imagine An online shop like amazon which shows the list of products, popular products, etc (in the sidebar), user data and basket data in the navbar and a tree of product categories in the menu and etc... In traditional good old MVC model you have a single controller method to provide all the widgets with data. You can immidiately see that you are violating the SRP (Single Responsibility Priciple)!!! The trouble is worse when the client changes his mind over time and asks the deveploper to add, remove and modify those widgets on the page. And it always happens. Clients do change their minds.The developoer's job is to be ready to cope with that as effortlessly as possible.
 
 #### Problem 2 : Page caching is always hard :( 
->Trying to cache the pages which include user specific data (for example the username on the top menu) is a often fruitless. Because each user sees slightly different page from other users. Or in cases when we have some parts of the page(recent products section) which update frequently and some other parts which change rarly... we have to expire the entire page cache to match the most most frequently updated one. :(
+>Trying to cache the pages which include user specific data (for example the username on the top menu) is a often fruitless. Because each user sees slightly different page from other users. Or in cases when we have some parts of the page which update frequently and some other parts which change rarly... we have to expire the entire page cache to match the most frequently updated one. :(
 AAAAAAAAAhh...
 
 
 #### Problem 3 : View templates easily get littered with if/else blocks (&_&)
->We ideally want our view files to be as logicless as possible and very much like the final output HTML. if/else blocks and other computations are always irritating within our views. specially for static page designers in our team. We just want to print out already defined variables wiout the to decide what to print. Anyway the data we store in database are sometimes far from ready to be printed on the page.
+>We ideally want our view files to be as logicless as possible and very much like the final output HTML.Don't we ?! if/else blocks and other computations are always irritating within our views. specially for static page designers in our team. We just want to print out already defined variables wiout the to decide what to print. Anyway the data we store in database are sometimes far from ready to be printed on the page.
 
 ========================
 
@@ -25,7 +25,7 @@ AAAAAAAAAhh...
 
 ### How this package is going to help us ? (@_@)
 
-1. It helps you to conforms to SRP (`single responsibility principle`) in your controllers (Because each widget class is only responsible for one and only one widget of the page but before you had a single controller method that was resposible for all the widgets. Effectively exploding one controller method into multiple widget classes.)
+1. It helps you to reach SRP (`single responsibility principle`) in your controllers (Because each widget class is only responsible for one and only one widget of the page but before you had a single controller method that was resposible for all the widgets. Effectively exploding one controller method into multiple widget classes.)
 2. It helps you to conforms to `Open-closed principle`. (Because if you want to add a widget on your page you do not need to touch the controller code. Instead you create a new widget class from scratch.)
 3. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
 4. It executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `{!! $widgetObj !!}`, So for example if you comment out `{!! $widgetObj !!}` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
@@ -44,7 +44,7 @@ AAAAAAAAAhh...
 ### Configuration:
 you can set the variables in your .env file to globally set some configs for you widgets and override them if needed.
 
-__WIDGET_MINIFICATION=true__ (you can turn off HTML minification in development)
+__WIDGET_MINIFICATION=true__ (you can globally turn off HTML minification for development)
 
 __WIDGET_CACHE=true__ (you can turn caching on and off for all widgets.)
 
@@ -77,7 +77,6 @@ class RecentProductsWidget extends BaseWidget
     protected $cacheLifeTime = 1; // 1(min) ( 0 : disable, -1 : forever) default: 0
     protected $friendlyName = 'A Friendly Name Here'; // Showed in html Comments
     protected $context_as = '$recentProducts'; // you can access $recentProducts in view file (default: $data)
-    protected $minifyOutput = true; // minifies the html before storing it in the cache to save storage space.
 
     // The data returned here would be available in widget view file.
     // You can use dependancy injection here like you do in your typical controllers.
@@ -91,6 +90,8 @@ class RecentProductsWidget extends BaseWidget
 ```
 
 ==============
+__Tip__ : If you want you can set `protected $controller = App\Some\Class\MyController::class` and put your `public data` method on a dedicated class.
+__Tip__ : If you want you can set `protected $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data retured from your controller is first piped to your presenter and then to your view.So if you specify a presenter your view file gets its data from the presenter and not the controller.
 
 __Tip__ : If you do not set the `$template` by default it looks for a template file within the app\Widgets folder with the same name as the class name.
 This means that you can put your view partials beside your widget class. like this:
