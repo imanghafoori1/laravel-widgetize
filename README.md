@@ -91,15 +91,11 @@ class RecentProductsWidget extends BaseWidget
 
 ==============
 __Tip__ : If you want you can set `protected $controller = App\Some\Class\MyController::class` and put your `public data` method on a dedicated class.
+
 __Tip__ : If you want you can set `protected $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data retured from your controller is first piped to your presenter and then to your view.So if you specify a presenter your view file gets its data from the presenter and not the controller.
 
 __Tip__ : If you do not set the `$template` by default it looks for a template file within the app\Widgets folder with the same name as the class name.
 This means that you can put your view partials beside your widget class. like this:
-
-| app\Widgets\RecentProductsWidget.php
-| app\Widgets\RecentProductsWidget.blade.php
-
-you can group the in folders if you want to: 
 
 | app\Widgets\Homepage\RecentProductsWidget.php
 
