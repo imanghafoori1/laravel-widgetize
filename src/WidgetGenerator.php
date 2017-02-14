@@ -48,7 +48,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return 'App\\Widgets\\';
+        return 'App\\Widgets';
     }
 	
 }
