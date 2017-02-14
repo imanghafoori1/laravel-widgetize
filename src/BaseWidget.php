@@ -23,20 +23,20 @@ abstract class BaseWidget
      */
     public function __construct()
     {
-        $this->normalizeController();
-        $this->normalizePresenter();
-        $this->normalizeTemplate();
+        $this->normalizeControllerMethod();
+        $this->normalizePresenterName();
+        $this->normalizeTemplateName();
         $this->normalizeContextAs();
     }
 
-    private function normalizePresenter()
+    private function normalizePresenterName()
     {
         if ($this->presenter === 'default') {
             $this->presenter = get_called_class() . 'Presenter';
         }
     }
 
-    private function normalizeTemplate()
+    private function normalizeTemplateName()
     {
         if ($this->template === null) {
             $className = str_replace('App\\Widgets\\', '', get_called_class()); // class name without namespace.
@@ -47,7 +47,8 @@ abstract class BaseWidget
 
     private function normalizeContextAs()
     {
-        $this->contextAs = str_replace('$', '', $this->contextAs); // removes the $ sign.
+        // removes the $ sign.
+        $this->contextAs = str_replace('$', '', $this->contextAs);
     }
 
     /**
@@ -71,7 +72,12 @@ abstract class BaseWidget
 
         $key = $this->makeCacheKey($args);
 
-        // We first chack the cache before trying to run the expensive $phpCode...
+        // The caching is turned off when we are running tests or have disabled it in .env file
+        if ((env('WIDGET_CACHE', false) == false) or (app()->environment('testing')) or ($this->cacheLifeTime === 0)) {
+            return $phpCode();
+        }
+
+        // We first try to get the output from the cache before trying to run the expensive $phpCode...
         return $this->cacheResult($key, $phpCode);
     }
 
@@ -82,7 +88,8 @@ abstract class BaseWidget
      */
     private function prepareDataForView($args)
     {
-        $this->viewData = app()->call( $this->controller, $args); // Here we call the data method on the widget class.
+        // Here we call the data method on the widget class.
+        $this->viewData = app()->call( $this->controller, $args);
 
         if (class_exists($this->presenter)) {
             // We make an object and call the `present` method on it.
@@ -96,7 +103,7 @@ abstract class BaseWidget
         $this->html = view($this->template, [$this->contextAs => $this->viewData])->render();
 
         // We may try to minify the html before storing it in cache to save space.
-        if ($this->minifyOutput == true and env('WIDGET_MINIFICATION', false)) {
+        if (env('WIDGET_MINIFICATION', false)) {
             $this->minifyHtml();
         }
 
@@ -124,7 +131,7 @@ abstract class BaseWidget
 
     }
 
-    protected function addIdentifierToHtml()
+    private function addIdentifierToHtml()
     {
         $name = $this->friendlyName;
 
@@ -140,11 +147,6 @@ abstract class BaseWidget
 
     private function cacheResult($key, $phpCode)
     {
-        // The caching is turned off when we are running tests
-        if ((env('WIDGET_CACHE', false) == false) or (app()->environment('testing')) or ($this->cacheLifeTime === 0)) {
-            return $phpCode();
-        }
-
         if (env('WIDGET_CACHE', false) == true) {
 
             if ($this->cacheLifeTime > 0) {
@@ -166,7 +168,7 @@ abstract class BaseWidget
         return $this->generateHtml();
     }
 
-    private function normalizeController()
+    private function normalizeControllerMethod()
     {
         if ($this->controller) {
             $this->controller = ($this->controller) . '@data';
