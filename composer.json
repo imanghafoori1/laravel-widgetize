@@ -1,8 +1,8 @@
 {
     "name": "imanghafoori/laravel-widgetize",
-    "description": "A minimal package to give a better structure and caching opportunity for your laravel apps.",
+    "description": "A minimal yet powerful package to give a better structure and caching opportunity for your laravel apps.",
     "type": "project",
-	"license": "MIT",
+    "license": "MIT",
     "authors": [
         {
             "name": "imanghafoori",
@@ -10,7 +10,7 @@
         }
     ],
   
-	 "autoload": {
+     "autoload": {
         "psr-4": {
             "Imanghafoori\\Widgets\\": "src"
         }
