@@ -19,7 +19,6 @@ abstract class BaseWidget
 
     /**
      * BaseWidget constructor.
-     * @param null $template
      */
     public function __construct()
     {
@@ -39,8 +38,10 @@ abstract class BaseWidget
     private function normalizeTemplateName()
     {
         if ($this->template === null) {
-            $className = str_replace('App\\Widgets\\', '', get_called_class()); // class name without namespace.
-            $className = str_replace(['\\', '/'], '.', $className); // replace slashes with dots
+            // class name without namespace.
+            $className = str_replace('App\\Widgets\\', '', get_called_class());
+            // replace slashes with dots
+            $className = str_replace(['\\', '/'], '.', $className);
             $this->template = 'Widgets::' . $className;
         }
     }
@@ -65,24 +66,22 @@ abstract class BaseWidget
     private function generateHtml(...$args)
     {
         // Everything inside this function is executed only when the cache is not available.
-        $phpCode = function () use ($args) {
+        $expensivePhpCode = function () use ($args) {
             $this->prepareDataForView($args);
             return $this->renderTemplate(); // Then render the template with the returned data.
         };
 
         $key = $this->makeCacheKey($args);
 
-        // The caching is turned off when we are running tests or have disabled it in .env file
-        if ((env('WIDGET_CACHE', false) == false) or (app()->environment('testing')) or ($this->cacheLifeTime === 0)) {
-            return $phpCode();
+        // We first try to get the output from the cache before trying to run the expensive $expensivePhpCode...
+        if ($this->widgetShouldUseCache()) {
+            return $this->cacheResult($key, $expensivePhpCode);
         }
 
-        // We first try to get the output from the cache before trying to run the expensive $phpCode...
-        return $this->cacheResult($key, $phpCode);
+        return $expensivePhpCode();
     }
 
     /**
-     * @param $this
      * @param $args
      * @return mixed
      */
@@ -93,6 +92,7 @@ abstract class BaseWidget
 
         if (class_exists($this->presenter)) {
             // We make an object and call the `present` method on it.
+            // Piping the data through the presenter before sending it to view.
             $this->viewData = resolve($this->presenter)->present($this->viewData);
         }
     }
@@ -102,12 +102,13 @@ abstract class BaseWidget
         // Here we render the view file to raw html.
         $this->html = view($this->template, [$this->contextAs => $this->viewData])->render();
 
-        // We may try to minify the html before storing it in cache to save space.
-        if (env('WIDGET_MINIFICATION', false)) {
+        // We try to minify the html before storing it in cache to save space.
+        if (env('WIDGET_MINIFICATION', false) or app()->environment('production')) {
             $this->minifyHtml();
         }
 
-        // We add some comments to be able to easily identify the widget in browser's developer tool.
+        // We add some comments before and after the widget to be able to
+        // easily identify the widget in browser's developer tool.
         if(env('WIDGET_IDENTIFIER',false)){
             $this->addIdentifierToHtml();
         }
@@ -135,7 +136,7 @@ abstract class BaseWidget
     {
         $name = $this->friendlyName;
 
-        $this->html = "<!-- ^ --> <!--  --> <!-- '$name' Widget Start -->"
+        $this->html = "<!-- ^ --> <!--".get_called_class()."  --> <!-- '$name' Widget Start -->"
             . $this->html .
             "<!-- '$name' Widget End --> <!--   --> <!-- ~ -->";
     }
@@ -147,8 +148,6 @@ abstract class BaseWidget
 
     private function cacheResult($key, $phpCode)
     {
-        if (env('WIDGET_CACHE', false) == true) {
-
             if ($this->cacheLifeTime > 0) {
                 return Cache::remember($key, $this->cacheLifeTime, $phpCode);
             }
@@ -156,7 +155,6 @@ abstract class BaseWidget
             if ($this->cacheLifeTime == 'forever' or $this->cacheLifeTime < 0) {
                 return Cache::rememberForever($key, $phpCode);
             }
-        }
     }
 
     /**
@@ -168,13 +166,30 @@ abstract class BaseWidget
         return $this->generateHtml();
     }
 
+    /**
+     * @return mixed
+     */
     private function normalizeControllerMethod()
     {
+        // If the user has specified the class path we call data method on that.
         if ($this->controller) {
             $this->controller = ($this->controller) . '@data';
         } else {
+            // otherwise we call data method on this object.
             $this->controller = [$this, 'data'];
         }
+    }
+
+    /**
+     * @return bool
+     */
+    private function widgetShouldUseCache()
+    {
+        // The caching is turned off when:
+        // 1- we are running tests
+        // 2- have disabled it in .env fil
+        // 3- have set the time to 0 minutes
+         return ((env('WIDGET_CACHE', false) !== false) and (!app()->environment('testing')) and ($this->cacheLifeTime !== 0));
     }
 
 }
