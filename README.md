@@ -1,7 +1,7 @@
 
 ### When to use it ?
 
->This package helps you in situations that you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-10x__ times faster. ;)
+>This package (this design pattern) helps you in situations that you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-10x__ times faster. ;)
 
 
 
@@ -15,7 +15,7 @@ AAAAAAAAAhh...
 
 
 #### Problem 3 : View templates easily get littered with if/else blocks (&_&)
->We ideally want our view files to be as logicless as possible and very much like the final output HTML.Don't we ?! if/else blocks and other computations are always irritating within our views. specially for static page designers in our team. We just want to print out already defined variables wiout the to decide what to print. Anyway the data we store in database are sometimes far from ready to be printed on the page.
+>We ideally want our view files to be as logic-less as possible and very much like the final output HTML.Don't we ?! if/else blocks and other computations are always irritating within our views. specially for static page designers in our team. We just want to print out already defined variables wiout the to decide what to print. Anyway the data we store in database are sometimes far from ready to be printed on the page.
 
 ========================
 
@@ -80,10 +80,9 @@ class RecentProductsWidget extends BaseWidget
 {
     protected $template = 'widgets.recentProducts.blade.php'; // referes to: views/widgets/recentProducts.blade.php
     protected $cacheLifeTime = 1; // 1(min) ( 0 : disable, -1 : forever)
-    protected $friendlyName = 'A Friendly Name Here'; // Showed in html Comments
     protected $context_as = '$recentProducts'; // you can access $recentProducts in view file (default: $data)
 
-    // The data returned here would be available in widget view file.
+    // The data returned here would be available in widget view file automatically.
     // You can use dependancy injection here like you do in your typical controllers.
     public function data($param1=5)
     {
@@ -94,7 +93,18 @@ class RecentProductsWidget extends BaseWidget
 }
 ```
 
+We do not call widget controllers from our routes So...
+
+###How the data method (widget's controller) is called then? (0_o)
+
+>After `{!! $myWidget('param1') !!}` is executed in your view file by php,
+then under the hood `public data` method is called on your widget class with the corresponding parameters.
+`But only if it is Not already cached` or the `protected $cacheLifeTime` is set to 0.
+If the widget HTML output is already in the cache it prints out the HTML without executing `data` method 
+(hence avoids performing database queries or even rendering the blade file.)
+
 ==============
+
 __Tip__ : If you want you can set `protected $controller = App\Some\Class\MyController::class` and put your `public data` method on a dedicated class.
 
 __Tip__ : If you want you can set `protected $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data retured from your controller is first piped to your presenter and then to your view.So if you specify a presenter your view file gets its data from the presenter and not the controller.
@@ -155,9 +165,6 @@ In order to easily understand what's going on here...
 Think of `{!! $recentProductsWidget !!}` as `@include('widgets.recentProductsWidget')` but more sophisticated.
 The actual result is the same piece of HTML, which is the result of rendering the partial.
 
-Pro tip: After `{!! $myWidget('param1') !!}` is executed in your view file, the `data` method is called on your widget class with the correspoding parameters. `But only if it is Not already cached` or the `protected $cacheLifeTime` is set to 0.
-If the widget HTML output is already in the cache it prints out the HTML with out executing `data` method (hence performing database queries) or even rendering the blade file.
-You may want to look at the BaseWidget source code and read the comments for more information.
-
 =============
+You may want to look at the BaseWidget source code and read the comments for more information.
 
