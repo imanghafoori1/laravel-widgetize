@@ -22,8 +22,9 @@ AAAAAAAAAhh...
 #### So, How to fight against those ? ;(
 >__The main idea is simple, Instead of one controller method to handle all widgets of the page, Each widget should have it's own `controller class`, `view partial`, `view presenter class` and `cache config`, isolated from others.__
 >That's it !! :)
+>This idea originally comes from the client-side js frameworks and is something new in server-side world.
 
-### How this package is going to help us ? (@_@)
+###Ok, but How this package is going to help us ? (@_@)
 
 1. It helps you to reach SRP (`single responsibility principle`) in your controllers (Because each widget class is only responsible for one and only one widget of the page but before you had a single controller method that was resposible for all the widgets. Effectively exploding one controller method into multiple widget classes.)
 2. It helps you to conforms to `Open-closed principle`. (Because if you want to add a widget on your page you do not need to touch the controller code. Instead you create a new widget class from scratch.)
@@ -39,8 +40,10 @@ AAAAAAAAAhh...
 `composer require imanghafoori/laravel-widgetize`
 
 >Add `Imanghafoori\Widgets\WidgetsServiceProvider::class` to the providers array in your config/app.php
-> And you will be on fire!
->Now you are free to extend the `Imanghafoori\Widgets\BaseWidget` abstract class which enforces to implement the public `data` method in your sub-class.
+
+>And you will be on fire!
+
+>Now you are free to extend the `Imanghafoori\Widgets\BaseWidget` abstract class and implement the `public data` method in your sub-class.
 
 ### Configuration:
 you can set the variables in your .env file to globally set some configs for you widgets and override them if needed.
@@ -120,6 +123,7 @@ views/widgets/recentProducts.blade.php
 
 Ok, Now it's done! We have a ready to use widget. let's use it...
 
+__Tip:__ If you decide to use some other template engine instead of Blade it would be no problem.
 
 ###How to leverage a "Widget Object"?
 
