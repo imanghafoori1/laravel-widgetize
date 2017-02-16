@@ -29,16 +29,17 @@ AAAAAAAAAhh...
 2. It helps you to conforms to `Open-closed principle`. (Because if you want to add a widget on your page you do not need to touch the controller code. Instead you create a new widget class from scratch.)
 3. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
 4. It executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `{!! $widgetObj !!}`, So for example if you comment out `{!! $widgetObj !!}` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
-5. It optionally `minifies` the output of the widget. Removing the white spaces. (In order to save cache storage space and bandwidth)
+5. It optionally `minifies` the output of the widget. (In order to save cache storage space and bandwidth)
 6. It support the `nested widgets` tree structure. (Use can inject and use widgets within widgets.)
-
-
+7. It can help you generate widget class boilerplate with artisan command. 
+8. It helps you to have a dedicated presenter class of each widget to clean up your views.
 
 ### Installation:
 
 `composer require imanghafoori/laravel-widgetize`
 
 >Add `Imanghafoori\Widgets\WidgetsServiceProvider::class` to the providers array in your config/app.php
+> And you will be on fire!
 >Now you are free to extend the `Imanghafoori\Widgets\BaseWidget` abstract class which enforces to implement the public `data` method in your sub-class.
 
 ### Configuration:
@@ -50,6 +51,7 @@ __WIDGET_CACHE=true__ (you can turn caching on and off for all widgets.)
 
 __WIDGET_IDENTIFIER=true__ (you can turn off widget identifiers in production)
 
+__WIDGET_DEFAULT_CACHE_LIFETIME__=1 (You can set a global default lifetime for all widgets and override it per widget if needed)
 
 ###Guideline:
 
@@ -74,7 +76,7 @@ use Imanghafoori\Widgets\BaseWidget;
 class RecentProductsWidget extends BaseWidget
 {
     protected $template = 'widgets.recentProducts.blade.php'; // referes to: views/widgets/recentProducts.blade.php
-    protected $cacheLifeTime = 1; // 1(min) ( 0 : disable, -1 : forever) default: 0
+    protected $cacheLifeTime = 1; // 1(min) ( 0 : disable, -1 : forever)
     protected $friendlyName = 'A Friendly Name Here'; // Showed in html Comments
     protected $context_as = '$recentProducts'; // you can access $recentProducts in view file (default: $data)
 
@@ -119,7 +121,7 @@ views/widgets/recentProducts.blade.php
 Ok, Now it's done! We have a ready to use widget. let's use it...
 
 
-###How to leverage a Widget Object?
+###How to leverage a "Widget Object"?
 
 In your typical controller methods (or somewhere else) we may instanciate our widget classes and pass the resulting object to our view like this:
 ```php
