@@ -22,7 +22,7 @@ AAAAAAAAAhh...
 #### So, How to fight against those ? ;(
 >__The main idea is simple, Instead of one controller method to handle all widgets of the page, Each widget should have it's own `controller class`, `view partial`, `view presenter class` and `cache config`, isolated from others.__
 >That's it !! :)
->This idea originally comes from the client-side js frameworks and is something new in server-side world.
+>This idea originally comes from the client-side js frameworks and is somewhat new in server-side world.
 
 ###Ok, but How this package is going to help us ? (@_@)
 
@@ -43,10 +43,10 @@ AAAAAAAAAhh...
 
 >And you will be on fire!
 
->Now you are free to extend the `Imanghafoori\Widgets\BaseWidget` abstract class and implement the `public data` method in your sub-class.
+>Now you are free to extend the `Imanghafoori\Widgets\BaseWidget` abstract class and implement the `public data` method in your sub-class or use the `php artisan make:widget`.
 
 ### Configuration:
-you can set the variables in your .env file to globally set some configs for you widgets and override them if needed.
+You can set the variables in your .env file to globally set some configs for you widgets and override them if needed.
 
 __WIDGET_MINIFICATION=true__ (you can globally turn off HTML minification for development)
 
@@ -60,8 +60,9 @@ __WIDGET_DEFAULT_CACHE_LIFETIME__=1 (You can set a global default lifetime for a
 
 >1. So we first extract each widget into it's own partial. (recentProducts.blade.php)
 >2. Use `php artisan make:widget` command to create your widget class.
->3. Set configurations like __$cacheLifeTime__ , __$template__, etc and implement the `data` method.
->4. Your widget is ready to be instanciated and be used in your view files. (see example below)
+>3. Set configurations like __$cacheLifeTime__ , __$template__, etc on your widget class.
+>4. Set your controller class and implement the `data` method.
+>5. Your widget is ready to be instanciated and be used in your view files. (see example below)
 
 
 
@@ -93,11 +94,11 @@ class RecentProductsWidget extends BaseWidget
 }
 ```
 
-We do not call widget controllers from our routes So...
+We do not call widget controller actions from our routes So...
 
-###How the data method (widget's controller) is called then? (0_o)
+###How the data method on the widget's controller is called then? (0_o)
 
->After `{!! $myWidget('param1') !!}` is executed in your view file by php,
+>After `{!! $myWidget('param1') !!}` is executed in your view file by php,(see below)
 then under the hood `public data` method is called on your widget class with the corresponding parameters.
 `But only if it is Not already cached` or the `protected $cacheLifeTime` is set to 0.
 If the widget HTML output is already in the cache it prints out the HTML without executing `data` method 
@@ -118,7 +119,7 @@ This means that you can put your view partials beside your widget class. like th
 
 =================
 
-views/widgets/recentProducts.blade.php
+recentProducts.blade.php
 
 ```blade
 <ul>
@@ -151,11 +152,11 @@ public function index(RecentProductsWidget $recentProductsWidget)
 And then you can render it in your view (home.blade.php) like this:
 ```blade
 <div class="container">
-    <h1>Hello {{ auth()->user()->username }} </h1>
+    <h1>Hello {{ auth()->user()->username }} </h1> <!-- not cached -->
     <br>
-    {!! $recentProductsWidget !!}
+    {!! $recentProductsWidget !!} <!-- cached part -->
     <p> if you need to pass parameters to data method :</p>
-    {!! $recentProductsWidget(10) !!}
+    {!! $recentProductsWidget(10) !!} <!-- cached part -->
 </div>
 ```
 
@@ -163,7 +164,8 @@ And then you can render it in your view (home.blade.php) like this:
 
 In order to easily understand what's going on here...
 Think of `{!! $recentProductsWidget !!}` as `@include('widgets.recentProductsWidget')` but more sophisticated.
-The actual result is the same piece of HTML, which is the result of rendering the partial.
+The final result is the same piece of HTML, which is the result of rendering the partial.
+but widget object are __self contained__ and __self cached__
 
 =============
 You may want to look at the BaseWidget source code and read the comments for more information.
