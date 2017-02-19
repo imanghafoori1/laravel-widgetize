@@ -110,12 +110,15 @@ __Tip__ : If you want you can set `protected $controller = App\Some\Class\MyCont
 
 __Tip__ : If you want you can set `protected $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data retured from your controller is first piped to your presenter and then to your view.So if you specify a presenter your view file gets its data from the presenter and not the controller.
 
-__Tip__ : If you do not set the `$template` by default it looks for a template file within the app\Widgets folder with the same name as the class name.
+__Tip__ : If you do not set the `$template` by default it looks for a template file within the same folder with the same name as the widget class name + "View" at the end.
 This means that you can put your view partials beside your widget class. like this:
 
 | app\Widgets\Homepage\RecentProductsWidget.php
 
-| app\Widgets\Homepage\RecentProductsWidget.blade.php
+| app\Widgets\Homepage\RecentProductsWidgetView.blade.php
+
+
+So the entire widget lives in one folder.
 
 =================
 
