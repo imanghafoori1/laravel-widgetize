@@ -34,12 +34,21 @@ abstract class BaseWidget
      */
     private function normalizeControllerMethod()
     {
-        // If the user has specified the class path we call data method on that.
-        if ($this->controller) {
-            $this->controller = ($this->controller) . '@data';
-        } else {
-            // otherwise we call data method on this object.
+        // If the user has explicitly declared controller class path on the sub-class
+        if ($this->controller === null) {
+            if (!method_exists($this, 'data')) {
+                throw new \BadMethodCallException("'data' method not found on " . get_called_class());
+            }
+            // We decide to call data method on widget object.
             $this->controller = [$this, 'data'];
+        } else {
+            // If the user has specified the controller class path
+            if (!class_exists($this->controller)) {
+                throw new \InvalidArgumentException("Controller class: [{$this->controller}] not found.");
+            }
+
+            // we decide to call data method on that.
+            $this->controller = ($this->controller) . '@data';
         }
     }
 
@@ -49,8 +58,17 @@ abstract class BaseWidget
     private function normalizePresenterName()
     {
         if ($this->presenter === 'default') {
-            $this->presenter = get_called_class() . 'Presenter';
+            $presenter = get_called_class() . 'Presenter';
+
+            if (class_exists($presenter)) {
+                $this->presenter = $presenter;
+            }
+        } else {
+            if (class_exists($this->presenter) === false) {
+                throw new \InvalidArgumentException("Presenter Class [{$this->presenter}] not found.");
+            }
         }
+
     }
 
     /**
@@ -63,7 +81,11 @@ abstract class BaseWidget
             $className = str_replace('App\\Widgets\\', '', get_called_class());
             // replace slashes with dots
             $className = str_replace(['\\', '/'], '.', $className);
-            $this->template = 'Widgets::' . $className;
+            $this->template = 'Widgets::' . $className. 'View';
+        }
+
+        if (!view()->exists($this->template)) {
+            throw new \InvalidArgumentException("View file [{$className}View] not found by: '". get_called_class()." '");
         }
     }
 
@@ -73,7 +95,7 @@ abstract class BaseWidget
     private function normalizeContextAs()
     {
         // removes the $ sign.
-        $this->contextAs = str_replace('$', '', $this->contextAs);
+        $this->contextAs = str_replace('$', '', (string)$this->contextAs);
     }
 
     /**
@@ -159,6 +181,14 @@ abstract class BaseWidget
     }
 
     /**
+     * @return bool
+     */
+    private function widgetShouldBeMinified()
+    {
+        return env('WIDGET_MINIFICATION', false) or app()->environment('production');
+    }
+
+    /**
      * @return null
      */
     private function minifyHtml()
@@ -186,6 +216,10 @@ abstract class BaseWidget
             "<!-- '$name' Widget End --> <!--   --> <!-- ~ -->";
     }
 
+    /**
+     * @param $arg
+     * @return string
+     */
     private function makeCacheKey($arg)
     {
         return md5(json_encode($arg, JSON_FORCE_OBJECT) . $this->template . get_called_class());
@@ -225,14 +259,6 @@ abstract class BaseWidget
     public function __toString()
     {
         return $this->generateHtml();
-    }
-
-    /**
-     * @return bool
-     */
-    private function widgetShouldBeMinified()
-    {
-        return env('WIDGET_MINIFICATION', false) or app()->environment('production');
     }
 
 }
