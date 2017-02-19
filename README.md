@@ -98,8 +98,8 @@ We do not call widget controller actions from our routes So...
 
 ###How the data method on the widget's controller is called then? (0_o)
 
->After `{!! $myWidget('param1') !!}` is executed in your view file by php,(see below)
-then under the hood `public data` method is called on your widget class with the corresponding parameters.
+>Think of widget controllers as laravel view composers which get called automatically when a specofic partial is included. Under the hood, After `{!! $myWidget('param1') !!}` is executed in your view file by php,(see below)
+then `public data` method is called on your widget class with the corresponding parameters.
 `But only if it is Not already cached` or the `protected $cacheLifeTime` is set to 0.
 If the widget HTML output is already in the cache it prints out the HTML without executing `data` method 
 (hence avoids performing database queries or even rendering the blade file.)
@@ -170,3 +170,4 @@ but widget object are __self contained__ and __self cached__
 =============
 You may want to look at the BaseWidget source code and read the comments for more information.
 
+If you find this package useful please do not forget to `star` it.
