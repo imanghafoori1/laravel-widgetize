@@ -14,6 +14,7 @@ abstract class BaseWidget
     protected $contextAs = '$data';
     protected $presenter = 'default';
     protected $controller = null;
+    protected $cacheTags = null;
     private $html;
     private $viewData;
 
@@ -27,6 +28,7 @@ abstract class BaseWidget
         $this->normalizeTemplateName();
         $this->normalizeContextAs();
         $this->normalizeCacheLifeTime();
+        $this->normalizeCacheTags();
     }
 
     /**
@@ -81,11 +83,11 @@ abstract class BaseWidget
             $className = str_replace('App\\Widgets\\', '', get_called_class());
             // replace slashes with dots
             $className = str_replace(['\\', '/'], '.', $className);
-            $this->template = 'Widgets::' . $className. 'View';
+            $this->template = 'Widgets::' . $className . 'View';
         }
 
         if (!view()->exists($this->template)) {
-            throw new \InvalidArgumentException("View file [{$className}View] not found by: '". get_called_class()." '");
+            throw new \InvalidArgumentException("View file [{$className}View] not found by: '" . get_called_class() . " '");
         }
     }
 
@@ -106,6 +108,19 @@ abstract class BaseWidget
         if ($this->cacheLifeTime === 'env_default') {
             $this->cacheLifeTime = (int)(env('WIDGET_DEFAULT_CACHE_LIFETIME', 0));
         };
+    }
+
+    private function normalizeCacheTags()
+    {
+        if ($this->cacheShouldBeTagged()) {
+            if (is_string($this->cacheTags)) {
+                $this->cacheTags = [$this->cacheTags];
+            }
+
+            if (!is_array($this->cacheTags)) {
+                throw new \InvalidArgumentException('Cache Tags should be of type String or Array.');
+            }
+        }
     }
 
     /**
@@ -243,12 +258,18 @@ abstract class BaseWidget
 
     private function cacheResult($key, $phpCode)
     {
+        $cache = app()->make('cache');
+
+        if($this->cacheTags){
+            $cache = $cache->tags($this->cacheTags);
+        }
+
         if ($this->cacheLifeTime > 0) {
-            return Cache::remember($key, $this->cacheLifeTime, $phpCode);
+            return $cache->remember($key, $this->cacheLifeTime, $phpCode);
         }
 
         if ($this->cacheLifeTime == 'forever' or $this->cacheLifeTime < 0) {
-            return Cache::rememberForever($key, $phpCode);
+            return $cache->rememberForever($key, $phpCode);
         }
     }
 
@@ -259,6 +280,14 @@ abstract class BaseWidget
     public function __toString()
     {
         return $this->generateHtml();
+    }
+
+    /**
+     * @return bool
+     */
+    private function cacheShouldBeTagged()
+    {
+        return !in_array(env('CACHE_DRIVER'), ['file', 'database']) and $this->cacheTags;
     }
 
 }
