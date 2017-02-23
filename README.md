@@ -7,7 +7,10 @@ Laravel Widgetize
 * [The Problem and The Solution](#so-what-is-our-problem-)
 * [Installation](#installation)
 * [Configuration](#configuration)
+    - [Global](#global-config)
+    - [Per Widget](#per-widget-config)
 * [Usage and Example](#example)
+* [Behind the curtain](#behind-the-curtain)
 
 This page may look long and boring to read at first, but bear with me!!!
 
@@ -61,7 +64,9 @@ AAAAAAAAAhh...
 
 >Now you are free to extend the `Imanghafoori\Widgets\BaseWidget` abstract class and implement the `public data` method in your sub-class or use the `php artisan make:widget`.
 
-### Configuration:
+## Configuration:
+
+### Global Config:
 You can set the variables in your .env file to globally set some configs for you widgets and override them if needed.
 
 __WIDGET_MINIFICATION=true__ (you can globally turn off HTML minification for development)
@@ -71,6 +76,41 @@ __WIDGET_CACHE=true__ (you can turn caching on and off for all widgets.)
 __WIDGET_IDENTIFIER=true__ (you can turn off widget identifiers in production)
 
 __WIDGET_DEFAULT_CACHE_LIFETIME__=1 (You can set a global default lifetime for all widgets and override it per widget if needed)
+
+
+### Per Widget Config:
+
+- _protected $template_
+
+>If you do not set it,By default, it refers to app/Widgets folder and looks for the 'widgetNameView.blade.php'
+(Meaning that if your widget is `app/Widgets/home/recentProducts.php` the default view for that is `app/Widgets/home/recentProductsView.blade.php`)
+Anyway you can ovrride it to point to any partial in views folder.(for example: `protected $template='home.footer'` will look for resource/views/home/footer.blade.php)
+
+
+| app\Widgets\Homepage\RecentProductsWidget.php
+
+| app\Widgets\Homepage\RecentProductsWidgetView.blade.php
+
+
+So the entire widget lives in one folder.
+
+
+- _protected $controller_
+
+>If you do not want to put your _data_ method on your widget class, you can set `protected $controller = App\Some\Class\MyController::class` and put your `public data` method on a dedicated class.(instead od having it on your widget class)
+
+
+- _protected $presenter_
+
+>If you do not want to put your _present_ method on your widget class, you can set `protected $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data retured from your controller is first piped to your presenter and then to your view.(So if you specify a presenter your view file gets its data from the presenter and not the controller.)
+
+
+- _protected $cacheTags_
+
+>If you want you can set `protected $cacheTags = ['tag1','tag2']` to easily target them for cache expiration.(Note that  _database_ and _file_ cache driver do not support cache tags.)
+
+
+
 
 ###Guideline
 
@@ -111,34 +151,6 @@ class RecentProductsWidget extends BaseWidget
     }
 }
 ```
-
-We do not call widget controller actions from our routes So...
-
-###How the data method on the widget's controller is called then? (0_o)
-
->Think of widget controllers as laravel view composers which get called automatically when a specific partial is included. Under the hood, After `{!! $myWidget('param1') !!}` is executed in your view file by php,(see below)
-then `public data` method is called on your widget class with the corresponding parameters.
-`But only if it is Not already cached` or the `protected $cacheLifeTime` is set to 0.
-If the widget HTML output is already in the cache it prints out the HTML without executing `data` method 
-(hence avoids performing database queries or even rendering the blade file.)
-
-==============
-
-__Tip__ : If you want you can set `protected $controller = App\Some\Class\MyController::class` and put your `public data` method on a dedicated class.
-
-__Tip__ : If you want you can set `protected $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data retured from your controller is first piped to your presenter and then to your view.So if you specify a presenter your view file gets its data from the presenter and not the controller.
-
-__Tip__ : If you want you can set `protected $cacheTags = ['tag1','tag2']` to easily target them for cache expiration.
-
-__Tip__ : If you do not set the `protected $template`, by default it looks for a template file within the same folder with the same name as the widget class name + "View" at the end.
-This means that you can put your view partials beside your widget class. like this:
-
-| app\Widgets\Homepage\RecentProductsWidget.php
-
-| app\Widgets\Homepage\RecentProductsWidgetView.blade.php
-
-
-So the entire widget lives in one folder.
 
 =================
 
@@ -195,3 +207,19 @@ but widget object are __self contained__ and __self cached__
 You may want to look at the BaseWidget source code and read the comments for more information.
 
 ####If you find this package useful please do not forget to `star` it.
+
+==============
+
+
+###Behind the Curtian
+
+
+####How the data method on the widget's controller is called then? (0_o)
+
+>Ok, now we know that we do not call widget controller actions from our routes or any where else, how the data method on the widget's controller is called then ???
+
+
+>Think of widget controllers as laravel view composers which get called automatically when a specific partial is included. Under the hood, After `{!! $myWidget('param1') !!}` is executed in your view file by php, then `public data` method is called on your widget class with the corresponding parameters.
+`But only if it is Not already cached` or the `protected $cacheLifeTime` is set to 0.
+If the widget HTML output is already in the cache it prints out the HTML without executing `data` method 
+(hence avoids performing database queries or even rendering the blade file.)
