@@ -1,7 +1,10 @@
 Laravel Widgetize
 =================
 
-###Widget Objects help you to have __cleaner code__ and __easy caching__.
+##Widget Objects help you to have _cleaner code_ and _easy caching_.
+
+
+==================
 
 * [Introduction](#introduction)
     - [When to use the _widget_ concept?](#when-to-use-the-widget-concept)
@@ -218,7 +221,6 @@ Think of `{!! $recentProductsWidget !!}` as `@include('widgets.recentProductsWid
 The final result is the same piece of HTML, which is the result of rendering the partial.
 but widget object are __self contained__ and __self cached__
 
-=============
 
 You may want to look at the BaseWidget source code and read the comments for more information.
 
@@ -233,7 +235,7 @@ You may want to look at the BaseWidget source code and read the comments for mor
 >Ok, now we know that we do not call widget controller actions from our routes or any where else, how the data method on the widget's controller is called then ???
 
 
->Think of widget controllers as laravel view composers which get called automatically when a specific partial is included. Under the hood, After `{!! $myWidget('param1') !!}` is executed in your view file by php, then `public data` method is called on your widget class with the corresponding parameters.
+>Think of widget controllers as laravel view composers which get called automatically when a specific partial is included. Under the hood, After `{!! $myWidget('param1') !!}` is executed in your view file by php, then through the php magic methods the `public data` method is called on your widget class with the corresponding parameters.
 `But only if it is Not already cached` or the `protected $cacheLifeTime` is set to 0.
 If the widget HTML output is already in the cache it prints out the HTML without executing `data` method 
 (hence avoids performing database queries or even rendering the blade file.)
