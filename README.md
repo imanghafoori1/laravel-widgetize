@@ -4,12 +4,17 @@ Laravel Widgetize
 ###Widget Objects help you to have __cleaner code__ and __easy caching__.
 
 * [Introduction](#introduction)
-* [The Problem and The Solution](#so-what-is-our-problem-)
+    - [When to use the _widget_ concept?](#when-to-use-the-widget-concept)
+    - [The Problems](#what-is-our-problems)
+    - [The Solution](#what-is-the-solution)
 * [Installation](#installation)
 * [Configuration](#configuration)
     - [Global](#global-config)
     - [Per Widget](#per-widget-config)
 * [Usage and Example](#example)
+    - [Guideline](#guideline)
+    - [How to make a widget class](#how-to-make-a-widget)
+    - [How to use a widget class](#how-to-use-a-widget-class)
 * [Behind the curtain](#behind-the-curtain)
 
 This page may look long and boring to read at first, but bear with me!!!
@@ -18,13 +23,14 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 
 ###Introduction
->When to use it?
+####When to use the _widget_ concept?
 
 >This package (this design pattern) helps you in situations that you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-10x__ times faster. ;)
 
 
 
-### So what is our problem ?
+### What is our problems?
+
 #### Problem 1 : Controllers easily get crowded :(
 >Imagine An online shop like amazon which shows the list of products, popular products, etc (in the sidebar), user data and basket data in the navbar and a tree of product categories in the menu and etc... In traditional good old MVC model you have a single controller method to provide all the widgets with data. You can immidiately see that you are violating the SRP (Single Responsibility Priciple)!!! The trouble is worse when the client changes his mind over time and asks the deveploper to add, remove and modify those widgets on the page. And it always happens. Clients do change their minds.The developoer's job is to be ready to cope with that as effortlessly as possible.
 
@@ -38,12 +44,14 @@ AAAAAAAAAhh...
 
 ========================
 
-#### So, How to fight against those ? ;(
+### What is the solution?
+
+So, How to fight against those ? ;(
 >__The main idea is simple, Instead of one controller method to handle all widgets of the page, Each widget should have it's own `controller class`, `view partial`, `view presenter class` and `cache config`, isolated from others.__
 >That's it !! :)
 >This idea originally comes from the client-side js frameworks and is somewhat new in server-side world.
 
-###Ok, but How this package is going to help us ? (@_@)
+- Ok, but How this package is going to help us ? (@_@)
 
 1. It helps you to reach SRP (`single responsibility principle`) in your controllers (Because each widget class is only responsible for one and only one widget of the page but before you had a single controller method that was resposible for all the widgets. Effectively exploding one controller method into multiple widget classes.)
 2. It helps you to conforms to `Open-closed principle`. (Because if you want to add a widget on your page you do not need to touch the controller code. Instead you create a new widget class from scratch.)
@@ -105,6 +113,12 @@ So the entire widget lives in one folder.
 >If you do not want to put your _present_ method on your widget class, you can set `protected $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data retured from your controller is first piped to your presenter and then to your view.(So if you specify a presenter your view file gets its data from the presenter and not the controller.)
 
 
+
+- _protected $cacheLifeTime_
+
+>If you want to override the global cache life time (which is set in your .env file) for a specific widget, you can set $cacheLifeTime on your widget class.
+
+
 - _protected $cacheTags_
 
 >If you want you can set `protected $cacheTags = ['tag1','tag2']` to easily target them for cache expiration.(Note that  _database_ and _file_ cache driver do not support cache tags.)
@@ -112,19 +126,17 @@ So the entire widget lives in one folder.
 
 
 
-###Guideline
+##Example
 
->1. So we first extract each widget into it's own partial. (recentProducts.blade.php)
+### Guideline
+
+>1. So we first extract each widget into it's own partial. (app/Widgets/recentProducts.blade.php)
 >2. Use `php artisan make:widget` command to create your widget class.
 >3. Set configurations like __$cacheLifeTime__ , __$template__, etc on your widget class.
 >4. Set your controller class and implement the `data` method.
 >5. Your widget is ready to be instanciated and be used in your view files. (see example below)
 
-
-
-###Example
-
-How to create a Widget?
+### How to make a Widget?
 
 >__You can use : `php artisan make:widget MyWidget` to make your widget class.__
 
@@ -171,20 +183,24 @@ Ok, Now it's done! We have a ready to use widget. let's use it...
 
 __Tip:__ If you decide to use some other template engine instead of Blade it would be no problem.
 
-###How to leverage a "Widget Object"?
+### How to use a widget class?
+
+>First we should instanciate our widget class.
 
 In your typical controller methods (or somewhere else) we may instanciate our widget classes and pass the resulting object to our view like this:
 ```php
 
 use \App\Widgets\RecentProductsWidget;
 
-public function index(RecentProductsWidget $recentProductsWidget)
+public function index()
 {
+    $recentProductsWidget = new RecentProductsWidget();
+    
     return view('home', compact('recentProductsWidget'));
 }
 ```
 
-And then you can render it in your view (home.blade.php) like this:
+And then you can force the object to render (home.blade.php) like this `{!! $recentProductsWidget !!}`:
 ```blade
 <div class="container">
     <h1>Hello {{ auth()->user()->username }} </h1> <!-- not cached -->
@@ -206,12 +222,10 @@ but widget object are __self contained__ and __self cached__
 
 You may want to look at the BaseWidget source code and read the comments for more information.
 
-####If you find this package useful please do not forget to `star` it.
-
 ==============
 
 
-###Behind the Curtian
+### Behind the Curtain
 
 
 ####How the data method on the widget's controller is called then? (0_o)
