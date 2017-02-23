@@ -1,9 +1,21 @@
+Laravel Widgetize
+=================
+
+###Widget Objects help you to have __cleaner code__ and __easy caching__.
+
+* [Introduction](#introduction)
+* [The Problem and The Solution](#so-what-is-our-problem-)
+* [Installation](#installation)
+* [Configuration](#configuration)
+* [Usage and Example](#example)
+
 This page may look long and boring to read at first, but bear with me!!!
 
 I bet if you read through it you won't get disappointed at the end.So let's Go...
 
 
-### When to use it ?
+###Introduction
+>When to use it?
 
 >This package (this design pattern) helps you in situations that you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-10x__ times faster. ;)
 
@@ -60,7 +72,7 @@ __WIDGET_IDENTIFIER=true__ (you can turn off widget identifiers in production)
 
 __WIDGET_DEFAULT_CACHE_LIFETIME__=1 (You can set a global default lifetime for all widgets and override it per widget if needed)
 
-###Guideline:
+###Guideline
 
 >1. So we first extract each widget into it's own partial. (recentProducts.blade.php)
 >2. Use `php artisan make:widget` command to create your widget class.
@@ -70,7 +82,9 @@ __WIDGET_DEFAULT_CACHE_LIFETIME__=1 (You can set a global default lifetime for a
 
 
 
-###Example : How to create a Widget?
+###Example
+
+How to create a Widget?
 
 >__You can use : `php artisan make:widget MyWidget` to make your widget class.__
 
@@ -177,7 +191,7 @@ The final result is the same piece of HTML, which is the result of rendering the
 but widget object are __self contained__ and __self cached__
 
 =============
+
 You may want to look at the BaseWidget source code and read the comments for more information.
 
-If you find this package useful please do not forget to `star` it.
-==================
+####If you find this package useful please do not forget to `star` it.
