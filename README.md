@@ -1,7 +1,7 @@
 Laravel Widgetize
 =================
 
-##Widget Objects help you to have _cleaner code_ and _easy caching_.
+## Widget Objects help you have _cleaner code_ and _easy caching_.
 
 
 ==================
@@ -12,6 +12,7 @@ Laravel Widgetize
     - [The Problems](#what-is-our-problems)
     - [The Solution](#what-is-the-solution)
     - [The Theory Behind Widget Objects](#theory)
+    - [Package Features](#package-features)
 * [Installation](#installation)
 * [Configuration](#configuration)
     - [Global](#global-config)
@@ -31,13 +32,13 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 #### What is a widget Object?
 
->Widget objects is are normal php objects, the special thing about them is that, when you try to treat them as a regular string variable (for example: `echo $myWidgetObj` or `{!! $myWidgetObj !!}`) they magically output `HTML`!!! which is the result of rendering a view partial with data from the widget controller. So we can replace `@include('myPartial')` with `{!! myPartial !!}`. 
+>Widget objects is are normal php objects, the special thing about them is that, when you try to treat them as a regular string variable (for example: `echo $myWidgetObj` or `{!! $myWidgetObj !!}`) they magically output `HTML`!!! which is the result of rendering a view partial with data from the widget controller. So we can replace `@include('myPartial')` with `{!! myPartial !!}`. but widget object are __self contained__ and __self cached__.
 
 
 
 #### When to use the _widget_ concept?
 
->This concept (this design pattern) helps you in situations that you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster. ;)
+>This concept (this design pattern) helps you in situations that you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster!!! ;)
 
 
 
@@ -71,15 +72,14 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 >It helps you to conforms to `Open-closed principle`.Because if you want to add a widget on your page you do not need to add to the controller code. Instead you create a new widget class from scratch or when you want to remove something from the page you do not have go to the controller find and comment out related controller code. removing the {!!myWidget !!} is enough to disable the corresponding controller.
 
 
-- Ok, but How this package is going to help us ? (@_@)
+### Package Features
 
-
-1. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
-2. It executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `{!! $widgetObj !!}`, So for example if you comment out `{!! $widgetObj !!}` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
-3. It optionally `minifies` the output of the widget. (In order to save cache storage space and bandwidth)
-4. It support the `nested widgets` tree structure. (Use can inject and use widgets within widgets.)
-5. It can help you generate widget class boilerplate with artisan command. 
-6. It helps you to have a dedicated presenter class of each widget to clean up your views.
+> 1. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
+> 2. It executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `{!! $widgetObj !!}`, So for example if you comment out `{!! $widgetObj !!}` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
+> 3. It optionally `minifies` the output of the widget. (In order to save cache storage space and bandwidth)
+> 4. It support the `nested widgets` tree structure. (Use can inject and use widgets within widgets.)
+> 5. It can help you generate widget class boilerplate with artisan command. 
+> 6. It helps you to have a dedicated presenter class of each widget to clean up your views.
 
 ### Installation:
 
@@ -94,55 +94,72 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 ## Configuration:
 
 ### Global Config:
-You can set the variables in your .env file to globally set some configs for you widgets and override them if needed.
+> You can set the variables in your .env file to globally set some configs for you widgets and override them if needed.
 
-__WIDGET_MINIFICATION=true__ (you can globally turn off HTML minification for development)
+> __WIDGET_MINIFICATION=true__ (you can globally turn off HTML minification for development)
 
-__WIDGET_CACHE=true__ (you can turn caching on and off for all widgets.)
+> __WIDGET_CACHE=true__ (you can turn caching on and off for all widgets.)
 
-__WIDGET_IDENTIFIER=true__ (you can turn off widget identifiers in production)
+> __WIDGET_IDENTIFIER=true__ (you can turn off widget identifiers in production)
 
-__WIDGET_DEFAULT_CACHE_LIFETIME__=1 (You can set a global default lifetime for all widgets and override it per widget if needed)
+> __WIDGET_DEFAULT_CACHE_LIFETIME__=1 (You can set a global default lifetime for all widgets and override it per widget if needed)
 
 
 ### Per Widget Config:
 
-- _protected $template_
+> __protected $template__ (string)
 
 >If you do not set it,By default, it refers to app/Widgets folder and looks for the 'widgetNameView.blade.php'
 (Meaning that if your widget is `app/Widgets/home/recentProducts.php` the default view for that is `app/Widgets/home/recentProductsView.blade.php`)
 Anyway you can ovrride it to point to any partial in views folder.(for example: `protected $template='home.footer'` will look for resource/views/home/footer.blade.php)
+So the entire widget lives in one folder:
 
+>| _app\Widgets\Homepage\RecentProductsWidget.php_
 
-| app\Widgets\Homepage\RecentProductsWidget.php
-
-| app\Widgets\Homepage\RecentProductsWidgetView.blade.php
-
-
-So the entire widget lives in one folder.
-
-
-- _protected $controller_
-
->If you do not want to put your _data_ method on your widget class, you can set `protected $controller = App\Some\Class\MyController::class` and put your `public data` method on a dedicated class.(instead od having it on your widget class)
-
-
-- _protected $presenter_
-
->If you do not want to put your _present_ method on your widget class, you can set `protected $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data retured from your controller is first piped to your presenter and then to your view.(So if you specify a presenter your view file gets its data from the presenter and not the controller.)
+>| _app\Widgets\Homepage\RecentProductsWidgetView.blade.php_
 
 
 
-- _protected $cacheLifeTime_
-
->If you want to override the global cache life time (which is set in your .env file) for a specific widget, you can set $cacheLifeTime on your widget class.
 
 
-- _protected $cacheTags_
+> __protected $controller__ (string)
 
->If you want you can set `protected $cacheTags = ['tag1','tag2']` to easily target them for cache expiration.(Note that  _database_ and _file_ cache driver do not support cache tags.)
+> If you do not want to put your _data_ method on your widget class, you can set `protected $controller = App\Some\Class\MyController::class` and put your `public data` method on a dedicated class.(instead od having it on your widget class)
 
 
+
+> __protected $presenter__ (string)
+
+> If you do not want to put your _present_ method on your widget class, you can set
+
+`protected $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data retured from your controller is first piped to your presenter and then to your view.(So if you specify a presenter your view file gets its data from the presenter and not the controller.)
+
+
+
+
+> __protected $cacheLifeTime__ (int)
+
+> If you want to override the global cache life time (which is set in your .env file) for a specific widget, you can set $cacheLifeTime on your widget class.
+
+ value  | effect
+:-------|:----------
+   -1   | forever
+'forever' | forever
+  0    | disable
+  1    | 1 minute
+
+
+
+
+
+>  __protected $cacheTags__ (array|string)
+
+> If you want you can set `protected $cacheTags = ['tag1','tag2']` to easily target them for cache expiration.(Note that  _database_ and _file_ cache driver do not support cache tags.)
+
+
+> __protected $context_as__ (string)
+
+> The variable name to access the controler data in the view.
 
 
 ##Example
@@ -232,10 +249,6 @@ And then you can force the object to render (home.blade.php) like this `{!! $rec
 
 =============
 
-In order to easily understand what's going on here...
-Think of `{!! $recentProductsWidget !!}` as `@include('widgets.recentProductsWidget')` but more sophisticated.
-The final result is the same piece of HTML, which is the result of rendering the partial.
-but widget object are __self contained__ and __self cached__
 
 
 You may want to look at the BaseWidget source code and read the comments for more information.
