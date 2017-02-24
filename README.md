@@ -7,9 +7,11 @@ Laravel Widgetize
 ==================
 
 * [Introduction](#introduction)
+    - [What is a _widget object_ ?](#what-is-a-widget-object)
     - [When to use the _widget_ concept?](#when-to-use-the-widget-concept)
     - [The Problems](#what-is-our-problems)
     - [The Solution](#what-is-the-solution)
+    - [The Theory Behind Widget Objects](#theory)
 * [Installation](#installation)
 * [Configuration](#configuration)
     - [Global](#global-config)
@@ -25,10 +27,17 @@ This page may look long and boring to read at first, but bear with me!!!
 I bet if you read through it you won't get disappointed at the end.So let's Go...
 
 
-###Introduction
-####When to use the _widget_ concept?
+### Introduction
 
->This package (this design pattern) helps you in situations that you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-10x__ times faster. ;)
+#### What is a widget Object?
+
+>Widget objects is are normal php objects, the special thing about them is that, when you try to treat them as a regular string variable (for example: `echo $myWidgetObj` or `{!! $myWidgetObj !!}`) they magically output `HTML`!!! which is the result of rendering a view partial with data from the widget controller. So we can replace `@include('myPartial')` with `{!! myPartial !!}`. 
+
+
+
+#### When to use the _widget_ concept?
+
+>This concept (this design pattern) helps you in situations that you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster. ;)
 
 
 
@@ -37,7 +46,7 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 #### Problem 1 : Controllers easily get crowded :(
 >Imagine An online shop like amazon which shows the list of products, popular products, etc (in the sidebar), user data and basket data in the navbar and a tree of product categories in the menu and etc... In traditional good old MVC model you have a single controller method to provide all the widgets with data. You can immidiately see that you are violating the SRP (Single Responsibility Priciple)!!! The trouble is worse when the client changes his mind over time and asks the deveploper to add, remove and modify those widgets on the page. And it always happens. Clients do change their minds.The developoer's job is to be ready to cope with that as effortlessly as possible.
 
-#### Problem 2 : Page caching is always hard :( 
+#### Problem 2 : Page caching is always hard (But no more) :( 
 >Trying to cache the pages which include user specific data (for example the username on the top menu) is a often fruitless. Because each user sees slightly different page from other users. Or in cases when we have some parts of the page which update frequently and some other parts which change rarly... we have to expire the entire page cache to match the most frequently updated one. :(
 AAAAAAAAAhh...
 
@@ -54,24 +63,31 @@ So, How to fight against those ? ;(
 >That's it !! :)
 >This idea originally comes from the client-side js frameworks and is somewhat new in server-side world.
 
+### Theory
+>The widget object pattern is in fact a variation of the famous `single responsibility principle`.
+Instead of having one bloated controller method that was resposible to supply data for all the widgets...
+You distribute your controller code amougst multiple widget classes.(Each widget is responsible for small portion of the page.)
+
+>It helps you to conforms to `Open-closed principle`.Because if you want to add a widget on your page you do not need to add to the controller code. Instead you create a new widget class from scratch or when you want to remove something from the page you do not have go to the controller find and comment out related controller code. removing the {!!myWidget !!} is enough to disable the corresponding controller.
+
+
 - Ok, but How this package is going to help us ? (@_@)
 
-1. It helps you to reach SRP (`single responsibility principle`) in your controllers (Because each widget class is only responsible for one and only one widget of the page but before you had a single controller method that was resposible for all the widgets. Effectively exploding one controller method into multiple widget classes.)
-2. It helps you to conforms to `Open-closed principle`. (Because if you want to add a widget on your page you do not need to touch the controller code. Instead you create a new widget class from scratch.)
-3. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
-4. It executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `{!! $widgetObj !!}`, So for example if you comment out `{!! $widgetObj !!}` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
-5. It optionally `minifies` the output of the widget. (In order to save cache storage space and bandwidth)
-6. It support the `nested widgets` tree structure. (Use can inject and use widgets within widgets.)
-7. It can help you generate widget class boilerplate with artisan command. 
-8. It helps you to have a dedicated presenter class of each widget to clean up your views.
+
+1. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
+2. It executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `{!! $widgetObj !!}`, So for example if you comment out `{!! $widgetObj !!}` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
+3. It optionally `minifies` the output of the widget. (In order to save cache storage space and bandwidth)
+4. It support the `nested widgets` tree structure. (Use can inject and use widgets within widgets.)
+5. It can help you generate widget class boilerplate with artisan command. 
+6. It helps you to have a dedicated presenter class of each widget to clean up your views.
 
 ### Installation:
 
 `composer require imanghafoori/laravel-widgetize`
 
->Add `Imanghafoori\Widgets\WidgetsServiceProvider::class` to the providers array in your config/app.php
+>Add `Imanghafoori\Widgets\WidgetsServiceProvider::class` to the providers array in your `config/app.php`
 
->And you will be on fire!
+>And you will be on fire!:fire:
 
 >Now you are free to extend the `Imanghafoori\Widgets\BaseWidget` abstract class and implement the `public data` method in your sub-class or use the `php artisan make:widget`.
 
