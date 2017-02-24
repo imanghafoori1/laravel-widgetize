@@ -59,7 +59,7 @@ AAAAAAAAAhh...
 
 ### What is the solution?
 
-So, How to fight against those ? ;(
+> So, How to fight against those ? ;(
 >__The main idea is simple, Instead of one controller method to handle all widgets of the page, Each widget should have it's own `controller class`, `view partial`, `view presenter class` and `cache config`, isolated from others.__
 >That's it !! :)
 >This idea originally comes from the client-side js frameworks and is somewhat new in server-side world.
@@ -75,11 +75,10 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 ### Package Features
 
 > 1. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
-> 2. It executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `{!! $widgetObj !!}`, So for example if you comment out `{!! $widgetObj !!}` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
-> 3. It optionally `minifies` the output of the widget. (In order to save cache storage space and bandwidth)
-> 4. It support the `nested widgets` tree structure. (Use can inject and use widgets within widgets.)
-> 5. It can help you generate widget class boilerplate with artisan command. 
-> 6. It helps you to have a dedicated presenter class of each widget to clean up your views.
+> 2. It optionally `minifies` the output of the widget. (In order to save cache storage space and bandwidth)
+> 3. It support the `nested widgets` tree structure. (Use can inject and use widgets within widgets.)
+> 4. It can help you generate widget class boilerplate with artisan command. 
+> 5. It helps you to have a dedicated presenter class of each widget to clean up your views.
 
 ### Installation:
 
@@ -249,8 +248,6 @@ And then you can force the object to render (home.blade.php) like this `{!! $rec
 
 =============
 
-
-
 You may want to look at the BaseWidget source code and read the comments for more information.
 
 ==============
@@ -268,3 +265,6 @@ You may want to look at the BaseWidget source code and read the comments for mor
 `But only if it is Not already cached` or the `protected $cacheLifeTime` is set to 0.
 If the widget HTML output is already in the cache it prints out the HTML without executing `data` method 
 (hence avoids performing database queries or even rendering the blade file.)
+
+
+>Note that it executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `{!! $widgetObj !!}`, So for example if you comment out `{!! $widgetObj !!}` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
