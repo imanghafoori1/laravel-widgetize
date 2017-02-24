@@ -1,7 +1,7 @@
 Laravel Widgetize
 =================
 
-## Widget Objects help you have _cleaner code_ and _easy caching_.
+## Widget Objects help you have _cleaner code_ and _easy caching_ !!!
 
 
 ==================
@@ -13,12 +13,19 @@ Laravel Widgetize
     - [The Solution](#what-is-the-solution)
     - [The Theory Behind Widget Objects](#theory)
     - [Package Features](#package-features)
+    
 * [Installation](#installation)
-* [Configuration](#configuration)
-    - [Global](#global-config)
-    - [Per Widget](#per-widget-config)
+* [Global Configuration](#global-config)
+* [Per Widget Configuration](#per-widget-config)
+    - [protected $template](#protected-template-string)
+    - [protected $controller](#protected-controller-string)
+    - [protected $presenter](#[protected-presenter-string)
+    - [protected $cacheLifeTime](#protected-cachelifetime-int)
+    - [protected $cacheTags](#protected-cachetags-arraystring)
+    - [protected $context_as](#protected-context_as-string)
+   
 * [Usage and Example](#example)
-    - [Guideline](#guideline)
+    - [General Guideline](#guideline)
     - [How to make a widget class](#how-to-make-a-widget)
     - [How to use a widget class](#how-to-use-a-widget-class)
 * [Behind the curtain](#behind-the-curtain)
@@ -40,6 +47,8 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 >This concept (this design pattern) helps you in situations that you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster!!! ;)
 
+
+=======================
 
 
 ### What is our problems?
@@ -72,6 +81,9 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 >It helps you to conforms to `Open-closed principle`.Because if you want to add a widget on your page you do not need to add to the controller code. Instead you create a new widget class from scratch or when you want to remove something from the page you do not have go to the controller find and comment out related controller code. removing the {!!myWidget !!} is enough to disable the corresponding controller.
 
 
+======================
+
+
 ### Package Features
 
 > 1. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
@@ -79,6 +91,10 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 > 3. It support the `nested widgets` tree structure. (Use can inject and use widgets within widgets.)
 > 4. It can help you generate widget class boilerplate with artisan command. 
 > 5. It helps you to have a dedicated presenter class of each widget to clean up your views.
+
+
+===================
+
 
 ### Installation:
 
@@ -90,9 +106,10 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 
 >Now you are free to extend the `Imanghafoori\Widgets\BaseWidget` abstract class and implement the `public data` method in your sub-class or use the `php artisan make:widget`.
 
-## Configuration:
+====================
 
-### Global Config:
+
+## Global Config:
 > You can set the variables in your .env file to globally set some configs for you widgets and override them if needed.
 
 > __WIDGET_MINIFICATION=true__ (you can globally turn off HTML minification for development)
@@ -104,9 +121,9 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 > __WIDGET_DEFAULT_CACHE_LIFETIME__=1 (You can set a global default lifetime for all widgets and override it per widget if needed)
 
 
-### Per Widget Config:
+## Per Widget Config:
 
-> __protected $template__ (string)
+> ###__protected $template__ (string)
 
 >If you do not set it,By default, it refers to app/Widgets folder and looks for the 'widgetNameView.blade.php'
 (Meaning that if your widget is `app/Widgets/home/recentProducts.php` the default view for that is `app/Widgets/home/recentProductsView.blade.php`)
@@ -118,25 +135,20 @@ So the entire widget lives in one folder:
 >| _app\Widgets\Homepage\RecentProductsWidgetView.blade.php_
 
 
-
-
-
-> __protected $controller__ (string)
+> ###__protected $controller__ (string)
 
 > If you do not want to put your _data_ method on your widget class, you can set `protected $controller = App\Some\Class\MyController::class` and put your `public data` method on a dedicated class.(instead od having it on your widget class)
 
 
 
-> __protected $presenter__ (string)
+> ###__protected $presenter__ (string)
 
 > If you do not want to put your _present_ method on your widget class, you can set
-
 `protected $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data retured from your controller is first piped to your presenter and then to your view.(So if you specify a presenter your view file gets its data from the presenter and not the controller.)
 
 
 
-
-> __protected $cacheLifeTime__ (int)
+> ###__protected $cacheLifeTime__ (int)
 
 > If you want to override the global cache life time (which is set in your .env file) for a specific widget, you can set $cacheLifeTime on your widget class.
 
@@ -148,18 +160,17 @@ So the entire widget lives in one folder:
   1    | 1 minute
 
 
-
-
-
->  __protected $cacheTags__ (array|string)
+> ###__protected $cacheTags__ (array|string)
 
 > If you want you can set `protected $cacheTags = ['tag1','tag2']` to easily target them for cache expiration.(Note that  _database_ and _file_ cache driver do not support cache tags.)
 
 
-> __protected $context_as__ (string)
+> ###__protected $context_as__ (string)
 
 > The variable name to access the controler data in the view.
 
+
+======================
 
 ##Example
 
