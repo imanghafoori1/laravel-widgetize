@@ -1,6 +1,9 @@
 Laravel Widgetize
 =================
 
+
+[![Build Status](https://travis-ci.org/imanghafoori1/laravel-widgetize.svg?branch=master)](https://travis-ci.org/imanghafoori1/laravel-widgetize)
+
 ## Widget Objects help you have _cleaner code_ and _easy caching_ !!!
 
 
