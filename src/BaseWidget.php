@@ -3,9 +3,6 @@
 
 namespace Imanghafoori\Widgets;
 
-
-use Illuminate\Support\Facades\Cache;
-
 abstract class BaseWidget
 {
     protected $template = null;
@@ -63,12 +60,15 @@ abstract class BaseWidget
             $presenter = get_called_class() . 'Presenter';
 
             if (class_exists($presenter)) {
-                $this->presenter = $presenter;
+                $this->presenter = $presenter.'@presenter';
+            }else{
+                $this->presenter = null;
             }
         } else {
             if (class_exists($this->presenter) === false) {
                 throw new \InvalidArgumentException("Presenter Class [{$this->presenter}] not found.");
             }
+            $this->presenter = $this->presenter.'@present';
         }
 
     }
@@ -78,11 +78,12 @@ abstract class BaseWidget
      */
     private function normalizeTemplateName()
     {
+        // class name without namespace.
+        $className = str_replace('App\\Widgets\\', '', get_called_class());
+        // replace slashes with dots
+        $className = str_replace(['\\', '/'], '.', $className);
+
         if ($this->template === null) {
-            // class name without namespace.
-            $className = str_replace('App\\Widgets\\', '', get_called_class());
-            // replace slashes with dots
-            $className = str_replace(['\\', '/'], '.', $className);
             $this->template = 'Widgets::' . $className . 'View';
         }
 
@@ -165,12 +166,12 @@ abstract class BaseWidget
     private function prepareDataForView($args)
     {
         // Here we call the data method on the widget class.
-        $viewData = app()->call($this->controller, $args);
+        $viewData = \App::call($this->controller, $args);
 
-        if (class_exists($this->presenter)) {
+        if (($this->presenter)) {
             // We make an object and call the `present` method on it.
             // Piping the data through the presenter before sending it to view.
-            $viewData = resolve($this->presenter)->present($viewData);
+            $viewData = \App::call($this->presenter, [$viewData]);
         }
 
         $this->viewData = $viewData;
@@ -249,7 +250,7 @@ abstract class BaseWidget
          * ================================== *
          |  The caching is turned off when:   |
          |  1- we are running tests           |
-         |  2- have disabled it in .env fil   |
+         |  2- have disabled it in .env file  |
          |  3- have set the time to 0 minutes |
          * ================================== *
         */
@@ -287,7 +288,7 @@ abstract class BaseWidget
      */
     private function cacheShouldBeTagged()
     {
-        return !in_array(env('CACHE_DRIVER'), ['file', 'database']) and $this->cacheTags;
+        return !in_array(env('CACHE_DRIVER','file'), ['file', 'database']) and $this->cacheTags;
     }
 
 }
