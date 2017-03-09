@@ -9,7 +9,7 @@ class DummyClass extends BaseWidget
     protected $template;
     protected $cacheLifeTime = 1;
 	protected $friendlyName = 'DummyClass';
-    protected $context_as = '$data';
+    protected $contextAs = '$data';
 
 	public function data()
 	{
