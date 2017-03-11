@@ -40,6 +40,10 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 
 ### Introduction
+>This package helps you in :
+- Caching
+- Code organization
+- HTML minification
 
 #### What is a widget Object?
 
