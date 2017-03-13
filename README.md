@@ -26,7 +26,7 @@ Laravel Widgetize
     - [protected $presenter](#[protected-presenter-string)
     - [protected $cacheLifeTime](#protected-cachelifetime-int)
     - [protected $cacheTags](#protected-cachetags-arraystring)
-    - [protected $context_as](#protected-context_as-string)
+    - [protected $contextAs](#protected-contextAs-string)
    
 * [Usage and Example](#example)
     - [General Guideline](#guideline)
@@ -176,7 +176,7 @@ So the entire widget lives in one folder:
 > If you want you can set `protected $cacheTags = ['tag1','tag2']` to easily target them for cache expiration.(Note that  _database_ and _file_ cache driver do not support cache tags.)
 
 
-> ###__protected $context_as__ (string)
+> ###__protected $contextAs__ (string)
 
 > The variable name to access the controler data in the view.
 
@@ -208,7 +208,7 @@ class RecentProductsWidget extends BaseWidget
 {
     protected $template = 'widgets.recentProducts.blade.php'; // referes to: views/widgets/recentProducts.blade.php
     protected $cacheLifeTime = 1; // 1(min) ( 0 : disable, -1 : forever)
-    protected $context_as = '$recentProducts'; // you can access $recentProducts in view file (default: $data)
+    protected $contextAs = '$recentProducts'; // you can access $recentProducts in view file (default: $data)
 
     // The data returned here would be available in widget view file automatically.
     // You can use dependancy injection here like you do in your typical controllers.
