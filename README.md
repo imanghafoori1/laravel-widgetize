@@ -34,6 +34,7 @@ Laravel Widgetize
     - [How to use a widget class](#how-to-use-a-widget-class)
 * [Behind the curtain](#behind-the-curtain)
 
+
 This page may look long and boring to read at first, but bear with me!!!
 
 I bet if you read through it you won't get disappointed at the end.So let's Go...
@@ -41,19 +42,21 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 ### Introduction
 >This package helps you in :
-- Caching
-- Code organization
-- HTML minification
+- Page Partial Caching
+- Code Organization
+- HTML Minification
 
 #### What is a widget Object?
 
->Widget objects is are normal php objects, the special thing about them is that, when you try to treat them as a regular string variable (for example: `echo $myWidgetObj` or `{!! $myWidgetObj !!}`) they magically output `HTML`!!! which is the result of rendering a view partial with data from the widget controller. So we can replace `@include('myPartial')` with `{!! myPartial !!}`. but widget object are __self contained__ and __self cached__.
+>You can think of a widget object as a page partial with 'View a Composer' attached to it.
+>Or If you know Drupal Views concept, they are very similar.
+>In fact Widget objects is are normal php objects, the special thing about them is that, when you try to treat them as a regular string variable (for example: `echo $myWidgetObj` or `{!! $myWidgetObj !!}`) they magically output `HTML`!!! which is the result of rendering a view partial with data from the widget controller. So we can replace `@include('myPartial')` with `{!! myPartial !!}`. but widget object are `__self contained__` and `__self cached__`.
 
 
 
 #### When to use the _widget_ concept?
 
->This concept (this design pattern) helps you in situations that you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster!!! ;)
+>This concept (this design pattern) really shines when you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster!!! ;)
 
 
 =======================
