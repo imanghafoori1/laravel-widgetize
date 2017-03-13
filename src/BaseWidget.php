@@ -132,7 +132,7 @@ abstract class BaseWidget
      */
     public function __invoke(...$args)
     {
-        return $this->generateHtml(...$args);
+        return $this->renderWidget(...$args);
     }
 
     /**
@@ -280,7 +280,7 @@ abstract class BaseWidget
      */
     public function __toString()
     {
-        return $this->generateHtml();
+        return $this->renderWidget();
     }
 
     /**
@@ -289,6 +289,20 @@ abstract class BaseWidget
     private function cacheShouldBeTagged()
     {
         return !in_array(env('CACHE_DRIVER','file'), ['file', 'database']) and $this->cacheTags;
+    }
+
+    /**
+     * @param array $args
+     * @return string
+     */
+    private function renderWidget(...$args)
+    {
+        try {
+            $html = $this->generateHtml(...$args);
+        } catch (\Exception $e) {
+            return app()->make(ExceptionHandler::class)->render(app('request'), $e)->send();
+        }
+        return $html;
     }
 
 }
