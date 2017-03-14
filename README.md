@@ -35,6 +35,9 @@ Laravel Widgetize
 * [Behind the curtain](#behind-the-curtain)
 
 
+=====================
+
+
 This page may look long and boring to read at first, but bear with me!!!
 
 I bet if you read through it you won't get disappointed at the end.So let's Go...
@@ -49,7 +52,9 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 #### What is a widget Object?
 
 >You can think of a widget object as a page partial with 'View a Composer' attached to it.
->Or If you know Drupal Views concept, they are very similar.
+
+>Or If you know `Drupal's Views` concept, they are very similar to each other.
+
 >In fact Widget objects is are normal php objects, the special thing about them is that, when you try to treat them as a regular string variable (for example: `echo $myWidgetObj` or `{!! $myWidgetObj !!}`) they magically output `HTML`!!! which is the result of rendering a view partial with data from the widget controller. So we can replace `@include('myPartial')` with `{!! myPartial !!}`. but widget object are `__self contained__` and `__self cached__`.
 
 
@@ -84,7 +89,7 @@ AAAAAAAAAhh...
 >That's it !! :)
 >This idea originally comes from the client-side js frameworks and is somewhat new in server-side world.
 
-### Theory
+### Design Patterns Theory
 >The widget object pattern is in fact a variation of the famous `single responsibility principle`.
 Instead of having one bloated controller method that was resposible to supply data for all the widgets...
 You distribute your controller code amougst multiple widget classes.(Each widget is responsible for small portion of the page.)
