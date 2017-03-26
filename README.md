@@ -8,8 +8,6 @@ Laravel Widgetize
 ## Widget Objects help you have _cleaner code_ and _easy caching_ !!!
 
 
-==================
-
 * [Introduction](#introduction)
     - [What is a _widget object_ ?](#what-is-a-widget-object)
     - [When to use the _widget_ concept?](#when-to-use-the-widget-concept)
@@ -35,7 +33,6 @@ Laravel Widgetize
 * [Behind the curtain](#behind-the-curtain)
 
 
-=====================
 
 
 This page may look long and boring to read at first, but bear with me!!!
@@ -64,8 +61,6 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 >This concept (this design pattern) really shines when you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster!!! ;)
 
 
-=======================
-
 
 ### What is our problems?
 
@@ -80,7 +75,6 @@ AAAAAAAAAhh...
 #### Problem 3 : View templates easily get littered with if/else blocks (&_&)
 >We ideally want our view files to be as logic-less as possible and very much like the final output HTML.Don't we ?! if/else blocks and other computations are always irritating within our views. specially for static page designers in our team. We just want to print out already defined variables wiout the to decide what to print. Anyway the data we store in database are sometimes far from ready to be printed on the page.
 
-========================
 
 ### What is the solution?
 
@@ -97,8 +91,6 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 >It helps you to conforms to `Open-closed principle`.Because if you want to add a widget on your page you do not need to add to the controller code. Instead you create a new widget class from scratch or when you want to remove something from the page you do not have go to the controller find and comment out related controller code. removing the {!!myWidget !!} is enough to disable the corresponding controller.
 
 
-======================
-
 
 ### Package Features
 
@@ -109,7 +101,6 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 > 5. It helps you to have a dedicated presenter class of each widget to clean up your views.
 
 
-===================
 
 
 ### Installation:
@@ -122,7 +113,6 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 
 >Now you are free to extend the `Imanghafoori\Widgets\BaseWidget` abstract class and implement the `public data` method in your sub-class or use the `php artisan make:widget`.
 
-====================
 
 
 ## Global Config:
@@ -139,7 +129,7 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 
 ## Per Widget Config:
 
-> ###__protected $template__ (string)
+> ### __protected $template__ (string)
 
 >If you do not set it,By default, it refers to app/Widgets folder and looks for the 'widgetNameView.blade.php'
 (Meaning that if your widget is `app/Widgets/home/recentProducts.php` the default view for that is `app/Widgets/home/recentProductsView.blade.php`)
@@ -151,20 +141,20 @@ So the entire widget lives in one folder:
 >| _app\Widgets\Homepage\RecentProductsWidgetView.blade.php_
 
 
-> ###__protected $controller__ (string)
+> ### __protected $controller__ (string)
 
 > If you do not want to put your _data_ method on your widget class, you can set `protected $controller = App\Some\Class\MyController::class` and put your `public data` method on a dedicated class.(instead od having it on your widget class)
 
 
 
-> ###__protected $presenter__ (string)
+> ### __protected $presenter__ (string)
 
 > If you do not want to put your _present_ method on your widget class, you can set
 `protected $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data retured from your controller is first piped to your presenter and then to your view.(So if you specify a presenter your view file gets its data from the presenter and not the controller.)
 
 
 
-> ###__protected $cacheLifeTime__ (int)
+> ### __protected $cacheLifeTime__ (int)
 
 > If you want to override the global cache life time (which is set in your .env file) for a specific widget, you can set $cacheLifeTime on your widget class.
 
@@ -176,19 +166,17 @@ So the entire widget lives in one folder:
   1    | 1 minute
 
 
-> ###__protected $cacheTags__ (array|string)
+> ### __protected $cacheTags__ (array|string)
 
 > If you want you can set `protected $cacheTags = ['tag1','tag2']` to easily target them for cache expiration.(Note that  _database_ and _file_ cache driver do not support cache tags.)
 
 
-> ###__protected $contextAs__ (string)
+> ### __protected $contextAs__ (string)
 
 > The variable name to access the controler data in the view.
 
 
-======================
-
-##Example
+## Example
 
 ### Guideline
 
@@ -226,7 +214,6 @@ class RecentProductsWidget extends BaseWidget
 }
 ```
 
-=================
 
 recentProducts.blade.php
 
@@ -273,17 +260,15 @@ And then you can force the object to render (home.blade.php) like this `{!! $rec
 </div>
 ```
 
-=============
 
 You may want to look at the BaseWidget source code and read the comments for more information.
 
-==============
 
 
 ### Behind the Curtain
 
 
-####How the data method on the widget's controller is called then? (0_o)
+#### How the data method on the widget's controller is called then? (0_o)
 
 >Ok, now we know that we do not call widget controller actions from our routes or any where else, how the data method on the widget's controller is called then ???
 
