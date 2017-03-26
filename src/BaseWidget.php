@@ -189,7 +189,7 @@ abstract class BaseWidget
 
         // We add some HTML comments before and after the widget output
         // So then, we will be able to easily identify the widget in browser's developer tool.
-        if (env('WIDGET_IDENTIFIER', false)) {
+        if (env('WIDGET_IDENTIFIER', true) and env('APP_ENV','production') === 'local') {
             $this->addIdentifierToHtml();
         }
 
@@ -226,10 +226,8 @@ abstract class BaseWidget
     private function addIdentifierToHtml()
     {
         $name = $this->friendlyName;
-
-        $this->html = "<!-- ^ --> <!--" . get_called_class() . "  --> <!-- '$name' Widget Start -->"
-            . $this->html .
-            "<!-- '$name' Widget End --> <!--   --> <!-- ~ -->";
+        $this->html = "<div title='". get_called_class() . "::class || template : {$this->template}".$this->cacheState()."style='box-shadow: 0px 0px 15px 5px #00c62b inset'>" . $this->html ."</div>";
+        $this->html = "<!-- '$name' Widget Start -->" . $this->html . "<!-- '$name' Widget End -->";
     }
 
     /**
@@ -289,6 +287,17 @@ abstract class BaseWidget
     private function cacheShouldBeTagged()
     {
         return !in_array(env('CACHE_DRIVER','file'), ['file', 'database']) and $this->cacheTags;
+    }
+
+    /**
+     * @return string
+     */
+    private function cacheState()
+    {
+        if($this->widgetShouldUseCache()){
+            return " || cache: {$this->cacheLifeTime}(min)' ";
+        }
+        return  " || cache : off";
     }
 
     /**
