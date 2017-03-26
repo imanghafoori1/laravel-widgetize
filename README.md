@@ -295,3 +295,5 @@ If the widget HTML output is already in the cache it prints out the HTML without
 
 
 >Note that it executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `{!! $widgetObj !!}`, So for example if you comment out `{!! $widgetObj !!}` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
+
+If you like the package please star it on Github, it means a lot to have support from the community and if you have suggestions please let us know.
