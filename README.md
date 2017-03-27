@@ -11,7 +11,7 @@ Laravel Widgetize
 [![License](https://poser.pugx.org/imanghafoori/laravel-widgetize/license)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 
 
-## :ribbon::ribbon::ribbon: Widget Objects help you have _cleaner code_ and _easy caching_ :ribbon::ribbon::ribbon:
+## :ribbon::ribbon::ribbon: Widget Objects help you have "_cleaner code_" :heavy_plus_sign: "_easy caching_" :ribbon::ribbon::ribbon:
 
 
 * :flashlight: [Introduction](#introduction)
@@ -36,14 +36,16 @@ Laravel Widgetize
     - [General Guideline](#guideline)
     - [How to make a widget class](#how-to-make-a-widget)
     - [How to use a widget class](#how-to-use-a-widget-class)
-* [Behind the curtain](#behind-the-curtain)
+* :shipit: [Behind the curtain](#behind-the-curtain)
 
 
-
+```If you like the package please star it, it means a lot to have support from the community```
+and if you have suggestions please let me know.
 
 This page may look long and boring to read at first, but bear with me!!!
 
 I bet if you read through it you won't get disappointed at the end.So let's Go... :horse_racing:
+
 
 
 ### :flashlight: Introduction
@@ -68,7 +70,7 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 
 
-### What is our problems?
+### What is our problems? :snake:
 
 #### Problem 1 : Controllers easily get crowded :weary:
 >Imagine An online shop like amazon which shows the list of products, popular products, etc (in the sidebar), user data and basket data in the navbar and a tree of product categories in the menu and etc... In traditional good old MVC model you have a single controller method to provide all the widgets with data. You can immidiately see that you are violating the SRP (Single Responsibility Priciple)!!! The trouble is worse when the client changes his mind over time and asks the deveploper to add, remove and modify those widgets on the page. And it always happens. Clients do change their minds.The developoer's job is to be ready to cope with that as effortlessly as possible.
@@ -99,7 +101,7 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 
 
 
-### Package Features 
+### :gem: Package Features 
 
 > 1. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
 > 2. It optionally `minifies` the output of the widget. (In order to save cache storage space and bandwidth)
@@ -110,15 +112,28 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 
 
 
-### :wrench: Installation:
+### :wrench: Installation: :arrow_down:
+``` bash
+composer require imanghafoori/laravel-widgetize
+```
 
-`composer require imanghafoori/laravel-widgetize`
+Next, you must install the service provider to `config/app.php`: :electric_plug:
 
->Add `Imanghafoori\Widgets\WidgetsServiceProvider::class` to the providers array in your `config/app.php`
+```php
+'providers' => [
+    // ...
+    Imanghafoori\Widgets\WidgetsServiceProvider::class,
+];
+```
 
 >And you will be on fire!:fire:
 
->Now you are free to extend the `Imanghafoori\Widgets\BaseWidget` abstract class and implement the `public data` method in your sub-class or use the `php artisan make:widget`.
+>Now you are free to extend the `Imanghafoori\Widgets\BaseWidget` abstract class and implement the `public data` method in your sub-class or use the 
+
+``` bash
+php artisan make:widget MySexyWidget
+```
+
 
 
 
@@ -272,7 +287,7 @@ You may want to look at the BaseWidget source code and read the comments for mor
 
 
 
-### Behind the Curtain
+### :shipit: Behind the Curtain
 
 
 #### How the data method on the widget's controller is called then? (0_o)
@@ -288,4 +303,6 @@ If the widget HTML output is already in the cache it prints out the HTML without
 
 >Note that it executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `{!! $widgetObj !!}`, So for example if you comment out `{!! $widgetObj !!}` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
 
-If you like the package please star it on Github, it means a lot to have support from the community and if you have suggestions please let us know.
+
+
+
