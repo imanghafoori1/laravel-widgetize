@@ -258,9 +258,8 @@ abstract class BaseWidget
 
     private function addIdentifierToHtml()
     {
-        $name = $this->friendlyName;
-        $this->html = "<div title='" . get_called_class() . "::class || template : {$this->template}" . $this->cacheState() . "style='box-shadow: 0px 0px 15px 5px #00c62b inset'>" . $this->html . "</div>";
-        $this->html = "<!-- '$name' Widget Start -->" . $this->html . "<!-- '$name' Widget End -->";
+        $this->addDebugInfo();
+        $this->addHtmlComments();
     }
 
     /**
@@ -324,6 +323,16 @@ abstract class BaseWidget
     public function __toString()
     {
         return $this->renderWidget();
+    }
+
+    private function addDebugInfo()
+    {
+        $this->html = "<div title='" . get_called_class() . "::class || template : {$this->template}" . $this->cacheState() . "' style='box-shadow: 0px 0px 15px 5px #00c62b inset'>" . $this->html . "</div>";
+    }
+
+    private function addHtmlComments()
+    {
+        $this->html = "<!-- '{$this->friendlyName}' Widget Start -->" . $this->html . "<!-- '{$this->friendlyName}' Widget End -->";
     }
 
 }
