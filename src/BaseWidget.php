@@ -29,6 +29,7 @@ abstract class BaseWidget
     }
 
     /**
+     * Figures out which method should be called as the controller.
      * @return null
      */
     private function normalizeControllerMethod()
@@ -52,6 +53,7 @@ abstract class BaseWidget
     }
 
     /**
+     * Figures out which method should be called as the presenter
      * @return null
      */
     private function normalizePresenterName()
@@ -60,20 +62,21 @@ abstract class BaseWidget
             $presenter = get_called_class() . 'Presenter';
 
             if (class_exists($presenter)) {
-                $this->presenter = $presenter.'@presenter';
-            }else{
+                $this->presenter = $presenter . '@presenter';
+            } else {
                 $this->presenter = null;
             }
         } else {
             if (class_exists($this->presenter) === false) {
                 throw new \InvalidArgumentException("Presenter Class [{$this->presenter}] not found.");
             }
-            $this->presenter = $this->presenter.'@present';
+            $this->presenter = $this->presenter . '@present';
         }
 
     }
 
     /**
+     * Figures out which template to render.
      * @return null
      */
     private function normalizeTemplateName()
@@ -93,6 +96,7 @@ abstract class BaseWidget
     }
 
     /**
+     * Figures out what the variable name should be in view file.
      * @return null
      */
     private function normalizeContextAs()
@@ -102,6 +106,7 @@ abstract class BaseWidget
     }
 
     /**
+     * ّFigures out how long the cache life time should be.
      * @return null
      */
     private function normalizeCacheLifeTime()
@@ -111,6 +116,10 @@ abstract class BaseWidget
         };
     }
 
+    /**
+     * ّFigures out what the cache tags should be.
+     * @return null
+     */
     private function normalizeCacheTags()
     {
         if ($this->cacheShouldBeTagged()) {
@@ -125,6 +134,15 @@ abstract class BaseWidget
     }
 
     /**
+     * Determine whether cache tags should be applied or not
+     * @return bool
+     */
+    private function cacheShouldBeTagged()
+    {
+        return !in_array(env('CACHE_DRIVER', 'file'), ['file', 'database']) and $this->cacheTags;
+    }
+
+    /**
      * This method is called when you try to invoke the object like a function in blade files.
      * like this : {!! $myWidgetObj('param1') !!}
      * @param array $args
@@ -136,6 +154,21 @@ abstract class BaseWidget
     }
 
     /**
+     * @param array $args
+     * @return string
+     */
+    private function renderWidget(...$args)
+    {
+        try {
+            $html = $this->generateHtml(...$args);
+        } catch (\Exception $e) {
+            return app()->make(ExceptionHandler::class)->render(app('request'), $e)->send();
+        }
+        return $html;
+    }
+
+    /**
+     * It tries to get the html from cache if possible, otherwise generates it.
      * @param array ...$args
      * @return string
      */
@@ -189,7 +222,7 @@ abstract class BaseWidget
 
         // We add some HTML comments before and after the widget output
         // So then, we will be able to easily identify the widget in browser's developer tool.
-        if (env('WIDGET_IDENTIFIER', true) and env('APP_ENV','production') === 'local') {
+        if (env('WIDGET_IDENTIFIER', true) and env('APP_ENV', 'production') === 'local') {
             $this->addIdentifierToHtml();
         }
 
@@ -226,17 +259,20 @@ abstract class BaseWidget
     private function addIdentifierToHtml()
     {
         $name = $this->friendlyName;
-        $this->html = "<div title='". get_called_class() . "::class || template : {$this->template}".$this->cacheState()."style='box-shadow: 0px 0px 15px 5px #00c62b inset'>" . $this->html ."</div>";
+        $this->html = "<div title='" . get_called_class() . "::class || template : {$this->template}" . $this->cacheState() . "style='box-shadow: 0px 0px 15px 5px #00c62b inset'>" . $this->html . "</div>";
         $this->html = "<!-- '$name' Widget Start -->" . $this->html . "<!-- '$name' Widget End -->";
     }
 
     /**
-     * @param $arg
+     * Generates a string of current cache configurations.
      * @return string
      */
-    private function makeCacheKey($arg)
+    private function cacheState()
     {
-        return md5(json_encode($arg, JSON_FORCE_OBJECT) . $this->template . get_called_class());
+        if ($this->widgetShouldUseCache()) {
+            return " || cache: {$this->cacheLifeTime}(min)' ";
+        }
+        return " || cache : off";
     }
 
     /**
@@ -255,11 +291,20 @@ abstract class BaseWidget
         return ((env('WIDGET_CACHE', false) !== false) and (!app()->environment('testing')) and ($this->cacheLifeTime !== 0));
     }
 
+    /**
+     * @param $arg
+     * @return string
+     */
+    private function makeCacheKey($arg)
+    {
+        return md5(json_encode($arg, JSON_FORCE_OBJECT) . $this->template . get_called_class());
+    }
+
     private function cacheResult($key, $phpCode)
     {
         $cache = app()->make('cache');
 
-        if($this->cacheTags){
+        if ($this->cacheTags) {
             $cache = $cache->tags($this->cacheTags);
         }
 
@@ -279,39 +324,6 @@ abstract class BaseWidget
     public function __toString()
     {
         return $this->renderWidget();
-    }
-
-    /**
-     * @return bool
-     */
-    private function cacheShouldBeTagged()
-    {
-        return !in_array(env('CACHE_DRIVER','file'), ['file', 'database']) and $this->cacheTags;
-    }
-
-    /**
-     * @return string
-     */
-    private function cacheState()
-    {
-        if($this->widgetShouldUseCache()){
-            return " || cache: {$this->cacheLifeTime}(min)' ";
-        }
-        return  " || cache : off";
-    }
-
-    /**
-     * @param array $args
-     * @return string
-     */
-    private function renderWidget(...$args)
-    {
-        try {
-            $html = $this->generateHtml(...$args);
-        } catch (\Exception $e) {
-            return app()->make(ExceptionHandler::class)->render(app('request'), $e)->send();
-        }
-        return $html;
     }
 
 }
