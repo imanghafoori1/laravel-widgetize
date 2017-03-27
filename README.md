@@ -1,5 +1,7 @@
 Laravel Widgetize
 =================
+
+
 ![untitled2](https://cloud.githubusercontent.com/assets/6961695/24345454/7d5c9e4c-12e5-11e7-8c22-015395dbb796.jpg)
 
 [![Latest Stable Version](https://poser.pugx.org/imanghafoori/laravel-widgetize/v/stable)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
@@ -9,10 +11,10 @@ Laravel Widgetize
 [![License](https://poser.pugx.org/imanghafoori/laravel-widgetize/license)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 
 
-## Widget Objects help you have _cleaner code_ and _easy caching_ !!!
+## :ribbon::ribbon::ribbon: Widget Objects help you have _cleaner code_ and _easy caching_ :ribbon::ribbon::ribbon:
 
 
-* [Introduction](#introduction)
+* :flashlight: [Introduction](#introduction)
     - [What is a _widget object_ ?](#what-is-a-widget-object)
     - [When to use the _widget_ concept?](#when-to-use-the-widget-concept)
     - [The Problems](#what-is-our-problems)
@@ -20,9 +22,9 @@ Laravel Widgetize
     - [The Theory Behind Widget Objects](#theory)
     - [Package Features](#package-features)
     
-* [Installation](#installation)
-* [Global Configuration](#global-config)
-* [Per Widget Configuration](#per-widget-config)
+* :wrench: [Installation](#installation)
+* :earth_africa: [Global Configuration](#global-config)
+* :blue_car: [Per Widget Configuration](#per-widget-config)
     - [protected $template](#protected-template-string)
     - [protected $controller](#protected-controller-string)
     - [protected $presenter](#[protected-presenter-string)
@@ -30,7 +32,7 @@ Laravel Widgetize
     - [protected $cacheTags](#protected-cachetags-arraystring)
     - [protected $contextAs](#protected-contextAs-string)
    
-* [Usage and Example](#example)
+* :bulb: [Usage and Example](#example)
     - [General Guideline](#guideline)
     - [How to make a widget class](#how-to-make-a-widget)
     - [How to use a widget class](#how-to-use-a-widget-class)
@@ -41,10 +43,10 @@ Laravel Widgetize
 
 This page may look long and boring to read at first, but bear with me!!!
 
-I bet if you read through it you won't get disappointed at the end.So let's Go...
+I bet if you read through it you won't get disappointed at the end.So let's Go... :horse_racing:
 
 
-### Introduction
+### :flashlight: Introduction
 >This package helps you in :
 - Page Partial Caching
 - Code Organization
@@ -62,32 +64,33 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 #### When to use the _widget_ concept?
 
->This concept (this design pattern) really shines when you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster!!! ;)
+>This concept (this design pattern) really shines when you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
 
 
 
 ### What is our problems?
 
-#### Problem 1 : Controllers easily get crowded :(
+#### Problem 1 : Controllers easily get crowded :weary:
 >Imagine An online shop like amazon which shows the list of products, popular products, etc (in the sidebar), user data and basket data in the navbar and a tree of product categories in the menu and etc... In traditional good old MVC model you have a single controller method to provide all the widgets with data. You can immidiately see that you are violating the SRP (Single Responsibility Priciple)!!! The trouble is worse when the client changes his mind over time and asks the deveploper to add, remove and modify those widgets on the page. And it always happens. Clients do change their minds.The developoer's job is to be ready to cope with that as effortlessly as possible.
 
-#### Problem 2 : Page caching is always hard (But no more) :( 
+#### Problem 2 : Page caching is always hard (But no more) :disappointed:
 >Trying to cache the pages which include user specific data (for example the username on the top menu) is a often fruitless. Because each user sees slightly different page from other users. Or in cases when we have some parts of the page which update frequently and some other parts which change rarly... we have to expire the entire page cache to match the most frequently updated one. :(
 AAAAAAAAAhh...
 
 
-#### Problem 3 : View templates easily get littered with if/else blocks (&_&)
+#### Problem 3 : View templates easily get littered with if/else blocks :dizzy_face:
 >We ideally want our view files to be as logic-less as possible and very much like the final output HTML.Don't we ?! if/else blocks and other computations are always irritating within our views. specially for static page designers in our team. We just want to print out already defined variables wiout the to decide what to print. Anyway the data we store in database are sometimes far from ready to be printed on the page.
 
 
-### What is the solution?
+### :dart: What is the solution?
 
-> So, How to fight against those ? ;(
+> So, How to fight against those ? :punch:
+
 >__The main idea is simple, Instead of one controller method to handle all widgets of the page, Each widget should have it's own `controller class`, `view partial`, `view presenter class` and `cache config`, isolated from others.__
 >That's it !! :)
 >This idea originally comes from the client-side js frameworks and is somewhat new in server-side world.
 
-### Design Patterns Theory
+###  :book: Design Patterns Theory
 >The widget object pattern is in fact a variation of the famous `single responsibility principle`.
 Instead of having one bloated controller method that was resposible to supply data for all the widgets...
 You distribute your controller code amougst multiple widget classes.(Each widget is responsible for small portion of the page.)
@@ -96,7 +99,7 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 
 
 
-### Package Features
+### Package Features 
 
 > 1. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
 > 2. It optionally `minifies` the output of the widget. (In order to save cache storage space and bandwidth)
@@ -107,7 +110,7 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 
 
 
-### Installation:
+### :wrench: Installation:
 
 `composer require imanghafoori/laravel-widgetize`
 
@@ -119,7 +122,7 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 
 
 
-## Global Config:
+## :earth_africa: Global Config:
 > You can set the variables in your .env file to globally set some configs for you widgets and override them if needed.
 
 > __WIDGET_MINIFICATION=true__ (you can globally turn off HTML minification for development)
@@ -131,7 +134,7 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 > __WIDGET_DEFAULT_CACHE_LIFETIME__=1 (You can set a global default lifetime for all widgets and override it per widget if needed)
 
 
-## Per Widget Config:
+## :blue_car: Per Widget Config:
 
 > ### __protected $template__ (string)
 
@@ -180,7 +183,7 @@ So the entire widget lives in one folder:
 > The variable name to access the controler data in the view.
 
 
-## Example
+## :bulb: Example
 
 ### Guideline
 
