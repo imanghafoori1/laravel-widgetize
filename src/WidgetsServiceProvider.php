@@ -14,15 +14,15 @@ class WidgetsServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
+        \Blade::directive('include_widget', function ($expression) {
+            return "<?php echo $expression; ?>";
+        });
+
         $this->loadViewsFrom($this->app->basePath().'/app/Widgets/', 'Widgets');
 	}
 
 	/**
 	 * Register any application services.
-	 *
-	 * This service provider is a great spot to register your various container
-	 * bindings with the application. As you can see, we are registering our
-	 * "Registrar" implementation here. You can add your own bindings too!
 	 *
 	 * @return void
 	 */
@@ -31,7 +31,27 @@ class WidgetsServiceProvider extends ServiceProvider {
 		$this->app->singleton('command.imanghafoori.widget', function ($app) {
             return $app['Imanghafoori\Widgets\WidgetGenerator'];
         });
-		
+
+        $this->app->singleton('imanghafoori.widget.normalizer', function ($app) {
+            return new Utils\Normalizer();
+        });
+
+        $this->app->singleton('imanghafoori.widget.minifier', function ($app) {
+            return new Utils\HtmlMinifier();
+        });
+
+        $this->app->singleton('imanghafoori.widget.debugInfo', function ($app) {
+            return new Utils\DebugInfo();
+        });
+
+        $this->app->singleton('imanghafoori.widget.policies', function ($app) {
+            return new Utils\Policies();
+        });
+
+        $this->app->singleton('imanghafoori.widget.cache', function ($app) {
+            return new Utils\Cache();
+        });
+
         $this->commands('command.imanghafoori.widget');
 	}
 

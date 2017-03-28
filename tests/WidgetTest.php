@@ -2,7 +2,7 @@
 
 class Widget1 extends Imanghafoori\Widgets\BaseWidget
 {
-    protected $template = 'hello';
+    public $template = 'hello';
 
     public function data()
     {
@@ -18,8 +18,8 @@ class Widget2 extends Imanghafoori\Widgets\BaseWidget
 
 class Widget3 extends Imanghafoori\Widgets\BaseWidget
 {
-    protected $template = 'hello';
-    protected $contextAs = '$myData';
+    public $template = 'hello';
+    public $contextAs = '$myData';
 
     public function data()
     {
@@ -28,8 +28,8 @@ class Widget3 extends Imanghafoori\Widgets\BaseWidget
 
 class Widget4 extends Imanghafoori\Widgets\BaseWidget
 {
-    protected $template = 'hello';
-    protected $controller = 'Widget4Ctrl';
+    public $template = 'hello';
+    public $controller = 'Widget4Ctrl';
 
     public function data()
     {
@@ -46,8 +46,8 @@ class Widget4Ctrl
 
 class Widget5 extends Imanghafoori\Widgets\BaseWidget
 {
-    protected $template = 'hello';
-    protected $presenter = 'Widget5Presenter';
+    public $template = 'hello';
+    public $presenter = 'Widget5Presenter';
 
     public function data()
     {
@@ -72,9 +72,8 @@ class WidgetTest extends TestCase
         View::shouldReceive('make')->once()->with('hello', ['data' => 'barfoo'], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<br>');
 
-        $cache = new \Illuminate\Cache\Repository(new \Illuminate\Cache\ArrayStore);
         //act
-        $widget = new Widget5($cache);
+        $widget = new Widget5();
         (string)$widget;
 
     }
@@ -134,9 +133,8 @@ class WidgetTest extends TestCase
         \App::shouldReceive('call')->once()->andReturn('foo');
 
 
-        $cache = new \Illuminate\Cache\Repository(new \Illuminate\Cache\ArrayStore);
         //act
-        $widget = new Widget2($cache);
+        $widget = new Widget2();
         (string)$widget;
     }
 
