@@ -4,6 +4,7 @@ Laravel Widgetize
 
 ![untitled2](https://cloud.githubusercontent.com/assets/6961695/24345454/7d5c9e4c-12e5-11e7-8c22-015395dbb796.jpg)
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/imanghafoori/laravel-widgetize/v/stable)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![Latest Unstable Version](https://poser.pugx.org/imanghafoori/laravel-widgetize/v/unstable)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![Total Downloads](https://poser.pugx.org/imanghafoori/laravel-widgetize/downloads)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
