@@ -10,7 +10,7 @@ class Policies
      */
     public function widgetShouldHaveDebugInfo(){
 
-        return env('WIDGET_IDENTIFIER', true) and env('APP_ENV', 'production') === 'local';
+        return env('WIDGET_IDENTIFIER', true) && env('APP_ENV', 'production') === 'local';
     }
 
     /**
@@ -26,7 +26,7 @@ class Policies
          |  3- have set the time to 0 minutes |
          * ================================== *
         */
-        return ((env('WIDGET_CACHE', false) !== false) and (!app()->environment('testing')));
+        return ((env('WIDGET_CACHE', false) !== false) && (!app()->environment('testing')));
     }
 
     /**
@@ -34,6 +34,6 @@ class Policies
      */
     public function widgetShouldBeMinified()
     {
-        return env('WIDGET_MINIFICATION', false) or app()->environment('production');
+        return env('WIDGET_MINIFICATION', false) || app()->environment('production');
     }
 }
