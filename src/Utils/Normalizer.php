@@ -32,22 +32,26 @@ class Normalizer
      */
     private function normalizeControllerMethod()
     {
-        // If the user has explicitly declared controller class path on the sub-class
-        if ($this->widget->controller === null) {
-            if (!method_exists($this->widget, 'data')) {
-                throw new \BadMethodCallException("'data' method not found on " . class_basename($this->widget));
-            }
-            // We decide to call data method on widget object.
-            $this->widget->controller = [$this->widget, 'data'];
-        } else {
-            // If the user has specified the controller class path
-            if (!class_exists($this->widget->controller)) {
-                throw new \InvalidArgumentException("Controller class: [{$this->widget->controller}] not found.");
-            }
+        // We decide to call data method on widget object by default.
+        $controllerMethod = [$this->widget, 'data'];
+        $ctrlClass = get_class($this->widget);
 
-            // we decide to call data method on that.
-            $this->widget->controller = ($this->widget->controller) . '@data';
+        // If the user has explicitly declared controller class path on widget
+        // then we decide to call data method on that instead.
+        if ($this->widget->controller) {
+            $ctrlClass = $this->widget->controller;
+            $controllerMethod = ($this->widget->controller) . '@data';
         }
+
+        if (!method_exists($ctrlClass, 'data')) {
+            throw new \BadMethodCallException("'data' method not found on " . class_basename($this->widget));
+        }
+
+        if (!class_exists($ctrlClass)) {
+            throw new \InvalidArgumentException("Controller class: [{$ctrlClass}] not found.");
+        }
+
+        $this->widget->controller = $controllerMethod;
     }
 
     /**
@@ -65,7 +69,7 @@ class Normalizer
                 $this->widget->presenter = null;
             }
         } else {
-            if (class_exists($this->widget->presenter) === false) {
+            if (!class_exists($this->widget->presenter)) {
                 throw new \InvalidArgumentException("Presenter Class [{$this->widget->presenter}] not found.");
             }
             $this->widget->presenter = $this->widget->presenter . '@present';
@@ -125,14 +129,16 @@ class Normalizer
      */
     private function normalizeCacheTags()
     {
-        if ($this->cacheShouldBeTagged()) {
-            if (is_string($this->widget->cacheTags)) {
-                $this->widget->cacheTags = [$this->widget->cacheTags];
-            }
+        if (!$this->cacheShouldBeTagged()) {
+            return null;
+        }
 
-            if (!is_array($this->widget->cacheTags)) {
-                throw new \InvalidArgumentException('Cache Tags should be of type String or Array.');
-            }
+        if (is_string($this->widget->cacheTags)) {
+            $this->widget->cacheTags = [$this->widget->cacheTags];
+        }
+
+        if (!is_array($this->widget->cacheTags)) {
+            throw new \InvalidArgumentException('Cache Tags should be of type String or Array.');
         }
     }
     /**
@@ -141,7 +147,7 @@ class Normalizer
      */
     private function cacheShouldBeTagged()
     {
-        return !in_array(env('CACHE_DRIVER', 'file'), ['file', 'database']) and $this->widget->cacheTags;
+        return !in_array(env('CACHE_DRIVER', 'file'), ['file', 'database']) && $this->widget->cacheTags;
     }
 
 }
