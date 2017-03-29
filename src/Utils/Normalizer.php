@@ -60,20 +60,21 @@ class Normalizer
      */
     private function normalizePresenterName()
     {
-        if ($this->widget->presenter === 'default') {
-            $presenter = class_basename($this->widget) . 'Presenter';
+        $presenter = class_basename($this->widget) . 'Presenter';
 
-            if (class_exists($presenter)) {
-                $this->widget->presenter = $presenter . '@presenter';
-            } else {
-                $this->widget->presenter = null;
-            }
-        } else {
+        $method = null;
+        if (class_exists($presenter)) {
+            $method = $presenter . '@presenter';
+        }
+
+        if ($this->widget->presenter !== 'default') {
             if (!class_exists($this->widget->presenter)) {
                 throw new \InvalidArgumentException("Presenter Class [{$this->widget->presenter}] not found.");
             }
-            $this->widget->presenter = $this->widget->presenter . '@present';
+            $method = $this->widget->presenter . '@present';
         }
+
+        $this->widget->presenter = $method;
 
     }
 
