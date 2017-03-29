@@ -11,7 +11,7 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget5();
-        (string)$widget;
+        $widget->render();
 
     }
 
@@ -29,11 +29,11 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget1();
-        $result1 = (string)$widget;
-        $result2 = (string)$widget;
-        $result3 = (string)$widget;
-        $result4 = (string)$widget;
-        $result5 = (string)$widget;
+        $result1 = $widget->render();
+        $result2 = $widget->render();
+        $result3 = $widget->render();
+        $result4 = $widget->render();
+        $result5 = $widget->render();
 
         $this->assertEquals('<p>some text</p>', $result2);
         $this->assertEquals('<p>some text</p>', $result5);
@@ -52,11 +52,11 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget1();
-        $result1 = (string)$widget;
-        $result2 = (string)$widget;
-        $result3 = (string)$widget;
-        $result4 = (string)$widget;
-        $result5 = (string)$widget;
+        $result1 = $widget->render();
+        $result2 = $widget->render();
+        $result3 = $widget->render();
+        $result4 = $widget->render();
+        $result5 = $widget->render();
 
         $this->assertEquals('<p>some text</p>', $result2);
         $this->assertEquals('<p>some text</p>', $result5);
@@ -77,7 +77,7 @@ class WidgetTest extends TestCase
         $widget2 = new ForeverWidget2();
 //        $widget2 = new Widget2();
 
-        $result1 = (string)$widget;
+        $result1 = $widget->render();
         $result2 = $widget2('sdfvsf');
 
         $this->assertEquals('<p>some text</p>', $result1);
@@ -95,7 +95,7 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget2();
-        (string)$widget;
+        $widget->render();
     }
 
     public function test_context_as_is_passes_to_view_correctly()
@@ -108,7 +108,7 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget3();
-        (string)$widget;
+        $widget->render();
 
     }
 
@@ -142,7 +142,7 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget4();
-        $widgetOutput = (string)$widget;
+        $widgetOutput = $widget->render();
         $this->assertEquals($minified, $widgetOutput);
     }
 
@@ -161,7 +161,7 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget4();
-        $html = (string)$widget;
+        $html = $widget->render();
         $this->assertEquals($minified, $html);
     }
 

@@ -6,22 +6,20 @@ namespace Imanghafoori\Widgets\Utils;
 class DebugInfo
 {
     private $widget;
+    private $html;
 
-    function addIdentifierToHtml($widget)
+    function addIdentifierToHtml($widget, $html)
     {
         $this->widget = $widget;
+        $this->html = $html;
         $this->addDebugInfo();
         $this->addHtmlComments();
+        return $this->html;
     }
 
     private function addDebugInfo()
     {
-        $this->widget->html = "<div title='" . class_basename($this->widget) . "::class || template : {$this->widget->template}" . $this->cacheState() . "' style='box-shadow: 0px 0px 15px 5px #00c62b inset'>" . $this->widget->html . "</div>";
-    }
-
-    private function addHtmlComments()
-    {
-        $this->widget->html = "<!-- '{$this->widget->friendlyName}' Widget Start -->" . $this->widget->html . "<!-- '{$this->widget->friendlyName}' Widget End -->";
+        $this->html = "<div title='" . class_basename($this->widget) . "::class || template : {$this->widget->template}" . $this->cacheState() . "' style='box-shadow: 0px 0px 15px 5px #00c62b inset'>" . $this->html . "</div>";
     }
 
     /**
@@ -34,5 +32,10 @@ class DebugInfo
             return " || cache: {$this->widget->cacheLifeTime}(min)' ";
         }
         return " || cache : off";
+    }
+
+    private function addHtmlComments()
+    {
+        $this->html = "<!-- '{$this->widget->friendlyName}' Widget Start -->" . $this->html . "<!-- '{$this->widget->friendlyName}' Widget End -->";
     }
 }

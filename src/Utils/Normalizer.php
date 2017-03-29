@@ -11,6 +11,11 @@ class Normalizer
 
     public function normalizeWidgetConfig(BaseWidget $widget)
     {
+        // to avoid normalizing a widget multiple times unnecessarily :
+        if(isset($widget->isNormalized)){
+            return null;
+        }
+
         $this->widget = $widget;
         $this->normalizeControllerMethod();
         $this->normalizePresenterName();
@@ -18,6 +23,7 @@ class Normalizer
         $this->normalizeContextAs();
         $this->normalizeCacheLifeTime();
         $this->normalizeCacheTags();
+        $widget->isNormalized = true;
     }
 
     /**
