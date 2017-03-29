@@ -68,8 +68,7 @@ abstract class BaseWidget
 
         // We first try to get the output from the cache before trying to run the expensive $expensivePhpCode...
         if ($this->policies->widgetShouldUseCache($this->cacheLifeTime)) {
-            $key = $this->makeCacheKey($args);
-            return app('imanghafoori.widget.cache')->cacheResult($key, $expensivePhpCode, $this->cacheLifeTime,$this->cacheTags);
+            return app('imanghafoori.widget.cache')->cacheResult($args, $expensivePhpCode, $this);
         }
 
         return $expensivePhpCode();
@@ -97,10 +96,12 @@ abstract class BaseWidget
     {
         // Here we render the view file to raw html.
         $this->html = view($this->template, [$this->contextAs => $this->viewData])->render();
+
         // We try to minify the html before storing it in cache to save space.
         if ($this->policies->widgetShouldBeMinified()) {
             $this->html = app('imanghafoori.widget.minifier')->minify($this->html);
         }
+
         // We add some HTML comments before and after the widget output
         // So then, we will be able to easily identify the widget in browser's developer tool.
         if ($this->policies->widgetShouldHaveDebugInfo()) {
@@ -108,15 +109,6 @@ abstract class BaseWidget
         }
 
         return $this->html;
-    }
-
-    /**
-     * @param $arg
-     * @return string
-     */
-    private function makeCacheKey($arg)
-    {
-        return md5(json_encode($arg, JSON_FORCE_OBJECT) . $this->template . get_called_class());
     }
 
     /**
