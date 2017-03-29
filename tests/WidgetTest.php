@@ -1,68 +1,5 @@
 <?php
-
-class Widget1 extends Imanghafoori\Widgets\BaseWidget
-{
-    public $template = 'hello';
-
-    public function data()
-    {
-    }
-}
-
-class Widget2 extends Imanghafoori\Widgets\BaseWidget
-{
-    public function data()
-    {
-    }
-}
-
-class Widget3 extends Imanghafoori\Widgets\BaseWidget
-{
-    public $template = 'hello';
-    public $contextAs = '$myData';
-
-    public function data()
-    {
-    }
-}
-
-class Widget4 extends Imanghafoori\Widgets\BaseWidget
-{
-    public $template = 'hello';
-    public $controller = 'Widget4Ctrl';
-
-    public function data()
-    {
-    }
-}
-
-class Widget4Ctrl
-{
-    public function data()
-    {
-    }
-}
-
-
-class Widget5 extends Imanghafoori\Widgets\BaseWidget
-{
-    public $template = 'hello';
-    public $presenter = 'Widget5Presenter';
-
-    public function data()
-    {
-        return 'foo';
-    }
-}
-
-class Widget5Presenter
-{
-    public function present($data)
-    {
-        return 'bar' . $data;
-    }
-}
-
+require_once ('test_stubs.php');
 
 class WidgetTest extends TestCase
 {
@@ -125,6 +62,29 @@ class WidgetTest extends TestCase
         $this->assertEquals('<p>some text</p>', $result5);
     }
 
+    public function test_caches_the_result_forever_when_lifetime_is_negative()
+    {
+        putenv('CACHE_DRIVER=array');
+        putenv('WIDGET_CACHE=true');
+        putenv('WIDGET_DEFAULT_CACHE_LIFETIME=1');
+        app()['env'] = 'production';
+        //assert
+        Cache::shouldReceive('rememberForever')->times(2)->andReturn('<p>some text</p>');
+        View::shouldReceive('exists')->times(2)->andReturn(true);
+
+        //act
+        $widget = new ForeverWidget();
+        $widget2 = new ForeverWidget2();
+//        $widget2 = new Widget2();
+
+        $result1 = (string)$widget;
+        $result2 = $widget2('sdfvsf');
+
+        $this->assertEquals('<p>some text</p>', $result1);
+        $this->assertEquals($widget->cacheLifeTime, -1);
+        $this->assertEquals($widget2->cacheLifeTime, -1);
+    }
+
     public function test_default_view_name_is_figured_out_correctly()
     {
         View::shouldReceive('exists')->once()->andReturn(true);
@@ -145,9 +105,9 @@ class WidgetTest extends TestCase
         View::shouldReceive('render')->once()->andReturn('<br>');
         \App::shouldReceive('call')->once()->andReturn('foo');
 
-        $cache = new \Illuminate\Cache\Repository(new \Illuminate\Cache\ArrayStore);
+
         //act
-        $widget = new Widget3($cache);
+        $widget = new Widget3();
         (string)$widget;
 
     }
@@ -157,12 +117,12 @@ class WidgetTest extends TestCase
         View::shouldReceive('exists')->once()->andReturn(true);
         View::shouldReceive('make')->once()->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<br>');
-        \App::shouldReceive('call')->with('Widget4Ctrl@data', [])->once()->andReturn('foo');
+        \App::shouldReceive('call')->with('Widget4Ctrl@data', ['abc'])->once()->andReturn('foo');
 
-        $cache = new \Illuminate\Cache\Repository(new \Illuminate\Cache\ArrayStore);
+
         //act
-        $widget = new Widget4($cache);
-        (string)$widget;
+        $widget = new Widget4();
+        $widget('abc');
 
     }
 
@@ -171,19 +131,19 @@ class WidgetTest extends TestCase
         putenv('WIDGET_MINIFICATION=true');
         app()['env'] = 'local';
 
-        $html = '  <p>        </p>  ';
+        $widgetOutput = '  <p>        </p>  ';
         $minified = ' <p> </p> ';
 
         View::shouldReceive('exists')->once()->andReturn(true);
         View::shouldReceive('make')->once()->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
-        View::shouldReceive('render')->once()->andReturn($html);
+        View::shouldReceive('render')->once()->andReturn($widgetOutput);
         \App::shouldReceive('call')->with('Widget4Ctrl@data', [])->once()->andReturn('foo');
 
-        $cache = new \Illuminate\Cache\Repository(new \Illuminate\Cache\ArrayStore);
+
         //act
-        $widget = new Widget4($cache);
-        $html = (string)$widget;
-        $this->assertEquals($minified, $html);
+        $widget = new Widget4();
+        $widgetOutput = (string)$widget;
+        $this->assertEquals($minified, $widgetOutput);
     }
 
     public function test_minifies_the_output_in_production()
@@ -199,9 +159,8 @@ class WidgetTest extends TestCase
         View::shouldReceive('render')->once()->andReturn($html);
         \App::shouldReceive('call')->with('Widget4Ctrl@data', [])->once()->andReturn('foo');
 
-        $cache = new \Illuminate\Cache\Repository(new \Illuminate\Cache\ArrayStore);
         //act
-        $widget = new Widget4($cache);
+        $widget = new Widget4();
         $html = (string)$widget;
         $this->assertEquals($minified, $html);
     }
