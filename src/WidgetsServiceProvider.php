@@ -32,23 +32,23 @@ class WidgetsServiceProvider extends ServiceProvider {
             return $app['Imanghafoori\Widgets\WidgetGenerator'];
         });
 
-        $this->app->singleton('imanghafoori.widget.normalizer', function ($app) {
+        $this->app->singleton('imanghafoori.widget.normalizer', function () {
             return new Utils\Normalizer();
         });
 
-        $this->app->singleton('imanghafoori.widget.minifier', function ($app) {
+        $this->app->singleton('imanghafoori.widget.minifier', function () {
             return new Utils\HtmlMinifier();
         });
 
-        $this->app->singleton('imanghafoori.widget.debugInfo', function ($app) {
+        $this->app->singleton('imanghafoori.widget.debugInfo', function () {
             return new Utils\DebugInfo();
         });
 
-        $this->app->singleton('imanghafoori.widget.policies', function ($app) {
+        $this->app->singleton('imanghafoori.widget.policies', function () {
             return new Utils\Policies();
         });
 
-        $this->app->singleton('imanghafoori.widget.cache', function ($app) {
+        $this->app->singleton('imanghafoori.widget.cache', function () {
             return new Utils\Cache();
         });
 

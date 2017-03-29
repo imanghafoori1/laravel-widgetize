@@ -33,6 +33,10 @@ abstract class BaseWidget
         return $this->render();;
     }
 
+    /**
+     * @param array ...$args
+     * @return string
+     */
     public function render(...$args)
     {
         return app('imanghafoori.widget.renderer')->renderWidget($this,...$args);

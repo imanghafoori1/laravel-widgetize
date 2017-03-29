@@ -12,7 +12,7 @@ class Normalizer
     public function normalizeWidgetConfig(BaseWidget $widget)
     {
         // to avoid normalizing a widget multiple times unnecessarily :
-        if(isset($widget->isNormalized)){
+        if (isset($widget->isNormalized)) {
             return null;
         }
 
@@ -60,22 +60,25 @@ class Normalizer
      */
     private function normalizePresenterName()
     {
-        $presenter = class_basename($this->widget) . 'Presenter';
-
-        $method = null;
-        if (class_exists($presenter)) {
-            $method = $presenter . '@presenter';
-        }
-
         if ($this->widget->presenter !== 'default') {
             if (!class_exists($this->widget->presenter)) {
                 throw new \InvalidArgumentException("Presenter Class [{$this->widget->presenter}] not found.");
             }
-            $method = $this->widget->presenter . '@present';
+            $presenter = $this->widget->presenter;
+        } else {
+            $presenter = get_class($this->widget) . 'Presenter';
+            $method = null;
+            if (!class_exists($presenter)) {
+                $this->widget->presenter =  null;
+                return ;
+            }
         }
 
-        $this->widget->presenter = $method;
+        if (!method_exists($presenter, 'present')) {
+            throw new \InvalidArgumentException("'present' method not found on : " . get_class($this->widget));
+        }
 
+        $this->widget->presenter = $presenter . '@present';
     }
 
     /**
@@ -130,7 +133,8 @@ class Normalizer
      */
     private function normalizeCacheTags()
     {
-        if (!$this->cacheShouldBeTagged()) {
+        if (!$this->cacheCanUseTags() || !$this->widget->cacheTags) {
+            $this->widget->cacheTags = null;
             return null;
         }
 
@@ -142,13 +146,14 @@ class Normalizer
             throw new \InvalidArgumentException('Cache Tags should be of type String or Array.');
         }
     }
+
     /**
      * Determine whether cache tags should be applied or not
      * @return bool
      */
-    private function cacheShouldBeTagged()
+    private function cacheCanUseTags()
     {
-        return !in_array(env('CACHE_DRIVER', 'file'), ['file', 'database']) && $this->widget->cacheTags;
+        return !in_array(env('CACHE_DRIVER', 'file'), ['file', 'database']);
     }
 
 }

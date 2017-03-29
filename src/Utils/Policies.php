@@ -8,7 +8,7 @@ class Policies
     /**
      * @return bool
      */
-    function widgetShouldHaveDebugInfo(){
+    public function widgetShouldHaveDebugInfo(){
 
         return env('WIDGET_IDENTIFIER', true) and env('APP_ENV', 'production') === 'local';
     }
@@ -16,7 +16,7 @@ class Policies
     /**
      * @return bool
      */
-    function widgetShouldUseCache()
+    public function widgetShouldUseCache()
     {
         /*
          * ================================== *
@@ -32,7 +32,7 @@ class Policies
     /**
      * @return bool
      */
-    function widgetShouldBeMinified()
+    public function widgetShouldBeMinified()
     {
         return env('WIDGET_MINIFICATION', false) or app()->environment('production');
     }

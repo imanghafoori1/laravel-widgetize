@@ -5,7 +5,6 @@ namespace Imanghafoori\Widgets\Utils;
 
 class Cache
 {
-
     /**
      * @param $arg
      * @param $widget
@@ -22,7 +21,7 @@ class Cache
 
         $cache = app('cache');
 
-        if ($widget->cacheTags) {
+        if (is_array($widget->cacheTags)) {
             $cache = $cache->tags($widget->cacheTags);
         }
 
