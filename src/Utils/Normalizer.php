@@ -67,7 +67,6 @@ class Normalizer
             $presenter = $this->widget->presenter;
         } else {
             $presenter = get_class($this->widget) . 'Presenter';
-            $method = null;
             if (!class_exists($presenter)) {
                 $this->widget->presenter =  null;
                 return ;
