@@ -4,9 +4,9 @@ namespace Imanghafoori\Widgets;
 
 use Illuminate\Console\GeneratorCommand as LaravelGeneratorCommand;
 
-class WidgetGenerator extends LaravelGeneratorCommand 
+class WidgetGenerator extends LaravelGeneratorCommand
 {
-	/**
+    /**
      * The name and signature of the console command.
      *
      * @var string
@@ -34,9 +34,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
      */
     protected function getStub()
     {
-       
-		return __DIR__.'/../stubs/widget.stub';
-       
+        return __DIR__ . '/../stubs/widget.stub';
     }
 
     /**
@@ -50,5 +48,4 @@ class WidgetGenerator extends LaravelGeneratorCommand
     {
         return 'App\\Widgets';
     }
-	
 }

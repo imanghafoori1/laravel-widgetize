@@ -1,5 +1,5 @@
 <?php
-require_once ('test_stubs.php');
+require_once('test_stubs.php');
 
 class WidgetTest extends TestCase
 {
@@ -12,7 +12,6 @@ class WidgetTest extends TestCase
         //act
         $widget = new Widget5();
         $widget->render();
-
     }
 
     public function test_the_view_and_controller_are_rendered_only_once_when_cache_is_enabled()
@@ -109,7 +108,6 @@ class WidgetTest extends TestCase
         //act
         $widget = new Widget3();
         $widget->render();
-
     }
 
     public function test_controller_method_is_called_on_some_other_class()
@@ -123,7 +121,6 @@ class WidgetTest extends TestCase
         //act
         $widget = new Widget4();
         $widget('abc');
-
     }
 
     public function test_minifies_the_output()
@@ -164,5 +161,4 @@ class WidgetTest extends TestCase
         $html = $widget->render();
         $this->assertEquals($minified, $html);
     }
-
 }

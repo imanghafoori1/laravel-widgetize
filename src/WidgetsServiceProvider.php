@@ -2,33 +2,33 @@
 
 namespace Imanghafoori\Widgets;
 
-
 use Illuminate\Support\ServiceProvider;
 
-class WidgetsServiceProvider extends ServiceProvider {
+class WidgetsServiceProvider extends ServiceProvider
+{
 
-	/**
-	 * Bootstrap any application services.
-	 *
-	 * @return void
-	 */
-	public function boot()
-	{
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
         \Blade::directive('include_widget', function ($expression) {
             return "<?php echo $expression; ?>";
         });
 
-        $this->loadViewsFrom($this->app->basePath().'/app/Widgets/', 'Widgets');
-	}
+        $this->loadViewsFrom($this->app->basePath() . '/app/Widgets/', 'Widgets');
+    }
 
-	/**
-	 * Register any application services.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
-		$this->app->singleton('command.imanghafoori.widget', function ($app) {
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->singleton('command.imanghafoori.widget', function ($app) {
             return $app['Imanghafoori\Widgets\WidgetGenerator'];
         });
 
@@ -57,6 +57,5 @@ class WidgetsServiceProvider extends ServiceProvider {
         });
 
         $this->commands('command.imanghafoori.widget');
-	}
-
+    }
 }
