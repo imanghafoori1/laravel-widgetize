@@ -39,16 +39,11 @@ class Normalizer
         // then we decide to call data method on that instead.
         if ($this->widget->controller) {
             $ctrlClass = $this->widget->controller;
-            $controllerMethod = ($this->widget->controller) . '@data';
+            $controllerMethod = ($ctrlClass) . '@data';
         }
 
-        if (!method_exists($ctrlClass, 'data')) {
-            throw new \BadMethodCallException("'data' method not found on " . class_basename($this->widget));
-        }
-
-        if (!class_exists($ctrlClass)) {
-            throw new \InvalidArgumentException("Controller class: [{$ctrlClass}] not found.");
-        }
+        $this->checkControllerExists($ctrlClass);
+        $this->checkDataMethodExists($ctrlClass);
 
         $this->widget->controller = $controllerMethod;
     }
@@ -60,21 +55,16 @@ class Normalizer
     private function normalizePresenterName()
     {
         if ($this->widget->presenter !== 'default') {
-            if (!class_exists($this->widget->presenter)) {
-                throw new \InvalidArgumentException("Presenter Class [{$this->widget->presenter}] not found.");
-            }
             $presenter = $this->widget->presenter;
+            $this->checkPresenterExists($presenter);
         } else {
             $presenter = get_class($this->widget) . 'Presenter';
             if (!class_exists($presenter)) {
-                $this->widget->presenter = null;
-                return;
+                return $this->widget->presenter = null;
             }
         }
 
-        if (!method_exists($presenter, 'present')) {
-            throw new \InvalidArgumentException("'present' method not found on : " . get_class($this->widget));
-        }
+        $this->checkPresentMethodExists($presenter);
 
         $this->widget->presenter = $presenter . '@present';
     }
@@ -87,6 +77,7 @@ class Normalizer
     {
         // class name without namespace.
         $className = str_replace('App\\Widgets\\', '', class_basename($this->widget));
+
         // replace slashes with dots
         $className = str_replace(['\\', '/'], '.', $className);
 
@@ -131,17 +122,18 @@ class Normalizer
     private function normalizeCacheTags()
     {
         if (!$this->cacheCanUseTags() || !$this->widget->cacheTags) {
-            $this->widget->cacheTags = null;
-            return null;
+            return $this->widget->cacheTags = null;
+        }
+
+        if (is_array($this->widget->cacheTags)) {
+            return $this->widget->cacheTags;
         }
 
         if (is_string($this->widget->cacheTags)) {
-            $this->widget->cacheTags = [$this->widget->cacheTags];
+            return $this->widget->cacheTags = [$this->widget->cacheTags];
         }
 
-        if (!is_array($this->widget->cacheTags)) {
-            throw new \InvalidArgumentException('Cache Tags should be of type String or Array.');
-        }
+        throw new \InvalidArgumentException('Cache Tags should be of type String or Array.');
     }
 
     /**
@@ -151,5 +143,45 @@ class Normalizer
     private function cacheCanUseTags()
     {
         return !in_array(env('CACHE_DRIVER', 'file'), ['file', 'database']);
+    }
+
+    /**
+     * @param $ctrlClass
+     */
+    private function checkControllerExists($ctrlClass)
+    {
+        if (!class_exists($ctrlClass)) {
+            throw new \InvalidArgumentException("Controller class: [{$ctrlClass}] not found.");
+        }
+    }
+
+    /**
+     * @param $ctrlClass
+     */
+    private function checkDataMethodExists($ctrlClass)
+    {
+        if (!method_exists($ctrlClass, 'data')) {
+            throw new \InvalidArgumentException("'data' method not found on " . $ctrlClass);
+        }
+    }
+
+    /**
+     * @param $presenter
+     */
+    private function checkPresentMethodExists($presenter)
+    {
+        if (!method_exists($presenter, 'present')) {
+            throw new \InvalidArgumentException("'present' method not found on : " . $presenter);
+        }
+    }
+
+    /**
+     * @param $presenter
+     */
+    private function checkPresenterExists($presenter)
+    {
+        if (!class_exists($presenter)) {
+            throw new \InvalidArgumentException("Presenter Class [{$presenter}] not found.");
+        }
     }
 }
