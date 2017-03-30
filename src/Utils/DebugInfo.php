@@ -21,17 +21,13 @@ class DebugInfo
     {
         $this->html = "<div title='" . class_basename($this->widget) . "::class || template : {$this->widget->template}" . $this->cacheState() . "' style='box-shadow: 0px 0px 15px 5px #00c62b inset'>" . $this->html . "</div>";
     }
-
     /**
      * Generates a string of current cache configurations.
      * @return string
      */
     private function cacheState()
     {
-        if ($this->widget->widgetShouldUseCache()) {
-            return " || cache: {$this->widget->cacheLifeTime}(min)' ";
-        }
-        return " || cache : off";
+        return " || cache: {$this->widget->cacheLifeTime}(min)' ";
     }
 
     private function addHtmlComments()
