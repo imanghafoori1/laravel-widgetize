@@ -19,8 +19,8 @@ class WidgetRenderer
     }
 
     /**
-     * @parameter Widget Object $widget
-     * @parameter array $args
+     * @param Widget Object $widget
+     * @param array $args
      * @return string
      */
     public function renderWidget($widget, ...$args)
@@ -37,8 +37,8 @@ class WidgetRenderer
     /**
      * It tries to get the html from cache if possible, otherwise generates it.
      *
-     * @parameter Widget Object $widget
-     * @parameter array arguments pass from view ...$args
+     * @param $widget
+     * @param array ...$args
      *
      * @return string
      */
@@ -61,8 +61,8 @@ class WidgetRenderer
 
 
     /**
-     * @parameter Widget Object $widget
-     * @parameter $args
+     * @param Widget Object $widget
+     * @param $args
      *
      * @return null
      */

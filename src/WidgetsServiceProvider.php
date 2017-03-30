@@ -52,7 +52,7 @@ class WidgetsServiceProvider extends ServiceProvider
             return new Utils\Cache();
         });
 
-        $this->app->singleton('imanghafoori.widget.renderer', function ($app) {
+        $this->app->singleton('imanghafoori.widget.renderer', function () {
             return new Utils\WidgetRenderer();
         });
 
