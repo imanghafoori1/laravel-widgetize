@@ -14,7 +14,7 @@ class WidgetsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \Blade::directive('include_widget', function ($expression) {
+        \Blade::directive('include_widget', function($expression) {
             return "<?php echo $expression; ?>";
         });
 
@@ -28,31 +28,31 @@ class WidgetsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('command.imanghafoori.widget', function ($app) {
+        $this->app->singleton('command.imanghafoori.widget', function($app) {
             return $app['Imanghafoori\Widgets\WidgetGenerator'];
         });
 
-        $this->app->singleton('imanghafoori.widget.normalizer', function () {
+        $this->app->singleton('imanghafoori.widget.normalizer', function() {
             return new Utils\Normalizer();
         });
 
-        $this->app->singleton('imanghafoori.widget.minifier', function () {
+        $this->app->singleton('imanghafoori.widget.minifier', function() {
             return new Utils\HtmlMinifier();
         });
 
-        $this->app->singleton('imanghafoori.widget.debugInfo', function () {
+        $this->app->singleton('imanghafoori.widget.debugInfo', function() {
             return new Utils\DebugInfo();
         });
 
-        $this->app->singleton('imanghafoori.widget.policies', function () {
+        $this->app->singleton('imanghafoori.widget.policies', function() {
             return new Utils\Policies();
         });
 
-        $this->app->singleton('imanghafoori.widget.cache', function () {
+        $this->app->singleton('imanghafoori.widget.cache', function() {
             return new Utils\Cache();
         });
 
-        $this->app->singleton('imanghafoori.widget.renderer', function () {
+        $this->app->singleton('imanghafoori.widget.renderer', function() {
             return new Utils\WidgetRenderer();
         });
 
