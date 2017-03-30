@@ -3,7 +3,6 @@
 
 namespace Imanghafoori\Widgets;
 
-
 abstract class BaseWidget
 {
     public $template = null;
@@ -22,15 +21,7 @@ abstract class BaseWidget
      */
     public function __invoke(...$args)
     {
-        return $this->render(...$args);;
-    }
-    /**
-     * This method is called when you try to print the object like an string in blade files.
-     * like this : {!! $myWidgetObj !!}
-     */
-    public function __toString()
-    {
-        return $this->render();;
+        return $this->render(...$args);
     }
 
     /**
@@ -39,7 +30,15 @@ abstract class BaseWidget
      */
     public function render(...$args)
     {
-        return app('imanghafoori.widget.renderer')->renderWidget($this,...$args);
+        return app('imanghafoori.widget.renderer')->renderWidget($this, ...$args);
     }
 
+    /**
+     * This method is called when you try to print the object like an string in blade files.
+     * like this : {!! $myWidgetObj !!}
+     */
+    public function __toString()
+    {
+        return $this->render();
+    }
 }

@@ -2,7 +2,6 @@
 
 namespace Imanghafoori\Widgets\Utils;
 
-
 use Imanghafoori\Widgets\BaseWidget;
 
 class Normalizer
@@ -68,8 +67,8 @@ class Normalizer
         } else {
             $presenter = get_class($this->widget) . 'Presenter';
             if (!class_exists($presenter)) {
-                $this->widget->presenter =  null;
-                return ;
+                $this->widget->presenter = null;
+                return;
             }
         }
 
@@ -123,7 +122,6 @@ class Normalizer
         if ($this->widget->cacheLifeTime === 'forever') {
             $this->widget->cacheLifeTime = -1;
         }
-
     }
 
     /**
@@ -154,5 +152,4 @@ class Normalizer
     {
         return !in_array(env('CACHE_DRIVER', 'file'), ['file', 'database']);
     }
-
 }

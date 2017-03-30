@@ -2,7 +2,10 @@
 
 namespace Imanghafoori\Widgets\Utils;
 
-
+/**
+ * Class Html Minifier
+ * @package Imanghafoori\Widgets\Utils
+ */
 class HtmlMinifier
 {
     private $replace = [
@@ -14,10 +17,12 @@ class HtmlMinifier
         "/\t/" => '', // remove tab
         "/\s+/" => ' ', // remove spaces
     ];
+
     /**
+     * @param $htmlString
      * @return null
      */
-    function minify($htmlString)
+    public function minify($htmlString)
     {
         return preg_replace(array_keys($this->replace), array_values($this->replace), $htmlString);
     }

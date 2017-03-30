@@ -2,13 +2,22 @@
 
 namespace Imanghafoori\Widgets\Utils;
 
-
+/**
+ * Class DebugInfo
+ * @package Imanghafoori\Widgets\Utils
+ */
 class DebugInfo
 {
     private $widget;
     private $html;
+    private $policies;
 
-    function addIdentifierToHtml($widget, $html)
+    public function __construct()
+    {
+        $this->policies = app('imanghafoori.widget.policies');
+    }
+
+    public function addIdentifierToHtml($widget, $html)
     {
         $this->widget = $widget;
         $this->html = $html;
@@ -19,14 +28,22 @@ class DebugInfo
 
     private function addDebugInfo()
     {
-        $this->html = "<div title='" . class_basename($this->widget) . "::class || template : {$this->widget->template}" . $this->cacheState() . "' style='box-shadow: 0px 0px 15px 5px #00c62b inset'>" . $this->html . "</div>";
+        $tpl = $this->widget->template;
+        if (str_contains($this->widget->template, 'Widgets::')) {
+            $tpl = str_replace('Widgets::', 'app\Widgets\\', $this->widget->template);
+        }
+        $this->html = "<div title='" . get_class($this->widget) . "::class || template : {$tpl}" . $this->cacheState() . "' style='box-shadow: 0px 0px 15px 5px #00c62b inset'>" . $this->html . "</div>";
     }
+
     /**
      * Generates a string of current cache configurations.
      * @return string
      */
     private function cacheState()
     {
+        if (!$this->policies->widgetShouldUseCache()) {
+            return " || cache: is globally turned off (in .env set WIDGET_CACHE=true) ";
+        }
         return " || cache: {$this->widget->cacheLifeTime}(min)' ";
     }
 

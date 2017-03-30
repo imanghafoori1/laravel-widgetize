@@ -2,22 +2,20 @@
 
 namespace Imanghafoori\Widgets\Utils;
 
-
 class Cache
 {
     /**
-     * @param $arg
+     * Caches the widget output
+     *
+     * @param $args
+     * @param $phpCode
      * @param $widget
-     * @return string
+     *
+     * @return null
      */
-    private function makeCacheKey($arg, $widget)
+    public function cacheResult($args, $phpCode, $widget)
     {
-        return md5(json_encode($arg, JSON_FORCE_OBJECT) . $widget->template . class_basename($widget));
-    }
-
-    function cacheResult($args, $phpCode, $widget)
-    {
-        $key = $this->makeCacheKey($args,$widget);
+        $key = $this->_makeCacheKey($args, $widget);
 
         $cache = app('cache');
 
@@ -36,6 +34,19 @@ class Cache
         if ($widget->cacheLifeTime === 0) {
             return $phpCode();
         }
+        return null;
     }
 
+    /**
+     * Creates a unique cache key for each possible output
+     *
+     * @param $arg
+     * @param $widget
+     *
+     * @return string
+     */
+    private function _makeCacheKey($arg, $widget)
+    {
+        return md5(json_encode($arg, JSON_FORCE_OBJECT) . $widget->template . class_basename($widget));
+    }
 }

@@ -19,7 +19,7 @@ class ForeverWidget2 extends Imanghafoori\Widgets\BaseWidget
 
 class Widget1 extends Imanghafoori\Widgets\BaseWidget
 {
-//    public $cacheLifeTime = -1;
+    //    public $cacheLifeTime = -1;
     public $template = 'hello';
     public function data()
     {
@@ -28,7 +28,7 @@ class Widget1 extends Imanghafoori\Widgets\BaseWidget
 
 class Widget2 extends Imanghafoori\Widgets\BaseWidget
 {
-//    public $cacheLifeTime = 'forever';
+    //    public $cacheLifeTime = 'forever';
 
     public function data()
     {
