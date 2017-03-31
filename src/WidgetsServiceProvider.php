@@ -3,6 +3,10 @@
 namespace Imanghafoori\Widgets;
 
 use Illuminate\Support\ServiceProvider;
+use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
+use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
+use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
+use Imanghafoori\Widgets\Utils\Normalizers\TemplateNormalizer;
 
 class WidgetsServiceProvider extends ServiceProvider
 {
@@ -33,7 +37,13 @@ class WidgetsServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton('imanghafoori.widget.normalizer', function () {
-            return new Utils\Normalizer();
+
+            $cacheNormalizer = new CacheNormalizer();
+            $templateNormalizer = new TemplateNormalizer();
+            $presenterNormalizer = new PresenterNormalizer();
+            $controllerNormalizer = new ControllerNormalizer();
+            
+            return new Utils\Normalizer($templateNormalizer, $cacheNormalizer, $presenterNormalizer, $controllerNormalizer);
         });
 
         $this->app->singleton('imanghafoori.widget.minifier', function () {
