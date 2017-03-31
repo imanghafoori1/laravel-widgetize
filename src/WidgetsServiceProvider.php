@@ -42,7 +42,7 @@ class WidgetsServiceProvider extends ServiceProvider
             $templateNormalizer = new TemplateNormalizer();
             $presenterNormalizer = new PresenterNormalizer();
             $controllerNormalizer = new ControllerNormalizer();
-            
+
             return new Utils\Normalizer($templateNormalizer, $cacheNormalizer, $presenterNormalizer, $controllerNormalizer);
         });
 

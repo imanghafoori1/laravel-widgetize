@@ -10,9 +10,10 @@ use Imanghafoori\Widgets\Utils\Normalizers\TemplateNormalizer;
 
 class Normalizer
 {
-    private $widget;
     private $presenterNormalizer;
     private $templateNormalizer;
+    private $cacheNormalizer;
+    private $controllerNormalizer;
 
     /**
      * Normalizer constructor.
@@ -38,23 +39,23 @@ class Normalizer
             return null;
         }
 
-        $this->widget = $widget;
         $this->controllerNormalizer->normalizeControllerMethod($widget);
         $this->presenterNormalizer->normalizePresenterName($widget);
         $this->templateNormalizer->normalizeTemplateName($widget);
         $this->cacheNormalizer->normalizeCacheLifeTime($widget);
         $this->cacheNormalizer->normalizeCacheTags($widget);
-        $this->normalizeContextAs();
+        $this->normalizeContextAs($widget);
         $widget->isNormalized = true;
     }
 
     /**
      * Figures out what the variable name should be in view file.
+     * @param $widget
      * @return null
      */
-    private function normalizeContextAs()
+    private function normalizeContextAs($widget)
     {
         // removes the $ sign.
-        $this->widget->contextAs = str_replace('$', '', (string)$this->widget->contextAs);
+        $widget->contextAs = str_replace('$', '', (string)$widget->contextAs);
     }
 }
