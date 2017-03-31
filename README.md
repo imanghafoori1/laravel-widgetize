@@ -18,20 +18,20 @@ Laravel Widgetize
 * :flashlight: [Introduction](#introduction)
     - [What is a _widget object_ ?](#what-is-a-widget-object)
     - [When to use the _widget_ concept?](#when-to-use-the-widget-concept)
-    - [The Problems](#what-is-our-problems)
-    - [The Solution](#what-is-the-solution)
-    - [The Theory Behind Widget Objects](#theory)
-    - [Package Features](#package-features)
+    - :snake: [The Problems](#what-is-our-problems)
+    - :dart: [The Solution](#what-is-the-solution)
+    - :book: [The Theory Behind Widget Objects](#theory)
+    - :gem: [Package Features](#package-features)
     
 * :wrench: [Installation](#installation)
 * :earth_africa: [Global Configuration](#global-config)
 * :blue_car: [Per Widget Configuration](#per-widget-config)
-    - [protected $template](#protected-template-string)
-    - [protected $controller](#protected-controller-string)
-    - [protected $presenter](#[protected-presenter-string)
-    - [protected $cacheLifeTime](#protected-cachelifetime-int)
-    - [protected $cacheTags](#protected-cachetags-arraystring)
-    - [protected $contextAs](#protected-contextAs-string)
+    - [public $template](#public-template-string)
+    - [public $controller](#public-controller-string)
+    - [public $presenter](#[public-presenter-string)
+    - [public $cacheLifeTime](#public-cachelifetime-int)
+    - [public $cacheTags](#public-cachetags-arraystring)
+    - [public $contextAs](#public-contextAs-string)
    
 * :bulb: [Usage and Example](#example)
     - [General Guideline](#guideline)
@@ -71,7 +71,7 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 
 
-### What is our problems? :snake:
+### :snake: What is our problems? :snake:
 
 #### Problem 1 : Controllers easily get crowded :weary:
 >Imagine An online shop like amazon which shows the list of products, popular products, etc (in the sidebar), user data and basket data in the navbar and a tree of product categories in the menu and etc... In traditional good old MVC model you have a single controller method to provide all the widgets with data. You can immidiately see that you are violating the SRP (Single Responsibility Priciple)!!! The trouble is worse when the client changes his mind over time and asks the deveploper to add, remove and modify those widgets on the page. And it always happens. Clients do change their minds.The developoer's job is to be ready to cope with that as effortlessly as possible.
@@ -118,7 +118,7 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 composer require imanghafoori/laravel-widgetize
 ```
 
-Next, you must install the service provider to `config/app.php`: :electric_plug:
+:electric_plug: Next, you must install the service provider to `config/app.php`: :electric_plug:
 
 ```php
 'providers' => [
@@ -152,11 +152,11 @@ php artisan make:widget MySexyWidget
 
 ## :blue_car: Per Widget Config:
 
-> ### __protected $template__ (string)
+> ### __public $template__ (string)
 
 >If you do not set it,By default, it refers to app/Widgets folder and looks for the 'widgetNameView.blade.php'
 (Meaning that if your widget is `app/Widgets/home/recentProducts.php` the default view for that is `app/Widgets/home/recentProductsView.blade.php`)
-Anyway you can ovrride it to point to any partial in views folder.(for example: `protected $template='home.footer'` will look for resource/views/home/footer.blade.php)
+Anyway you can ovrride it to point to any partial in views folder.(for example: `public $template='home.footer'` will look for resource/views/home/footer.blade.php)
 So the entire widget lives in one folder:
 
 >| _app\Widgets\Homepage\RecentProductsWidget.php_
@@ -164,20 +164,20 @@ So the entire widget lives in one folder:
 >| _app\Widgets\Homepage\RecentProductsWidgetView.blade.php_
 
 
-> ### __protected $controller__ (string)
+> ### __public $controller__ (string)
 
-> If you do not want to put your _data_ method on your widget class, you can set `protected $controller = App\Some\Class\MyController::class` and put your `public data` method on a dedicated class.(instead od having it on your widget class)
+> If you do not want to put your _data_ method on your widget class, you can set `public $controller = App\Some\Class\MyController::class` and put your `public data` method on a dedicated class.(instead od having it on your widget class)
 
 
 
-> ### __protected $presenter__ (string)
+> ### __public $presenter__ (string)
 
 > If you do not want to put your _present_ method on your widget class, you can set
-`protected $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data retured from your controller is first piped to your presenter and then to your view.(So if you specify a presenter your view file gets its data from the presenter and not the controller.)
+`public $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data retured from your controller is first piped to your presenter and then to your view.(So if you specify a presenter your view file gets its data from the presenter and not the controller.)
 
 
 
-> ### __protected $cacheLifeTime__ (int)
+> ### __public $cacheLifeTime__ (int)
 
 > If you want to override the global cache life time (which is set in your .env file) for a specific widget, you can set $cacheLifeTime on your widget class.
 
@@ -189,12 +189,12 @@ So the entire widget lives in one folder:
   1    | 1 minute
 
 
-> ### __protected $cacheTags__ (array|string)
+> ### __public $cacheTags__ (array|string)
 
-> If you want you can set `protected $cacheTags = ['tag1','tag2']` to easily target them for cache expiration.(Note that  _database_ and _file_ cache driver do not support cache tags.)
+> If you want you can set `public $cacheTags = ['tag1','tag2']` to easily target them for cache expiration.(Note that  _database_ and _file_ cache driver do not support cache tags.)
 
 
-> ### __protected $contextAs__ (string)
+> ### __public $contextAs__ (string)
 
 > The variable name to access the controler data in the view.
 
@@ -222,9 +222,9 @@ use Imanghafoori\Widgets\BaseWidget;
 
 class RecentProductsWidget extends BaseWidget
 {
-    protected $template = 'widgets.recentProducts.blade.php'; // referes to: views/widgets/recentProducts.blade.php
-    protected $cacheLifeTime = 1; // 1(min) ( 0 : disable, -1 : forever)
-    protected $contextAs = '$recentProducts'; // you can access $recentProducts in view file (default: $data)
+    public $template = 'widgets.recentProducts.blade.php'; // referes to: views/widgets/recentProducts.blade.php
+    public $cacheLifeTime = 1; // 1(min) ( 0 : disable, -1 : forever)
+    public $contextAs = '$recentProducts'; // you can access $recentProducts in view file (default: $data)
 
     // The data returned here would be available in widget view file automatically.
     // You can use dependancy injection here like you do in your typical controllers.
@@ -297,7 +297,7 @@ You may want to look at the BaseWidget source code and read the comments for mor
 
 
 >Think of widget controllers as laravel view composers which get called automatically when a specific partial is included. Under the hood, After `{!! $myWidget('param1') !!}` is executed in your view file by php, then through the php magic methods the `public data` method is called on your widget class with the corresponding parameters.
-`But only if it is Not already cached` or the `protected $cacheLifeTime` is set to 0.
+`But only if it is Not already cached` or the `public $cacheLifeTime` is set to 0.
 If the widget HTML output is already in the cache it prints out the HTML without executing `data` method 
 (hence avoids performing database queries or even rendering the blade file.)
 
