@@ -38,10 +38,8 @@ Laravel Widgetize
     - [How to make a widget class](#how-to-make-a-widget)
     - [How to use a widget class](#how-to-use-a-widget-class)
 * :shipit: [Behind the curtain](#behind-the-curtain)
+* :star: [Your Stars Makes Us Do More](#your-stars-makes-us-do-more)
 
-
-```If you like the package please star it, it means a lot to have support from the community```
-and if you have suggestions please let me know.
 
 This page may look long and boring to read at first, but bear with me!!!
 
@@ -305,5 +303,5 @@ If the widget HTML output is already in the cache it prints out the HTML without
 >Note that it executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `{!! $widgetObj !!}`, So for example if you comment out `{!! $widgetObj !!}` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
 
 
-
-
+### :star: Your Stars Makes Us Do More :star:
+As always if you found this package useful and you want to encourage us to maintain and work on it. Just press the star button to declare your willing.
