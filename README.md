@@ -150,6 +150,8 @@ php artisan make:widget MySexyWidget
 
 ## :blue_car: Per Widget Config:
 
+![widget](https://cloud.githubusercontent.com/assets/6961695/24771543/41a9df7c-1b23-11e7-892c-0a27472e109a.png)
+
 > ### __public $template__ (string)
 
 >If you do not set it,By default, it refers to app/Widgets folder and looks for the 'widgetNameView.blade.php'
