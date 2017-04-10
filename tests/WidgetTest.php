@@ -11,7 +11,7 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget5();
-        $widget->render();
+        render_widget($widget);
     }
 
     public function test_the_view_and_controller_are_rendered_only_once_when_cache_is_enabled()
@@ -28,11 +28,11 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget1();
-        $result1 = $widget->render();
-        $result2 = $widget->render();
-        $result3 = $widget->render();
-        $result4 = $widget->render();
-        $result5 = $widget->render();
+        $result1 = render_widget($widget);
+        $result2 = render_widget($widget);
+        $result3 = render_widget($widget);
+        $result4 = render_widget($widget);
+        $result5 = render_widget($widget);
 
         $this->assertEquals('<p>some text</p>', $result2);
         $this->assertEquals('<p>some text</p>', $result5);
@@ -51,11 +51,11 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget1();
-        $result1 = $widget->render();
-        $result2 = $widget->render();
-        $result3 = $widget->render();
-        $result4 = $widget->render();
-        $result5 = $widget->render();
+        $result1 = render_widget($widget);
+        $result2 = render_widget($widget);
+        $result3 = render_widget($widget);
+        $result4 = render_widget($widget);
+        $result5 = render_widget($widget);
 
         $this->assertEquals('<p>some text</p>', $result2);
         $this->assertEquals('<p>some text</p>', $result5);
@@ -76,8 +76,8 @@ class WidgetTest extends TestCase
         $widget2 = new ForeverWidget2();
 //        $widget2 = new Widget2();
 
-        $result1 = $widget->render();
-        $result2 = $widget2('sdfvsf');
+        $result1 = render_widget($widget);
+        $result2 = render_widget($widget2, 'sdfvsf');
 
         $this->assertEquals('<p>some text</p>', $result1);
         $this->assertEquals($widget->cacheLifeTime, -1);
@@ -94,7 +94,7 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget2();
-        $widget->render();
+        render_widget($widget);
     }
 
     public function test_context_as_is_passes_to_view_correctly()
@@ -107,7 +107,7 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget3();
-        $widget->render();
+        render_widget($widget);
     }
 
     public function test_controller_method_is_called_on_some_other_class()
@@ -120,7 +120,7 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget4();
-        $widget('abc');
+        render_widget($widget, 'abc');
     }
 
     public function test_minifies_the_output()
@@ -139,7 +139,7 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget4();
-        $widgetOutput = $widget->render();
+        $widgetOutput = render_widget($widget);
         $this->assertEquals($minified, $widgetOutput);
     }
 
@@ -158,7 +158,7 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget4();
-        $html = $widget->render();
+        $html = render_widget($widget);
         $this->assertEquals($minified, $html);
     }
 }
