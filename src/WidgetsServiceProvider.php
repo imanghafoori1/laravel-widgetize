@@ -37,7 +37,6 @@ class WidgetsServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton('imanghafoori.widget.normalizer', function () {
-
             $cacheNormalizer = new CacheNormalizer();
             $templateNormalizer = new TemplateNormalizer();
             $presenterNormalizer = new PresenterNormalizer();

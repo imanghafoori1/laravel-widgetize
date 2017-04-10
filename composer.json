@@ -25,6 +25,9 @@
     "autoload": {
         "psr-4": {
             "Imanghafoori\\Widgets\\": "src"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     }
 }

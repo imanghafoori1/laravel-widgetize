@@ -65,7 +65,7 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 #### When to use the _widget_ concept?
 
->This concept (this design pattern) really shines when you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs seperate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
+>This concept (this design pattern) really shines when you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs separate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
 
 
 
@@ -156,7 +156,7 @@ php artisan make:widget MySexyWidget
 
 >If you do not set it,By default, it refers to app/Widgets folder and looks for the 'widgetNameView.blade.php'
 (Meaning that if your widget is `app/Widgets/home/recentProducts.php` the default view for that is `app/Widgets/home/recentProductsView.blade.php`)
-Anyway you can ovrride it to point to any partial in views folder.(for example: `public $template='home.footer'` will look for resource/views/home/footer.blade.php)
+Anyway you can override it to point to any partial in views folder.(For example: `public $template='home.footer'` will look for resource/views/home/footer.blade.php)
 So the entire widget lives in one folder:
 
 >| _app\Widgets\Homepage\RecentProductsWidget.php_
@@ -196,7 +196,7 @@ So the entire widget lives in one folder:
 
 > ### __public $contextAs__ (string)
 
-> The variable name to access the controler data in the view.
+> The variable name to access the controller data in the view.
 
 
 ## :bulb: Example
@@ -272,14 +272,14 @@ public function index()
 }
 ```
 
-And then you can force the object to render (home.blade.php) like this `{!! $recentProductsWidget !!}`:
+And then you can force the object to render (home.blade.php) like this `{!! render_widget($recentProductsWidget) !!}`:
 ```blade
 <div class="container">
     <h1>Hello {{ auth()->user()->username }} </h1> <!-- not cached -->
     <br>
-    {!! $recentProductsWidget !!} <!-- cached part -->
+    {!! render_widget($recentProductsWidget) !!} <!-- cached part -->
     <p> if you need to pass parameters to data method :</p>
-    {!! $recentProductsWidget(10) !!} <!-- cached part -->
+    {!! render_widget($recentProductsWidget, 10) !!} <!-- cached part -->
 </div>
 ```
 
@@ -296,13 +296,13 @@ You may want to look at the BaseWidget source code and read the comments for mor
 >Ok, now we know that we do not call widget controller actions from our routes or any where else, how the data method on the widget's controller is called then ???
 
 
->Think of widget controllers as laravel view composers which get called automatically when a specific partial is included. Under the hood, After `{!! $myWidget('param1') !!}` is executed in your view file by php, then through the php magic methods the `public data` method is called on your widget class with the corresponding parameters.
+>Think of widget controllers as laravel view composers which get called automatically when a specific partial is included. Under the hood, After `{!! render_widget($myWidget, 'param1') !!}` is executed in your view file by php, then through the php magic methods the `public data` method is called on your widget class with the corresponding parameters.
 `But only if it is Not already cached` or the `public $cacheLifeTime` is set to 0.
 If the widget HTML output is already in the cache it prints out the HTML without executing `data` method 
 (hence avoids performing database queries or even rendering the blade file.)
 
 
->Note that it executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `{!! $widgetObj !!}`, So for example if you comment out `{!! $widgetObj !!}` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
+>Note that it executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `{!! render_widget($widgetObj) !!}`, So for example if you delete `{!! render_widget($widgetObj) !!}` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
 
 
 ### :star: Your Stars Makes Us Do More :star:
