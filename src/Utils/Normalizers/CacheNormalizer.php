@@ -35,11 +35,7 @@ class CacheNormalizer
             return $widget->cacheTags;
         }
 
-        if (is_string($widget->cacheTags)) {
-            return $widget->cacheTags = [$widget->cacheTags];
-        }
-
-        throw new \InvalidArgumentException('Cache Tags should be of type String or Array.');
+        throw new \InvalidArgumentException('Cache Tags should be of type Array.');
     }
 
     /**
