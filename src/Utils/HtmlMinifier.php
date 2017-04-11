@@ -3,8 +3,7 @@
 namespace Imanghafoori\Widgets\Utils;
 
 /**
- * Class Html Minifier
- * @package Imanghafoori\Widgets\Utils
+ * Class Html Minifier.
  */
 class HtmlMinifier
 {

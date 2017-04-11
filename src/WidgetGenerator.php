@@ -34,7 +34,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__ . '/../stubs/widget.stub';
+        return __DIR__.'/../stubs/widget.stub';
     }
 
     /**

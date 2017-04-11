@@ -31,6 +31,7 @@ class WidgetRenderer
         } catch (\Exception $e) {
             return app()->make(ExceptionHandler::class)->render(app('request'), $e)->send();
         }
+
         return $html;
     }
 
@@ -58,7 +59,6 @@ class WidgetRenderer
 
         return $expensivePhpCode();
     }
-
 
     /**
      * @param Widget Object $widget
@@ -95,7 +95,6 @@ class WidgetRenderer
         if ($this->_policies->widgetShouldHaveDebugInfo()) {
             $this->html = app(DebugInfo::class)->addIdentifierToHtml($widget, $this->html);
         }
-
 
         return $this->html;
     }

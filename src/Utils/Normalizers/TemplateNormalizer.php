@@ -17,12 +17,12 @@ class TemplateNormalizer
         // replace slashes with dots
         $className = str_replace(['\\', '/'], '.', $className);
 
-        if (!property_exists($widget, 'template')) {
-            $widget->template = 'Widgets::' . $className . 'View';
+        if (! property_exists($widget, 'template')) {
+            $widget->template = 'Widgets::'.$className.'View';
         }
 
-        if (!view()->exists($widget->template)) {
-            throw new \InvalidArgumentException("View file [{$className}View] not found by: '" . class_basename($widget) . " '");
+        if (! view()->exists($widget->template)) {
+            throw new \InvalidArgumentException("View file [{$className}View] not found by: '".class_basename($widget)." '");
         }
     }
 }

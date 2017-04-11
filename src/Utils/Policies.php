@@ -5,7 +5,7 @@ namespace Imanghafoori\Widgets\Utils;
 class Policies
 {
     /**
-     * Detects the widget Should Have Debug Info
+     * Detects the widget Should Have Debug Info.
      *
      * @return bool
      */
@@ -17,17 +17,17 @@ class Policies
     /**
      * The caching is turned off when:
      * 1- we are running tests
-     * 2- have disabled it in .env file
+     * 2- have disabled it in .env file.
      *
      * @return bool
      */
     public function widgetShouldUseCache()
     {
-        return ((env('WIDGET_CACHE', false) !== false) && (!app()->environment('testing')));
+        return (env('WIDGET_CACHE', false) !== false) && (! app()->environment('testing'));
     }
 
     /**
-     * Widget Should Be Minified or Not
+     * Widget Should Be Minified or Not.
      *
      * @return bool
      */
