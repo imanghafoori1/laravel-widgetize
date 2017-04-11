@@ -25,12 +25,12 @@ Laravel Widgetize
 * :wrench: [Installation](#wrench-installation-arrow_down)
 * :earth_africa: [Global Configuration](#earth_africa-global-config)
 * :blue_car: [Per Widget Configuration](#blue_car-per-widget-config)
-    - [public $template](#public-template-string)
-    - [public $controller](#public-controller-string)
-    - [public $presenter](#[public-presenter-string)
-    - [public $cacheLifeTime](#public-cachelifetime-int)
-    - [public $cacheTags](#public-cachetags-arraystring)
-    - [public $contextAs](#public-contextAs-string)
+    - [public $template (optional)](#public-template-string)
+    - [public $controller (optional)](#public-controller-string)
+    - [public $presenter (optional)](#[public-presenter-string)
+    - [public $cacheLifeTime (optional)](#public-cachelifetime-int)
+    - [public $cacheTags (optional)](#public-cachetags-arraystring)
+    - [public $contextAs (optional)](#public-contextAs-string)
    
 * :bulb: [Usage and Example](#bulb-example)
     - [General Guideline](#guideline)
@@ -215,7 +215,7 @@ namespace App\Widgets;
 class RecentProductsWidget
 {
     public $template = 'widgets.recentProducts.blade.php'; // referes to: views/widgets/recentProducts.blade.php
-    public $cacheLifeTime = 1; // 1(min) ( 0 : disable, -1 : forever)
+    public $cacheLifeTime = 1; // 1(min)
     public $contextAs = '$recentProducts'; // you can access $recentProducts in view file (default: $data)
 
     // The data returned here would be available in widget view file automatically.

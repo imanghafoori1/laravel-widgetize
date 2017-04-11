@@ -2,16 +2,22 @@
 
 namespace DummyNamespace;
 
+/**
+ *  |====================================================
+ *  | Optionally you can use the below snippets to override the defaults.
+ *  | Feel free remove this doc block if you do not need it.
+ *  |====================================================
+ *  | public $controller = App/classPath/MyWidget::class;
+ *  | public $presenter = App/classPath/WidgetPresenter::class';
+ *  | public $minifyOutput = true; (Default value is read from .env file);
+ *  | public $cacheLifeTime = 0; (Default value is read from .env file);
+ *  | public $contextAs; (Default : '$data')
+ *  | public $template; (By default it looks for App\Widgets\DummyClassView.blade.php)
+ *  | public $cacheTags = [];
+ *  |===================================================
+ */
 class DummyClass
 {
-    public $template = null;
-    public $minifyOutput = true;
-    public $cacheLifeTime = 'env_default';
-    public $contextAs = '$data';
-    public $presenter = 'default';
-    public $controller = null;
-    public $cacheTags = null;
-
 	public function data($args = null)
 	{
 		return [];
