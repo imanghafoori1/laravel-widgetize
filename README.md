@@ -18,14 +18,14 @@ Laravel Widgetize
 * :flashlight: [Introduction](#introduction)
     - [What is a _widget object_ ?](#what-is-a-widget-object)
     - [When to use the _widget_ concept?](#when-to-use-the-widget-concept)
-    - :snake: [The Problems](#what-is-our-problems)
-    - :dart: [The Solution](#what-is-the-solution)
-    - :book: [The Theory Behind Widget Objects](#theory)
-    - :gem: [Package Features](#package-features)
+    - :snake: [The Problems](#snake-what-is-our-problems-snake)
+    - :dart: [The Solution](#dart-what-is-the-solution)
+    - :book: [The Theory Behind Widget Objects](#book-design-patterns-theory)
+    - :gem: [Package Features](#gem-package-features-gem)
     
-* :wrench: [Installation](#installation)
-* :earth_africa: [Global Configuration](#global-config)
-* :blue_car: [Per Widget Configuration](#per-widget-config)
+* :wrench: [Installation](#wrench-installation-arrow_down)
+* :earth_africa: [Global Configuration](#earth_africa-global-config)
+* :blue_car: [Per Widget Configuration](#blue_car-per-widget-config)
     - [public $template](#public-template-string)
     - [public $controller](#public-controller-string)
     - [public $presenter](#[public-presenter-string)
@@ -33,12 +33,12 @@ Laravel Widgetize
     - [public $cacheTags](#public-cachetags-arraystring)
     - [public $contextAs](#public-contextAs-string)
    
-* :bulb: [Usage and Example](#example)
+* :bulb: [Usage and Example](#bulb-example)
     - [General Guideline](#guideline)
     - [How to make a widget class](#how-to-make-a-widget)
     - [How to use a widget class](#how-to-use-a-widget-class)
-* :shipit: [Behind the curtain](#behind-the-curtain)
-* :star: [Your Stars Makes Us Do More](#your-stars-makes-us-do-more)
+* :shipit: [Behind the curtain](#shipit-behind-the-curtain)
+* :star: [Your Stars Makes Us Do More](#star-your-stars-makes-us-do-more-star)
 
 
 This page may look long and boring to read at first, but bear with me!!!
@@ -59,7 +59,11 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 >Or If you know `Drupal's Views` concept, they are very similar to each other.
 
->In fact Widget objects is are normal php objects, the special thing about them is that, when you try to treat them as a regular string variable (for example: `echo $myWidgetObj` or `{!! $myWidgetObj !!}`) they magically output `HTML`!!! which is the result of rendering a view partial with data from the widget controller. So we can replace `@include('myPartial')` with `{!! myPartial !!}`. but widget object are `__self contained__` and `__self cached__`.
+>In fact Widget objects is are normal php objects without any methods,
+ when you pass them into the `render_widget()` helper magically output `HTML`!!! 
+ Which is the result of rendering a view partial with data from the widget controller.
+ So we can replace `@include('myPartial')` with `{!! render_widget($myWidget) !!}`.
+ The main benefit is the fact that widget object are `__self cached__` and they know how to provide data from them selves.
 
 
 
@@ -100,7 +104,7 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 
 
 
-### :gem: Package Features 
+### :gem: Package Features :gem:
 
 > 1. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
 > 2. It optionally `minifies` the output of the widget. (In order to save cache storage space and bandwidth)
