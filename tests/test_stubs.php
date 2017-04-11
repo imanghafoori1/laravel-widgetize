@@ -1,8 +1,10 @@
 <?php
+
 class ForeverWidget
 {
     public $cacheLifeTime = -1;
     public $template = 'hello';
+
     public function data()
     {
     }
@@ -12,6 +14,7 @@ class ForeverWidget2
 {
     public $cacheLifeTime = 'forever';
     public $template = 'hello';
+
     public function data()
     {
     }
@@ -21,6 +24,7 @@ class Widget1
 {
     //    public $cacheLifeTime = -1;
     public $template = 'hello';
+
     public function data()
     {
     }
@@ -62,7 +66,6 @@ class Widget4Ctrl
     }
 }
 
-
 class Widget5
 {
     public $template = 'hello';
@@ -78,6 +81,6 @@ class Widget5Presenter
 {
     public function present($data)
     {
-        return 'bar' . $data;
+        return 'bar'.$data;
     }
 }

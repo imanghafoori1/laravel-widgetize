@@ -3,8 +3,7 @@
 namespace Imanghafoori\Widgets\Utils;
 
 /**
- * Class DebugInfo
- * @package Imanghafoori\Widgets\Utils
+ * Class DebugInfo.
  */
 class DebugInfo
 {
@@ -23,6 +22,7 @@ class DebugInfo
         $this->html = $html;
         $this->addDebugInfo();
         $this->addHtmlComments();
+
         return $this->html;
     }
 
@@ -32,7 +32,7 @@ class DebugInfo
         if (str_contains($this->widget->template, 'Widgets::')) {
             $tpl = str_replace('Widgets::', 'app\Widgets\\', $this->widget->template);
         }
-        $this->html = "<div title='" . get_class($this->widget) . "::class || template : {$tpl}" . $this->cacheState() . "' style='box-shadow: 0px 0px 15px 5px #00c62b inset'>" . $this->html . "</div>";
+        $this->html = "<div title='".get_class($this->widget)."::class || template : {$tpl}".$this->cacheState()."' style='box-shadow: 0px 0px 15px 5px #00c62b inset'>".$this->html.'</div>';
     }
 
     /**
@@ -41,14 +41,15 @@ class DebugInfo
      */
     private function cacheState()
     {
-        if (!$this->policies->widgetShouldUseCache()) {
-            return " || cache: is globally turned off (in .env set WIDGET_CACHE=true) ";
+        if (! $this->policies->widgetShouldUseCache()) {
+            return ' || cache: is globally turned off (in .env set WIDGET_CACHE=true) ';
         }
+
         return " || cache: {$this->widget->cacheLifeTime}(min)' ";
     }
 
     private function addHtmlComments()
     {
-        $this->html = "<!-- '{$this->widget->friendlyName}' Widget Start -->" . $this->html . "<!-- '{$this->widget->friendlyName}' Widget End -->";
+        $this->html = "<!-- '{$this->widget->friendlyName}' Widget Start -->".$this->html."<!-- '{$this->widget->friendlyName}' Widget End -->";
     }
 }

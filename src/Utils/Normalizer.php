@@ -3,9 +3,9 @@
 namespace Imanghafoori\Widgets\Utils;
 
 use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
-use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
-use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\TemplateNormalizer;
+use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
+use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
 
 class Normalizer
 {
@@ -34,12 +34,11 @@ class Normalizer
         $this->cacheNormalizer = $cacheNormalizer;
     }
 
-
     public function normalizeWidgetConfig($widget)
     {
         // to avoid normalizing a widget multiple times unnecessarily :
         if (isset($widget->isNormalized)) {
-            return null;
+            return;
         }
 
         $this->controllerNormalizer->normalizeControllerMethod($widget);
@@ -61,7 +60,7 @@ class Normalizer
         $contextAs = 'data';
         if (property_exists($widget, 'contextAs')) {
             // removes the $ sign.
-            $contextAs = str_replace('$', '', (string)$widget->contextAs);
+            $contextAs = str_replace('$', '', (string) $widget->contextAs);
         }
         $widget->contextAs = $contextAs;
     }

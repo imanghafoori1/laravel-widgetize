@@ -5,13 +5,12 @@ namespace Imanghafoori\Widgets;
 use Illuminate\Support\ServiceProvider;
 use Imanghafoori\Widgets\Utils\Normalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
-use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
-use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\TemplateNormalizer;
+use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
+use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
 
 class WidgetsServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap any application services.
      *
@@ -23,7 +22,7 @@ class WidgetsServiceProvider extends ServiceProvider
             return "<?php echo $expression; ?>";
         });
 
-        $this->loadViewsFrom($this->app->basePath() . '/app/Widgets/', 'Widgets');
+        $this->loadViewsFrom($this->app->basePath().'/app/Widgets/', 'Widgets');
     }
 
     /**

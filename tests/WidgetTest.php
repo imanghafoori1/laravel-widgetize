@@ -1,5 +1,6 @@
 <?php
-require_once('test_stubs.php');
+
+require_once 'test_stubs.php';
 
 class WidgetTest extends TestCase
 {
@@ -91,7 +92,6 @@ class WidgetTest extends TestCase
         View::shouldReceive('render')->once()->andReturn('<br>');
         \App::shouldReceive('call')->once()->andReturn('foo');
 
-
         //act
         $widget = new Widget2();
         render_widget($widget);
@@ -104,7 +104,6 @@ class WidgetTest extends TestCase
         View::shouldReceive('render')->once()->andReturn('<br>');
         \App::shouldReceive('call')->once()->andReturn('foo');
 
-
         //act
         $widget = new Widget3();
         render_widget($widget);
@@ -116,7 +115,6 @@ class WidgetTest extends TestCase
         View::shouldReceive('make')->once()->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<br>');
         \App::shouldReceive('call')->with('Widget4Ctrl@data', ['abc'])->once()->andReturn('foo');
-
 
         //act
         $widget = new Widget4();
@@ -135,7 +133,6 @@ class WidgetTest extends TestCase
         View::shouldReceive('make')->once()->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn($widgetOutput);
         \App::shouldReceive('call')->with('Widget4Ctrl@data', [])->once()->andReturn('foo');
-
 
         //act
         $widget = new Widget4();

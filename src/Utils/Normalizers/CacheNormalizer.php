@@ -11,8 +11,8 @@ class CacheNormalizer
      */
     public function normalizeCacheLifeTime($widget)
     {
-        if (!property_exists($widget, 'cacheLifeTime')) {
-            $widget->cacheLifeTime = (int)(env('WIDGET_DEFAULT_CACHE_LIFETIME', 0));
+        if (! property_exists($widget, 'cacheLifeTime')) {
+            $widget->cacheLifeTime = (int) (env('WIDGET_DEFAULT_CACHE_LIFETIME', 0));
         }
 
         if ($widget->cacheLifeTime === 'forever') {
@@ -27,7 +27,7 @@ class CacheNormalizer
      */
     public function normalizeCacheTags($widget)
     {
-        if (!$this->cacheCanUseTags() || !property_exists($widget, 'cacheTags')) {
+        if (! $this->cacheCanUseTags() || ! property_exists($widget, 'cacheTags')) {
             return $widget->cacheTags = null;
         }
 
@@ -39,11 +39,11 @@ class CacheNormalizer
     }
 
     /**
-     * Determine whether cache tags should be applied or not
+     * Determine whether cache tags should be applied or not.
      * @return bool
      */
     private function cacheCanUseTags()
     {
-        return !in_array(env('CACHE_DRIVER', 'file'), ['file', 'database']);
+        return ! in_array(env('CACHE_DRIVER', 'file'), ['file', 'database']);
     }
 }

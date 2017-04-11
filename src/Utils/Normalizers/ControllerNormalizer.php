@@ -19,7 +19,7 @@ class ControllerNormalizer
         // then we decide to call data method on that instead.
         if (property_exists($widget, 'controller')) {
             $ctrlClass = $widget->controller;
-            $controllerMethod = ($ctrlClass) . '@data';
+            $controllerMethod = ($ctrlClass).'@data';
         }
 
         $this->checkControllerExists($ctrlClass);
@@ -33,7 +33,7 @@ class ControllerNormalizer
      */
     private function checkControllerExists($ctrlClass)
     {
-        if (!class_exists($ctrlClass)) {
+        if (! class_exists($ctrlClass)) {
             throw new \InvalidArgumentException("Controller class: [{$ctrlClass}] not found.");
         }
     }
@@ -43,8 +43,8 @@ class ControllerNormalizer
      */
     private function checkDataMethodExists($ctrlClass)
     {
-        if (!method_exists($ctrlClass, 'data')) {
-            throw new \InvalidArgumentException("'data' method not found on " . $ctrlClass);
+        if (! method_exists($ctrlClass, 'data')) {
+            throw new \InvalidArgumentException("'data' method not found on ".$ctrlClass);
         }
     }
 }
