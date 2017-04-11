@@ -7,7 +7,6 @@ Laravel Widgetize
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/imanghafoori/laravel-widgetize/v/stable)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![Latest Unstable Version](https://poser.pugx.org/imanghafoori/laravel-widgetize/v/unstable)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
-[![Total Downloads](https://poser.pugx.org/imanghafoori/laravel-widgetize/downloads)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![Build Status](https://travis-ci.org/imanghafoori1/laravel-widgetize.svg?branch=master)](https://travis-ci.org/imanghafoori1/laravel-widgetize)
 [![License](https://poser.pugx.org/imanghafoori/laravel-widgetize/license)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 
@@ -112,9 +111,6 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 > 4. It can help you generate widget class boilerplate with artisan command. 
 > 5. It helps you to have a dedicated presenter class of each widget to clean up your views.
 
-
-
-
 ### :wrench: Installation: :arrow_down:
 ``` bash
 composer require imanghafoori/laravel-widgetize
@@ -131,14 +127,9 @@ composer require imanghafoori/laravel-widgetize
 
 >And you will be on fire!:fire:
 
->Now you are free to extend the `Imanghafoori\Widgets\BaseWidget` abstract class and implement the `public data` method in your sub-class or use the 
-
 ``` bash
 php artisan make:widget MySexyWidget
 ```
-
-
-
 
 ## :earth_africa: Global Config:
 > You can set the variables in your .env file to globally set some configs for you widgets and override them if needed.
@@ -221,10 +212,7 @@ Sample widget class :
 ```php
 namespace App\Widgets;
 
-use Imanghafoori\Widgets\BaseWidget;
-
-
-class RecentProductsWidget extends BaseWidget
+class RecentProductsWidget
 {
     public $template = 'widgets.recentProducts.blade.php'; // referes to: views/widgets/recentProducts.blade.php
     public $cacheLifeTime = 1; // 1(min) ( 0 : disable, -1 : forever)
@@ -288,7 +276,7 @@ And then you can force the object to render (home.blade.php) like this `{!! rend
 ```
 
 
-You may want to look at the BaseWidget source code and read the comments for more information.
+You may want to look at the source code and read the comments for more information.
 
 
 
