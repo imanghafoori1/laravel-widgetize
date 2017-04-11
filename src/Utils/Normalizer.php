@@ -2,7 +2,6 @@
 
 namespace Imanghafoori\Widgets\Utils;
 
-use Imanghafoori\Widgets\BaseWidget;
 use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
@@ -23,8 +22,12 @@ class Normalizer
      * @param ControllerNormalizer $controllerNormalizer
      * @internal param $widget
      */
-    public function __construct(TemplateNormalizer $templateNormalizer, CacheNormalizer $cacheNormalizer, PresenterNormalizer $presenterNormalizer, ControllerNormalizer $controllerNormalizer)
-    {
+    public function __construct(
+        TemplateNormalizer $templateNormalizer,
+        CacheNormalizer $cacheNormalizer,
+        PresenterNormalizer $presenterNormalizer,
+        ControllerNormalizer $controllerNormalizer
+    ) {
         $this->presenterNormalizer = $presenterNormalizer;
         $this->controllerNormalizer = $controllerNormalizer;
         $this->templateNormalizer = $templateNormalizer;
@@ -32,7 +35,7 @@ class Normalizer
     }
 
 
-    public function normalizeWidgetConfig(BaseWidget $widget)
+    public function normalizeWidgetConfig($widget)
     {
         // to avoid normalizing a widget multiple times unnecessarily :
         if (isset($widget->isNormalized)) {
@@ -55,7 +58,11 @@ class Normalizer
      */
     private function normalizeContextAs($widget)
     {
-        // removes the $ sign.
-        $widget->contextAs = str_replace('$', '', (string)$widget->contextAs);
+        $contextAs = 'data';
+        if (property_exists($widget, 'contextAs')) {
+            // removes the $ sign.
+            $contextAs = str_replace('$', '', (string)$widget->contextAs);
+        }
+        $widget->contextAs = $contextAs;
     }
 }

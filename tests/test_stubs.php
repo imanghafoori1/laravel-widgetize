@@ -1,5 +1,5 @@
 <?php
-class ForeverWidget extends Imanghafoori\Widgets\BaseWidget
+class ForeverWidget
 {
     public $cacheLifeTime = -1;
     public $template = 'hello';
@@ -8,7 +8,7 @@ class ForeverWidget extends Imanghafoori\Widgets\BaseWidget
     }
 }
 
-class ForeverWidget2 extends Imanghafoori\Widgets\BaseWidget
+class ForeverWidget2
 {
     public $cacheLifeTime = 'forever';
     public $template = 'hello';
@@ -17,7 +17,7 @@ class ForeverWidget2 extends Imanghafoori\Widgets\BaseWidget
     }
 }
 
-class Widget1 extends Imanghafoori\Widgets\BaseWidget
+class Widget1
 {
     //    public $cacheLifeTime = -1;
     public $template = 'hello';
@@ -26,7 +26,7 @@ class Widget1 extends Imanghafoori\Widgets\BaseWidget
     }
 }
 
-class Widget2 extends Imanghafoori\Widgets\BaseWidget
+class Widget2
 {
     //    public $cacheLifeTime = 'forever';
 
@@ -35,7 +35,7 @@ class Widget2 extends Imanghafoori\Widgets\BaseWidget
     }
 }
 
-class Widget3 extends Imanghafoori\Widgets\BaseWidget
+class Widget3
 {
     public $template = 'hello';
     public $contextAs = '$myData';
@@ -45,7 +45,7 @@ class Widget3 extends Imanghafoori\Widgets\BaseWidget
     }
 }
 
-class Widget4 extends Imanghafoori\Widgets\BaseWidget
+class Widget4
 {
     public $template = 'hello';
     public $controller = 'Widget4Ctrl';
@@ -63,7 +63,7 @@ class Widget4Ctrl
 }
 
 
-class Widget5 extends Imanghafoori\Widgets\BaseWidget
+class Widget5
 {
     public $template = 'hello';
     public $presenter = 'Widget5Presenter';

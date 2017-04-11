@@ -17,7 +17,7 @@ class ControllerNormalizer
 
         // If the user has explicitly declared controller class path on widget
         // then we decide to call data method on that instead.
-        if ($widget->controller) {
+        if (property_exists($widget, 'controller')) {
             $ctrlClass = $widget->controller;
             $controllerMethod = ($ctrlClass) . '@data';
         }

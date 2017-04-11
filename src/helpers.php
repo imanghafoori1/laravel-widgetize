@@ -1,9 +1,8 @@
 <?php
-use Imanghafoori\Widgets\BaseWidget;
 
 if (!function_exists('render_widget')) {
-    function render_widget(BaseWidget $widget, ...$args)
+    function render_widget($widget, ...$args)
     {
-        return app('imanghafoori.widget.renderer')->renderWidget($widget, ...$args);
+        return app(\Imanghafoori\Widgets\Utils\WidgetRenderer::class)->renderWidget($widget, ...$args);
     }
 }

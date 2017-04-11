@@ -2,16 +2,17 @@
 
 namespace DummyNamespace;
 
-use Imanghafoori\Widgets\BaseWidget;
-
-class DummyClass extends BaseWidget
+class DummyClass
 {
-    public $template;
-    public $cacheLifeTime = 1;
-	public $friendlyName = 'DummyClass';
+    public $template = null;
+    public $minifyOutput = true;
+    public $cacheLifeTime = 'env_default';
     public $contextAs = '$data';
+    public $presenter = 'default';
+    public $controller = null;
+    public $cacheTags = null;
 
-	public function data()
+	public function data($args = null)
 	{
 		return [];
 	}

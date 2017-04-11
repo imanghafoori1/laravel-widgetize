@@ -15,7 +15,7 @@ class WidgetRenderer
      */
     public function __construct()
     {
-        $this->_policies = app('imanghafoori.widget.policies');
+        $this->_policies = app(Policies::class);
     }
 
     /**
@@ -25,7 +25,7 @@ class WidgetRenderer
      */
     public function renderWidget($widget, ...$args)
     {
-        app('imanghafoori.widget.normalizer')->normalizeWidgetConfig($widget);
+        app(Normalizer::class)->normalizeWidgetConfig($widget);
         try {
             $html = $this->_generateHtml($widget, ...$args);
         } catch (\Exception $e) {
@@ -53,7 +53,7 @@ class WidgetRenderer
 
         // We first try to get the output from the cache before trying to run the expensive $expensivePhpCode...
         if ($this->_policies->widgetShouldUseCache($widget->cacheLifeTime)) {
-            return app('imanghafoori.widget.cache')->cacheResult($args, $expensivePhpCode, $widget);
+            return app(Cache::class)->cacheResult($args, $expensivePhpCode, $widget);
         }
 
         return $expensivePhpCode();
@@ -87,13 +87,13 @@ class WidgetRenderer
 
         // We try to minify the html before storing it in cache to save space.
         if ($this->_policies->widgetShouldBeMinified()) {
-            $this->html = app('imanghafoori.widget.minifier')->minify($this->html);
+            $this->html = app(HtmlMinifier::class)->minify($this->html);
         }
 
         // We add some HTML comments before and after the widget output
         // So then, we will be able to easily identify the widget in browser's developer tool.
         if ($this->_policies->widgetShouldHaveDebugInfo()) {
-            $this->html = app('imanghafoori.widget.debugInfo')->addIdentifierToHtml($widget, $this->html);
+            $this->html = app(DebugInfo::class)->addIdentifierToHtml($widget, $this->html);
         }
 
 

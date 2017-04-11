@@ -3,6 +3,7 @@
 namespace Imanghafoori\Widgets;
 
 use Illuminate\Support\ServiceProvider;
+use Imanghafoori\Widgets\Utils\Normalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
@@ -36,7 +37,7 @@ class WidgetsServiceProvider extends ServiceProvider
             return $app['Imanghafoori\Widgets\WidgetGenerator'];
         });
 
-        $this->app->singleton('imanghafoori.widget.normalizer', function () {
+        $this->app->singleton(Normalizer::class, function () {
             $cacheNormalizer = new CacheNormalizer();
             $templateNormalizer = new TemplateNormalizer();
             $presenterNormalizer = new PresenterNormalizer();
@@ -45,23 +46,23 @@ class WidgetsServiceProvider extends ServiceProvider
             return new Utils\Normalizer($templateNormalizer, $cacheNormalizer, $presenterNormalizer, $controllerNormalizer);
         });
 
-        $this->app->singleton('imanghafoori.widget.minifier', function () {
+        $this->app->singleton(Utils\HtmlMinifier::class, function () {
             return new Utils\HtmlMinifier();
         });
 
-        $this->app->singleton('imanghafoori.widget.debugInfo', function () {
+        $this->app->singleton(Utils\DebugInfo::class, function () {
             return new Utils\DebugInfo();
         });
 
-        $this->app->singleton('imanghafoori.widget.policies', function () {
+        $this->app->singleton(Utils\Policies::class, function () {
             return new Utils\Policies();
         });
 
-        $this->app->singleton('imanghafoori.widget.cache', function () {
+        $this->app->singleton(Utils\Cache::class, function () {
             return new Utils\Cache();
         });
 
-        $this->app->singleton('imanghafoori.widget.renderer', function () {
+        $this->app->singleton(Utils\WidgetRenderer::class, function () {
             return new Utils\WidgetRenderer();
         });
 

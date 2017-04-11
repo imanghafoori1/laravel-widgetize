@@ -14,7 +14,7 @@ class DebugInfo
 
     public function __construct()
     {
-        $this->policies = app('imanghafoori.widget.policies');
+        $this->policies = app(Policies::class);
     }
 
     public function addIdentifierToHtml($widget, $html)

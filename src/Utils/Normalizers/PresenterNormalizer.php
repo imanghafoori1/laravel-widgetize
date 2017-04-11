@@ -6,11 +6,12 @@ class PresenterNormalizer
 {
     /**
      * Figures out which method should be called as the presenter
+     * @param $widget
      * @return null
      */
     public function normalizePresenterName($widget)
     {
-        if ($widget->presenter !== 'default') {
+        if (property_exists($widget, 'presenter')) {
             $presenter = $widget->presenter;
             $this->checkPresenterExists($presenter);
         } else {

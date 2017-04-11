@@ -17,7 +17,7 @@ class TemplateNormalizer
         // replace slashes with dots
         $className = str_replace(['\\', '/'], '.', $className);
 
-        if ($widget->template === null) {
+        if (!property_exists($widget, 'template')) {
             $widget->template = 'Widgets::' . $className . 'View';
         }
 

@@ -11,7 +11,7 @@ class CacheNormalizer
      */
     public function normalizeCacheLifeTime($widget)
     {
-        if ($widget->cacheLifeTime === 'env_default') {
+        if (!property_exists($widget, 'cacheLifeTime')) {
             $widget->cacheLifeTime = (int)(env('WIDGET_DEFAULT_CACHE_LIFETIME', 0));
         }
 
@@ -27,7 +27,7 @@ class CacheNormalizer
      */
     public function normalizeCacheTags($widget)
     {
-        if (!$this->cacheCanUseTags() || !$widget->cacheTags) {
+        if (!$this->cacheCanUseTags() || !property_exists($widget, 'cacheTags')) {
             return $widget->cacheTags = null;
         }
 
