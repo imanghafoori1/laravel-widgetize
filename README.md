@@ -220,7 +220,7 @@ class RecentProductsWidget
 
     // The data returned here would be available in widget view file automatically.
     // You can use dependancy injection here like you do in your typical controllers.
-    public function data($param1=5)
+    public function data($param=5)
     {
         // It's the perfect place to query the database for your widget...
         return Product::orderBy('id', 'desc')->take($param1)->get();
@@ -271,7 +271,7 @@ And then you can force the object to render (home.blade.php) like this `@render_
     <br>
     @render_widget($recentProductsWidget) <!-- cached part -->
     <p> if you need to pass parameters to data method :</p>
-    @render_widget($recentProductsWidget, 10) <!-- cached part -->
+    @render_widget($recentProductsWidget, ['param' => 10]) <!-- cached part -->
 </div>
 ```
 
