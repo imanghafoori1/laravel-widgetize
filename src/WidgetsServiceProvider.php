@@ -2,6 +2,7 @@
 
 namespace Imanghafoori\Widgets;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Imanghafoori\Widgets\Utils\Normalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
@@ -18,8 +19,12 @@ class WidgetsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \Blade::directive('include_widget', function ($expression) {
-            return "<?php echo $expression; ?>";
+        $omitParenthesis = version_compare($this->app->version(), '5.3', '<');
+
+        Blade::directive('render_widget', function ($expression) use ($omitParenthesis) {
+            $expression = $omitParenthesis ? $expression : "($expression)";
+
+            return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->renderWidget{$expression}; ?>";
         });
 
         $this->loadViewsFrom($this->app->basePath().'/app/Widgets/', 'Widgets');

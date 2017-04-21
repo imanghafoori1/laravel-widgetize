@@ -69,7 +69,7 @@ class WidgetRenderer
     private function _makeDataForView($widget, $args)
     {
         // Here we call the data method on the widget class.
-        $viewData = \App::call($widget->controller, $args);
+        $viewData = \App::call($widget->controller, ...$args);
 
         if (($widget->presenter)) {
             // We make an object and call the `present` method on it.

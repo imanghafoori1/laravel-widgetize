@@ -32,7 +32,11 @@ class DebugInfo
         if (str_contains($this->widget->template, 'Widgets::')) {
             $tpl = str_replace('Widgets::', 'app\Widgets\\', $this->widget->template);
         }
-        $this->html = "<div title='".get_class($this->widget)."::class || template : {$tpl}".$this->cacheState()."' style='box-shadow: 0px 0px 15px 5px #00c62b inset'>".$this->html.'</div>';
+
+        $tpl = str_replace('.', '\\', $tpl);
+
+        $this->html =
+            "<div title='WidgetObj : ".get_class($this->widget).".php&#013;Template : {$tpl}.blade.php".$this->cacheState()."' style='box-shadow: 0px 0px 15px 5px #00c62b inset'>".$this->html.'</div>';
     }
 
     /**
@@ -42,10 +46,10 @@ class DebugInfo
     private function cacheState()
     {
         if (! $this->policies->widgetShouldUseCache()) {
-            return ' || cache: is globally turned off (in .env set WIDGET_CACHE=true) ';
+            return ' &#013;Cache: is globally turned off (You should put "WIDGET_CACHE=true" in .env) ';
         }
 
-        return " || cache: {$this->widget->cacheLifeTime}(min)' ";
+        return " &#013;Cache : {$this->widget->cacheLifeTime} (min)' ";
     }
 
     private function addHtmlComments()

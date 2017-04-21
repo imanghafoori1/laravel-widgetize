@@ -61,8 +61,9 @@ class Widget4
 
 class Widget4Ctrl
 {
-    public function data()
+    public function data($arg1,$arg2)
     {
+        return $arg1.$arg2;
     }
 }
 
@@ -82,5 +83,25 @@ class Widget5Presenter
     public function present($data)
     {
         return 'bar'.$data;
+    }
+}
+
+class Widget6
+{
+    public $template = 'hello';
+
+    public function data($foo, $bar)
+    {
+        return $bar.$foo;
+    }
+}
+
+class Widget7
+{
+    public $template = 'hello';
+
+    public function data()
+    {
+        return null;
     }
 }

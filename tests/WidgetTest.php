@@ -112,13 +112,12 @@ class WidgetTest extends TestCase
     public function test_controller_method_is_called_on_some_other_class()
     {
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('hello', ['data' => 'aaabbb'], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<br>');
-        \App::shouldReceive('call')->with('Widget4Ctrl@data', ['abc'])->once()->andReturn('foo');
 
         //act
         $widget = new Widget4();
-        render_widget($widget, 'abc');
+        render_widget($widget, ['arg1' => 'aaa', 'arg2' => 'bbb']);
     }
 
     public function test_minifies_the_output()
@@ -130,12 +129,11 @@ class WidgetTest extends TestCase
         $minified = ' <p> </p> ';
 
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('hello', ['data' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn($widgetOutput);
-        \App::shouldReceive('call')->with('Widget4Ctrl@data', [])->once()->andReturn('foo');
 
         //act
-        $widget = new Widget4();
+        $widget = new Widget7();
         $widgetOutput = render_widget($widget);
         $this->assertEquals($minified, $widgetOutput);
     }
@@ -149,13 +147,22 @@ class WidgetTest extends TestCase
         $minified = ' <p> </p> ';
 
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('hello', ['data' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn($html);
-        \App::shouldReceive('call')->with('Widget4Ctrl@data', [])->once()->andReturn('foo');
 
         //act
-        $widget = new Widget4();
+        $widget = new Widget7();
         $html = render_widget($widget);
         $this->assertEquals($minified, $html);
+    }
+
+    public function test_data_is_passed_to_data_method()
+    {
+        View::shouldReceive('exists')->once()->andReturn(true);
+        View::shouldReceive('make')->once()->with('hello', ['data' => '222111'], [])->andReturn(app('view'));
+        View::shouldReceive('render')->once()->andReturn('<br>');
+        //act
+        $widget = new Widget6();
+        render_widget($widget, ['foo' => '111', 'bar' => '222']);
     }
 }
