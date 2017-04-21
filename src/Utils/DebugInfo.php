@@ -50,6 +50,6 @@ class DebugInfo
 
     private function addHtmlComments()
     {
-        $this->html = "<!-- '{$this->widget->friendlyName}' Widget Start -->".$this->html."<!-- '{$this->widget->friendlyName}' Widget End -->";
+        $this->html = "<!-- '{".get_class($this->widget)."' Widget Start -->".$this->html."<!-- '".get_class($this->widget)."' Widget End -->";
     }
 }
