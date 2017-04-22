@@ -1,0 +1,11 @@
+<?php
+
+namespace DummyNamespace;
+
+class DummyClass
+{
+	public function data($args = null)
+	{
+		return [];
+	}
+}

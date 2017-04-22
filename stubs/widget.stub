@@ -3,21 +3,30 @@
 namespace DummyNamespace;
 
 /**
- *  |====================================================
- *  | Optionally you can use the below snippets to override the defaults.
- *  | Feel free remove this doc block if you do not need it.
- *  |====================================================
- *  | public $controller = App/classPath/MyWidget::class;
- *  | public $presenter = App/classPath/WidgetPresenter::class';
- *  | public $minifyOutput = true; (Default value is read from .env file);
- *  | public $cacheLifeTime = 0; (Default value is read from .env file);
- *  | public $contextAs; (Default : '$data')
- *  | public $template; (By default it looks for App\Widgets\DummyClassView.blade.php)
- *  | public $cacheTags = [];
- *  |===================================================
+ *  |====== Remove this doc block if you don't need it ========
+ *  |==========================================================
+ *  |   Optionally you can use the below snippets to override the defaults.
+ *  |   Feel free remove this doc block if you do not need it.
+ *  | =========================================================
+ *  |   WIDGET_CACHE=true       ( in .env file to enable caching)
+ *  |   WIDGET_IDENTIFIER=true  ( in .env file to enable debug mode)
+ *  |==========================================================
+ *  | public $controller = App/classPath/MyWidget::class; (optional)
+ *  | public $presenter = App/classPath/WidgetPresenter::class'; (optional)
+ *  | public $minifyOutput = true; (Default value comes from .env file: WIDGET_MINIFICATION=true);
+ *  | public $cacheLifeTime = 0;   (Default value comes from .env file: WIDGET_DEFAULT_CACHE_LIFETIME=2);
+ *  | public $contextAs = '$data'; (Default : '$data')
+ *  | public $template; (optional) (By default it looks for App\Widgets\DummyClassView.blade.php)
+ *  | public $cacheTags = []; (optional) (file system driver does not support cache tags!)
+ *  |===========================================================
  */
 class DummyClass
 {
+   /**
+    * You may call this widget in blade files like this:
+    *
+    * @render_widget($widgetObj, ['args' => 'someVal'])
+    */
 	public function data($args = null)
 	{
 		return [];
