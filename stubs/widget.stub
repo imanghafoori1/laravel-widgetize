@@ -3,9 +3,10 @@
 namespace DummyNamespace;
 
 /**
+ *  |==========================================================
  *  |====== Remove this doc block if you don't need it ========
  *  |==========================================================
- *  |   Optionally you can use the below snippets to override the defaults.
+ *  |   You can use the below snippets to override the defaults.
  *  |   Feel free remove this doc block if you do not need it.
  *  | =========================================================
  *  |   WIDGET_CACHE=true       ( in .env file to enable caching)

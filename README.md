@@ -264,14 +264,14 @@ public function index()
 }
 ```
 
-And then you can force the object to render (home.blade.php) like this `@render_widget($recentProductsWidget)`:
+And then you can force the object to render (home.blade.php) like this `@widget($recentProductsWidget)`:
 ```blade
 <div class="container">
     <h1>Hello {{ auth()->user()->username }} </h1> <!-- not cached -->
     <br>
-    @render_widget($recentProductsWidget) <!-- cached part -->
+    @widget($recentProductsWidget) <!-- cached part -->
     <p> if you need to pass parameters to data method :</p>
-    @render_widget($recentProductsWidget, ['param' => 10]) <!-- cached part -->
+    @widget($recentProductsWidget, ['param' => 10]) <!-- cached part -->
 </div>
 ```
 
@@ -288,13 +288,13 @@ You may want to look at the source code and read the comments for more informati
 >Ok, now we know that we do not call widget controller actions from our routes or any where else, how the data method on the widget's controller is called then ???
 
 
->Think of widget controllers as laravel view composers which get called automatically when a specific partial is included. Under the hood, After `@render_widget($myWidget, 'param1')` is executed in your view file by php, then through the php magic methods the `public data` method is called on your widget class with the corresponding parameters.
+>Think of widget controllers as laravel view composers which get called automatically when a specific partial is included. Under the hood, After `@widget($myWidget, 'param1')` is executed in your view file by php, then through the php magic methods the `public data` method is called on your widget class with the corresponding parameters.
 `But only if it is Not already cached` or the `public $cacheLifeTime` is set to 0.
 If the widget HTML output is already in the cache it prints out the HTML without executing `data` method 
 (hence avoids performing database queries or even rendering the blade file.)
 
 
->Note that it executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `@render_widget($widgetObj)`, So for example if you remove `@render_widget($widgetObj)` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
+>Note that it executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `@widget($widgetObj)`, So for example if you remove `@widget($widgetObj)` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
 
 
 ### :star: Your Stars Makes Us Do More :star:

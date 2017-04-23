@@ -11,16 +11,7 @@ class ControllerNormalizer
      */
     public function normalizeControllerMethod($widget)
     {
-        // We decide to call data method on widget object by default.
-        $controllerMethod = [$widget, 'data'];
-        $ctrlClass = get_class($widget);
-
-        // If the user has explicitly declared controller class path on widget
-        // then we decide to call data method on that instead.
-        if (property_exists($widget, 'controller')) {
-            $ctrlClass = $widget->controller;
-            $controllerMethod = ($ctrlClass).'@data';
-        }
+        list($controllerMethod, $ctrlClass) = $this->determineDataMethod($widget);
 
         $this->checkControllerExists($ctrlClass);
         $this->checkDataMethodExists($ctrlClass);
@@ -46,5 +37,24 @@ class ControllerNormalizer
         if (! method_exists($ctrlClass, 'data')) {
             throw new \InvalidArgumentException("'data' method not found on ".$ctrlClass);
         }
+    }
+
+    /**
+     * @param $widget
+     * @return array
+     */
+    private function determineDataMethod($widget)
+    {
+// We decide to call data method on widget object by default.
+        $controllerMethod = [$widget, 'data'];
+        $ctrlClass = get_class($widget);
+
+        // If the user has explicitly declared controller class path on widget
+        // then we decide to call data method on that instead.
+        if (property_exists($widget, 'controller')) {
+            $ctrlClass = $widget->controller;
+            $controllerMethod = ($ctrlClass) . '@data';
+        }
+        return array($controllerMethod, $ctrlClass);
     }
 }

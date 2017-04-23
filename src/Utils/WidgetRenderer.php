@@ -25,7 +25,13 @@ class WidgetRenderer
      */
     public function renderWidget($widget, ...$args)
     {
+        if(is_string($widget))
+        {
+            $widget = app($widget);
+        }
+
         app(Normalizer::class)->normalizeWidgetConfig($widget);
+
         try {
             $html = $this->_generateHtml($widget, ...$args);
         } catch (\Exception $e) {

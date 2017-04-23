@@ -21,11 +21,7 @@ class WidgetsServiceProvider extends ServiceProvider
     {
         $omitParenthesis = version_compare($this->app->version(), '5.3', '<');
 
-        Blade::directive('render_widget', function ($expression) use ($omitParenthesis) {
-            $expression = $omitParenthesis ? $expression : "($expression)";
-
-            return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->renderWidget{$expression}; ?>";
-        });
+        $this->_defineDirectives($omitParenthesis);
 
         $this->loadViewsFrom($this->app->basePath().'/app/Widgets/', 'Widgets');
     }
@@ -71,5 +67,23 @@ class WidgetsServiceProvider extends ServiceProvider
         });
 
         $this->commands('command.imanghafoori.widget');
+    }
+
+    /**
+     * @param $omitParenthesis
+     */
+    private function _defineDirectives($omitParenthesis)
+    {
+        Blade::directive('render_widget', function ($expression) use ($omitParenthesis) {
+            $expression = $omitParenthesis ? $expression : "($expression)";
+
+            return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->renderWidget{$expression}; ?>";
+        });
+
+        Blade::directive('widget', function ($expression) use ($omitParenthesis) {
+            $expression = $omitParenthesis ? $expression : "($expression)";
+
+            return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->renderWidget{$expression}; ?>";
+        });
     }
 }
