@@ -34,7 +34,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
      */
     public function fire()
     {
-        parent::fire();
+        $this->_makeWidgetClass();
 
         if (!$this->option('plain')) {
             $this->createView();
@@ -51,14 +51,14 @@ class WidgetGenerator extends LaravelGeneratorCommand
         $path = $this->_getViewPath();
 
         if ($this->files->exists($path)) {
-            $this->error('View already exists!');
+            $this->error($this->qualifyClass($this->getNameInput())."View.blade.php - Already exists! (@_@)");
 
             return;
         }
 
         $this->files->put($path, '');
 
-        $this->info('View created successfully.');
+        $this->info( ' - '.$this->qualifyClass($this->getNameInput())."View.blade.php - was created. (^_^)");
     }
 
     /**
@@ -106,5 +106,34 @@ class WidgetGenerator extends LaravelGeneratorCommand
         $path = $this->getPath($name);
         $path = str_replace('.php', 'View.blade.php', $path);
         return $path;
+    }
+
+    /**
+     * Creates the widget class
+     * @return bool
+     */
+    private function _makeWidgetClass()
+    {
+        $name = $this->qualifyClass($this->getNameInput());
+
+        $path = $this->getPath($name);
+
+        // First we will check to see if the class already exists. If it does, we don't want
+        // to create the class and overwrite the user's code. So, we will bail out so the
+        // code is untouched. Otherwise, we will continue generating this class' files.
+        if ($this->alreadyExists($this->getNameInput())) {
+            $this->error($this->qualifyClass($this->getNameInput()).".php - Already exists (@_@)");
+
+            return false;
+        }
+
+        // Next, we will generate the path to the location where this class' file should get
+        // written. Then, we will build the class and make the proper replacements on the
+        // stub files so that it gets the correctly formatted namespace and class name.
+        $this->makeDirectory($path);
+
+        $this->files->put($path, $this->buildClass($name));
+
+        $this->info(' - '.$name.'.php - was created.  (^_^)');
     }
 }
