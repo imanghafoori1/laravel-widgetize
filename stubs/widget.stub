@@ -18,15 +18,15 @@ namespace DummyNamespace;
  *  | public $cacheLifeTime = 0;   (Default value comes from .env file: WIDGET_DEFAULT_CACHE_LIFETIME=2);
  *  | public $contextAs = '$data'; (Default : '$data')
  *  | public $template; (optional) (By default it looks for App\Widgets\DummyClassView.blade.php)
- *  | public $cacheTags = []; (optional) (file system driver does not support cache tags!)
+ *  | public $cacheTags = []; (optional) ('file system' driver does not support cache tags!)
  *  |===========================================================
  */
 class DummyClass
 {
    /**
-    * You may call this widget in blade files like this:
+    * You may call this widget in .blade files like this :
     *
-    * @render_widget($widgetObj, ['args' => 'someVal'])
+    * @widget('DummyNamespace\DummyClass', ['args' => 'someVal'])
     */
 	public function data($args = null)
 	{
