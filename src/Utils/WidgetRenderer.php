@@ -27,7 +27,7 @@ class WidgetRenderer
     {
         if(is_string($widget))
         {
-            $widget = app($widget);
+            $widget = $this->_makeWidgetObj($widget);
         }
 
         app(Normalizer::class)->normalizeWidgetConfig($widget);
@@ -103,5 +103,15 @@ class WidgetRenderer
         }
 
         return $this->html;
+    }
+
+    /**
+     * @param $widget
+     * @return \Illuminate\Foundation\Application|mixed
+     */
+    private function _makeWidgetObj($widget)
+    {
+        $widget = app()->getNamespace().'Widgets\\'.$widget;
+        return $widgetObj = app($widget);
     }
 }

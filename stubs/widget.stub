@@ -26,7 +26,7 @@ class DummyClass
    /**
     * You may call this widget in .blade files like this :
     *
-    * @widget('DummyNamespace\DummyClass', ['args' => 'someVal'])
+    * @widget('DummyClass', ['args' => 'someVal'])
     */
 	public function data($args = null)
 	{
