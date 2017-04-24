@@ -29,14 +29,13 @@ class DebugInfo
     private function addDebugInfo()
     {
         $tpl = $this->widget->template;
-        if (str_contains($this->widget->template, 'Widgets::')) {
-            $tpl = str_replace('Widgets::', 'app\Widgets\\', $this->widget->template);
+        if (str_contains($tpl, 'Widgets::')) {
+            $tpl = str_replace('Widgets::', app()->getNamespace().'Widgets\\', $tpl);
         }
 
         $tpl = str_replace('.', '\\', $tpl);
 
-        $this->html =
-            "<div title='WidgetObj : ".get_class($this->widget).".php&#013;Template : {$tpl}.blade.php".$this->cacheState()."' style='box-shadow: 0px 0px 15px 5px #00c62b inset'>".$this->html.'</div>';
+        $this->html = "<span title='WidgetObj : ".get_class($this->widget).".php&#013;Template : {$tpl}.blade.php{$this->cacheState()}>{$this->html}</span>";
     }
 
     /**
