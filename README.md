@@ -17,9 +17,6 @@ Laravel Widgetize
 * :flashlight: [Introduction](#introduction)
     - [What is a _widget object_ ?](#what-is-a-widget-object)
     - [When to use the _widget_ concept?](#when-to-use-the-widget-concept)
-    - :snake: [The Problems](#snake-what-is-our-problems-snake)
-    - :dart: [The Solution](#dart-what-is-the-solution)
-    - :book: [The Theory Behind Widget Objects](#book-design-patterns-theory)
     - :gem: [Package Features](#gem-package-features-gem)
     
 * :wrench: [Installation](#wrench-installation-arrow_down)
@@ -35,7 +32,11 @@ Laravel Widgetize
 * :bulb: [Usage and Example](#bulb-example)
     - [How to make a widget class](#how-to-make-a-widget)
     - [How to use a widget class](#how-to-use-a-widget-class)
-* :shipit: [Behind the curtain](#shipit-behind-the-curtain)
+    
+* :shipit: [Some Theory for Experts](#)
+    - :snake: [The Problems](#snake-what-is-our-problems-snake)
+    - :dart: [The Solution](#dart-what-is-the-solution)
+    - :book: [The Theory Behind Widget Objects](#book-design-patterns-theory)
 * :star: [Your Stars Makes Us Do More](#star-your-stars-makes-us-do-more-star)
 
 
@@ -51,13 +52,13 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 - Code Organization
 - HTML Minification
 
-#### What is a widget Object?
+#### What is a widget?
 
->You can think of a widget object as a page partial with 'View a Composer' attached to it.
+>You can think of a widget as a page partial with 'View a Composer' attached to it.
 
 >Or If you know `Drupal's Views` concept, they are very similar to each other.
 
->In fact Widget objects is are normal php objects without any methods,
+>In fact Widget is are normal php class without any methods,
  when you pass them into the `render_widget()` helper magically output `HTML`!!! 
  Which is the result of rendering a view partial with data from the widget controller.
  So we can replace `@include('myPartial')` with `{!! render_widget($myWidget) !!}`.
@@ -67,39 +68,7 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 #### When to use the _widget_ concept?
 
->This concept (this design pattern) really shines when you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs separate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
-
-
-
-### :snake: What is our problems? :snake:
-
-#### Problem 1 : Controllers easily get crowded :weary:
->Imagine An online shop like amazon which shows the list of products, popular products, etc (in the sidebar), user data and basket data in the navbar and a tree of product categories in the menu and etc... In traditional good old MVC model you have a single controller method to provide all the widgets with data. You can immidiately see that you are violating the SRP (Single Responsibility Priciple)!!! The trouble is worse when the client changes his mind over time and asks the deveploper to add, remove and modify those widgets on the page. And it always happens. Clients do change their minds.The developoer's job is to be ready to cope with that as effortlessly as possible.
-
-#### Problem 2 : Page caching is always hard (But no more) :disappointed:
->Trying to cache the pages which include user specific data (for example the username on the top menu) is a often fruitless. Because each user sees slightly different page from other users. Or in cases when we have some parts of the page which update frequently and some other parts which change rarly... we have to expire the entire page cache to match the most frequently updated one. :(
-AAAAAAAAAhh...
-
-
-#### Problem 3 : View templates easily get littered with if/else blocks :dizzy_face:
->We ideally want our view files to be as logic-less as possible and very much like the final output HTML.Don't we ?! if/else blocks and other computations are always irritating within our views. specially for static page designers in our team. We just want to print out already defined variables wiout the to decide what to print. Anyway the data we store in database are sometimes far from ready to be printed on the page.
-
-
-### :dart: What is the solution?
-
-> So, How to fight against those ?
-
->__The main idea is simple, Instead of one controller method to handle all widgets of the page, Each widget should have it's own `controller class`, `view partial`, `view presenter class` and `cache config`, isolated from others.__
->That's it !! :)
->This idea originally comes from the client-side js frameworks and is somewhat new in server-side world.
-
-###  :book: Design Patterns Theory
->The widget object pattern is in fact a variation of the famous `single responsibility principle`.
-Instead of having one bloated controller method that was resposible to supply data for all the widgets...
-You distribute your controller code amougst multiple widget classes.(Each widget is responsible for small portion of the page.)
-
->It helps you to conforms to `Open-closed principle`.Because if you want to add a widget on your page you do not need to add to the controller code. Instead you create a new widget class from scratch or when you want to remove something from the page you do not have go to the controller find and comment out related controller code. removing the {!!myWidget !!} is enough to disable the corresponding controller.
-
+>The simple answer is : `Always` This concept (this design pattern) really shines when you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs separate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
 
 
 ### :gem: Package Features :gem:
@@ -259,21 +228,36 @@ You may want to look at the source code and read the comments for more informati
 
 
 
-### :shipit: Behind the Curtain
+
+### :snake: What is our problems? :snake:
+
+#### Problem 1 : Controllers easily get crowded :weary:
+>Imagine An online shop like amazon which shows the list of products, popular products, etc (in the sidebar), user data and basket data in the navbar and a tree of product categories in the menu and etc... In traditional good old MVC model you have a single controller method to provide all the widgets with data. You can immidiately see that you are violating the SRP (Single Responsibility Priciple)!!! The trouble is worse when the client changes his mind over time and asks the deveploper to add, remove and modify those widgets on the page. And it always happens. Clients do change their minds.The developoer's job is to be ready to cope with that as effortlessly as possible.
+
+#### Problem 2 : Page caching is always hard (But no more) :disappointed:
+>Trying to cache the pages which include user specific data (for example the username on the top menu) is a often fruitless. Because each user sees slightly different page from other users. Or in cases when we have some parts of the page which update frequently and some other parts which change rarly... we have to expire the entire page cache to match the most frequently updated one. :(
+AAAAAAAAAhh...
 
 
-#### How the data method on the widget's controller is called then? (0_o)
-
->Ok, now we know that we do not call widget controller actions from our routes or any where else, how the data method on the widget's controller is called then ???
-
-
->Think of widget controllers as laravel view composers which get called automatically when a specific partial is included. Under the hood, After `@widget($myWidget, 'param1')` is executed in your view file by php, then through the php magic methods the `public data` method is called on your widget class with the corresponding parameters.
-`But only if it is Not already cached` or the `public $cacheLifeTime` is set to 0.
-If the widget HTML output is already in the cache it prints out the HTML without executing `data` method 
-(hence avoids performing database queries or even rendering the blade file.)
+#### Problem 3 : View templates easily get littered with if/else blocks :dizzy_face:
+>We ideally want our view files to be as logic-less as possible and very much like the final output HTML.Don't we ?! if/else blocks and other computations are always irritating within our views. specially for static page designers in our team. We just want to print out already defined variables wiout the to decide what to print. Anyway the data we store in database are sometimes far from ready to be printed on the page.
 
 
->Note that it executes the widget code `Lazily`. Meaning that the widget's data method `public function data(){` is hit only and only after the widget object is forced to be rendered in the blade file like this: `@widget($widgetObj)`, So for example if you remove `@widget($widgetObj)` from your blade file then all database queries will be disabled automatically. No need to comment out the controller codes anymore...
+### :dart: What is the solution?
+
+> So, How to fight against those ?
+
+>__The main idea is simple, Instead of one controller method to handle all widgets of the page, Each widget should have it's own `controller class`, `view partial`, `view presenter class` and `cache config`, isolated from others.__
+>That's it !! :)
+>This idea originally comes from the client-side js frameworks and is somewhat new in server-side world.
+
+###  :book: Design Patterns Theory
+>The widget object pattern is in fact a variation of the famous `single responsibility principle`.
+Instead of having one bloated controller method that was resposible to supply data for all the widgets...
+You distribute your controller code amougst multiple widget classes.(Each widget is responsible for small portion of the page.)
+
+>It helps you to conforms to `Open-closed principle`.Because if you want to add a widget on your page you do not need to add to the controller code. Instead you create a new widget class from scratch or when you want to remove something from the page you do not have go to the controller find and comment out related controller code. removing the {!!myWidget !!} is enough to disable the corresponding controller.
+
 
 
 ### :star: Your Stars Makes Us Do More :star:
