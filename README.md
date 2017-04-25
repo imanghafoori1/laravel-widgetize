@@ -33,7 +33,6 @@ Laravel Widgetize
     - [public $contextAs (optional)](#public-contextAs-string)
    
 * :bulb: [Usage and Example](#bulb-example)
-    - [General Guideline](#guideline)
     - [How to make a widget class](#how-to-make-a-widget)
     - [How to use a widget class](#how-to-use-a-widget-class)
 * :shipit: [Behind the curtain](#shipit-behind-the-curtain)
@@ -88,7 +87,7 @@ AAAAAAAAAhh...
 
 ### :dart: What is the solution?
 
-> So, How to fight against those ? :punch:
+> So, How to fight against those ?
 
 >__The main idea is simple, Instead of one controller method to handle all widgets of the page, Each widget should have it's own `controller class`, `view partial`, `view presenter class` and `cache config`, isolated from others.__
 >That's it !! :)
@@ -134,7 +133,7 @@ WIDGET_DEFAULT_CACHE_LIFETIME=1
 
 ```
 
->And you will be on fire!:fire: :fire: :fire:
+ :fire: And you will be on fire!:fire:
 
 ``` bash
 php artisan make:widget MySexyWidget
@@ -204,14 +203,6 @@ So the entire widget lives in one folder:
 
 
 ## :bulb: Example
-
-### Guideline
-
->1. So we first extract each widget into it's own partial. (app/Widgets/recentProducts.blade.php)
->2. Use `php artisan make:widget` command to create your widget class.
->3. Set configurations like __$cacheLifeTime__ , __$template__, etc on your widget class.
->4. Set your controller class and implement the `data` method.
->5. Your widget is ready to be instanciated and be used in your view files. (see example below)
 
 ### How to make a Widget?
 
