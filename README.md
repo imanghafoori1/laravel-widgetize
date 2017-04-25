@@ -125,7 +125,16 @@ composer require imanghafoori/laravel-widgetize
 ];
 ```
 
->And you will be on fire!:fire:
+put below in your .env file :
+```
+WIDGET_MINIFICATION=true
+WIDGET_CACHE=false
+WIDGET_IDENTIFIER=true
+WIDGET_DEFAULT_CACHE_LIFETIME=1
+
+```
+
+>And you will be on fire!:fire: :fire: :fire:
 
 ``` bash
 php artisan make:widget MySexyWidget
@@ -140,7 +149,7 @@ php artisan make:widget MySexyWidget
 
 > __WIDGET_IDENTIFIER=true__ (you can turn off widget identifiers in production)
 
-> __WIDGET_DEFAULT_CACHE_LIFETIME__=1 (You can set a global default lifetime for all widgets and override it per widget if needed)
+> __WIDGET_DEFAULT_CACHE_LIFETIME=1__ (You can set a global default lifetime for all widgets)
 
 
 ## :blue_car: Per Widget Config:
@@ -212,14 +221,9 @@ Sample widget class :
 ```php
 namespace App\Widgets;
 
-class RecentProductsWidget
+class MyWidget
 {
-    public $template = 'widgets.recentProducts.blade.php'; // referes to: views/widgets/recentProducts.blade.php
-    public $cacheLifeTime = 1; // 1(min)
-    public $contextAs = '$recentProducts'; // you can access $recentProducts in view file (default: $data)
-
     // The data returned here would be available in widget view file automatically.
-    // You can use dependancy injection here like you do in your typical controllers.
     public function data($param=5)
     {
         // It's the perfect place to query the database for your widget...
@@ -230,11 +234,11 @@ class RecentProductsWidget
 ```
 
 
-recentProducts.blade.php
+MyWidgetView.blade.php
 
 ```blade
 <ul>
-  @foreach($recentProducts as $product)
+  @foreach($data as $product)
     <li>
       <h3> {{ $product->title }} </h3>
       <p>$ {{ $product->price }} </p>
@@ -249,29 +253,13 @@ __Tip:__ If you decide to use some other template engine instead of Blade it wou
 
 ### How to use a widget class?
 
->First we should instanciate our widget class.
-
-In your typical controller methods (or somewhere else) we may instanciate our widget classes and pass the resulting object to our view like this:
-```php
-
-use \App\Widgets\RecentProductsWidget;
-
-public function index()
-{
-    $recentProductsWidget = new RecentProductsWidget();
-    
-    return view('home', compact('recentProductsWidget'));
-}
-```
-
-And then you can force the object to render (home.blade.php) like this `@widget($recentProductsWidget)`:
 ```blade
 <div class="container">
     <h1>Hello {{ auth()->user()->username }} </h1> <!-- not cached -->
     <br>
-    @widget($recentProductsWidget) <!-- cached part -->
+    @widget('RecentProductsWidget') <!-- cached part -->
     <p> if you need to pass parameters to data method :</p>
-    @widget($recentProductsWidget, ['param' => 10]) <!-- cached part -->
+    @widget('RecentProductsWidget', ['param' => 10]) <!-- cached part -->
 </div>
 ```
 
