@@ -27,7 +27,7 @@ Laravel Widgetize
 * :blue_car: [Per Widget Configuration](#blue_car-per-widget-config)
     - [public $template (optional)](#public-template-string)
     - [public $controller (optional)](#public-controller-string)
-    - [public $presenter (optional)]([#public-presenter-string)
+    - [public $presenter (optional)](#public-presenter-string)
     - [public $cacheLifeTime (optional)](#public-cachelifetime-int)
     - [public $cacheTags (optional)](#public-cachetags-arraystring)
     - [public $contextAs (optional)](#public-contextAs-string)
