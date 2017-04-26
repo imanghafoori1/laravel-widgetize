@@ -46,6 +46,6 @@ class Cache
      */
     private function _makeCacheKey($arg, $widget)
     {
-        return md5(json_encode($arg, JSON_FORCE_OBJECT).$widget->template.class_basename($widget));
+        return md5(json_encode($arg, JSON_FORCE_OBJECT).app()->getLocale().$widget->template.get_class($widget));
     }
 }
