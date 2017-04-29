@@ -56,9 +56,9 @@ class WidgetGenerator extends LaravelGeneratorCommand
             return;
         }
 
-        $this->files->put($path, '');
+        $this->files->put($path, $this->_getViewStub());
 
-        $this->info( ' - '.$this->qualifyClass($this->getNameInput())."View.blade.php - was created. (^_^)");
+        $this->info(' - '.$this->qualifyClass($this->getNameInput())."View.blade.php - was created. (^_^)");
     }
 
     /**
@@ -135,5 +135,13 @@ class WidgetGenerator extends LaravelGeneratorCommand
         $this->files->put($path, $this->buildClass($name));
 
         $this->info(' - '.$name.'.php - was created.  (^_^)');
+    }
+
+    /**
+     * @return string
+     */
+    private function _getViewStub()
+    {
+        return 'Note that you can reference partials within "Widgets" folder like this: @include("Widgets::somePartial")';
     }
 }
