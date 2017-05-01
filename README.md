@@ -25,9 +25,10 @@ Laravel Widgetize
     - [public $template (optional)](#public-template-string)
     - [public $controller (optional)](#public-controller-string)
     - [public $presenter (optional)](#public-presenter-string)
+    - [public $contextAs (optional)](#public-contextAs-string)
     - [public $cacheLifeTime (optional)](#public-cachelifetime-int)
     - [public $cacheTags (optional)](#public-cachetags-arraystring)
-    - [public $contextAs (optional)](#public-contextAs-string)
+    - [public function extraCacheKeyDependency (optional)](#public-extraCacheKeyDependency)
    
 * :bulb: [Usage and Example](#bulb-example)
     - [How to make a widget class](#how-to-make-a-widget)
@@ -165,6 +166,23 @@ So the entire widget lives in one folder:
 
 > If you want you can set `public $cacheTags = ['tag1','tag2']` to easily target them for cache expiration.(Note that  _database_ and _file_ cache driver do not support cache tags.)
 
+> ### __public function extraCacheKeyDependency__
+
+> It is important to note that if the HTML output on PHP's super global variables and you 
+want to use cache they must be included in the cache key of the widget.So for example :
+
+```php
+/**
+ *
+ * @return array
+ */
+public function extraCacheKeyDependency()
+{
+    return request()->get('q');
+}
+
+```
+ 
 
 > ### __public $contextAs__ (string)
 
