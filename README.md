@@ -75,7 +75,7 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 ### :gem: Package Features :gem:
 
 > 1. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
-> 2. It optionally `minifies` the output of the widget. (In order to save cache storage space and bandwidth)
+> 2. It optionally `minifies` the output of the widget.
 > 3. It support the `nested widgets` tree structure. (Use can inject and use widgets within widgets.)
 > 4. It can help you generate widget class boilerplate with artisan command. 
 > 5. It helps you to have a dedicated presenter class of each widget to clean up your views.

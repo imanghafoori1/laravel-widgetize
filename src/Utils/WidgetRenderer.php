@@ -25,8 +25,7 @@ class WidgetRenderer
      */
     public function renderWidget($widget, ...$args)
     {
-        if(is_string($widget))
-        {
+        if (is_string($widget)) {
             $widget = $this->_makeWidgetObj($widget);
         }
 
