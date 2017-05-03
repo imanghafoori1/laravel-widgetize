@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Widgets{
+    
+}
+
 class ForeverWidget
 {
     public $cacheLifeTime = -1;
@@ -54,9 +58,6 @@ class Widget4
     public $template = 'hello';
     public $controller = 'Widget4Ctrl';
 
-    public function data()
-    {
-    }
 }
 
 class Widget4Ctrl
