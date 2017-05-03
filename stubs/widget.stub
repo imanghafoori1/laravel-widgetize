@@ -3,32 +3,27 @@
 namespace DummyNamespace;
 
 /**
- *  |==========================================================
- *  |====== Remove this doc block if you don't need it ========
- *  |==========================================================
+ *  |--------------------------------------------------------------------------
  *  |   You can use the below snippets to override the defaults.
- *  |   Feel free remove this doc block if you do not need it.
- *  | =========================================================
- *  |   WIDGET_CACHE=true       ( in .env file to enable caching)
- *  |   WIDGET_IDENTIFIER=true  ( in .env file to enable debug mode)
- *  |==========================================================
+ *  |====== Remove this doc block if you don't need it ========
+ *  |--------------------------------------------------------------------------
  *  | public $controller = App/classPath/MyWidget::class; (optional)
  *  | public $presenter = App/classPath/WidgetPresenter::class'; (optional)
- *  | public $minifyOutput = true; (Default value comes from .env file: WIDGET_MINIFICATION=true);
- *  | public $cacheLifeTime = 0;   (Default value comes from .env file: WIDGET_DEFAULT_CACHE_LIFETIME=2);
- *  | public $contextAs = '$data'; (Default : '$data')
+ *  | public $minifyOutput = true; (use it to override the default value in config file)
+ *  | public $cacheLifeTime = 0;   (use it to override the default value in config file)
+ *  | public $contextAs = '$data'; (default is : '$data')
  *  | public $template; (optional) (By default it looks for App\Widgets\DummyClassView.blade.php)
  *  | public $cacheTags = []; (optional) ('file system' driver does not support cache tags!)
- *  |===========================================================
+ *  |--------------------------------------------------------------------------
  */
 class DummyClass
 {
    /**
-    * You may call this widget in .blade files like this :
+    * You may call this widget in any blade files like this :
     *
-    * @widget('DummyClass', ['args' => 'someVal'])
+    * @widget('DummyClass', ['a' => 'someVal', 'b' => 'foo'])
     */
-	public function data($args = null)
+	public function data($a, $b)
 	{
 		return [];
 	}
