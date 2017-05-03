@@ -94,13 +94,9 @@ composer require imanghafoori/laravel-widgetize
 ];
 ```
 
-put below in your .env file :
-```
-WIDGET_MINIFICATION=true
-WIDGET_CACHE=false
-WIDGET_IDENTIFIER=true
-WIDGET_DEFAULT_CACHE_LIFETIME=1
-
+__Publish your config file__
+``` bash
+php artisan vendor:publish
 ```
 
  :fire: And you will be on fire!:fire:
@@ -110,16 +106,8 @@ php artisan make:widget MySexyWidget
 ```
 
 ## :earth_africa: Global Config:
-> You can set the variables in your .env file to globally set some configs for you widgets and override them if needed.
-
-> __WIDGET_MINIFICATION=true__ (you can globally turn off HTML minification for development)
-
-> __WIDGET_CACHE=true__ (you can turn caching on and off for all widgets.)
-
-> __WIDGET_IDENTIFIER=true__ (you can turn off widget identifiers in production)
-
-> __WIDGET_DEFAULT_CACHE_LIFETIME=1__ (You can set a global default lifetime for all widgets)
-
+> You can set the variables in your config file to globally set some configs for you widgets and override them per widget if needed.
+>Read the docblocks in config file for more info. 
 
 ## :blue_car: Per Widget Config:
 
@@ -152,7 +140,7 @@ So the entire widget lives in one folder:
 
 > ### __public $cacheLifeTime__ (int)
 
-> If you want to override the global cache life time (which is set in your .env file) for a specific widget, you can set $cacheLifeTime on your widget class.
+> If you want to override the global cache life time (which is set in your config file) for a specific widget, you can set $cacheLifeTime on your widget class.
 
  value  | effect
 :-------|:----------
