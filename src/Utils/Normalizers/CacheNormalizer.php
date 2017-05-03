@@ -12,7 +12,7 @@ class CacheNormalizer
     public function normalizeCacheLifeTime($widget)
     {
         if (! property_exists($widget, 'cacheLifeTime')) {
-            $widget->cacheLifeTime = (int) (env('WIDGET_DEFAULT_CACHE_LIFETIME', 0));
+            $widget->cacheLifeTime = (int) (config('widgetize.default_cache_lifetime', 0));
         }
 
         if ($widget->cacheLifeTime === 'forever') {

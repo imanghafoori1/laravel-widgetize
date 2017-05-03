@@ -49,11 +49,14 @@ class WidgetsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/config/config.php', 'widgets');
+        $this->mergeConfigFrom(__DIR__ . '/config/config.php', 'widgetize');
         $this->commands('command.imanghafoori.widget');
         $this->_registerSingletons();
     }
-
+    
+    /**
+     * Register classes as singletons
+     */
     private function _registerSingletons()
     {
         $this->app->singleton('command.imanghafoori.widget', function ($app) {

@@ -1,7 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Iman
- * Date: 5/2/2017
- * Time: 9:15 PM
- */
+return [
+        'debug_info'   => true,
+        'enable_cache' => true,
+        'minify_html'  => true,
+        'default_cache_lifetime' => 1,
+];

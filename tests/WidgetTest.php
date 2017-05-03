@@ -18,8 +18,8 @@ class WidgetTest extends TestCase
     public function test_the_view_and_controller_are_rendered_only_once_when_cache_is_enabled()
     {
         putenv('CACHE_DRIVER=array');
-        putenv('WIDGET_CACHE=true');
-        putenv('WIDGET_DEFAULT_CACHE_LIFETIME=1');
+        config(['widgetize.enable_cache' => true]);
+        config(['widgetize.default_cache_lifetime' => 1]);
         app()['env'] = 'production';
         //assert
         View::shouldReceive('exists')->once()->andReturn(true);
@@ -43,8 +43,8 @@ class WidgetTest extends TestCase
     public function test_caches_the_result_of_controller_method_and_views()
     {
         putenv('CACHE_DRIVER=array');
-        putenv('WIDGET_CACHE=true');
-        putenv('WIDGET_DEFAULT_CACHE_LIFETIME=1');
+        config(['widgetize.enable_cache' => true]);
+        config(['widgetize.default_cache_lifetime' => 1]);
         app()['env'] = 'production';
         //assert
         Cache::shouldReceive('remember')->times(5)->andReturn('<p>some text</p>');
@@ -65,8 +65,8 @@ class WidgetTest extends TestCase
     public function test_caches_the_result_forever_when_lifetime_is_negative()
     {
         putenv('CACHE_DRIVER=array');
-        putenv('WIDGET_CACHE=true');
-        putenv('WIDGET_DEFAULT_CACHE_LIFETIME=1');
+        config(['widgetize.enable_cache' => true]);
+        config(['widgetize.default_cache_lifetime' => 1]);
         app()['env'] = 'production';
         //assert
         Cache::shouldReceive('rememberForever')->times(2)->andReturn('<p>some text</p>');
@@ -122,7 +122,7 @@ class WidgetTest extends TestCase
 
     public function test_minifies_the_output()
     {
-        putenv('WIDGET_MINIFICATION=true');
+        config(['widgetize.minify_html' => true]);
         app()['env'] = 'local';
 
         $widgetOutput = '  <p>        </p>  ';
@@ -140,7 +140,7 @@ class WidgetTest extends TestCase
 
     public function test_minifies_the_output_in_production()
     {
-        putenv('WIDGET_MINIFICATION=false');
+        config(['widgetize.minify_html' => true]);
         app()['env'] = 'production';
 
         $html = '  <p>        </p>  ';

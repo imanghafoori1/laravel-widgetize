@@ -11,7 +11,7 @@ class Policies
      */
     public function widgetShouldHaveDebugInfo()
     {
-        return config('debug_info') && env('APP_ENV', 'production') === 'local';
+        return config('widgetize.debug_info') && env('APP_ENV', 'production') === 'local';
     }
 
     /**
@@ -23,7 +23,7 @@ class Policies
      */
     public function widgetShouldUseCache()
     {
-        return config('enable_cache') && (! app()->environment('testing'));
+        return config('widgetize.enable_cache') && (! app()->environment('testing'));
     }
 
     /**
@@ -33,6 +33,6 @@ class Policies
      */
     public function widgetShouldBeMinified()
     {
-        return config('minify_html') || app()->environment('production');
+        return config('widgetize.minify_html') || app()->environment('production');
     }
 }
