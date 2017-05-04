@@ -262,7 +262,7 @@ AAAAAAAAAhh...
 Instead of having one bloated controller method that was resposible to supply data for all the widgets...
 You distribute your controller code amougst multiple widget classes.(Each widget is responsible for small portion of the page.)
 
->It helps you to conforms to `Open-closed principle`.Because if you want to add a widget on your page you do not need to add to the controller code. Instead you create a new widget class from scratch or when you want to remove something from the page you do not have go to the controller find and comment out related controller code. removing the {!!myWidget !!} is enough to disable the corresponding controller.
+>It helps you to conforms to `Open-closed principle`.Because if you want to add a widget on your page you do not need to add to the controller code. Instead you create a new widget class from scratch or when you want to remove something from the page you do not have go to the controller find and comment out related controller code. removing the `@widget('myWidget')` is enough to disable the corresponding controller and hence db queries.
 
 
 
