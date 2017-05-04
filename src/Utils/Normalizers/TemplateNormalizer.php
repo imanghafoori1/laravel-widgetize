@@ -22,7 +22,7 @@ class TemplateNormalizer
         }
 
         if (! view()->exists($widget->template)) {
-            throw new \InvalidArgumentException("View file [{$className}View] not found by: '".get_class($widget)." '");
+            throw new \InvalidArgumentException("View file \"{$widget->template}\" not found by: '".get_class($widget)." '");
         }
     }
 }
