@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Widgets {
+namespace App\Widgets\Foo {
     class Widget1
     {
-        public $template = 'hello';
-
         public function data()
         {
         }

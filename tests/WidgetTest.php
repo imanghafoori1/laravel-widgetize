@@ -18,12 +18,12 @@ class WidgetTest extends TestCase
     public function test_default_view_name_is_figured_out_correctly()
     {
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('Widgets::Widget2View', ['data' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('Widgets::Foo.Widget1View', ['data' => 'foo'], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<br>');
         \App::shouldReceive('call')->once()->andReturn('foo');
 
         //act
-        $widget = new Widget2();
+        $widget = new \App\Widgets\Foo\Widget1();
         render_widget($widget);
     }
 
