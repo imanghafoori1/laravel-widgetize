@@ -26,8 +26,8 @@ Laravel Widgetize
     - [public $controller (optional)](#public-controller-string)
     - [public $presenter (optional)](#public-presenter-string)
     - [public $cacheLifeTime (optional)](#public-cachelifetime-int)
-    - [public $cacheTags (optional)](#public-cachetags-arraystring)
-    - [public function extraCacheKeyDependency (optional)](#public-extraCacheKeyDependency)
+    - [public $cacheTags (optional)](#public-cachetags-array)
+    - [public function extraCacheKeyDependency (optional)](#public-function-extracachekeydependency)
    
 * :bulb: [Usage and Example](#bulb-example)
     - [How to make a widget class](#how-to-make-a-widget)
