@@ -11,7 +11,7 @@ class Policies
      */
     public function widgetShouldHaveDebugInfo()
     {
-        return config('widgetize.debug_info') && env('APP_ENV', 'production') === 'local';
+        return config('widgetize.debug_info') && env('APP_ENV', 'production') !== 'local';
     }
 
     /**
