@@ -129,6 +129,7 @@ class MyWidget
 ```
 
 
+
 App\Widgets\MyWidgetView.blade.php :
 
 ```blade
@@ -217,17 +218,26 @@ So the entire widget lives in one folder:
 want to cache it,Then they must be included in the cache key of the widget. So for example :
 
 ```php
-/**
- *
- * @return array
- */
-public function extraCacheKeyDependency()
+namespace App\Widgets;
+
+class MyWidget
 {
-    return request()->get('q');
+
+    public function data()
+    {
+        $id = request('order_id');
+        return Product::where('order_id', $id)->get();
+    }
+    
+
+    public function extraCacheKeyDependency()
+    {
+        return request()->get('order_id');
+    }
+    
 }
 
 ```
-
 
 
 You may want to look at the source code and read the comments for more information.
