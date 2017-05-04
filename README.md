@@ -11,6 +11,8 @@ Laravel Widgetize
 [![License](https://poser.pugx.org/imanghafoori/laravel-widgetize/license)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 
 
+
+
 ## :ribbon::ribbon::ribbon: Widget Objects help you have "_cleaner code_" :heavy_plus_sign: "_easy caching_" :ribbon::ribbon::ribbon:
 
 
@@ -40,6 +42,12 @@ Laravel Widgetize
 * :star: [Your Stars Makes Us Do More](#star-your-stars-makes-us-do-more-star)
 
 
+
+
+
+
+
+
 This page may look long and boring to read at first, but bear with me!!!
 
 I bet if you read through it you won't get disappointed at the end.So let's Go... :horse_racing:
@@ -54,14 +62,14 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 #### What is a widget?
 
->You can think of a widget as a page partial with 'View a Composer' attached to it.
+>You can think of a widget as a page partial with a 'View Composer' attached to it.
 
 >Or If you know `Drupal's Views` concept, they are very similar to each other.
 
->In fact Widget is are normal php class without any methods,
- when you pass them into the `render_widget()` helper magically output `HTML`!!! 
+>In fact a Widget is are normal php class without any magical methods,
+ when you pass them into the `render_widget()` helper function or `@widget()` directive they magically output `HTML`!!! 
  Which is the result of rendering a view partial with data from the widget controller.
- So we can replace `@include('myPartial')` with `@widget('myWidget')`.
+ So we can replace `@include('myPartial')` with `@widget('myWidget')` in our laravel applications.
  The main benefit you get here is the fact that widget objects are __cached__ and they know how to provide data from them selves.
 
 
@@ -272,6 +280,15 @@ Instead of having one bloated controller method that was resposible to supply da
 You distribute your controller code amougst multiple widget classes.(Each widget is responsible for small portion of the page.)
 
 >It helps you to conforms to `Open-closed principle`.Because if you want to add a widget on your page you do not need to add to the controller code. Instead you create a new widget class from scratch or when you want to remove something from the page you do not have go to the controller find and comment out related controller code. removing the `@widget('myWidget')` is enough to disable the corresponding controller and hence db queries.
+
+### How to referrence widget controllers from routes ?
+
+This way you can also expose your data as json for client-side apps.
+
+```php
+Route::get('/api/recent-products', '\App\Widgets\MyWidget@data');
+```
+\* It is important to put `\` before `App` when you wnat to refer to a class outside the `Http\Controller` folder.
 
 
 
