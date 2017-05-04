@@ -25,7 +25,6 @@ Laravel Widgetize
     - [public $template (optional)](#public-template-string)
     - [public $controller (optional)](#public-controller-string)
     - [public $presenter (optional)](#public-presenter-string)
-    - [public $contextAs (optional)](#public-contextAs-string)
     - [public $cacheLifeTime (optional)](#public-cachelifetime-int)
     - [public $cacheTags (optional)](#public-cachetags-arraystring)
     - [public function extraCacheKeyDependency (optional)](#public-extraCacheKeyDependency)
@@ -62,8 +61,8 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 >In fact Widget is are normal php class without any methods,
  when you pass them into the `render_widget()` helper magically output `HTML`!!! 
  Which is the result of rendering a view partial with data from the widget controller.
- So we can replace `@include('myPartial')` with `{!! render_widget($myWidget) !!}`.
- The main benefit is the fact that widget object are `__self cached__` and they know how to provide data from them selves.
+ So we can replace `@include('myPartial')` with `@widget('myWidget')`.
+ The main benefit you get here is the fact that widget objects are __cached__ and they know how to provide data from them selves.
 
 
 
@@ -104,6 +103,64 @@ php artisan vendor:publish
 ``` bash
 php artisan make:widget MySexyWidget
 ```
+
+
+
+## :bulb: Example
+
+### How to make a Widget?
+
+>__You can use : `php artisan make:widget MyWidget` to make your widget class.__
+
+Sample widget class :
+```php
+namespace App\Widgets;
+
+class MyWidget
+{
+    // The data returned here would be available in widget view file automatically.
+    public function data($param=5)
+    {
+        // It's the perfect place to query the database for your widget...
+        return Product::orderBy('id', 'desc')->take($param1)->get();
+
+    }
+}
+```
+
+
+App\Widgets\MyWidgetView.blade.php :
+
+```blade
+<ul>
+  @foreach($data as $product)
+    <li>
+      {{ $product->title }}
+    </li>
+  @endforeach
+</ul>
+```
+
+Ok, Now it's done! We have a ready to use widget. let's use it...
+
+__Tip:__ If you decide to use some other template engine instead of Blade it would be no problem.
+
+### How to use a widget class?
+
+In a normal day to day view :
+```blade
+<html>
+    <head></head>
+    <body>
+        <h1>Hello {{ auth()->user()->username }} </h1> <!-- not cached -->
+
+        @widget('RecentProductsWidget') <!-- comes from cached -->
+        
+    <body>
+</html>
+```
+
+
 
 ## :earth_africa: Global Config:
 > You can set the variables in your config file to globally set some configs for you widgets and override them per widget if needed.
@@ -150,14 +207,14 @@ So the entire widget lives in one folder:
   1    | 1 minute
 
 
-> ### __public $cacheTags__ (array|string)
+> ### __public $cacheTags__ (array)
 
-> If you want you can set `public $cacheTags = ['tag1','tag2']` to easily target them for cache expiration.(Note that  _database_ and _file_ cache driver do not support cache tags.)
+> If can set `public $cacheTags = ['tag1','tag2']` to exactly target a group of widgets to refresh their cached state.
 
 > ### __public function extraCacheKeyDependency__
 
-> It is important to note that if the HTML output on PHP's super global variables and you 
-want to use cache they must be included in the cache key of the widget.So for example :
+> It is important to note that if your final widget HTML output depends on PHP's super global variables and you 
+want to cache it,Then they must be included in the cache key of the widget. So for example :
 
 ```php
 /**
@@ -170,64 +227,7 @@ public function extraCacheKeyDependency()
 }
 
 ```
- 
 
-> ### __public $contextAs__ (string)
-
-> The variable name to access the controller data in the view.
-
-
-## :bulb: Example
-
-### How to make a Widget?
-
->__You can use : `php artisan make:widget MyWidget` to make your widget class.__
-
-Sample widget class :
-```php
-namespace App\Widgets;
-
-class MyWidget
-{
-    // The data returned here would be available in widget view file automatically.
-    public function data($param=5)
-    {
-        // It's the perfect place to query the database for your widget...
-        return Product::orderBy('id', 'desc')->take($param1)->get();
-
-    }
-}
-```
-
-
-MyWidgetView.blade.php
-
-```blade
-<ul>
-  @foreach($data as $product)
-    <li>
-      <h3> {{ $product->title }} </h3>
-      <p>$ {{ $product->price }} </p>
-    </li>
-  @endforeach
-</ul>
-```
-
-Ok, Now it's done! We have a ready to use widget. let's use it...
-
-__Tip:__ If you decide to use some other template engine instead of Blade it would be no problem.
-
-### How to use a widget class?
-
-```blade
-<div class="container">
-    <h1>Hello {{ auth()->user()->username }} </h1> <!-- not cached -->
-    <br>
-    @widget('RecentProductsWidget') <!-- cached part -->
-    <p> if you need to pass parameters to data method :</p>
-    @widget('RecentProductsWidget', ['param' => 10]) <!-- cached part -->
-</div>
-```
 
 
 You may want to look at the source code and read the comments for more information.
