@@ -144,7 +144,6 @@ App\Widgets\MyWidgetView.blade.php :
 
 Ok, Now it's done! We have a ready to use widget. let's use it...
 
-__Tip:__ If you decide to use some other template engine instead of Blade it would be no problem.
 
 ### How to use a widget class?
 
@@ -171,7 +170,7 @@ In a normal day to day view :
 
 ![widget](https://cloud.githubusercontent.com/assets/6961695/24771543/41a9df7c-1b23-11e7-892c-0a27472e109a.png)
 
-> ### __public $template__ (string)
+## __public $template__ (string)
 
 >If you do not set it,By default, it refers to app/Widgets folder and looks for the 'widgetNameView.blade.php'
 (Meaning that if your widget is `app/Widgets/home/recentProducts.php` the default view for that is `app/Widgets/home/recentProductsView.blade.php`)
@@ -183,20 +182,20 @@ So the entire widget lives in one folder:
 >| _app\Widgets\Homepage\RecentProductsWidgetView.blade.php_
 
 
-> ### __public $controller__ (string)
+### __public $controller__ (string)
 
 > If you do not want to put your _data_ method on your widget class, you can set `public $controller = App\Some\Class\MyController::class` and put your `public data` method on a dedicated class.(instead od having it on your widget class)
 
 
 
-> ### __public $presenter__ (string)
+### __public $presenter__ (string)
 
 > If you do not want to put your _present_ method on your widget class, you can set
 `public $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data retured from your controller is first piped to your presenter and then to your view.(So if you specify a presenter your view file gets its data from the presenter and not the controller.)
 
 
 
-> ### __public $cacheLifeTime__ (int)
+### __public $cacheLifeTime__ (int)
 
 > If you want to override the global cache life time (which is set in your config file) for a specific widget, you can set $cacheLifeTime on your widget class.
 
@@ -208,11 +207,11 @@ So the entire widget lives in one folder:
   1    | 1 minute
 
 
-> ### __public $cacheTags__ (array)
+### __public $cacheTags__ (array)
 
-> If can set `public $cacheTags = ['tag1','tag2']` to exactly target a group of widgets to refresh their cached state.
+> You can set `public $cacheTags = ['tag1','tag2']` to exactly target a group of widgets to refresh their cached state.
 
-> ### __public function extraCacheKeyDependency__
+### __public function extraCacheKeyDependency__
 
 > It is important to note that if your final widget HTML output depends on PHP's super global variables and you 
 want to cache it,Then they must be included in the cache key of the widget. So for example :
@@ -242,7 +241,7 @@ class MyWidget
 
 You may want to look at the source code and read the comments for more information.
 
-
+__Tip:__ If you decide to use some other template engine instead of Blade it would be no problem.
 
 
 ### :snake: What is our problems? :snake:
