@@ -147,6 +147,9 @@ App\Widgets\MyWidgetView.blade.php :
       {{ $product->title }}
     </li>
   @endforeach
+  
+  Note that it is perfectly ok to use an other widget here 
+  @widget('AnOtherWidget')
 </ul>
 ```
 
@@ -174,9 +177,10 @@ In a normal day to day view :
 > You can set the variables in your config file to globally set some configs for you widgets and override them per widget if needed.
 >Read the docblocks in config file for more info. 
 
+![widget](https://cloud.githubusercontent.com/assets/6961695/24771543/41a9df7c-1b23-11e7-892c-0a27472e109a.png)
+
 ## :blue_car: Per Widget Config:
 
-![widget](https://cloud.githubusercontent.com/assets/6961695/24771543/41a9df7c-1b23-11e7-892c-0a27472e109a.png)
 
 ## __public $template__ (string)
 

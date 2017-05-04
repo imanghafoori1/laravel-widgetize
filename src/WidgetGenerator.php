@@ -142,6 +142,6 @@ class WidgetGenerator extends LaravelGeneratorCommand
      */
     private function _getViewStub()
     {
-        return 'Note that you can reference partials within "Widgets" folder like this: @include("Widgets::somePartial")';
+        return 'Note that you can reference partials within "App\Widgets" folder like this: @include("Widgets::somePartial") ';
     }
 }

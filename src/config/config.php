@@ -25,6 +25,8 @@ return [
     |--------------------------------------------------------------------------
     | Minify widgets to save both 'cache storage space' and the 'page size'
     |
+    | * Putting "APP_ENV=production" in .env will forcefully enable minification.
+    |
     */
     'minify_html' => false,
     /*
@@ -33,7 +35,8 @@ return [
     |--------------------------------------------------------------------------
     | It is helpful for you to see information about your widgets in the browser
     | as HTML title attribute.So it is recommended to turn it on for development.
-    | * Remember to make it false for in production.
+    |
+    | * Putting "APP_ENV=production" in .env will forcefully disable debug_info.
     |
     */
     'debug_info' => true,
