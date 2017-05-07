@@ -45,7 +45,7 @@ class DebugInfo
     private function cacheState()
     {
         if (! $this->policies->widgetShouldUseCache()) {
-            return ' &#013;Cache: is globally turned off (You should put "WIDGET_CACHE=true" in .env) ';
+            return ' &#013;Cache: is globally turned off (You should put "enable_cache" => true in config\widgetize.php) ';
         }
 
         return " &#013;Cache : {$this->widget->cacheLifeTime} (min)' ";
