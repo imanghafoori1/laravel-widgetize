@@ -35,7 +35,7 @@ class DebugInfo
 
         $tpl = str_replace('.', '\\', $tpl);
 
-        $this->html = "<span title='WidgetObj : ".get_class($this->widget).".php&#013;Template : {$tpl}.blade.php{$this->cacheState()}>{$this->html}</span>";
+        $this->html = "<span title='WidgetObj : ".get_class($this->widget).".php&#013;Template : {$tpl}.blade.php{$this->cacheState()}'>{$this->html}</span>";
     }
 
     /**
