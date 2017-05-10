@@ -76,7 +76,9 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 #### When to use the _widget_ concept?
 
->The simple answer is : `Always` This concept (this design pattern) really shines when you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs separate sql queries and php logic to be provided with data for its template. If you need a small application with low traffic this package is not much of a help. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
+>The simple answer is : `Always` This concept (this design pattern) really shines when you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs separate sql queries and php logic to be provided with data for its template. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
+
+
 
 
 ### :gem: Package Features :gem:
@@ -171,11 +173,16 @@ In a normal day to day view :
 </html>
 ```
 
-We all more or less ajax experience.One senario is to lazy load a page partial after
-the page has loaded. (like jQuery Pjax plug-in)
-You can think of @widget() as an ajax call to the back end to load a piece of HTML
-into the main page. In facts you widgets are 'Backend' and you typical views become
-the 'middle-end' !!!
+#### __An other way to think of widgets__
+
+```
+All of us, more or less have some ajax experience. One senario is to lazy load a page partial after
+the page has been loaded. (like jQuery Pjax plug-in does)
+You can think of @widget() as an ajax call from __middle-end__ to the __back-end__ to load a piece of HTML
+into the main page. In facts your widgets are 'Back-end' and you typical views become the 'middle-end' !!!
+```
+
+
 
 ## :earth_africa: Global Config:
 > You can set the variables in your config file to globally set some configs for you widgets and override them per widget if needed.
