@@ -111,6 +111,6 @@ class WidgetRenderer
     private function _makeWidgetObj($widget)
     {
         $widget = app()->getNamespace().'Widgets\\'.$widget;
-        return $widgetObj = app($widget);
+        return app($widget);
     }
 }
