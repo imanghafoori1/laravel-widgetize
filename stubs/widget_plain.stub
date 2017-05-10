@@ -8,4 +8,9 @@ class DummyClass
 	{
 		return [];
 	}
+	
+    public function extraCacheKeyDependency()
+    {
+        return [];
+    }
 }

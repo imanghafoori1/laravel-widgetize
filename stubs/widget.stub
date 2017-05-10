@@ -27,4 +27,17 @@ class DummyClass
 	{
 		return [];
 	}
+
+
+   /**
+    * By default the cacheKey of your widget output does not
+    * depend on any Global variables like $_GET. So if the final
+    * widget output depend on them you should return them here.
+    * otherwise you get undesired results out of the cache store.
+    */
+	public function extraCacheKeyDependency()
+	{
+        return [];
+	}
+
 }
