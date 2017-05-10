@@ -171,7 +171,11 @@ In a normal day to day view :
 </html>
 ```
 
-
+We all more or less ajax experience.One senario is to lazy load a page partial after
+the page has loaded. (like jQuery Pjax plug-in)
+You can think of @widget() as an ajax call to the back end to load a piece of HTML
+into the main page. In facts you widgets are 'Backend' and you typical views become
+the 'middle-end' !!!
 
 ## :earth_africa: Global Config:
 > You can set the variables in your config file to globally set some configs for you widgets and override them per widget if needed.
