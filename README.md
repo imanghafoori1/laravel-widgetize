@@ -160,26 +160,27 @@ Ok, Now it's done! We have a ready to use widget. let's use it...
 
 ### How to use a widget class?
 
-In a normal day to day view :
+In a normal day to day view (middle-end):
 ```blade
 <html>
     <head></head>
     <body>
         <h1>Hello {{ auth()->user()->username }} </h1> <!-- not cached -->
 
-        @widget('RecentProductsWidget') <!-- comes from cached -->
+        @widget('RecentProductsWidget') <!-- Here we send request to back-end to get HTML -->
         
     <body>
 </html>
 ```
 
-#### __An other way to think of widgets__
+#### __An other way to think of widgets :__
 
 ```
-All of us, more or less have some ajax experience. One senario is to lazy load a page partial after
-the page has been loaded. (like jQuery Pjax plug-in does)
-You can think of @widget() as an ajax call from __middle-end__ to the __back-end__ to load a piece of HTML
-into the main page. In facts your widgets are 'Back-end' and you typical views become the 'middle-end' !!!
+All of us, more or less have some ajax experience. One scenario is to lazy load a page partial after
+the page has been fully loaded. (like jQuery Pjax plug-in does)
+You can think of @widget() as an ajax call from "middle-end" to the "back-end" to load a piece of HTML
+into the main page.
+In facts your widgets are the 'Back-end' and your typical views are the 'middle-end' !!!
 ```
 
 
