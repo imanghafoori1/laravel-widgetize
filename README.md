@@ -189,7 +189,7 @@ In facts your widgets are the 'Back-end' and your typical views are the 'middle-
 > You can set the variables in your config file to globally set some configs for you widgets and override them per widget if needed.
 >Read the docblocks in config file for more info. 
 
-![widget](https://cloud.githubusercontent.com/assets/6961695/24771543/41a9df7c-1b23-11e7-892c-0a27472e109a.png)
+
 
 ## :blue_car: Per Widget Config:
 
