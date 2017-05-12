@@ -39,7 +39,7 @@ Laravel Widgetize
     - :snake: [The Problems](#snake-what-is-our-problems-snake)
     - :dart: [The Solution](#dart-what-is-the-solution)
     - :book: [The Theory Behind Widget Objects](#book-design-patterns-theory)
-* :star: [Your Stars Makes Us Do More](#star-your-stars-makes-us-do-more-star)
+* :star: [Your Stars Makes Us Do More](#star-your-stars-make-us-do-more-star)
 
 
 
@@ -307,6 +307,13 @@ Route::get('/api/recent-products', '\App\Widgets\MyWidget@data');
 \* It is important to put `\` before `App` when you wnat to refer to a class outside the `Http\Controller` folder.
 
 
+### :raising_hand: Contributing 
+If you find an issue, or have a better way to do something, feel free to open an issue or a pull request.
 
-### :star: Your Stars Makes Us Do More :star:
+
+### :exclamation: Security
+If you discover any security related issues, please email imanghafoori1@gmail.com instead of using the issue tracker.
+
+
+### :star: Your Stars Make Us Do More :star:
 As always if you found this package useful and you want to encourage us to maintain and work on it. Just press the star button to declare your willing.
