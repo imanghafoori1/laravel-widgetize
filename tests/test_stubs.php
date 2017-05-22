@@ -22,6 +22,23 @@ namespace {
         }
     }
 
+
+    class CustomCacheKeyWidget
+    {
+        public $cacheLifeTime = -1;
+        public $template = 'hello';
+
+        public function data()
+        {
+        }
+
+        public function cacheKey()
+        {
+            return 'abcde';
+        }
+    }
+
+
     class ForeverWidget2
     {
         public $cacheLifeTime = 'forever';

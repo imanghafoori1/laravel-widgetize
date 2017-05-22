@@ -46,6 +46,10 @@ class Cache
      */
     private function _makeCacheKey($arg, $widget)
     {
+        if (method_exists($widget, 'cacheKey')) {
+            return $widget->cacheKey();
+        }
+
         $_key = '';
 
         if (method_exists($widget, 'extraCacheKeyDependency')) {

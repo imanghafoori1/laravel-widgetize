@@ -30,6 +30,7 @@ Laravel Widgetize
     - [public $cacheLifeTime (optional)](#public-cachelifetime-int)
     - [public $cacheTags (optional)](#public-cachetags-array)
     - [public function extraCacheKeyDependency (optional)](#public-function-extracachekeydependency)
+    - [public function cacheKey (optional)](#public-function-cachekey)
    
 * :bulb: [Usage and Example](#bulb-example)
     - [How to make a widget class](#how-to-make-a-widget)
@@ -239,6 +240,11 @@ So the entire widget lives in one folder:
 
 > It is important to note that if your final widget HTML output depends on PHP's super global variables and you 
 want to cache it,Then they must be included in the cache key of the widget. So for example :
+
+### __public function cacheKey__
+
+> If you want to explicitly define the cache key used to store the html result of your widget, you can implement this method.
+
 
 ```php
 namespace App\Widgets;

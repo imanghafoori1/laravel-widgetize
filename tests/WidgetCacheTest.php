@@ -73,4 +73,27 @@ class WidgetCacheTest extends TestCase
         $this->assertEquals($widget->cacheLifeTime, -1);
         $this->assertEquals($widget2->cacheLifeTime, -1);
     }
+
+
+    public function test_cacheKey_method()
+    {
+        putenv('CACHE_DRIVER=array');
+        config(['widgetize.enable_cache' => true]);
+        config(['widgetize.default_cache_lifetime' => 1]);
+        config(['widgetize.debug_info' => false]);
+
+        app()['env'] = 'production';
+
+
+        View::shouldReceive('exists')->once()->andReturn(true);
+        View::shouldReceive('make')->once()->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('render')->once()->andReturn('<p>some text</p>');
+        \App::shouldReceive('call')->once()->andReturn('foo');
+
+        $widget = new CustomCacheKeyWidget();
+        render_widget($widget);
+
+        $this->assertTrue(cache()->has('abcde'));
+        $this->assertEquals(cache()->get('abcde'),'<p>some text</p>');
+    }
 }
