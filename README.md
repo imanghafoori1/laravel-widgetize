@@ -7,7 +7,7 @@ Laravel Widgetize
 <a href="https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize"><img src="https://img.shields.io/scrutinizer/g/imanghafoori1/laravel-widgetize.svg?style=flat-square" alt="Quality Score"></img></a>
 [![Latest Stable Version](https://poser.pugx.org/imanghafoori/laravel-widgetize/v/stable)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![Latest Unstable Version](https://poser.pugx.org/imanghafoori/laravel-widgetize/v/unstable)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
-[![Build Status](https://travis-ci.org/imanghafoori1/laravel-widgetize.svg?branch=master)](https://travis-ci.org/imanghafoori1/laravel-widgetize)
+[![Build Status](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/badges/build.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/build-status/master)
 [![License](https://poser.pugx.org/imanghafoori/laravel-widgetize/license)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![Awesome Laravel](https://img.shields.io/badge/Awesome-Laravel-brightgreen.svg)](https://github.com/z-song/laravel-admin)
 
