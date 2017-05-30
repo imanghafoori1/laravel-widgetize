@@ -74,7 +74,6 @@ class WidgetCacheTest extends TestCase
         $this->assertEquals($widget2->cacheLifeTime, -1);
     }
 
-
     public function test_cacheKey_method()
     {
         putenv('CACHE_DRIVER=array');

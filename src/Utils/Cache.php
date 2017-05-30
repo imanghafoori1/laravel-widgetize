@@ -19,7 +19,7 @@ class Cache
 
         $cache = app('cache');
 
-        if (is_array($widget->cacheTags)) {
+        if ( !empty($widget->cacheTags) && $this->cacheDriverSupportsTags() ) {
             $cache = $cache->tags($widget->cacheTags);
         }
 
@@ -47,6 +47,7 @@ class Cache
     private function _makeCacheKey($arg, $widget)
     {
         if (method_exists($widget, 'cacheKey')) {
+
             return $widget->cacheKey();
         }
 
@@ -56,8 +57,24 @@ class Cache
             $_key = json_encode($widget->extraCacheKeyDependency());
         }
 
+
+        if(!$this->cacheDriverSupportsTags()){
+            $_cache = app('cache');
+            foreach ($widget->cacheTags as $tag){
+                $_key .= $_cache->get($tag);
+            }
+        }
+
         $_key .= json_encode($arg, JSON_FORCE_OBJECT) . app()->getLocale() . $widget->template . get_class($widget);
 
         return md5($_key);
+    }
+
+    /**
+     * @return bool
+     */
+    private function cacheDriverSupportsTags()
+    {
+        return ! in_array(env('CACHE_DRIVER', 'file'), ['file', 'database']);
     }
 }

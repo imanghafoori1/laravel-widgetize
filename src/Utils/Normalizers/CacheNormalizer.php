@@ -44,6 +44,6 @@ class CacheNormalizer
      */
     private function cacheCanUseTags()
     {
-        return ! in_array(env('CACHE_DRIVER', 'file'), ['file', 'database']);
+        return ! in_array(config('cache.default'), ['file', 'database']);
     }
 }
