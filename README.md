@@ -235,7 +235,17 @@ So the entire widget lives in one folder:
 
 ### __public $cacheTags__ (array)
 
-> You can set `public $cacheTags = ['tag1','tag2']` to exactly target a group of widgets to refresh their cached state.
+> You can set `public $cacheTags = ['tag1','tag2']` to exactly target a group of widgets to flush their cached state.
+using the helper function :
+
+```php
+expire_widgets(['someTag', 'someOtherTag']);
+```
+This causes all the widgets with 'someTag' and 'someOtherTag' to be refreshed.
+
+
+__Note: Tagging feature works with ALL the laravel cache drivers including 'file' and 'database'.__
+
 
 ### __public function extraCacheKeyDependency__
 
