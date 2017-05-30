@@ -15,35 +15,27 @@ class CacheNormalizer
             $widget->cacheLifeTime = (int) (config('widgetize.default_cache_lifetime', 0));
         }
 
-        if ($widget->cacheLifeTime === 'forever') {
-            $widget->cacheLifeTime = -1;
+        if ($widget->cacheLifeTime === 'forever' || $widget->cacheLifeTime < 0) {
+            // 20.000 minutes is about 2 weeks which is long enough !
+            $widget->cacheLifeTime = 20000;
         }
     }
 
     /**
      * ّFigures out what the cache tags should be.
      * @param $widget
-     * @return null
+     * @return array
      */
     public function normalizeCacheTags($widget)
     {
-        if (! $this->cacheCanUseTags() || ! property_exists($widget, 'cacheTags')) {
-            return $widget->cacheTags = null;
+        if (! property_exists($widget, 'cacheTags')) {
+            return $widget->cacheTags = [];
         }
 
         if (is_array($widget->cacheTags)) {
             return $widget->cacheTags;
         }
 
-        throw new \InvalidArgumentException('Cache Tags should be of type Array.');
-    }
-
-    /**
-     * Determine whether cache tags should be applied or not.
-     * @return bool
-     */
-    private function cacheCanUseTags()
-    {
-        return ! in_array(config('cache.default'), ['file', 'database']);
+        throw new \InvalidArgumentException('Cache Tags must be of type Array with String elements.');
     }
 }

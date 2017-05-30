@@ -88,6 +88,10 @@ class WidgetsServiceProvider extends ServiceProvider
             return new Utils\Cache();
         });
 
+        $this->app->singleton(Utils\CacheTag::class, function () {
+            return new Utils\CacheTag();
+        });
+
         $this->app->singleton(Utils\WidgetRenderer::class, function () {
             return new Utils\WidgetRenderer();
         });

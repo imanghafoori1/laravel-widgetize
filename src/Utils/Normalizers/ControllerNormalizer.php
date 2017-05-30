@@ -45,7 +45,7 @@ class ControllerNormalizer
      */
     private function determineDataMethod($widget)
     {
-// We decide to call data method on widget object by default.
+        // We decide to call data method on widget object by default.
         $controllerMethod = [$widget, 'data'];
         $ctrlClass = get_class($widget);
 
