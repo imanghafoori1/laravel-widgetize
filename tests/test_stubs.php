@@ -59,6 +59,16 @@ namespace {
         }
     }
 
+    class TaggedWidget
+    {
+        public $template = 'hello';
+        public $cacheTags = ['t1','t2'];
+
+        public function data()
+        {
+        }
+    }
+
     class Widget2
     {
         //    public $cacheLifeTime = 'forever';

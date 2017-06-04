@@ -58,7 +58,7 @@ class WidgetCacheTest extends TestCase
         config(['widgetize.default_cache_lifetime' => 1]);
         app()['env'] = 'production';
         //assert
-        Cache::shouldReceive('rememberForever')->times(2)->andReturn('<p>some text</p>');
+        Cache::shouldReceive('remember')->times(2)->andReturn('<p>some text</p>');
         View::shouldReceive('exists')->times(2)->andReturn(true);
 
         //act
@@ -70,8 +70,8 @@ class WidgetCacheTest extends TestCase
         $result2 = render_widget($widget2, 'sdfvsf');
 
         $this->assertEquals('<p>some text</p>', $result1);
-        $this->assertEquals($widget->cacheLifeTime, -1);
-        $this->assertEquals($widget2->cacheLifeTime, -1);
+        $this->assertEquals($widget->cacheLifeTime, 20000);
+        $this->assertEquals($widget2->cacheLifeTime, 20000);
     }
 
     public function test_cacheKey_method()
@@ -93,6 +93,37 @@ class WidgetCacheTest extends TestCase
         render_widget($widget);
 
         $this->assertTrue(cache()->has('abcde'));
-        $this->assertEquals(cache()->get('abcde'),'<p>some text</p>');
+        $this->assertEquals(cache()->get('abcde'), '<p>some text</p>');
     }
+
+    public function test_the_cache_tags()
+    {
+        putenv('CACHE_DRIVER=array');
+        config(['widgetize.debug_info' => false]);
+        config(['widgetize.enable_cache' => true]);
+        config(['widgetize.default_cache_lifetime' => 1]);
+        app()['env'] = 'production';
+        //assert
+        View::shouldReceive('exists')->once()->andReturn(true);
+        View::shouldReceive('make')->times(3)->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('render')->times(3)->andReturn('<p>some text</p>');
+        \App::shouldReceive('call')->times(3)->andReturn('foo');
+
+        //act
+        $widget = new TaggedWidget();
+        $result1 = render_widget($widget);
+        $result2 = render_widget($widget);
+        expire_widgets(['t1']); // causes a re-render
+        $result3 = render_widget($widget);
+        expire_widgets(['_foo_']); // has no effect
+        $result4 = render_widget($widget);
+        expire_widgets(['t2']);// causes a re-render
+        $result5 = render_widget($widget);
+        $result6 = render_widget($widget);
+
+        $this->assertEquals('<p>some text</p>', $result2);
+        $this->assertEquals('<p>some text</p>', $result5);
+    }
+
+
 }
