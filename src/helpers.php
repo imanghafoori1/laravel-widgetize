@@ -8,7 +8,7 @@ if (!function_exists('render_widget')) {
     }
 }
 
-if (!function_exists('expire_widget')) {
+if (!function_exists('expire_widgets')) {
     function expire_widgets($tags)
     {
         return app(\Imanghafoori\Widgets\Utils\Cache::class)->expireTaggedWidgets($tags);
