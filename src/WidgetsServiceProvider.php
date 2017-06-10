@@ -3,6 +3,7 @@
 namespace Imanghafoori\Widgets;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Imanghafoori\Widgets\Utils\Normalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
@@ -52,8 +53,9 @@ class WidgetsServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/config/config.php', 'widgetize');
         $this->commands('command.imanghafoori.widget');
         $this->_registerSingletons();
+        $this->_registerMacros();
     }
-    
+
     /**
      * Register classes as singletons
      */
@@ -94,6 +96,15 @@ class WidgetsServiceProvider extends ServiceProvider
 
         $this->app->singleton(Utils\WidgetRenderer::class, function () {
             return new Utils\WidgetRenderer();
+        });
+    }
+
+    private function _registerMacros()
+    {
+        Route::macro('view', function ($url, $view) {
+            return Route::get($url, function () use ($view) {
+                return view($view);
+            });
         });
     }
 }
