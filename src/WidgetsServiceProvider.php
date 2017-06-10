@@ -106,5 +106,11 @@ class WidgetsServiceProvider extends ServiceProvider
                 return view($view);
             });
         });
+
+        Route::macro('widget', function ($url, $widget) {
+            return Route::get($url, function (...$args) use ($widget) {
+                return render_widget($widget, $args);
+            });
+        });
     }
 }
