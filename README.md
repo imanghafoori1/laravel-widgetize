@@ -188,8 +188,8 @@ In facts your widgets are the 'Back-end' and your typical views are the 'middle-
 
 
 ## :earth_africa: Global Config:
-> You can set the variables in your config file to globally set some configs for you widgets and override them per widget if needed.
->Read the docblocks in config file for more info. 
+> You can set the variables in "config/widgetize.php" file to globally set some configs for you widgets and override them per widget if needed.
+>Read the docblocks in __config/widgetize.php__ file for more info. 
 
 
 
@@ -323,6 +323,23 @@ Route::get('/api/recent-products', '\App\Widgets\MyWidget@data');
 ```
 \* It is important to put `\` before `App` when you wnat to refer to a class outside the `Http\Controller` folder.
 
+
+### How to expose a widget content directly from a url ?
+
+```php
+Route::widget('/some-url', 'MyWidget');
+```
+A `GET` request to `/some-url/{a}/{b}` will see the widget.
+_a_ and _b_ parameters are passed to widget controller.
+
+
+
+You can also :
+
+```php
+Route::view('/some-url-2', 'someView'); // to load resource/someView.blade.php
+```
+to directly load __resource/someView.blade.php__ with GET request.
 
 ### :raising_hand: Contributing 
 If you find an issue, or have a better way to do something, feel free to open an issue or a pull request.
