@@ -16,6 +16,11 @@ class DebugInfo
         $this->policies = app(Policies::class);
     }
 
+    /**
+     * @param object $widget
+     * @param string $html
+     * @return string
+     */
     public function addIdentifierToHtml($widget, $html)
     {
         $this->widget = $widget;
@@ -26,6 +31,9 @@ class DebugInfo
         return $this->html;
     }
 
+    /**
+     * Adds debug info to html as HTML title tags.
+     */
     private function addDebugInfo()
     {
         $tpl = $this->widget->template;

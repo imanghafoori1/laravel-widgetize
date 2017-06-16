@@ -6,7 +6,7 @@ class CacheNormalizer
 {
     /**
      * ّFigures out how long the cache life time should be.
-     * @param $widget
+     * @param object $widget
      * @return null
      */
     public function normalizeCacheLifeTime($widget)
@@ -23,7 +23,7 @@ class CacheNormalizer
 
     /**
      * ّFigures out what the cache tags should be.
-     * @param $widget
+     * @param object $widget
      * @return array
      */
     public function normalizeCacheTags($widget)

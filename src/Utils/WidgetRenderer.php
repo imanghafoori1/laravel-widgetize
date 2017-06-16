@@ -19,7 +19,7 @@ class WidgetRenderer
     }
 
     /**
-     * @param Widget Object $widget
+     * @param $widget object|string
      * @param array $args
      * @return string
      */
@@ -43,7 +43,7 @@ class WidgetRenderer
     /**
      * It tries to get the html from cache if possible, otherwise generates it.
      *
-     * @param $widget
+     * @param $widget object
      * @param array ...$args
      *
      * @return string
@@ -52,7 +52,7 @@ class WidgetRenderer
     {
         // Everything inside this function is executed only when the cache is not available.
         $expensivePhpCode = function () use ($widget, $args) {
-            $this->_makeDataForView($widget, $args);
+            $this->makeDataForView($widget, $args);
             // render the template with the resulting data.
             return $this->renderTemplate($widget);
         };
@@ -66,12 +66,12 @@ class WidgetRenderer
     }
 
     /**
-     * @param Widget Object $widget
-     * @param $args
+     * @param $widget object
+     * @param $args array
      *
      * @return null
      */
-    private function _makeDataForView($widget, $args)
+    private function makeDataForView($widget, array $args)
     {
         // Here we call the data method on the widget class.
         $viewData = \App::call($widget->controller, ...$args);
@@ -85,6 +85,10 @@ class WidgetRenderer
         $this->_viewData = $viewData;
     }
 
+    /**
+     * @param $widget object
+     * @return string HTML output
+     */
     private function renderTemplate($widget)
     {
         // Here we render the view file to raw html.
@@ -105,7 +109,7 @@ class WidgetRenderer
     }
 
     /**
-     * @param $widget
+     * @param $widget object
      * @return \Illuminate\Foundation\Application|mixed
      */
     private function _makeWidgetObj($widget)

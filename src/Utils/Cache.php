@@ -17,13 +17,13 @@ class Cache
     /**
      * Caches the widget output.
      *
-     * @param $args
-     * @param $phpCode
-     * @param $widget
+     * @param array $args
+     * @param callable $phpCode
+     * @param object $widget
      *
      * @return null
      */
-    public function cacheResult($args, $phpCode, $widget)
+    public function cacheResult(array $args, callable $phpCode, $widget)
     {
         $key = $this->_makeCacheKey($args, $widget);
 
@@ -43,12 +43,12 @@ class Cache
     /**
      * Creates a unique cache key for each possible output.
      *
-     * @param $arg
-     * @param $widget
+     * @param array $arg
+     * @param object $widget
      *
-     * @return string
+     * @return string An MD5 string
      */
-    private function _makeCacheKey($arg, $widget)
+    private function _makeCacheKey(array $arg, $widget)
     {
         if (method_exists($widget, 'cacheKey')) {
             return $widget->cacheKey($arg);
@@ -70,6 +70,7 @@ class Cache
     }
 
     /**
+     * Determines cacheTagging is supported by the chosen laravel cache driver or not.
      * @return bool
      */
     private function cacheDriverSupportsTags()
@@ -78,12 +79,10 @@ class Cache
     }
 
     /**
-     * @param $cacheTags
-     * @param $_key
-     * @return string
-     * @internal param $widget
+     * @param string[] $cacheTags
+     * @return string[]
      */
-    private function getTagTokens($cacheTags)
+    private function getTagTokens(array $cacheTags)
     {
         return array_map(function ($tag) {
             return $this->_cacheTag->getTagToken($tag);
@@ -91,7 +90,7 @@ class Cache
     }
 
     /**
-     * @param $tags
+     * @param string[] $tags
      */
     public function expireTaggedWidgets($tags)
     {

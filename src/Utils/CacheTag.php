@@ -8,7 +8,7 @@ class CacheTag
 
     /**
      * @param $tag string
-     * @return array
+     * @return string The old existing token or a brand new one.
      */
     public function getTagToken($tag)
     {
@@ -28,6 +28,7 @@ class CacheTag
 
 
     /**
+     * Generates a brand new token
      * @param $tag string
      * @return string
      */
@@ -40,14 +41,21 @@ class CacheTag
         return $token;
     }
 
+    /**
+     * Set token in Memory for fast access within the same request.
+     * @param $tag string
+     * @param $token string
+     * @return string
+     */
     private function setTokenInMemory($tag, $token)
     {
         return $this->tagTokens[$tag] = $token;
     }
 
     /**
-     * @param $tag
-     * @param $token
+     * Save token to disk for later requests
+     * @param $tag string
+     * @param $token string
      */
     private function persistToken($tag, $token)
     {
@@ -55,8 +63,8 @@ class CacheTag
     }
 
     /**
-     * @param $tag
-     * @return mixed
+     * @param $tag string
+     * @return string|null
      */
     private function getPersistedToken($tag)
     {

@@ -6,7 +6,7 @@ class PresenterNormalizer
 {
     /**
      * Figures out which method should be called as the presenter.
-     * @param $widget
+     * @param object $widget
      * @return null
      */
     public function normalizePresenterName($widget)
@@ -27,7 +27,7 @@ class PresenterNormalizer
     }
 
     /**
-     * @param $presenter
+     * @param string $presenter
      */
     private function checkPresentMethodExists($presenter)
     {
@@ -37,7 +37,7 @@ class PresenterNormalizer
     }
 
     /**
-     * @param $presenter
+     * @param string $presenter
      */
     private function checkPresenterExists($presenter)
     {

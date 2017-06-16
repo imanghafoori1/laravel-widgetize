@@ -6,7 +6,7 @@ class TemplateNormalizer
 {
     /**
      * Figures out which template to render.
-     * @param $widget
+     * @param object $widget
      * @return null
      */
     public function normalizeTemplateName($widget)

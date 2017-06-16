@@ -98,7 +98,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
     }
 
     /**
-     * @return mixed|string
+     * @return string
      */
     private function _getViewPath()
     {

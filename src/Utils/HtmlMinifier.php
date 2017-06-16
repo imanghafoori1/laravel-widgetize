@@ -18,8 +18,8 @@ class HtmlMinifier
     ];
 
     /**
-     * @param $htmlString
-     * @return null
+     * @param $htmlString string
+     * @return string
      */
     public function minify($htmlString)
     {

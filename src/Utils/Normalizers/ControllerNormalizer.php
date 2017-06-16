@@ -6,8 +6,8 @@ class ControllerNormalizer
 {
     /**
      * Figures out which method should be called as the controller.
-     * @param $widget
-     * @return null
+     * @param object $widget
+     * @return void
      */
     public function normalizeControllerMethod($widget)
     {
@@ -20,7 +20,7 @@ class ControllerNormalizer
     }
 
     /**
-     * @param $ctrlClass
+     * @param string $ctrlClass
      */
     private function checkControllerExists($ctrlClass)
     {
@@ -40,8 +40,8 @@ class ControllerNormalizer
     }
 
     /**
-     * @param $widget
-     * @return array
+     * @param object $widget
+     * @return array [$controllerMethod, $ctrlClass]
      */
     private function determineDataMethod($widget)
     {

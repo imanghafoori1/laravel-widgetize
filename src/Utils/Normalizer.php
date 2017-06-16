@@ -15,12 +15,11 @@ class Normalizer
     private $controllerNormalizer;
 
     /**
-     * Normalizer constructor.
+     * Normalizer constructor which accepts dependencies.
      * @param TemplateNormalizer $templateNormalizer
      * @param CacheNormalizer $cacheNormalizer
      * @param PresenterNormalizer $presenterNormalizer
      * @param ControllerNormalizer $controllerNormalizer
-     * @internal param $widget
      */
     public function __construct(
         TemplateNormalizer $templateNormalizer,
@@ -34,6 +33,10 @@ class Normalizer
         $this->cacheNormalizer = $cacheNormalizer;
     }
 
+    /**
+     * Figures out and sets the widget configs according to conventions.
+     * @param object $widget
+     */
     public function normalizeWidgetConfig($widget)
     {
         // to avoid normalizing a widget multiple times unnecessarily :
@@ -52,7 +55,7 @@ class Normalizer
 
     /**
      * Figures out what the variable name should be in view file.
-     * @param $widget
+     * @param object $widget
      * @return null
      */
     private function normalizeContextAs($widget)
