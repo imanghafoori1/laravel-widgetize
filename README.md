@@ -60,6 +60,7 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 - Page Partial Caching
 - Code Organization
 - HTML Minification
+- Showing Debug information
 
 #### What is a widget?
 
@@ -86,8 +87,8 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 > 1. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
 > 2. It optionally `minifies` the output of the widget.
-> 3. It support the `nested widgets` tree structure. (Use can inject and use widgets within widgets.)
-> 4. It can help you generate widget class boilerplate with artisan command. 
+> 3. It shows Debug info for your widgets as html title="" attributes.
+> 4. __php artisan make:widget__ command 
 > 5. It helps you to have a dedicated presenter class of each widget to clean up your views.
 
 ### :wrench: Installation: :arrow_down:
