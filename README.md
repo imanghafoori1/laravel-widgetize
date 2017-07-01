@@ -338,9 +338,8 @@ _a_ and _b_ parameters are passed to widget controller.
 You can also :
 
 ```php
-Route::view('/some-url-2', 'someView'); // to load resource/someView.blade.php
+Route::view('/some-url-2', 'someView'); //loads resource/views/someView.blade.php with a GET
 ```
-to directly load __resource/someView.blade.php__ with GET request.
 
 ### :raising_hand: Contributing 
 If you find an issue, or have a better way to do something, feel free to open an issue or a pull request.
