@@ -132,10 +132,10 @@ namespace App\Widgets;
 class MyWidget
 {
     // The data returned here would be available in widget view file automatically.
-    public function data($param=5)
+    public function data($my_param=5)
     {
         // It's the perfect place to query the database for your widget...
-        return Product::orderBy('id', 'desc')->take($param1)->get();
+        return Product::orderBy('id', 'desc')->take($my_param)->get();
 
     }
 }
