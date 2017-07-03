@@ -61,6 +61,7 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 - Code Organization
 - HTML Minification
 - Showing Debug information
+- Extends the laravel Router
 
 #### What is a widget?
 
@@ -90,6 +91,7 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 > 3. It shows Debug info for your widgets as html title="" attributes.
 > 4. __php artisan make:widget__ command 
 > 5. It helps you to have a dedicated presenter class of each widget to clean up your views.
+> 6. It extends the Route facade with `Route::view` , `Route::jsonWidget` , `Route::widget`
 
 ### :wrench: Installation: :arrow_down:
 ``` bash
@@ -329,10 +331,15 @@ Route::get('/api/recent-products', '\App\Widgets\MyWidget@data');
 
 ```php
 Route::widget('/some-url', 'MyWidget');
+// or
+Route::jsonWidget('/my-api','MyWidget');
+
 ```
 A `GET` request to `/some-url/{a}/{b}` will see the widget.
 _a_ and _b_ parameters are passed to widget controller.
 
+
+`jsonWidget` will expose the cached data returned from the widget's controller.
 
 
 You can also :
