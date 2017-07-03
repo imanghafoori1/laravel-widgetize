@@ -34,9 +34,9 @@ class Normalizer
     }
 
     /**
-     * Figures out and sets the widget configs according to conventions.
-     * @param object $widget
-     */
+ * Figures out and sets the widget configs according to conventions.
+ * @param object $widget
+ */
     public function normalizeWidgetConfig($widget)
     {
         // to avoid normalizing a widget multiple times unnecessarily :
@@ -51,6 +51,17 @@ class Normalizer
         $this->cacheNormalizer->normalizeCacheTags($widget);
         $this->normalizeContextAs($widget);
         $widget->isNormalized = true;
+    }
+
+    /**
+     * Figures out and sets json widget configs according to conventions.
+     * @param object $widget
+     */
+    public function normalizeJsonWidget($widget)
+    {
+        $this->controllerNormalizer->normalizeControllerMethod($widget);
+        $this->cacheNormalizer->normalizeCacheLifeTime($widget);
+        $this->cacheNormalizer->normalizeCacheTags($widget);
     }
 
     /**
