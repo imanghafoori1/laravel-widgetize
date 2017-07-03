@@ -19,25 +19,26 @@ class Cache
      *
      * @param array $args
      * @param callable $phpCode
-     * @param object $widget
+     * @param object $widgetObj
      *
+     * @param string $form
      * @return null
      */
-    public function cacheResult(array $args, callable $phpCode, $widget)
+    public function cacheResult(array $args, callable $phpCode, $widgetObj, $form = 'HTML')
     {
-        $key = $this->_makeCacheKey($args, $widget);
+        $key = $this->_makeCacheKey($args, $widgetObj, $form);
 
         $cache = app('cache');
 
-        if (!empty($widget->cacheTags) && $this->cacheDriverSupportsTags()) {
-            $cache = $cache->tags($widget->cacheTags);
+        if (!empty($widgetObj->cacheTags) && $this->cacheDriverSupportsTags()) {
+            $cache = $cache->tags($widgetObj->cacheTags);
         }
 
-        if ($widget->cacheLifeTime === 0) {
+        if ($widgetObj->cacheLifeTime === 0) {
             return $phpCode();
         }
 
-        return $cache->remember($key, $widget->cacheLifeTime, $phpCode);
+        return $cache->remember($key, $widgetObj->cacheLifeTime, $phpCode);
     }
 
     /**
@@ -45,10 +46,10 @@ class Cache
      *
      * @param array $arg
      * @param object $widget
-     *
+     * @param string $form
      * @return string An MD5 string
      */
-    private function _makeCacheKey(array $arg, $widget)
+    private function _makeCacheKey(array $arg, $widget, $form)
     {
         if (method_exists($widget, 'cacheKey')) {
             return $widget->cacheKey($arg);
@@ -64,7 +65,7 @@ class Cache
             $_key .= json_encode($this->getTagTokens($widget->cacheTags));
         }
 
-        $_key .= json_encode($arg, JSON_FORCE_OBJECT) . app()->getLocale() . $widget->template . get_class($widget);
+        $_key .= json_encode($arg, JSON_FORCE_OBJECT) . app()->getLocale() . $form . $widget->template . get_class($widget);
 
         return md5($_key);
     }
