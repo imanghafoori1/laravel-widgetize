@@ -14,3 +14,10 @@ if (!function_exists('expire_widgets')) {
         return app(\Imanghafoori\Widgets\Utils\Cache::class)->expireTaggedWidgets($tags);
     }
 }
+
+if (!function_exists('json_widget')) {
+    function json_widget($widget, ...$args)
+    {
+        return app(\Imanghafoori\Widgets\Utils\WidgetJsonifier::class)->jsonResponse($widget, ...$args);
+    }
+}
