@@ -330,9 +330,9 @@ Route::get('/api/recent-products', '\App\Widgets\MyWidget@data');
 ### How to expose a widget content directly from a url ?
 
 ```php
-Route::widget('/some-url', 'MyWidget');
+Route::widget('/some-url', 'MyWidget', 'MyRouteName1');
 // or
-Route::jsonWidget('/my-api','MyWidget');
+Route::jsonWidget('/my-api','MyWidget', 'MyRouteName2');
 
 ```
 A `GET` request to `/some-url/{a}/{b}` will see the widget.
@@ -345,7 +345,7 @@ _a_ and _b_ parameters are passed to widget controller.
 You can also :
 
 ```php
-Route::view('/some-url-2', 'someView'); //loads resource/views/someView.blade.php with a GET
+Route::view('/some-url-2', 'someView', 'theRouteName'); //loads resource/views/someView.blade.php with a GET
 ```
 
 ### :raising_hand: Contributing 

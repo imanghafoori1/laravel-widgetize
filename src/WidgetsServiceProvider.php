@@ -101,22 +101,31 @@ class WidgetsServiceProvider extends ServiceProvider
 
     private function _registerMacros()
     {
-        Route::macro('view', function ($url, $view) {
-            return Route::get($url, function () use ($view) {
-                return view($view);
-            });
+        Route::macro('view', function ($url, $view, $name = null) {
+            return Route::get($url, [
+                'as' => $name,
+                'uses' => function () use ($view) {
+                    return view($view);
+                }
+            ]);
         });
 
-        Route::macro('widget', function ($url, $widget) {
-            return Route::get($url, function (...$args) use ($widget) {
-                return render_widget($widget, $args);
-            });
+        Route::macro('widget', function ($url, $widget, $name = null) {
+            return Route::get($url, [
+                'as' => $name,
+                'uses' => function (...$args) use ($widget) {
+                    return render_widget($widget, $args);
+                }
+            ]);
         });
 
-        Route::macro('jsonWidget', function ($url, $widget) {
-            return Route::get($url, function (...$args) use ($widget) {
-                return json_widget($widget, $args);
-            });
+        Route::macro('jsonWidget', function ($url, $widget, $name = null) {
+            return Route::get($url, [
+                'as' => $name,
+                'uses' => function (...$args) use ($widget) {
+                    return json_widget($widget, $args);
+                }
+            ]);
         });
     }
 }
