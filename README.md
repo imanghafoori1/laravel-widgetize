@@ -8,7 +8,7 @@ Laravel Widgetize
 [![Latest Stable Version](https://poser.pugx.org/imanghafoori/laravel-widgetize/v/stable)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![Build Status](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/badges/build.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/build-status/master)
 [![License](https://poser.pugx.org/imanghafoori/laravel-widgetize/license)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
-[![Awesome Laravel](https://img.shields.io/badge/Awesome-Laravel-brightgreen.svg)](https://github.com/z-song/laravel-admin)
+[![Awesome Laravel](https://img.shields.io/badge/Awesome-Laravel-brightgreen.svg)](https://github.com/chiraggude/awesome-laravel)
 
 
 
