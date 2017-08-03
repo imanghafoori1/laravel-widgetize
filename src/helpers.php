@@ -1,4 +1,3 @@
-
 <?php
 
 if (!function_exists('render_widget')) {
