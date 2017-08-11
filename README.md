@@ -69,11 +69,11 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 >Or If you know `Drupal's Views` concept, they are very similar to each other.
 
->In fact a Widget is are normal php class without any magical methods,
+>In fact a Widget is a normal php class without any magical methods,
  when you pass them into the `render_widget()` helper function or `@widget()` directive they magically output `HTML`!!! 
  Which is the result of rendering a view partial with data from the widget controller.
  So we can replace `@include('myPartial')` with `@widget('myWidget')` in our laravel applications.
- The main benefit you get here is the fact that widget objects are __cached__ and they know how to provide data from them selves.
+ The main benefit you get here is the fact that widget objects are __cached__ and they know how to provide data from themselves.
 
 
 
@@ -299,7 +299,7 @@ AAAAAAAAAhh...
 
 
 #### Problem 3 : View templates easily get littered with if/else blocks :dizzy_face:
->We ideally want our view files to be as logic-less as possible and very much like the final output HTML.Don't we ?! if/else blocks and other computations are always irritating within our views. specially for static page designers in our team. We just want to print out already defined variables wiout the to decide what to print. Anyway the data we store in database are sometimes far from ready to be printed on the page.
+>We ideally want our view files to be as logic-less as possible and very much like the final output HTML.Don't we ?! if/else blocks and other computations. They are always irritating within our views. specially for static page designers in our team. We just want to print out already defined variables without having to decide what to print. Anyway the raw data we store in database are sometimes far from ready to be printed on the page.
 
 
 ### :dart: What is the solution?
@@ -317,7 +317,7 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 
 >It helps you to conforms to `Open-closed principle`.Because if you want to add a widget on your page you do not need to add to the controller code. Instead you create a new widget class from scratch or when you want to remove something from the page you do not have go to the controller find and comment out related controller code. removing the `@widget('myWidget')` is enough to disable the corresponding controller and hence db queries.
 
-### How to referrence widget controllers from routes ?
+### How to reference widget controllers from routes ?
 
 This way you can also expose your data as json for client-side apps.
 
