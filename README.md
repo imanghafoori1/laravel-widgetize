@@ -317,22 +317,13 @@ You distribute your controller code amougst multiple widget classes.(Each widget
 
 >It helps you to conforms to `Open-closed principle`.Because if you want to add a widget on your page you do not need to add to the controller code. Instead you create a new widget class from scratch or when you want to remove something from the page you do not have go to the controller find and comment out related controller code. removing the `@widget('myWidget')` is enough to disable the corresponding controller and hence db queries.
 
-### How to reference widget controllers from routes ?
-
-This way you can also expose your data as json for client-side apps.
-
-```php
-Route::get('/api/recent-products', '\App\Widgets\MyWidget@data');
-```
-\* It is important to put `\` before `App` when you wnat to refer to a class outside the `Http\Controller` folder.
-
 
 ### How to expose a widget content directly from a url ?
 
 ```php
-Route::widget('/some-url', 'MyWidget', 'MyRouteName1');
+Route::widget('/some-url', 'MyWidget', 'MyRouteName1'); // <-- exposes HTML
 // or
-Route::jsonWidget('/my-api','MyWidget', 'MyRouteName2');
+Route::jsonWidget('/my-api','MyWidget', 'MyRouteName2'); // <-- exposes json
 
 ```
 A `GET` request to `/some-url/{a}/{b}` will see the widget.
@@ -347,6 +338,17 @@ You can also :
 ```php
 Route::view('/some-url-2', 'someView', 'theRouteName'); //loads resource/views/someView.blade.php with a GET
 ```
+
+
+### How to reference widget controllers from routes ?
+
+This way you can also expose your data as json for client-side apps.
+
+```php
+Route::get('/api/products/{id}', '\App\Widgets\MyWidget@data');
+```
+\* It is important to put `\` before `App` when you want to refer to a class outside the `Http\Controller` folder.
+
 
 ### :raising_hand: Contributing 
 If you find an issue, or have a better way to do something, feel free to open an issue or a pull request.
