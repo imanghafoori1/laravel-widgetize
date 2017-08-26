@@ -4,7 +4,7 @@
     "keywords": ["laravel","laravel-cache","laravel5-package","PHP","laravel5"],
     "type": "project",
     "license": "MIT",
-	"homepage": "https://github.com/imanghafoori1/laravel-widgetize",
+    "homepage": "https://github.com/imanghafoori1/laravel-widgetize",
     "authors": [
         {
             "name": "Iman Ghafoori",
@@ -30,5 +30,12 @@
         "files": [
             "src/helpers.php"
         ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Imanghafoori\\Widgets\\WidgetsServiceProvider"
+            ]
+        }
     }
 }
