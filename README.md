@@ -25,10 +25,10 @@ Laravel Widgetize
 * :earth_africa: [Global Configuration](#earth_africa-global-config)
 * :blue_car: [Per Widget Configuration](#blue_car-per-widget-config)
     - [public $template (optional)](#public-template-string)
-    - [public $controller (optional)](#public-controller-string) Advanced
-    - [public $presenter (optional)](#public-presenter-string) Advanced
     - [public $cacheLifeTime (optional)](#public-cachelifetime-int)
     - [public $cacheTags (optional)](#public-cachetags-array)
+    - [public $controller (optional)](#public-controller-string) Advanced
+    - [public $presenter (optional)](#public-presenter-string) Advanced
     - [public function extraCacheKeyDependency (optional)](#public-function-extracachekeydependency) Advanced
     - [public function cacheKey (optional)](#public-function-cachekey) Advanced
    
