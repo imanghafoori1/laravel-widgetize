@@ -63,6 +63,18 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 - Showing Debug information
 - Extends the laravel Router
 
+
+#### When to use this package?
+
+>Let me tell you some code sniffs : :nose:
+
+1. If you have php code and database query in your blade files.
+2. If you have multiple database queries in your controller for different parts of the page.
+3. If you need to cache your database queries.
+
+This concept (this design pattern) really shines when you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs separate sql queries and php logic to be provided with data for its template. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
+
+
 #### What is a widget?
 
 >You can think of a widget as a page partial with a 'View Composer' attached to it.
@@ -74,20 +86,6 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
  Which is the result of rendering a view partial with data from the widget controller.
  So we can replace `@include('myPartial')` with `@widget('myWidget')` in our laravel applications.
  The main benefit you get here is the fact that widget objects are __cached__ and they know how to provide data from themselves.
-
-
-
-#### When to use the _widget_ concept?
-
->Let me tell you some code sniffs :
-
-1. If you have php code and database query in your blade files.
-2. If you have multiple database queries in your controller for different parts of the page.
-3. If you need to cache your database queries.
-
-This concept (this design pattern) really shines when you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs separate sql queries and php logic to be provided with data for its template. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
-
-
 
 
 ### :gem: Package Features :gem:
