@@ -79,7 +79,13 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 #### When to use the _widget_ concept?
 
->The simple answer is : `Always` This concept (this design pattern) really shines when you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs separate sql queries and php logic to be provided with data for its template. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
+>Let me tell you some code sniffs :
+
+1. If you have php code and database query in your blade files.
+2. If you have multiple database queries in your controller for different parts of the page.
+3. If you need to cache your database queries.
+
+This concept (this design pattern) really shines when you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs separate sql queries and php logic to be provided with data for its template. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
 
 
 
