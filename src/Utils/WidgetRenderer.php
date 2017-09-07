@@ -114,6 +114,10 @@ class WidgetRenderer
      */
     private function _makeWidgetObj($widget)
     {
+        if (starts_with($widget, ['\\'])) {
+            return app($widget);
+        }
+
         $widget = app()->getNamespace().'Widgets\\'.$widget;
         return app($widget);
     }
