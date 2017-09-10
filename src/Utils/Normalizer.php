@@ -10,12 +10,16 @@ use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
 class Normalizer
 {
     private $presenterNormalizer;
+
     private $templateNormalizer;
+
     private $cacheNormalizer;
+
     private $controllerNormalizer;
 
     /**
      * Normalizer constructor which accepts dependencies.
+     *
      * @param TemplateNormalizer $templateNormalizer
      * @param CacheNormalizer $cacheNormalizer
      * @param PresenterNormalizer $presenterNormalizer
@@ -35,6 +39,7 @@ class Normalizer
 
     /**
      * Figures out and sets the widget configs according to conventions.
+     *
      * @param object $widget
      */
     public function normalizeWidgetConfig($widget)
@@ -55,6 +60,7 @@ class Normalizer
 
     /**
      * Figures out and sets json widget configs according to conventions.
+     *
      * @param object $widget
      */
     public function normalizeJsonWidget($widget)
@@ -66,6 +72,7 @@ class Normalizer
 
     /**
      * Figures out what the variable name should be in view file.
+     *
      * @param object $widget
      * @return null
      */

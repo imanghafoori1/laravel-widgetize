@@ -8,7 +8,9 @@ namespace Imanghafoori\Widgets\Utils;
 class DebugInfo
 {
     private $widget;
+
     private $html;
+
     private $policies;
 
     public function __construct()
@@ -48,6 +50,7 @@ class DebugInfo
 
     /**
      * Generates a string of current cache configurations.
+     *
      * @return string
      */
     private function cacheState()

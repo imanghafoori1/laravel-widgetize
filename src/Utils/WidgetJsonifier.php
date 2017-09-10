@@ -29,6 +29,17 @@ class WidgetJsonifier
     }
 
     /**
+     * @param $widget object
+     * @return \Illuminate\Foundation\Application|mixed
+     */
+    private function _makeWidgetObj($widget)
+    {
+        $widget = app()->getNamespace().'Widgets\\'.$widget;
+
+        return app($widget);
+    }
+
+    /**
      * It tries to get the html from cache if possible, otherwise generates it.
      *
      * @param $widget object
@@ -41,6 +52,7 @@ class WidgetJsonifier
         // Everything inside this function is executed only when the cache is not available.
         $expensivePhpCode = function () use ($widget, $args) {
             $data = \App::call($widget->controller, ...$args);
+
             // render the template with the resulting data.
             return response()->json($data, 200);
         };
@@ -51,16 +63,5 @@ class WidgetJsonifier
         }
 
         return $expensivePhpCode();
-    }
-
-    /**
-     * @param $widget object
-     * @return \Illuminate\Foundation\Application|mixed
-     */
-    private function _makeWidgetObj($widget)
-    {
-        $widget = app()->getNamespace().'Widgets\\'.$widget;
-
-        return app($widget);
     }
 }

@@ -7,7 +7,9 @@ use Illuminate\Contracts\Debug\ExceptionHandler;
 class WidgetRenderer
 {
     public $html;
+
     private $_viewData;
+
     private $_policies;
 
     /**
@@ -41,6 +43,21 @@ class WidgetRenderer
     }
 
     /**
+     * @param $widget object
+     * @return \Illuminate\Foundation\Application|mixed
+     */
+    private function _makeWidgetObj($widget)
+    {
+        if (starts_with($widget, ['\\'])) {
+            return app($widget);
+        }
+
+        $widget = app()->getNamespace().'Widgets\\'.$widget;
+
+        return app($widget);
+    }
+
+    /**
      * It tries to get the html from cache if possible, otherwise generates it.
      *
      * @param $widget object
@@ -53,6 +70,7 @@ class WidgetRenderer
         // Everything inside this function is executed only when the cache is not available.
         $expensivePhpCode = function () use ($widget, $args) {
             $this->makeDataForView($widget, $args);
+
             // render the template with the resulting data.
             return $this->renderTemplate($widget);
         };
@@ -106,20 +124,5 @@ class WidgetRenderer
         }
 
         return $this->html;
-    }
-
-    /**
-     * @param $widget object
-     * @return \Illuminate\Foundation\Application|mixed
-     */
-    private function _makeWidgetObj($widget)
-    {
-        if (starts_with($widget, ['\\'])) {
-            return app($widget);
-        }
-
-        $widget = app()->getNamespace().'Widgets\\'.$widget;
-
-        return app($widget);
     }
 }
