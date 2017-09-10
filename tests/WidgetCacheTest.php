@@ -83,7 +83,6 @@ class WidgetCacheTest extends TestCase
 
         app()['env'] = 'production';
 
-
         View::shouldReceive('exists')->once()->andReturn(true);
         View::shouldReceive('make')->once()->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<p>some text</p>');
@@ -117,13 +116,11 @@ class WidgetCacheTest extends TestCase
         $result3 = render_widget($widget);
         expire_widgets(['_foo_']); // has no effect
         $result4 = render_widget($widget);
-        expire_widgets(['t2']);// causes a re-render
+        expire_widgets(['t2']); // causes a re-render
         $result5 = render_widget($widget);
         $result6 = render_widget($widget);
 
         $this->assertEquals('<p>some text</p>', $result2);
         $this->assertEquals('<p>some text</p>', $result5);
     }
-
-
 }

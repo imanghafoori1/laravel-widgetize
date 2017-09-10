@@ -6,7 +6,6 @@ use Illuminate\Contracts\Debug\ExceptionHandler;
 
 class WidgetJsonifier
 {
-
     /**
      * @param $widget object|string
      * @param array $args
@@ -54,7 +53,6 @@ class WidgetJsonifier
         return $expensivePhpCode();
     }
 
-
     /**
      * @param $widget object
      * @return \Illuminate\Foundation\Application|mixed
@@ -62,6 +60,7 @@ class WidgetJsonifier
     private function _makeWidgetObj($widget)
     {
         $widget = app()->getNamespace().'Widgets\\'.$widget;
+
         return app($widget);
     }
 }

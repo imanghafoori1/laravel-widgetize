@@ -36,7 +36,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
     {
         $this->_makeWidgetClass();
 
-        if (!$this->option('plain')) {
+        if (! $this->option('plain')) {
             $this->createView();
         }
     }
@@ -51,14 +51,14 @@ class WidgetGenerator extends LaravelGeneratorCommand
         $path = $this->_getViewPath();
 
         if ($this->files->exists($path)) {
-            $this->error($this->qualifyClass($this->getNameInput())."View.blade.php - Already exists! (@_@)");
+            $this->error($this->qualifyClass($this->getNameInput()).'View.blade.php - Already exists! (@_@)');
 
             return;
         }
 
         $this->files->put($path, $this->_getViewStub());
 
-        $this->info(' - '.$this->qualifyClass($this->getNameInput())."View.blade.php - was created. (^_^)");
+        $this->info(' - '.$this->qualifyClass($this->getNameInput()).'View.blade.php - was created. (^_^)');
     }
 
     /**
@@ -69,7 +69,8 @@ class WidgetGenerator extends LaravelGeneratorCommand
     protected function getStub()
     {
         $stubName = $this->option('plain') ? 'widget_plain' : 'widget';
-        return __DIR__ . "/../stubs/$stubName.stub";
+
+        return __DIR__."/../stubs/$stubName.stub";
     }
 
     /**
@@ -81,9 +82,8 @@ class WidgetGenerator extends LaravelGeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\\Widgets';
+        return $rootNamespace.'\\Widgets';
     }
-
 
     /**
      * Get the console command options.
@@ -105,11 +105,12 @@ class WidgetGenerator extends LaravelGeneratorCommand
         $name = $this->qualifyClass($this->getNameInput());
         $path = $this->getPath($name);
         $path = str_replace('.php', 'View.blade.php', $path);
+
         return $path;
     }
 
     /**
-     * Creates the widget class
+     * Creates the widget class.
      * @return bool
      */
     private function _makeWidgetClass()
@@ -122,7 +123,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
         // to create the class and overwrite the user's code. So, we will bail out so the
         // code is untouched. Otherwise, we will continue generating this class' files.
         if ($this->alreadyExists($this->getNameInput())) {
-            $this->error($this->qualifyClass($this->getNameInput()).".php - Already exists (@_@)");
+            $this->error($this->qualifyClass($this->getNameInput()).'.php - Already exists (@_@)');
 
             return false;
         }

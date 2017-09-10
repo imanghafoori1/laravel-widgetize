@@ -119,6 +119,7 @@ class WidgetRenderer
         }
 
         $widget = app()->getNamespace().'Widgets\\'.$widget;
+
         return app($widget);
     }
 }

@@ -53,8 +53,9 @@ class ControllerNormalizer
         // then we decide to call data method on that instead.
         if (property_exists($widget, 'controller')) {
             $ctrlClass = $widget->controller;
-            $controllerMethod = ($ctrlClass) . '@data';
+            $controllerMethod = ($ctrlClass).'@data';
         }
-        return array($controllerMethod, $ctrlClass);
+
+        return [$controllerMethod, $ctrlClass];
     }
 }

@@ -9,7 +9,6 @@ namespace App\Widgets\Foo {
     }
 }
 
-
 namespace {
 
     class ForeverWidget
@@ -21,7 +20,6 @@ namespace {
         {
         }
     }
-
 
     class CustomCacheKeyWidget
     {
@@ -37,7 +35,6 @@ namespace {
             return 'abcde';
         }
     }
-
 
     class ForeverWidget2
     {
@@ -62,7 +59,7 @@ namespace {
     class TaggedWidget
     {
         public $template = 'hello';
-        public $cacheTags = ['t1','t2'];
+        public $cacheTags = ['t1', 't2'];
 
         public function data()
         {
@@ -92,14 +89,13 @@ namespace {
     {
         public $template = 'hello';
         public $controller = 'Widget4Ctrl';
-
     }
 
     class Widget4Ctrl
     {
         public function data($arg1, $arg2)
         {
-            return $arg1 . $arg2;
+            return $arg1.$arg2;
         }
     }
 
@@ -118,7 +114,7 @@ namespace {
     {
         public function present($data)
         {
-            return 'bar' . $data;
+            return 'bar'.$data;
         }
     }
 
@@ -128,7 +124,7 @@ namespace {
 
         public function data($foo, $bar)
         {
-            return $bar . $foo;
+            return $bar.$foo;
         }
     }
 
@@ -138,7 +134,6 @@ namespace {
 
         public function data()
         {
-            return null;
         }
     }
 }

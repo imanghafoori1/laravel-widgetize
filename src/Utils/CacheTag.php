@@ -19,6 +19,7 @@ class CacheTag
         $token = $this->getPersistedToken($tag);
         if ($token) {
             $this->setTokenInMemory($tag, $token);
+
             return $token;
         }
 
@@ -26,9 +27,8 @@ class CacheTag
         return $this->generateNewToken($tag);
     }
 
-
     /**
-     * Generates a brand new token
+     * Generates a brand new token.
      * @param $tag string
      * @return string
      */
@@ -53,7 +53,7 @@ class CacheTag
     }
 
     /**
-     * Save token to disk for later requests
+     * Save token to disk for later requests.
      * @param $tag string
      * @param $token string
      */
