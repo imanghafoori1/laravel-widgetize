@@ -42,5 +42,4 @@ class WidgetMinificationTest extends TestCase
         $html = render_widget($widget);
         $this->assertEquals($minified, $html);
     }
-
 }

@@ -30,7 +30,7 @@ class Cache
 
         $cache = app('cache');
 
-        if (!empty($widgetObj->cacheTags) && $this->cacheDriverSupportsTags()) {
+        if (! empty($widgetObj->cacheTags) && $this->cacheDriverSupportsTags()) {
             $cache = $cache->tags($widgetObj->cacheTags);
         }
 
@@ -61,11 +61,11 @@ class Cache
             $_key = json_encode($widget->extraCacheKeyDependency($arg));
         }
 
-        if (!$this->cacheDriverSupportsTags()) {
+        if (! $this->cacheDriverSupportsTags()) {
             $_key .= json_encode($this->getTagTokens($widget->cacheTags));
         }
 
-        $_key .= json_encode($arg, JSON_FORCE_OBJECT) . app()->getLocale() . $form . $widget->template . get_class($widget);
+        $_key .= json_encode($arg, JSON_FORCE_OBJECT).app()->getLocale().$form.$widget->template.get_class($widget);
 
         return md5($_key);
     }
@@ -76,7 +76,7 @@ class Cache
      */
     private function cacheDriverSupportsTags()
     {
-        return !in_array(config('cache.default', 'file'), ['file', 'database']);
+        return ! in_array(config('cache.default', 'file'), ['file', 'database']);
     }
 
     /**

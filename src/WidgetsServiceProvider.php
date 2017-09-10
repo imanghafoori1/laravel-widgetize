@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Imanghafoori\Widgets\Utils\Normalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
-use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
-use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\TemplateNormalizer;
+use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
+use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
 
 class WidgetsServiceProvider extends ServiceProvider
 {
@@ -20,17 +20,16 @@ class WidgetsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         $this->publishes([
-            __DIR__ . '/config/config.php' => config_path('widgetize.php'),
+            __DIR__.'/config/config.php' => config_path('widgetize.php'),
         ]);
 
         $this->_defineDirectives();
-        $this->loadViewsFrom($this->app->basePath() . '/app/Widgets/', 'Widgets');
+        $this->loadViewsFrom($this->app->basePath().'/app/Widgets/', 'Widgets');
     }
 
     /**
-     * Define Blade Directives
+     * Define Blade Directives.
      */
     private function _defineDirectives()
     {
@@ -50,14 +49,14 @@ class WidgetsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/config/config.php', 'widgetize');
+        $this->mergeConfigFrom(__DIR__.'/config/config.php', 'widgetize');
         $this->commands('command.imanghafoori.widget');
         $this->_registerSingletons();
         $this->_registerMacros();
     }
 
     /**
-     * Register classes as singletons
+     * Register classes as singletons.
      */
     private function _registerSingletons()
     {
@@ -106,7 +105,7 @@ class WidgetsServiceProvider extends ServiceProvider
                 'as' => $name,
                 'uses' => function () use ($view) {
                     return view($view);
-                }
+                },
             ]);
         });
 
@@ -115,7 +114,7 @@ class WidgetsServiceProvider extends ServiceProvider
                 'as' => $name,
                 'uses' => function (...$args) use ($widget) {
                     return render_widget($widget, $args);
-                }
+                },
             ]);
         });
 
@@ -124,7 +123,7 @@ class WidgetsServiceProvider extends ServiceProvider
                 'as' => $name,
                 'uses' => function (...$args) use ($widget) {
                     return json_widget($widget, $args);
-                }
+                },
             ]);
         });
     }
