@@ -26,7 +26,7 @@ class Cache
      */
     public function cacheResult(array $args, callable $phpCode, $widgetObj, $form = 'HTML')
     {
-        $key = $this->_makeCacheKey($args, $widgetObj, $form);
+        $key = $this->makeCacheKey($args, $widgetObj, $form);
 
         $cache = app('cache');
 
@@ -49,7 +49,7 @@ class Cache
      * @param string $form
      * @return string An MD5 string
      */
-    private function _makeCacheKey(array $arg, $widget, $form)
+    private function makeCacheKey(array $arg, $widget, $form)
     {
         if (method_exists($widget, 'cacheKey')) {
             return $widget->cacheKey($arg);
