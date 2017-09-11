@@ -17,7 +17,7 @@ class CacheTag
         }
 
         $token = $this->getPersistedToken($tag);
-        if ($token) {
+        if ($token !== null) {
             $this->setTokenInMemory($tag, $token);
 
             return $token;
