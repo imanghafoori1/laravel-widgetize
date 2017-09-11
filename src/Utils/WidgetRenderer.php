@@ -28,13 +28,13 @@ class WidgetRenderer
     public function renderWidget($widget, ...$args)
     {
         if (is_string($widget)) {
-            $widget = $this->_makeWidgetObj($widget);
+            $widget = $this->makeWidgetObj($widget);
         }
 
         app(Normalizer::class)->normalizeWidgetConfig($widget);
 
         try {
-            $html = $this->_generateHtml($widget, ...$args);
+            $html = $this->generateHtml($widget, ...$args);
         } catch (\Exception $e) {
             return app()->make(ExceptionHandler::class)->render(app('request'), $e)->send();
         }
@@ -46,7 +46,7 @@ class WidgetRenderer
      * @param $widget object
      * @return \Illuminate\Foundation\Application|mixed
      */
-    private function _makeWidgetObj($widget)
+    private function makeWidgetObj($widget)
     {
         if (starts_with($widget, ['\\'])) {
             return app($widget);
@@ -65,7 +65,7 @@ class WidgetRenderer
      *
      * @return string
      */
-    private function _generateHtml($widget, ...$args)
+    private function generateHtml($widget, ...$args)
     {
         // Everything inside this function is executed only when the cache is not available.
         $expensivePhpCode = function () use ($widget, $args) {
