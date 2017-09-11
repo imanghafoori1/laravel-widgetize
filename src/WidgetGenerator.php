@@ -34,7 +34,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
      */
     public function fire()
     {
-        $this->_makeWidgetClass();
+        $this->makeWidgetClass();
 
         if (! $this->option('plain')) {
             $this->createView();
@@ -48,7 +48,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
      */
     private function createView()
     {
-        $path = $this->_getViewPath();
+        $path = $this->getViewPath();
 
         if ($this->files->exists($path)) {
             $this->error($this->qualifyClass($this->getNameInput()).'View.blade.php - Already exists! (@_@)');
@@ -56,7 +56,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
             return;
         }
 
-        $this->files->put($path, $this->_getViewStub());
+        $this->files->put($path, $this->getViewStub());
 
         $this->info(' - '.$this->qualifyClass($this->getNameInput()).'View.blade.php - was created. (^_^)');
     }
@@ -100,7 +100,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
     /**
      * @return string
      */
-    private function _getViewPath()
+    private function getViewPath()
     {
         $name = $this->qualifyClass($this->getNameInput());
         $path = $this->getPath($name);
@@ -113,7 +113,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
      * Creates the widget class.
      * @return bool
      */
-    private function _makeWidgetClass()
+    private function makeWidgetClass()
     {
         $name = $this->qualifyClass($this->getNameInput());
 
@@ -141,7 +141,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
     /**
      * @return string
      */
-    private function _getViewStub()
+    private function getViewStub()
     {
         return 'Note that you can reference partials within "App\Widgets" folder like this: @include("Widgets::somePartial") ';
     }
