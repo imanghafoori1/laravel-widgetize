@@ -3,6 +3,7 @@
 namespace Imanghafoori\Widgets;
 
 use Illuminate\Console\GeneratorCommand as LaravelGeneratorCommand;
+use Symfony\Component\Console\Input\InputOption;
 
 class WidgetGenerator extends LaravelGeneratorCommand
 {
