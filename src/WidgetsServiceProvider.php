@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Imanghafoori\Widgets\Utils\Normalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
+use Imanghafoori\Widgets\Utils\Normalizers\ContextAsNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\TemplateNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
@@ -69,8 +70,9 @@ class WidgetsServiceProvider extends ServiceProvider
             $tplNormalizer = new TemplateNormalizer();
             $presenterNormalizer = new PresenterNormalizer();
             $ctrlNormalizer = new ControllerNormalizer();
+            $contextAsNormalizer = new ContextAsNormalizer();
 
-            return new Utils\Normalizer($tplNormalizer, $cacheNormalizer, $presenterNormalizer, $ctrlNormalizer);
+            return new Utils\Normalizer($tplNormalizer, $cacheNormalizer, $presenterNormalizer, $ctrlNormalizer, $contextAsNormalizer);
         });
 
         $this->app->singleton(Utils\HtmlMinifier::class, function () {
