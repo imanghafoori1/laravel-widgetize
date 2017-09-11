@@ -18,8 +18,6 @@
         "classmap": ["tests/TestCase.php"]
     },
     "require-dev": {
-        "phpunit/phpunit": "^5.2",
-        "illuminate/cache": "^5.2",
         "orchestra/testbench": "~3.0",
         "mockery/mockery": "^0.9.9"
     },
