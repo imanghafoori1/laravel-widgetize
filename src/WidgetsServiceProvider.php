@@ -25,14 +25,14 @@ class WidgetsServiceProvider extends ServiceProvider
             __DIR__.'/config/config.php' => config_path('widgetize.php'),
         ]);
 
-        $this->_defineDirectives();
+        $this->defineDirectives();
         $this->loadViewsFrom($this->app->basePath().'/app/Widgets/', 'Widgets');
     }
 
     /**
      * Define Blade Directives.
      */
-    private function _defineDirectives()
+    private function defineDirectives()
     {
         $omitParenthesis = version_compare($this->app->version(), '5.3', '<');
 
@@ -52,14 +52,14 @@ class WidgetsServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/config/config.php', 'widgetize');
         $this->commands('command.imanghafoori.widget');
-        $this->_registerSingletons();
-        $this->_registerMacros();
+        $this->registerSingletons();
+        $this->registerMacros();
     }
 
     /**
      * Register classes as singletons.
      */
-    private function _registerSingletons()
+    private function registerSingletons()
     {
         $this->app->singleton('command.imanghafoori.widget', function ($app) {
             return $app['Imanghafoori\Widgets\WidgetGenerator'];
@@ -100,7 +100,7 @@ class WidgetsServiceProvider extends ServiceProvider
         });
     }
 
-    private function _registerMacros()
+    private function registerMacros()
     {
         Route::macro('view', function ($url, $view, $name = null) {
             return Route::get($url, [
