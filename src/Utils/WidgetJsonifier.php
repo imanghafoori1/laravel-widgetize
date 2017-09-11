@@ -14,13 +14,13 @@ class WidgetJsonifier
     public function jsonResponse($widget, ...$args)
     {
         if (is_string($widget)) {
-            $widget = $this->_makeWidgetObj($widget);
+            $widget = $this->makeWidgetObj($widget);
         }
 
         app(Normalizer::class)->normalizeJsonWidget($widget);
 
         try {
-            $json = $this->_generateJson($widget, ...$args);
+            $json = $this->generateJson($widget, ...$args);
         } catch (\Exception $e) {
             return app()->make(ExceptionHandler::class)->render(app('request'), $e)->send();
         }
@@ -32,7 +32,7 @@ class WidgetJsonifier
      * @param $widget object
      * @return \Illuminate\Foundation\Application|mixed
      */
-    private function _makeWidgetObj($widget)
+    private function makeWidgetObj($widget)
     {
         $widget = app()->getNamespace().'Widgets\\'.$widget;
 
@@ -47,7 +47,7 @@ class WidgetJsonifier
      *
      * @return string
      */
-    private function _generateJson($widget, ...$args)
+    private function generateJson($widget, ...$args)
     {
         // Everything inside this function is executed only when the cache is not available.
         $expensivePhpCode = function () use ($widget, $args) {
