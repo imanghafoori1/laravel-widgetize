@@ -18,6 +18,8 @@ class Normalizer
 
     private $controllerNormalizer;
 
+    private $contextAsNormalizer;
+
     /**
      * Normalizer constructor which accepts dependencies.
      *
