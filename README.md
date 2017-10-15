@@ -102,7 +102,7 @@ This concept (this design pattern) really shines when you want to create crowded
 composer require imanghafoori/laravel-widgetize
 ```
 
-:electric_plug: Next, you must install the service provider to `config/app.php`: :electric_plug:
+:electric_plug: (For Laravel <=5.4) Next, you must add the service provider to `config/app.php` :electric_plug:
 
 ```php
 'providers' => [
