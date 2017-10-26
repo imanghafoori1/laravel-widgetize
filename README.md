@@ -9,7 +9,6 @@ Laravel Widgetize
 [![Build Status](https://travis-ci.org/imanghafoori1/laravel-widgetize.svg?branch=v1.8.16)](https://travis-ci.org/imanghafoori1/laravel-widgetize)
 [![License](https://poser.pugx.org/imanghafoori/laravel-widgetize/license)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![Awesome Laravel](https://img.shields.io/badge/Awesome-Laravel-brightgreen.svg)](https://github.com/chiraggude/awesome-laravel)
-[!Sample App](https://github.com/zigstum/laracasts-forum-widgets)
 
 
 
@@ -20,6 +19,7 @@ Laravel Widgetize
     - [What is a _widget object_ ?](#what-is-a-widget-object)
     - [When to use the _widget_ concept?](#when-to-use-the-widget-concept)
     - :gem: [Package Features](#gem-package-features-gem)
+    - [Sample App](https://github.com/zigstum/laracasts-forum-widgets)
     
 * :wrench: [Installation](#wrench-installation-arrow_down)
 * :earth_africa: [Global Configuration](#earth_africa-global-config)
