@@ -9,7 +9,7 @@ Laravel Widgetize
 [![Build Status](https://travis-ci.org/imanghafoori1/laravel-widgetize.svg?branch=v1.8.16)](https://travis-ci.org/imanghafoori1/laravel-widgetize)
 [![License](https://poser.pugx.org/imanghafoori/laravel-widgetize/license)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![Awesome Laravel](https://img.shields.io/badge/Awesome-Laravel-brightgreen.svg)](https://github.com/chiraggude/awesome-laravel)
-
+[!Sample App](https://github.com/zigstum/laracasts-forum-widgets)
 
 
 
@@ -356,6 +356,7 @@ Route::get('/api/products/{id}', '\App\Widgets\MyWidget@data');
 
 ### :raising_hand: Contributing 
 If you find an issue, or have a better way to do something, feel free to open an issue or a pull request.
+If you use laravel-widgetize in your open source project, create a pull request to provide it's url as a sample application in the README.md file. 
 
 
 ### :exclamation: Security
