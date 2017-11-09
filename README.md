@@ -15,6 +15,19 @@ Laravel Widgetize
 ## :ribbon::ribbon::ribbon: Widget Objects help you have "_cleaner code_" :heavy_plus_sign: "_easy caching_" :ribbon::ribbon::ribbon:
 
 
+## This package helps you in :
+- ### Page Partial Caching
+- ### Code Organization
+- ### HTML Minification
+- ### Showing Debug information
+- ### Extends the laravel Router
+
+
+
+
+---------------------
+
+
 * :flashlight: [Introduction](#introduction)
     - [What is a _widget object_ ?](#what-is-a-widget-object)
     - [When to use the _widget_ concept?](#when-to-use-the-widget-concept)
@@ -53,15 +66,6 @@ This page may look long and boring to read at first, but bear with me!!!
 
 I bet if you read through it you won't get disappointed at the end.So let's Go... :horse_racing:
 
-
-
-### :flashlight: Introduction
->This package helps you in :
-- Page Partial Caching
-- Code Organization
-- HTML Minification
-- Showing Debug information
-- Extends the laravel Router
 
 
 #### When to use this package?
