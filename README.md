@@ -20,7 +20,6 @@ Laravel Widgetize
 - ### Code Organization
 - ### HTML Minification
 - ### Showing Debug information
-- ### Extends the laravel Router
 
 
 
