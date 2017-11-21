@@ -39,15 +39,18 @@ Laravel Widgetize
     - [public $template (optional)](#public-template-string)
     - [public $cacheLifeTime (optional)](#public-cachelifetime-int)
     - [public $cacheTags (optional)](#public-cachetags-array)
+    
     - [public $controller (optional)](#public-controller-string) Advanced
     - [public $presenter (optional)](#public-presenter-string) Advanced
     - [public function extraCacheKeyDependency (optional)](#public-function-extracachekeydependency) Advanced
     - [public function cacheKey (optional)](#public-function-cachekey) Advanced
    
+   
 * :bulb: [Usage and Example](#bulb-example)
     - [How to make a widget class](#how-to-make-a-widget)
     - [How to use a widget class](#how-to-use-a-widget-class)
-    
+   
+More readings:
 * :shipit: [Some Theory for Experts](#)
     - :snake: [The Problems](#snake-what-is-our-problems-snake)
     - :dart: [The Solution](#dart-what-is-the-solution)
