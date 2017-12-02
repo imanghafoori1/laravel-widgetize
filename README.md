@@ -9,7 +9,7 @@ Laravel Widgetize
 [![Build Status](https://travis-ci.org/imanghafoori1/laravel-widgetize.svg?branch=v1.8.16)](https://travis-ci.org/imanghafoori1/laravel-widgetize)
 [![License](https://poser.pugx.org/imanghafoori/laravel-widgetize/license)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![Awesome Laravel](https://img.shields.io/badge/Awesome-Laravel-brightgreen.svg)](https://github.com/chiraggude/awesome-laravel)
-
+[![Daily Downloads](https://poser.pugx.org/imanghafoori/laravel-widgetize/d/daily)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 
 
 ## :ribbon::ribbon::ribbon: Widget Objects help you have "_cleaner code_" :heavy_plus_sign: "_easy caching_" :ribbon::ribbon::ribbon:
