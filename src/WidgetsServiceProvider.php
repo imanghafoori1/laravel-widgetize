@@ -2,6 +2,7 @@
 
 namespace Imanghafoori\Widgets;
 
+use DebugBar\DataCollector\MessagesCollector;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -21,6 +22,7 @@ class WidgetsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->_registerDebugbar();
         $this->publishes([
             __DIR__.'/config/config.php' => config_path('widgetize.php'),
         ]);
@@ -128,5 +130,17 @@ class WidgetsServiceProvider extends ServiceProvider
                 },
             ]);
         });
+    }
+
+    private function _registerDebugbar()
+    {
+        if (!$this->app->offsetExists('debugbar')) {
+            return;
+        }
+        $this->app->singleton('widgetize.debugger', function () {
+            return new MessagesCollector('Widgets');
+        });
+
+        $this->app->make('debugbar')->addCollector(app('widgetize.debugger'));
     }
 }

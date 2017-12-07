@@ -33,6 +33,10 @@ class WidgetRenderer
 
         app(Normalizer::class)->normalizeWidgetConfig($widget);
 
+        if (app()->offsetExists('debugbar')) {
+            app('widgetize.debugger')->addMessage(['widget class:' => $widget, 'args:' => $args]);
+        }
+
         try {
             $html = $this->generateHtml($widget, ...$args);
         } catch (\Exception $e) {
