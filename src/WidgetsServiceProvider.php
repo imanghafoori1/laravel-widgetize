@@ -2,11 +2,11 @@
 
 namespace Imanghafoori\Widgets;
 
-use DebugBar\DataCollector\MessagesCollector;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Imanghafoori\Widgets\Utils\Normalizer;
+use DebugBar\DataCollector\MessagesCollector;
 use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\TemplateNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\ContextAsNormalizer;
@@ -134,7 +134,7 @@ class WidgetsServiceProvider extends ServiceProvider
 
     private function _registerDebugbar()
     {
-        if (!$this->app->offsetExists('debugbar')) {
+        if (! $this->app->offsetExists('debugbar')) {
             return;
         }
         $this->app->singleton('widgetize.debugger', function () {
