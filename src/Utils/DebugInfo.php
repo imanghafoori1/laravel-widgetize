@@ -38,14 +38,9 @@ class DebugInfo
      */
     private function addDebugInfo()
     {
-        $tpl = $this->widget->template;
-        if (str_contains($tpl, 'Widgets::')) {
-            $tpl = str_replace('Widgets::', app()->getNamespace().'Widgets\\', $tpl);
-        }
+        $tpl = $this->getTplPath($this->widget->template);
 
-        $tpl = str_replace('.', '\\', $tpl);
-
-        $this->html = "<span title='WidgetObj : ".get_class($this->widget).".php&#013;Template : {$tpl}.blade.php{$this->cacheState()}'>{$this->html}</span>";
+        $this->html = "<span title='WidgetObj : ".get_class($this->widget).".php&#013;Template : {$tpl}{$this->cacheState()}'>{$this->html}</span>";
     }
 
     /**
@@ -65,5 +60,18 @@ class DebugInfo
     private function addHtmlComments()
     {
         $this->html = "<!-- '{".get_class($this->widget)."' Widget Start -->".$this->html."<!-- '".get_class($this->widget)."' Widget End -->";
+    }
+
+    /**
+     * @param $tpl
+     * @return string
+     */
+    private function getTplPath($tpl)
+    {
+        if (str_contains($tpl, 'Widgets::')) {
+            $tpl = str_replace('Widgets::', app()->getNamespace().'Widgets\\', $tpl);
+        }
+
+        return str_replace('.', '\\', $tpl).'.blade.php';
     }
 }
