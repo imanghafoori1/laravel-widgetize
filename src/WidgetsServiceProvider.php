@@ -12,6 +12,7 @@ use Imanghafoori\Widgets\Utils\Normalizers\TemplateNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\ContextAsNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
+use Imanghafoori\Widgets\Utils\RouteMacros;
 
 class WidgetsServiceProvider extends ServiceProvider
 {
@@ -104,32 +105,7 @@ class WidgetsServiceProvider extends ServiceProvider
 
     private function registerMacros()
     {
-        Route::macro('view', function ($url, $view, $name = null) {
-            return Route::get($url, [
-                'as' => $name,
-                'uses' => function () use ($view) {
-                    return view($view);
-                },
-            ]);
-        });
-
-        Route::macro('widget', function ($url, $widget, $name = null) {
-            return Route::get($url, [
-                'as' => $name,
-                'uses' => function (...$args) use ($widget) {
-                    return render_widget($widget, $args);
-                },
-            ]);
-        });
-
-        Route::macro('jsonWidget', function ($url, $widget, $name = null) {
-            return Route::get($url, [
-                'as' => $name,
-                'uses' => function (...$args) use ($widget) {
-                    return json_widget($widget, $args);
-                },
-            ]);
-        });
+        app(RouteMacros::class)->registerMacros();
     }
 
     private function _registerDebugbar()
@@ -137,6 +113,7 @@ class WidgetsServiceProvider extends ServiceProvider
         if (! $this->app->offsetExists('debugbar')) {
             return;
         }
+
         $this->app->singleton('widgetize.debugger', function () {
             return new MessagesCollector('Widgets');
         });
