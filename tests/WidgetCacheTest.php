@@ -98,10 +98,12 @@ class WidgetCacheTest extends TestCase
     public function test_the_cache_tags()
     {
         putenv('CACHE_DRIVER=array');
+        config(['cache.default'=> 'file']);
         config(['widgetize.debug_info' => false]);
         config(['widgetize.enable_cache' => true]);
         config(['widgetize.default_cache_lifetime' => 1]);
         app()['env'] = 'production';
+
         //assert
         View::shouldReceive('exists')->once()->andReturn(true);
         View::shouldReceive('make')->times(3)->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
