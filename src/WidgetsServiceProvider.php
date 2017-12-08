@@ -3,16 +3,15 @@
 namespace Imanghafoori\Widgets;
 
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Imanghafoori\Widgets\Utils\Normalizer;
+use Imanghafoori\Widgets\Utils\RouteMacros;
 use DebugBar\DataCollector\MessagesCollector;
 use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\TemplateNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\ContextAsNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
-use Imanghafoori\Widgets\Utils\RouteMacros;
 
 class WidgetsServiceProvider extends ServiceProvider
 {
