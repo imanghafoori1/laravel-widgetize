@@ -1,6 +1,7 @@
 filter:
     excluded_paths:
         - 'src/WidgetGenerator.php'
+        - 'src/Utils/RouteMacros.php'
 
 build:
     tests:
