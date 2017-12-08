@@ -27,12 +27,9 @@
              lowUpperBound="50" highLowerBound="80"/>
         <log type="testdox-html" target="./log/testdox.html" />
     </logging>
-	 <filter>
-	
-	<whitelist>
-		<directory>src</directory>
-		<exclude>
-			<directory>../src/*/Bundle/*Bundle/Tests</directory>
-		</exclude>
-	</whitelist> </filter>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
 </phpunit>
