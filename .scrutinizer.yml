@@ -1,3 +1,7 @@
+filter:
+    excluded_paths:
+        - 'src/WidgetGenerator.php'
+
 build:
     tests:
         override:
