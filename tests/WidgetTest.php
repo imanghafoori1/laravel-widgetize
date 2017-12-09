@@ -59,4 +59,13 @@ class WidgetTest extends TestCase
         $widget = new Widget6();
         render_widget($widget, ['foo' => '111', 'bar' => '222']);
     }
+
+    public function test_json_widgets()
+    {
+        Response::shouldReceive('json')->once()->with('222111', 200)->andReturn('123');
+        //act
+        $widget = new Widget6();
+        $a = json_widget($widget, ['foo' => '111', 'bar' => '222']);
+        $this->assertEquals('123', $a);
+    }
 }
