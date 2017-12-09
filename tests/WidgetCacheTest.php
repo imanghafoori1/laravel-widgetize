@@ -97,7 +97,7 @@ class WidgetCacheTest extends TestCase
 
     public function test_the_cache_tags()
     {
-        putenv('CACHE_DRIVER=array');
+        //putenv('CACHE_DRIVER=array');
         config(['cache.default'=> 'file']);
         config(['widgetize.debug_info' => false]);
         config(['widgetize.enable_cache' => true]);

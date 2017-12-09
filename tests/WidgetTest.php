@@ -60,12 +60,31 @@ class WidgetTest extends TestCase
         render_widget($widget, ['foo' => '111', 'bar' => '222']);
     }
 
+    public function test_data_is_passed_to_data_method_from_view_as_string()
+    {
+        View::shouldReceive('exists')->once()->andReturn(true);
+        View::shouldReceive('make')->once()->with('hello', ['data' => '222111'], [])->andReturn(app('view'));
+        View::shouldReceive('render')->once()->andReturn('<br>');
+        //act
+        render_widget('Foo\Widget6', ['foo' => '111', 'bar' => '222']);
+    }
+
+
+
     public function test_json_widgets()
     {
         Response::shouldReceive('json')->once()->with('222111', 200)->andReturn('123');
         //act
         $widget = new Widget6();
         $a = json_widget($widget, ['foo' => '111', 'bar' => '222']);
+        $this->assertEquals('123', $a);
+    }
+
+    public function test_json_widgets_as_string()
+    {
+        Response::shouldReceive('json')->once()->with('222111', 200)->andReturn('123');
+        //act
+        $a = json_widget('Foo\Widget6', ['foo' => '111', 'bar' => '222']);
         $this->assertEquals('123', $a);
     }
 }

@@ -7,6 +7,17 @@ namespace App\Widgets\Foo {
         {
         }
     }
+
+    class Widget6
+    {
+        public $template = 'hello';
+
+        public function data($foo, $bar)
+        {
+            return $bar.$foo;
+        }
+    }
+
 }
 
 namespace {
