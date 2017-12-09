@@ -69,8 +69,6 @@ class WidgetTest extends TestCase
         render_widget('Foo\Widget6', ['foo' => '111', 'bar' => '222']);
     }
 
-
-
     public function test_json_widgets()
     {
         Response::shouldReceive('json')->once()->with('222111', 200)->andReturn('123');
