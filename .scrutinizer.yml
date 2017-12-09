@@ -2,6 +2,7 @@ filter:
     excluded_paths:
         - 'src/WidgetGenerator.php'
         - 'src/Utils/RouteMacros.php'
+        - 'tests/*'
 
 build:
     tests:
