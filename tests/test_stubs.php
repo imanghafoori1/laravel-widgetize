@@ -31,6 +31,15 @@ namespace {
         {
         }
     }
+    class ZeroLifeTimeWidget
+    {
+        public $cacheLifeTime = 0;
+        public $template = 'hello';
+
+        public function data()
+        {
+        }
+    }
 
     class CustomCacheKeyWidget
     {

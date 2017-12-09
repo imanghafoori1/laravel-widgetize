@@ -51,6 +51,30 @@ class WidgetCacheTest extends TestCase
         $this->assertEquals('<p>some text</p>', $result5);
     }
 
+    public function test_avoids_caching_when_lifetime_is_set_to_zero()
+    {
+        putenv('CACHE_DRIVER=array');
+        config(['widgetize.enable_cache' => true]);
+        config(['widgetize.default_cache_lifetime' => 1]);
+        app()['env'] = 'production';
+        //assert
+        Cache::shouldReceive('remember')->times(0);
+        View::shouldReceive('exists')->once()->andReturn(true);
+        View::shouldReceive('make')->times(5)->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('render')->times(5)->andReturn('<p>some text</p>');
+        \App::shouldReceive('call')->times(5)->andReturn('foo');
+        //act
+        $widget = new ZeroLifeTimeWidget();
+        $result1 = render_widget($widget);
+        $result2 = render_widget($widget);
+        $result3 = render_widget($widget);
+        $result4 = render_widget($widget);
+        $result5 = render_widget($widget);
+
+        //$this->assertEquals('<p>some text</p>', $result2);
+        //$this->assertEquals('<p>some text</p>', $result5);
+    }
+
     public function test_caches_the_result_forever_when_lifetime_is_negative()
     {
         putenv('CACHE_DRIVER=array');
