@@ -1,6 +1,6 @@
 <?php
 
-namespace Imanghafoori\Widgets\Utils;
+namespace Imanghafoori\Widgets;
 
 use Illuminate\Support\Facades\Route;
 

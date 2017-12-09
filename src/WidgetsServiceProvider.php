@@ -5,7 +5,6 @@ namespace Imanghafoori\Widgets;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Imanghafoori\Widgets\Utils\Normalizer;
-use Imanghafoori\Widgets\Utils\RouteMacros;
 use DebugBar\DataCollector\MessagesCollector;
 use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\TemplateNormalizer;

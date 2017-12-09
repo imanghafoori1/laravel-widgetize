@@ -56,6 +56,7 @@ class CacheTag
      * Save token to disk for later requests.
      * @param $tag string
      * @param $token string
+     * @return void
      */
     private function persistToken($tag, $token)
     {
