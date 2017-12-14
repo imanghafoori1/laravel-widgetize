@@ -21,7 +21,7 @@ Laravel Widgetize
 - ### Page Partial Caching
 - ### Code Organization
 - ### HTML Minification
-- ### Showing Debug information
+- ### Integrated With laravel-debugbar
 
 
 
