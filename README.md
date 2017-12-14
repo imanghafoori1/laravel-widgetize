@@ -6,7 +6,7 @@ Laravel Widgetize
 
 <a href="https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize"><img src="https://img.shields.io/scrutinizer/g/imanghafoori1/laravel-widgetize.svg?style=flat-square" alt="Quality Score"></img></a>
 [![Latest Stable Version](https://poser.pugx.org/imanghafoori/laravel-widgetize/v/stable)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
-[![Build Status](https://travis-ci.org/imanghafoori1/laravel-widgetize.svg?branch=v1.8.16)](https://travis-ci.org/imanghafoori1/laravel-widgetize)
+[![Build Status](https://travis-ci.org/imanghafoori1/laravel-widgetize.svg?branch=master)](https://travis-ci.org/imanghafoori1/laravel-widgetize)
 [![License](https://poser.pugx.org/imanghafoori/laravel-widgetize/license)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![Awesome Laravel](https://img.shields.io/badge/Awesome-Laravel-brightgreen.svg)](https://github.com/chiraggude/awesome-laravel)
 [![Daily Downloads](https://poser.pugx.org/imanghafoori/laravel-widgetize/d/daily)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
@@ -21,7 +21,7 @@ Laravel Widgetize
 - ### Page Partial Caching
 - ### Code Organization
 - ### HTML Minification
-- ### Integrated With laravel-debugbar
+- ### Integrated with laravel-debugbar
 
 
 
