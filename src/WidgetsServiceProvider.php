@@ -61,7 +61,7 @@ class WidgetsServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/config/config.php', 'widgetize');
         $this->commands('command.imanghafoori.widget');
         $this->registerSingletons();
-        $this->registerMacros();
+        app(RouteMacros::class)->registerMacros();
     }
 
     /**
@@ -106,11 +106,6 @@ class WidgetsServiceProvider extends ServiceProvider
         $this->app->singleton(Utils\WidgetRenderer::class, function () {
             return new Utils\WidgetRenderer();
         });
-    }
-
-    private function registerMacros()
-    {
-        app(RouteMacros::class)->registerMacros();
     }
 
     private function _registerDebugbar()
