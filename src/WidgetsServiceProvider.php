@@ -4,13 +4,7 @@ namespace Imanghafoori\Widgets;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Imanghafoori\Widgets\Utils\Normalizer;
 use DebugBar\DataCollector\MessagesCollector;
-use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
-use Imanghafoori\Widgets\Utils\Normalizers\TemplateNormalizer;
-use Imanghafoori\Widgets\Utils\Normalizers\ContextAsNormalizer;
-use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
-use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
 
 class WidgetsServiceProvider extends ServiceProvider
 {
@@ -60,52 +54,8 @@ class WidgetsServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/config/config.php', 'widgetize');
         $this->commands('command.imanghafoori.widget');
-        $this->registerSingletons();
         app(RouteMacros::class)->registerMacros();
-    }
-
-    /**
-     * Register classes as singletons.
-     */
-    private function registerSingletons()
-    {
-        $this->app->singleton('command.imanghafoori.widget', function ($app) {
-            return $app['Imanghafoori\Widgets\WidgetGenerator'];
-        });
-
-        $this->app->singleton(Normalizer::class, function () {
-            $cacheNormalizer = new CacheNormalizer();
-            $tplNormalizer = new TemplateNormalizer();
-            $presenterNormalizer = new PresenterNormalizer();
-            $ctrlNormalizer = new ControllerNormalizer();
-            $contextAsNormalizer = new ContextAsNormalizer();
-
-            return new Utils\Normalizer($tplNormalizer, $cacheNormalizer, $presenterNormalizer, $ctrlNormalizer, $contextAsNormalizer);
-        });
-
-        $this->app->singleton(Utils\HtmlMinifier::class, function () {
-            return new Utils\HtmlMinifier();
-        });
-
-        $this->app->singleton(Utils\DebugInfo::class, function () {
-            return new Utils\DebugInfo();
-        });
-
-        $this->app->singleton(Utils\Policies::class, function () {
-            return new Utils\Policies();
-        });
-
-        $this->app->singleton(Utils\Cache::class, function () {
-            return new Utils\Cache();
-        });
-
-        $this->app->singleton(Utils\CacheTag::class, function () {
-            return new Utils\CacheTag();
-        });
-
-        $this->app->singleton(Utils\WidgetRenderer::class, function () {
-            return new Utils\WidgetRenderer();
-        });
+        app(SingletonServices::class)->registerSingletons($this->app);
     }
 
     private function _registerDebugbar()
