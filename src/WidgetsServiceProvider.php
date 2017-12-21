@@ -31,7 +31,14 @@ class WidgetsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Define Blade Directives.
+     * | ------------------------------------------ |
+     * |         Define Blade Directive             |
+     * | ------------------------------------------ |
+     * | When you call @ widget from your views     |
+     * | The only thing that happens is that the    |
+     * | `renderWidget` method Gets called on the   |
+     * | `Utils\WidgetRenderer` class               |
+     * | ------------------------------------------ |
      */
     private function defineDirectives()
     {
