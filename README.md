@@ -19,10 +19,14 @@ Laravel Widgetize
 
 ## This package helps you in :
 - ### Page Partial Caching
-- ### Code Organization
-- ### HTML Minification
-- ### Integrated with laravel-debugbar
+- ### Clean up your Controllers Code
+- ### Minify HTML
+- ### Easily provide page partials for varnish or nginx for ESI caching
 
+
+And to show the information you need.. It is :
+- ### Integrated with laravel-debugbar package
+out of the box ! 
 
 
 
