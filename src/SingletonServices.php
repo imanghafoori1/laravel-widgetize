@@ -2,16 +2,15 @@
 
 namespace Imanghafoori\Widgets;
 
+use Imanghafoori\Widgets\Utils\Normalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\TemplateNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\ContextAsNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
-use Imanghafoori\Widgets\Utils\Normalizer;
 
 class SingletonServices
 {
-
     /**
      * Register classes as singletons.
      */
@@ -55,5 +54,4 @@ class SingletonServices
             return new Utils\WidgetRenderer();
         });
     }
-
 }

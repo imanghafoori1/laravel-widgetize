@@ -32,7 +32,7 @@ class WidgetsServiceProvider extends ServiceProvider
      * | The only thing that happens is that the    |
      * | `renderWidget` method Gets called on the   |
      * | `Utils\WidgetRenderer` class               |
-     * | ------------------------------------------ |
+     * | ------------------------------------------ |.
      */
     private function defineDirectives()
     {
