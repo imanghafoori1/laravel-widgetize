@@ -89,13 +89,13 @@ This concept (this design pattern) really shines when you want to create crowded
 
 #### What is a widget?
 
->You can think of a widget as a page partial with a 'View Composer' attached to it.
+>You can think of a widget as a blade partial (which know how to provide data for itself.)
 
->Or If you know `Drupal's Views` concept, they are very similar to each other.
+>Or If you know `Drupal's Views` concept, they are very similar.
 
 >In fact a Widget is a normal php class without any magical methods,
- when you pass them into the `render_widget()` helper function or `@widget()` directive they magically output `HTML`!!! 
- Which is the result of rendering a view partial with data from the widget controller.
+ You can include them within your blade files with `@widget()` directive and they magically turn into `HTML`!!! 
+ 
  So we can replace `@include('myPartial')` with `@widget('myWidget')` in our laravel applications.
  The main benefit you get here is the fact that widget objects are __cached__ and they know how to provide data from themselves.
 
