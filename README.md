@@ -58,9 +58,7 @@ out of the box !
    
 More readings:
 * :shipit: [Some Theory for Experts](#)
-    - :snake: [The Problems](#snake-what-is-our-problems-snake)
-    - :dart: [The Solution](#dart-what-is-the-solution)
-    - :book: [The Theory Behind Widget Objects](#book-design-patterns-theory)
+    - Article about design patterns
 * :star: [Your Stars Makes Us Do More](#star-your-stars-make-us-do-more-star)
 
 
@@ -304,12 +302,15 @@ You may want to look at the source code and read the comments for more informati
 __Tip:__ If you decide to use some other template engine instead of Blade it would be no problem.
 
 
-### :snake: What is our problems? :snake:
+### :Book: Solid Design Pattern
+You can Find more information in the article below :
+It is a 3 minutes read.
+
 [Single Responsibility Prinsiple](https://medium.com/@imanghafoori1/taste-single-responsibility-in-your-laravel-controllers-with-laravel-widgetize-package-9e0800d8b559)
 
 
 
-### How to expose a widget content directly from a url ?
+### How to expose only a widget HTML content from a url ?
 
 ```php
 Route::widget('/some-url', 'MyWidget', 'MyRouteName1'); // <-- exposes HTML
