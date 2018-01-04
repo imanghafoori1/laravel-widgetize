@@ -263,15 +263,16 @@ This causes all the widgets with 'someTag' or 'tag1' to be refreshed.
 __Note: Tagging feature works with ALL the laravel cache drivers including 'file' and 'database'.__
 
 
-### __public function extraCacheKeyDependency__
-
-> It is important to note that if your final widget HTML output depends on PHP's super global variables and you 
-want to cache it,Then they must be included in the cache key of the widget. So for example :
 
 ### __public function cacheKey__
 
 > If you want to explicitly define the cache key used to store the html result of your widget, you can implement this method.
 
+
+### __public function extraCacheKeyDependency__
+
+> It is important to note that if your final widget HTML output depends on PHP's super global variables and you 
+want to cache it,Then they must be included in the cache key of the widget.
 
 ```php
 namespace App\Widgets;
@@ -281,20 +282,20 @@ class MyWidget
 
     public function data()
     {
-        $id = request('order_id');
+        $id = request('order_id'); // here we are using a request parameter to fetch database...
         return Product::where('order_id', $id)->get();
     }
     
 
     public function extraCacheKeyDependency()
     {
+        // so the value of this parameter should be considered for caching.
         return request()->get('order_id');
     }
     
 }
 
 ```
-
 
 You may want to look at the source code and read the comments for more information.
 
