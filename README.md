@@ -192,14 +192,13 @@ In a normal day to day view (middle-end):
 </html>
 ```
 
-#### __An other way to think of widgets :__
+#### __An other way to think of @widget() in your blade files :__
 
 ```
 All of us, more or less have some ajax experience. One scenario is to lazy load a page partial after
-the page has been fully loaded. (like jQuery Pjax plug-in does)
+the page has been fully loaded.
 You can think of @widget() as an ajax call from "middle-end" to the "back-end" to load a piece of HTML
-into the main page.
-In facts your widgets are the 'Back-end' and your typical views are the 'middle-end' !!!
+into the page.
 ```
 
 
@@ -240,7 +239,7 @@ So the entire widget lives in one folder:
 
 ### __public $cacheLifeTime__ (int)
 
-> If you want to override the global cache life time (which is set in your config file) for a specific widget, you can set $cacheLifeTime on your widget class.
+> If you want to override the global cache life time (which is set in your config file).
 
  value  | effect
 :-------|:----------
@@ -252,13 +251,13 @@ So the entire widget lives in one folder:
 
 ### __public $cacheTags__ (array)
 
-> You can set `public $cacheTags = ['tag1','tag2']` to exactly target a group of widgets to flush their cached state.
+> You can set tags `public $cacheTags = ['tag1','tag2']` to target a group of widgets and flush their cache.
 using the helper function :
 
 ```php
-expire_widgets(['someTag', 'someOtherTag']);
+expire_widgets(['someTag', 'tag1']);
 ```
-This causes all the widgets with 'someTag' and 'someOtherTag' to be refreshed.
+This causes all the widgets with 'someTag' or 'tag1' to be refreshed.
 
 
 __Note: Tagging feature works with ALL the laravel cache drivers including 'file' and 'database'.__
