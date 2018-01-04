@@ -308,14 +308,6 @@ __Tip:__ If you decide to use some other template engine instead of Blade it wou
 [Single Responsibility Prinsiple](https://medium.com/@imanghafoori1/taste-single-responsibility-in-your-laravel-controllers-with-laravel-widgetize-package-9e0800d8b559)
 
 
-### :dart: What is the solution?
-
-> So, How to fight against those ?
-
->__The main idea is simple, Instead of one controller method to handle all widgets of the page, Each widget should have it's own `controller class`, `view partial`, `view presenter class` and `cache config`, isolated from others.__
->That's it !! :)
->This idea originally comes from the client-side js frameworks and is somewhat new in server-side world.
-
 
 ### How to expose a widget content directly from a url ?
 
