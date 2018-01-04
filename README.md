@@ -305,17 +305,7 @@ __Tip:__ If you decide to use some other template engine instead of Blade it wou
 
 
 ### :snake: What is our problems? :snake:
-
-#### Problem 1 : Controllers easily get crowded :weary:
->Imagine An online shop like amazon which shows the list of products, popular products, etc (in the sidebar), user data and basket data in the navbar and a tree of product categories in the menu and etc... In traditional good old MVC model you have a single controller method to provide all the widgets with data. You can immidiately see that you are violating the SRP (Single Responsibility Priciple)!!! The trouble is worse when the client changes his mind over time and asks the deveploper to add, remove and modify those widgets on the page. And it always happens. Clients do change their minds.The developoer's job is to be ready to cope with that as effortlessly as possible.
-
-#### Problem 2 : Page caching is always hard (But no more) :disappointed:
->Trying to cache the pages which include user specific data (for example the username on the top menu) is a often fruitless. Because each user sees slightly different page from other users. Or in cases when we have some parts of the page which update frequently and some other parts which change rarly... we have to expire the entire page cache to match the most frequently updated one. :(
-AAAAAAAAAhh...
-
-
-#### Problem 3 : View templates easily get littered with if/else blocks :dizzy_face:
->We ideally want our view files to be as logic-less as possible and very much like the final output HTML.Don't we ?! if/else blocks and other computations. They are always irritating within our views. specially for static page designers in our team. We just want to print out already defined variables without having to decide what to print. Anyway the raw data we store in database are sometimes far from ready to be printed on the page.
+[Single Responsibility Prinsiple](https://medium.com/@imanghafoori1/taste-single-responsibility-in-your-laravel-controllers-with-laravel-widgetize-package-9e0800d8b559)
 
 
 ### :dart: What is the solution?
@@ -325,13 +315,6 @@ AAAAAAAAAhh...
 >__The main idea is simple, Instead of one controller method to handle all widgets of the page, Each widget should have it's own `controller class`, `view partial`, `view presenter class` and `cache config`, isolated from others.__
 >That's it !! :)
 >This idea originally comes from the client-side js frameworks and is somewhat new in server-side world.
-
-###  :book: Design Patterns Theory
->The widget object pattern is in fact a variation of the famous `single responsibility principle`.
-Instead of having one bloated controller method that was resposible to supply data for all the widgets...
-You distribute your controller code amougst multiple widget classes.(Each widget is responsible for small portion of the page.)
-
->It helps you to conforms to `Open-closed principle`.Because if you want to add a widget on your page you do not need to add to the controller code. Instead you create a new widget class from scratch or when you want to remove something from the page you do not have go to the controller find and comment out related controller code. removing the `@widget('myWidget')` is enough to disable the corresponding controller and hence db queries.
 
 
 ### How to expose a widget content directly from a url ?
