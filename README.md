@@ -16,6 +16,7 @@ Laravel Widgetize
 
 ## :ribbon::ribbon::ribbon: Widget Objects help you have "_cleaner code_" :heavy_plus_sign: "_easy caching_" :ribbon::ribbon::ribbon:
 
+You can reach the maintainer throught telegram IM: @imanghafoori or imanghafoori1@gmail.com
 
 ## This package helps you in :
 - ### Page Partial Caching
