@@ -14,7 +14,7 @@ Laravel Widgetize
 [![Code Coverage](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/?branch=master)
 
 
-## :ribbon::ribbon::ribbon: Widget Objects help you have "_cleaner code_" :heavy_plus_sign: "_easy caching_" :ribbon::ribbon::ribbon:
+## :ribbon::ribbon::ribbon: Widgetize : "_cleaner code_" :heavy_plus_sign: "_easy caching_" :ribbon::ribbon::ribbon:
 
 You can reach the maintainer throught telegram IM: @imanghafoori or imanghafoori1@gmail.com
 
