@@ -46,7 +46,6 @@ out of the box !
     - [public $template (optional)](#public-template-string)
     - [public $cacheLifeTime (optional)](#public-cachelifetime-int)
     - [public $cacheTags (optional)](#public-cachetags-array)
-    
     - [public $controller (optional)](#public-controller-string) Advanced
     - [public $presenter (optional)](#public-presenter-string) Advanced
     - [public function extraCacheKeyDependency (optional)](#public-function-extracachekeydependency) Advanced
