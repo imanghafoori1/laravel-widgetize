@@ -16,6 +16,8 @@ Laravel Widgetize
 
 ## :ribbon::ribbon::ribbon: Widgetize : "_cleaner code_" :heavy_plus_sign: "_easy caching_" :ribbon::ribbon::ribbon:
 
+### Built with :heart:
+
 You can reach the maintainer throught telegram IM: @imanghafoori or imanghafoori1@gmail.com
 
 ## This package helps you in :
