@@ -307,7 +307,7 @@ You may want to look at the source code and read the comments for more informati
 __Tip:__ If you decide to use some other template engine instead of Blade it would be no problem.
 
 
-### :Book: Solid Design Pattern
+### :book: Solid Design Pattern
 You can Find more information in the article below :
 It is a 3 minutes read.
 
