@@ -9,16 +9,28 @@ Laravel Widgetize
 [![Build Status](https://travis-ci.org/imanghafoori1/laravel-widgetize.svg?branch=master)](https://travis-ci.org/imanghafoori1/laravel-widgetize)
 [![License](https://poser.pugx.org/imanghafoori/laravel-widgetize/license)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![Awesome Laravel](https://img.shields.io/badge/Awesome-Laravel-brightgreen.svg)](https://github.com/chiraggude/awesome-laravel)
-[![Daily Downloads](https://poser.pugx.org/imanghafoori/laravel-widgetize/d/daily)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
+[![Daily Downloads](https://poser.pugx.org/imanghafoori/laravel-widgetize/d/monthly)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![StyleCI](https://styleci.io/repos/80939052/shield?branch=master)](https://styleci.io/repos/80939052)
 [![Code Coverage](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/?branch=master)
+
+
+
+
+
 
 
 ## :ribbon::ribbon::ribbon: Widgetize : "_cleaner code_" :heavy_plus_sign: "_easy caching_" :ribbon::ribbon::ribbon:
 
 ### Built with :heart: for every smart laravel developer
 
-You can reach the maintainer throught telegram IM: @imanghafoori or imanghafoori1@gmail.com
+
+You can reach the maintainer throught telegram IM:
+
+@imanghafoori or imanghafoori1@gmail.com
+
+
+
+
 
 ## This package helps you in :
 - ### Page Partial Caching
@@ -34,6 +46,7 @@ out of the box !
 
 
 ---------------------
+
 
 
 * :flashlight: [Introduction](#introduction)
