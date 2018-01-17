@@ -94,26 +94,33 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 #### When to use this package?
 
->Let me tell you some code sniffs : :nose:
-
-1. If you have php code and database query in your blade files.
-2. If you have multiple database queries in your controller for different parts of the page.
-3. If you need to cache your database queries.
-
-This concept (this design pattern) really shines when you want to create crowded web pages with multiple widgets (on sidebar, menu, carousels ...) and each widget needs separate sql queries and php logic to be provided with data for its template. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
+This concept (this design pattern) really shines when you want to create crowded web pages with multiple sections (on sidebar, menu, carousels ...) and each widget needs separate sql queries and php logic to be provided with data for its template. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
 
 
 #### What is a widget?
 
->You can think of a widget as a blade partial (which know how to provide data for itself.)
+You can think of a widget as a blade partial (which know how to provide data for itself.)
 
->Or If you know `Drupal's Views` concept, they are very similar.
+Or If you know `Drupal's Views` concept, they are very similar.
 
->In fact a Widget is a normal php class without any magical methods,
- You can include them within your blade files with `@widget()` directive and they magically turn into `HTML`!!! 
+You can include `@widget('myWidget')` within your blade files and it will turn into `HTML`!!! 
  
- So we can replace `@include('myPartial')` with `@widget('myWidget')` in our laravel applications.
- The main benefit you get here is the fact that widget objects are __cached__ and they know how to provide data from themselves.
+ So you can replace `@include('myPartial')` with `@widget('myWidget')` in our laravel applications.
+
+
+
+### What happens when your write @widget('SomeWidget')
+
+Given that we have disabled caching in the widgetize config file...
+
+1 - It first looks for "SomeWidget" class to inspect it.
+
+2 - Then calls the widget's controller method and gets some data from it.
+
+3 - It "compiles" (in other word "renders") the blade file ($template) with data. (to produce some html)
+
+At last
+    (If caching is enabled for the widget) it puts a copy of the resulting html in cache, for future use.
 
 
 ### :gem: Package Features :gem:
