@@ -132,6 +132,29 @@ At last
 > 5. It helps you to have a dedicated presenter class of each widget to clean up your views.
 > 6. It extends the Route facade with `Route::view` , `Route::jsonWidget` , `Route::widget`
 
+### Widgets vs. View Composers
+
+About View Composers :
+
+1- The worst thing about view composers is you never know which composer is attached to a @include not to mention other members of your team.
+
+2- You have no way of passing data to the compose() method from your view.
+They receive a \Illuminate\View\View object. so they can not be re-used to expose json data.
+widgetize designed to provide fully freedom and resuability for widget-controllers.
+
+``` php
+public function compose(View $view)
+{
+    $view->with('count', $this->users->count());
+}
+
+```
+3- $view->with('count', $this->users->count()); 
+This exposes the $count to all views not just the partial.
+And this violates encapsulation.
+
+4- They offer no caching out of the box.
+
 ### :wrench: Installation: :arrow_down:
 ``` bash
 composer require imanghafoori/laravel-widgetize
