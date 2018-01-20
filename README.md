@@ -17,8 +17,6 @@ Laravel Widgetize
 
 
 
-
-
 ## :ribbon::ribbon::ribbon: Widgetize : "_cleaner code_" :heavy_plus_sign: "_easy caching_" :ribbon::ribbon::ribbon:
 
 ### Built with :heart: for every smart laravel developer
@@ -27,22 +25,6 @@ Laravel Widgetize
 You can reach the maintainer throught telegram IM:
 
 @imanghafoori or imanghafoori1@gmail.com
-
-
-
-
-
-## This package helps you in :
-- ### Page Partial Caching
-- ### Clean up your Controllers Code
-- ### Minify HTML
-- ### Easily provide page partials for varnish or nginx for ESI caching
-
-
-And to show the information you need.. It is :
-- ### Integrated with laravel-debugbar package
-out of the box ! 
-
 
 
 ---------------------
@@ -90,15 +72,33 @@ This page may look long and boring to read at first, but bear with me!!!
 
 I bet if you read through it you won't get disappointed at the end.So let's Go... :horse_racing:
 
+
+-----------------------
+
+## Overview:
+
+### This package helps you in :
+- #### Page Partial Caching
+- #### Clean up your Controllers Code
+- #### Minify HTML
+- #### Easily provide page partials for varnish or nginx for ESI caching
+
+
+And to show the information you need.. It is :
+- #### Integrated with laravel-debugbar package
+out of the box ! 
+
+
+
 ---------------
 
-### When to use this package?
+### Overview:When to use this package?
 
 This concept (this design pattern) really shines when you want to create crowded web pages with multiple sections (on sidebar, menu, carousels ...) and each widget needs separate sql queries and php logic to be provided with data for its template. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
 
 -----------------
 
-### What is a widget?
+### Overview:What is a widget?
 
 You can think of a widget as a blade partial (which know how to provide data for itself.)
 
@@ -110,22 +110,8 @@ You can include `@widget('myWidget')` within your blade files and it will turn i
 
 ------------------
 
-### What happens when your write @widget('SomeWidget')
 
-Given that we have disabled caching in the widgetize config file...
-
-1 - It first looks for "SomeWidget" class to inspect it.
-
-2 - Then calls the widget's controller method and gets some data from it.
-
-3 - It "compiles" (in other word "renders") the blade file ($template) with data. (to produce some html)
-
-At last
-    (If caching is enabled for the widget) it puts a copy of the resulting html in cache, for future use.
-
--------------------------
-
-### :gem: Package Features
+### :gem: Overview:Technical Package Features
 
 > 1. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
 > 2. It optionally `minifies` the output of the widget.
@@ -136,9 +122,23 @@ At last
 
 -------------------
 
-### "Widgets" vs. "View Composers":
+### Overview:What happens when your write @widget('SomeWidget') in your views
 
-About View Composers :
+Given that we have disabled caching in the widgetize config file...
+
+1 - It first looks for "SomeWidget" class to inspect it.
+
+2 - Then calls the widget's controller method and gets some data from it.
+
+3 - Using that data it "compiles" (in other word "renders") the blade file ($template). (to produce some html)
+
+4 - At last, (If caching is enabled for the widget) it puts a copy of the resulting html in cache, for future use and return it.
+
+-------------------------
+
+### Overview:"Widgets" vs. "View Composers":
+
+You might think that "view composers" are already doing the job, so why "widgets" ?
 
 1- The worst thing about view composers is you never know which composer is attached to a @include not to mention other members of your team.
 
@@ -236,10 +236,10 @@ into the page.
 
 -----------------
 
-## Documentation:
+## :book: Documentation:
 
 
-### :wrench: Installation: :arrow_down:
+### Installation: :arrow_down:
 ``` bash
 composer require imanghafoori/laravel-widgetize
 ```
@@ -248,7 +248,7 @@ composer require imanghafoori/laravel-widgetize
 
 ```php
 'providers' => [
-    // ...
+    // for laravel 5.4 and below
     Imanghafoori\Widgets\WidgetsServiceProvider::class,
 ];
 ```
