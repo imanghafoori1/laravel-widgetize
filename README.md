@@ -191,9 +191,9 @@ php artisan make:widget MySexyWidget
 A lot of docs are included in the generated widget file so it is not needed to memorize or even read the rest of this page.
 You can jump right-in and start using it.
 
-## :bulb: Example
+## :bulb: Sample Code:
 
-### How to make a Widget?
+### Example:How to make a Widget?
 
 >__You can use : `php artisan make:widget MyWidget` to make your widget class.__
 
@@ -233,7 +233,7 @@ App\Widgets\MyWidgetView.blade.php :
 Ok, Now it's done! We have a ready to use widget. let's use it...
 
 
-### How to use a widget class?
+### Example:Then how to use that widget ?
 
 In a normal day to day view (middle-end):
 ```blade
@@ -247,6 +247,9 @@ In a normal day to day view (middle-end):
     <body>
 </html>
 ```
+
+---------------------
+
 
 #### __An other way to think of @widget() in your blade files :__
 
@@ -369,7 +372,7 @@ It is a 3 minutes read.
 --------------------------
 
 
-### How to expose only a widget HTML content from a url ?
+### Q&A:How to expose only a widget HTML content from a url ?
 
 ```php
 Route::widget('/some-url', 'MyWidget', 'MyRouteName1'); // <-- exposes HTML
@@ -390,8 +393,9 @@ You can also :
 Route::view('/some-url-2', 'someView', 'theRouteName'); //loads resource/views/someView.blade.php with a GET
 ```
 
+--------------------
 
-### How to reference widget controllers from routes ?
+### Q&A:How to reference widget controllers from routes ?
 
 This way you can also expose your data as json for client-side apps.
 
@@ -400,6 +404,7 @@ Route::get('/api/products/{id}', '\App\Widgets\MyWidget@data');
 ```
 \* It is important to put `\` before `App` when you want to refer to a class outside the `Http\Controller` folder.
 
+--------------------
 
 ### :raising_hand: Contributing 
 If you find an issue, or have a better way to do something, feel free to open an issue or a pull request.
