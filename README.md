@@ -90,14 +90,15 @@ This page may look long and boring to read at first, but bear with me!!!
 
 I bet if you read through it you won't get disappointed at the end.So let's Go... :horse_racing:
 
+---------------
 
-
-#### When to use this package?
+### When to use this package?
 
 This concept (this design pattern) really shines when you want to create crowded web pages with multiple sections (on sidebar, menu, carousels ...) and each widget needs separate sql queries and php logic to be provided with data for its template. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
 
+-----------------
 
-#### What is a widget?
+### What is a widget?
 
 You can think of a widget as a blade partial (which know how to provide data for itself.)
 
@@ -107,7 +108,7 @@ You can include `@widget('myWidget')` within your blade files and it will turn i
  
  So you can replace `@include('myPartial')` with `@widget('myWidget')` in our laravel applications.
 
-
+------------------
 
 ### What happens when your write @widget('SomeWidget')
 
@@ -122,6 +123,7 @@ Given that we have disabled caching in the widgetize config file...
 At last
     (If caching is enabled for the widget) it puts a copy of the resulting html in cache, for future use.
 
+-------------------------
 
 ### :gem: Package Features :gem:
 
@@ -131,6 +133,8 @@ At last
 > 4. __php artisan make:widget__ command 
 > 5. It helps you to have a dedicated presenter class of each widget to clean up your views.
 > 6. It extends the Route facade with `Route::view` , `Route::jsonWidget` , `Route::widget`
+
+-------------------
 
 ### Widgets vs. View Composers
 
@@ -154,6 +158,10 @@ This exposes the $count to all views not just the partial.
 And this violates encapsulation.
 
 4- They offer no caching out of the box.
+
+
+--------------------
+
 
 ### :wrench: Installation: :arrow_down:
 ``` bash
@@ -249,7 +257,7 @@ You can think of @widget() as an ajax call from "middle-end" to the "back-end" t
 into the page.
 ```
 
-
+-----------------
 
 ## :earth_africa: Global Config:
 > You can set the variables in "config/widgetize.php" file to globally set some configs for you widgets and override them per widget if needed.
@@ -316,6 +324,7 @@ __Note: Tagging feature works with ALL the laravel cache drivers including 'file
 
 > If you want to explicitly define the cache key used to store the html result of your widget, you can implement this method.
 
+-------------------
 
 ### __public function extraCacheKeyDependency__
 
@@ -356,6 +365,8 @@ It is a 3 minutes read.
 
 [Single Responsibility Prinsiple](https://medium.com/@imanghafoori1/taste-single-responsibility-in-your-laravel-controllers-with-laravel-widgetize-package-9e0800d8b559)
 
+
+--------------------------
 
 
 ### How to expose only a widget HTML content from a url ?
