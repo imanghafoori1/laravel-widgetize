@@ -125,7 +125,7 @@ At last
 
 -------------------------
 
-### :gem: Package Features :gem:
+### :gem: Package Features
 
 > 1. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
 > 2. It optionally `minifies` the output of the widget.
@@ -136,7 +136,7 @@ At last
 
 -------------------
 
-### Widgets vs. View Composers
+### "Widgets" vs. "View Composers":
 
 About View Composers :
 
@@ -160,45 +160,13 @@ And this violates encapsulation.
 4- They offer no caching out of the box.
 
 
---------------------
-
-
-### :wrench: Installation: :arrow_down:
-``` bash
-composer require imanghafoori/laravel-widgetize
-```
-
-:electric_plug: (For Laravel <=5.4) Next, you must add the service provider to `config/app.php` :electric_plug:
-
-```php
-'providers' => [
-    // ...
-    Imanghafoori\Widgets\WidgetsServiceProvider::class,
-];
-```
-
-__Publish your config file__
-``` bash
-php artisan vendor:publish
-```
-
- :fire: And you will be on fire!:fire:
-
-``` bash
-php artisan make:widget MySexyWidget
-```
-
-A lot of docs are included in the generated widget file so it is not needed to memorize or even read the rest of this page.
-You can jump right-in and start using it.
-
-
 ----------------------
 
 
 ## :bulb: Sample Code:
 
 
-### Example:How to make a Widget?
+### Sample:How to make a Widget?
 
 
 >__You can use : `php artisan make:widget MyWidget` to make your widget class.__
@@ -239,7 +207,7 @@ App\Widgets\MyWidgetView.blade.php :
 Ok, Now it's done! We have a ready to use widget. let's use it...
 
 
-### Example:Then how to use that widget ?
+### Sample:Then how to use that widget ?
 
 In a normal day to day view (middle-end):
 ```blade
@@ -268,16 +236,51 @@ into the page.
 
 -----------------
 
-## :earth_africa: Global Config:
+## Documentation:
+
+
+### :wrench: Installation: :arrow_down:
+``` bash
+composer require imanghafoori/laravel-widgetize
+```
+
+:electric_plug: (For Laravel <=5.4) Next, you must add the service provider to `config/app.php` :electric_plug:
+
+```php
+'providers' => [
+    // ...
+    Imanghafoori\Widgets\WidgetsServiceProvider::class,
+];
+```
+
+__Publish your config file__
+``` bash
+php artisan vendor:publish
+```
+
+ :fire: And you will be on fire!:fire:
+
+``` bash
+php artisan make:widget MySexyWidget
+```
+
+A lot of docs are included in the generated widget file so it is not needed to memorize or even read the rest of this page.
+You can jump right-in and start using it.
+
+
+
+
+### :earth_africa: Global Config:
+
 > You can set the variables in "config/widgetize.php" file to globally set some configs for you widgets and override them per widget if needed.
 >Read the docblocks in __config/widgetize.php__ file for more info. 
 
 
 
-## :blue_car: Per Widget Config:
+### :blue_car: Per Widget Config:
 
 
-## __public $template__ (string)
+#### __public $template__ (string)
 
 >If you do not set it,By default, it refers to app/Widgets folder and looks for the 'widgetNameView.blade.php'
 (Meaning that if your widget is `app/Widgets/home/recentProducts.php` the default view for that is `app/Widgets/home/recentProductsView.blade.php`)
@@ -289,20 +292,20 @@ So the entire widget lives in one folder:
 >| _app\Widgets\Homepage\RecentProductsWidgetView.blade.php_
 
 
-### __public $controller__ (string)
+#### __public $controller__ (string)
 
 > If you do not want to put your _data_ method on your widget class, you can set `public $controller = App\Some\Class\MyController::class` and put your `public data` method on a dedicated class.(instead od having it on your widget class)
 
 
 
-### __public $presenter__ (string)
+#### __public $presenter__ (string)
 
 > If you do not want to put your _present_ method on your widget class, you can set
 `public $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data retured from your controller is first piped to your presenter and then to your view.(So if you specify a presenter your view file gets its data from the presenter and not the controller.)
 
 
 
-### __public $cacheLifeTime__ (int)
+#### __public $cacheLifeTime__ (int)
 
 > If you want to override the global cache life time (which is set in your config file).
 
@@ -314,7 +317,7 @@ So the entire widget lives in one folder:
   1    | 1 minute
 
 
-### __public $cacheTags__ (array)
+#### __public $cacheTags__ (array)
 
 > You can set tags `public $cacheTags = ['tag1','tag2']` to target a group of widgets and flush their cache.
 using the helper function :
@@ -329,13 +332,13 @@ __Note: Tagging feature works with ALL the laravel cache drivers including 'file
 
 
 
-### __public function cacheKey__
+#### __public function cacheKey__
 
 > If you want to explicitly define the cache key used to store the html result of your widget, you can implement this method.
 
--------------------
 
-### __public function extraCacheKeyDependency__
+
+#### __public function extraCacheKeyDependency__
 
 > It is important to note that if your final widget HTML output depends on PHP's super global variables and you 
 want to cache it,Then they must be included in the cache key of the widget.
@@ -377,6 +380,7 @@ It is a 3 minutes read.
 
 --------------------------
 
+## Q&A
 
 ### Q&A:How to expose only a widget HTML content from a url ?
 
