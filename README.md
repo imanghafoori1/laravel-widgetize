@@ -191,9 +191,15 @@ php artisan make:widget MySexyWidget
 A lot of docs are included in the generated widget file so it is not needed to memorize or even read the rest of this page.
 You can jump right-in and start using it.
 
+
+----------------------
+
+
 ## :bulb: Sample Code:
 
+
 ### Example:How to make a Widget?
+
 
 >__You can use : `php artisan make:widget MyWidget` to make your widget class.__
 
