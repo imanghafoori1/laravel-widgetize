@@ -60,6 +60,8 @@ class WidgetGenerator extends LaravelGeneratorCommand
         $this->files->put($path, $this->getViewStub());
 
         $this->info(' - '.$this->qualifyClass($this->getNameInput()).'View.blade.php - was created. (^_^)');
+        
+        $this->printStarUs();
     }
 
     /**
@@ -146,4 +148,19 @@ class WidgetGenerator extends LaravelGeneratorCommand
     {
         return 'Note that you can reference partials within "App\Widgets" folder like this: @include("Widgets::somePartial") ';
     }
+    
+    private function printStarUs()
+    {
+        if (mt_rand (1, 6) !== 4) {
+            return null;
+        }
+        $this->info('************************ Star It ************************');
+        $this->info('Dear developer, if you find Laravel-Widgetize useful for you');
+        $this->info('Please, star it on github.com to recommend it to others.');
+        $this->info('Visit:');
+        $this->info('https://github.com/imanghafoori1/laravel-widgetize');
+        $this->info('Thanks.  lol ');
+        $this->info('********************************************************');
+    }
+    
 }
