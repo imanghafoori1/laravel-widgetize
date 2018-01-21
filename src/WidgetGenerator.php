@@ -33,13 +33,23 @@ class WidgetGenerator extends LaravelGeneratorCommand
      *
      * @return void
      */
-    public function fire()
+    public function handle()
     {
         $this->makeWidgetClass();
 
         if (! $this->option('plain')) {
             $this->createView();
         }
+    }
+    
+        /**
+     * Execute the console command.
+     *
+     * @return void
+     */
+    public function fire()
+    {
+        $this->handle();
     }
 
     /**
