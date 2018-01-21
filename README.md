@@ -122,7 +122,8 @@ You can include `@widget('myWidget')` within your blade files and it will turn i
 
 -------------------
 
-### Overview:What happens when your write @widget('SomeWidget') in your views
+### Overview:What happens when your write @widget('SomeWidget') in your views(Long story, short)
+
 
 Given that we have disabled caching in the widgetize config file...
 
