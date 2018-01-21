@@ -41,8 +41,8 @@ class WidgetGenerator extends LaravelGeneratorCommand
             $this->createView();
         }
     }
-    
-        /**
+
+    /**
      * Execute the console command.
      *
      * @return void
