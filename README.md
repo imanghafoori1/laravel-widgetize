@@ -7,7 +7,6 @@ Laravel Widgetize
 <a href="https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize"><img src="https://img.shields.io/scrutinizer/g/imanghafoori1/laravel-widgetize.svg?style=flat-square" alt="Quality Score"></img></a>
 [![Latest Stable Version](https://poser.pugx.org/imanghafoori/laravel-widgetize/v/stable)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![Build Status](https://travis-ci.org/imanghafoori1/laravel-widgetize.svg?branch=master)](https://travis-ci.org/imanghafoori1/laravel-widgetize)
-[![License](https://poser.pugx.org/imanghafoori/laravel-widgetize/license)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![Awesome Laravel](https://img.shields.io/badge/Awesome-Laravel-brightgreen.svg)](https://github.com/chiraggude/awesome-laravel)
 [![Daily Downloads](https://poser.pugx.org/imanghafoori/laravel-widgetize/d/monthly)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![StyleCI](https://styleci.io/repos/80939052/shield?branch=master)](https://styleci.io/repos/80939052)
@@ -122,7 +121,7 @@ You can include `@widget('myWidget')` within your blade files and it will turn i
 
 -------------------
 
-### Overview:What happens when your write @widget('SomeWidget') in your views(Long story, short)
+#### Overview:What happens when your write @widget('SomeWidget') in your views (Long story, short)
 
 
 Given that we have disabled caching in the widgetize config file...
