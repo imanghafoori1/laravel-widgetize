@@ -161,7 +161,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
 
     private function printStarUs()
     {
-        if (mt_rand(1, 6) !== 4) {
+        if (mt_rand(1, 5) !== 3) {
             return;
         }
         $this->info('************************ Star It ************************');
