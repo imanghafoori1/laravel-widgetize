@@ -21,11 +21,6 @@ Laravel Widgetize
 ### Built with :heart: for every smart laravel developer
 
 
-You can reach the maintainer throught telegram IM:
-
-@imanghafoori or imanghafoori1@gmail.com
-
-
 **If you look for more ways of refactoring your controllers visit:**
 
 https://github.com/imanghafoori1/laravel-responder
