@@ -55,9 +55,9 @@ https://github.com/imanghafoori1/laravel-responder
    
 More readings:
 * :shipit: [Some Theory for Experts](#)
-    - [Article about widgetize and Solid Design Patterns](https://medium.com/@imanghafoori1/taste-single-responsibility-in-your-laravel-controllers-with-laravel-widgetize-package-9e0800d8b559)
-    - [Article about widgetize and Solid Design Patterns](https://medium.com/@imanghafoori1/taste-single-responsibility-in-your-laravel-controllers-with-laravel-widgetize-package-9e0800d8b559)
-    - [Article about widgetize and Solid Design Patterns](https://medium.com/@imanghafoori1/taste-single-responsibility-in-your-laravel-controllers-with-laravel-widgetize-package-9e0800d8b559)
+    - [Article about widgetize and S in Solid Design Patterns](https://medium.com/@imanghafoori1/taste-single-responsibility-in-your-laravel-controllers-with-laravel-widgetize-package-9e0800d8b559)
+    - [Article about widgetize and O in Solid Design Patterns](https://medium.com/@imanghafoori1/open-closed-principle-in-laravel-controllers-affc41df2f02)
+
 
 * :star: [Your Stars Makes Us Do More](#star-your-stars-make-us-do-more-star)
 
