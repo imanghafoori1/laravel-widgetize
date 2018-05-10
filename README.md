@@ -25,7 +25,9 @@ Laravel Widgetize
 
 **If you look for more ways of refactoring your controllers visit:**
 
-https://github.com/imanghafoori1/laravel-responder
+https://github.com/imanghafoori1/laravel-terminator
+
+https://github.com/imanghafoori1/laravel-anypass
 
 ---------------------
 
