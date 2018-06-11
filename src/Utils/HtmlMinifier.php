@@ -11,7 +11,7 @@ class HtmlMinifier
         '<!--(.*?)-->' => '', //remove comments
         "/<\?php/" => '<?php ',
         "/\n([\S])/" => '$1',
-        "/\r/" => '', // remove carrage return
+        "/\r/" => '', // remove carriage return
         "/\n/" => '', // remove new lines
         "/\t/" => '', // remove tab
         "/\s+/" => ' ', // remove spaces
