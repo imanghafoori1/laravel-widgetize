@@ -432,12 +432,16 @@ As always if you found this package useful and you want to encourage us to maint
 ### More from the authors:
 
 
+### Laravel Hey Man
+
 :gem: It allows to write exressive and defensive code whcih is decoupled from the rest of your app.
 
 - https://github.com/imanghafoori1/laravel-heyman
 
 
 ------------
+
+### Laravel Terminator
 
 
  :gem: A minimal yet powerful package to give you opportunity to refactor your controllers.
@@ -447,6 +451,7 @@ As always if you found this package useful and you want to encourage us to maint
 
 ------------
 
+### Laravel AnyPass
 
 :gem: It allows you login with any password in local environment only.
 
