@@ -434,7 +434,7 @@ As always if you found this package useful and you want to encourage us to maint
 
 ### Laravel Hey Man
 
-:gem: It allows to write exressive and defensive code whcih is decoupled from the rest of your app.
+:gem: It allows to write expressive code to authorize, validate and authenticate.
 
 - https://github.com/imanghafoori1/laravel-heyman
 
