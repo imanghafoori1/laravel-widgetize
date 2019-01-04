@@ -9,7 +9,7 @@ class PresenterNormalizer
      * @param object $widget
      * @return null
      */
-    public function normalizePresenterName($widget)
+    public function normalize($widget)
     {
         if (property_exists($widget, 'presenter')) {
             $presenter = $widget->presenter;

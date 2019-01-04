@@ -21,7 +21,7 @@ class HtmlMinifier
      * @param $htmlString string
      * @return string
      */
-    public function minify($htmlString)
+    public function minify(string $htmlString) : string
     {
         return preg_replace(array_keys($this->replace), array_values($this->replace), $htmlString);
     }

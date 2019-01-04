@@ -9,7 +9,7 @@ class CacheNormalizer
      * @param object $widget
      * @return null
      */
-    public function normalizeCacheLifeTime($widget)
+    public function normalize($widget)
     {
         if (! property_exists($widget, 'cacheLifeTime')) {
             $widget->cacheLifeTime = (int) (config('widgetize.default_cache_lifetime', 0));
@@ -19,23 +19,5 @@ class CacheNormalizer
             // 20.000 minutes is about 2 weeks which is long enough !
             $widget->cacheLifeTime = 20000;
         }
-    }
-
-    /**
-     * ّFigures out what the cache tags should be.
-     * @param object $widget
-     * @return array
-     */
-    public function normalizeCacheTags($widget)
-    {
-        if (! property_exists($widget, 'cacheTags')) {
-            return $widget->cacheTags = [];
-        }
-
-        if (is_array($widget->cacheTags)) {
-            return $widget->cacheTags;
-        }
-
-        throw new \InvalidArgumentException('Cache Tags must be of type Array with String elements.');
     }
 }

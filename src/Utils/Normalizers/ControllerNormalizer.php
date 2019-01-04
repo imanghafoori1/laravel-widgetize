@@ -9,7 +9,7 @@ class ControllerNormalizer
      * @param object $widget
      * @return void
      */
-    public function normalizeControllerMethod($widget)
+    public function normalize($widget)
     {
         list($controllerMethod, $ctrlClass) = $this->determineDataMethod($widget);
 
@@ -22,7 +22,7 @@ class ControllerNormalizer
     /**
      * @param string $ctrlClass
      */
-    private function checkControllerExists($ctrlClass)
+    private function checkControllerExists(string $ctrlClass)
     {
         if (! class_exists($ctrlClass)) {
             throw new \InvalidArgumentException("Controller class: [{$ctrlClass}] not found.");
@@ -32,7 +32,7 @@ class ControllerNormalizer
     /**
      * @param $ctrlClass
      */
-    private function checkDataMethodExists($ctrlClass)
+    private function checkDataMethodExists(string $ctrlClass)
     {
         if (! method_exists($ctrlClass, 'data')) {
             throw new \InvalidArgumentException("'data' method not found on ".$ctrlClass);

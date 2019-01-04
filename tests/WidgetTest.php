@@ -72,6 +72,7 @@ class WidgetTest extends TestCase
     public function test_json_widgets()
     {
         Response::shouldReceive('json')->once()->with('222111', 200)->andReturn('123');
+        View::shouldReceive('exists')->once()->andReturn(true);
         //act
         $widget = new Widget6();
         $a = json_widget($widget, ['foo' => '111', 'bar' => '222']);
@@ -81,6 +82,7 @@ class WidgetTest extends TestCase
     public function test_json_widgets_as_string()
     {
         Response::shouldReceive('json')->once()->with('222111', 200)->andReturn('123');
+        View::shouldReceive('exists')->once()->andReturn(true);
         //act
         $a = json_widget('Foo\Widget6', ['foo' => '111', 'bar' => '222']);
         $this->assertEquals('123', $a);

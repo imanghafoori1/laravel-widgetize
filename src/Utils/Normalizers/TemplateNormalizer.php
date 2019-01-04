@@ -9,7 +9,7 @@ class TemplateNormalizer
      * @param object $widget
      * @return null
      */
-    public function normalizeTemplateName($widget)
+    public function normalize($widget)
     {
         // class name without namespace.
         $className = str_replace('App\\Widgets\\', '', get_class($widget));

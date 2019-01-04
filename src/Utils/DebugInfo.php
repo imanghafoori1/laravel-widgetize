@@ -23,7 +23,7 @@ class DebugInfo
      * @param string $html
      * @return string
      */
-    public function addIdentifierToHtml($widget, $html)
+    public function addIdentifierToHtml($widget,string $html): string
     {
         $this->widget = $widget;
         $this->html = $html;
@@ -36,7 +36,7 @@ class DebugInfo
     /**
      * Adds debug info to html as HTML title tags.
      */
-    private function addDebugInfo()
+    private function addDebugInfo(): void
     {
         $tpl = $this->getTplPath($this->widget->template);
 
@@ -48,7 +48,7 @@ class DebugInfo
      *
      * @return string
      */
-    private function cacheState()
+    private function cacheState(): string
     {
         if (! $this->policies->widgetShouldUseCache()) {
             return ' &#013;Cache: is globally turned off (You should put "enable_cache" => true in config\widgetize.php) ';
@@ -57,7 +57,7 @@ class DebugInfo
         return " &#013;Cache : {$this->widget->cacheLifeTime} (min) ";
     }
 
-    private function addHtmlComments()
+    private function addHtmlComments(): void
     {
         $this->html = "<!-- '{".get_class($this->widget)."' Widget Start -->".$this->html."<!-- '".get_class($this->widget)."' Widget End -->";
     }
@@ -66,7 +66,7 @@ class DebugInfo
      * @param $tpl
      * @return string
      */
-    private function getTplPath($tpl)
+    private function getTplPath(string $tpl): string
     {
         if (str_contains($tpl, 'Widgets::')) {
             $tpl = str_replace('Widgets::', app()->getNamespace().'Widgets\\', $tpl);

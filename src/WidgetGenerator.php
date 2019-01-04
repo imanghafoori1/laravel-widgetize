@@ -57,7 +57,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
      *
      * return void
      */
-    private function createView()
+    private function createView(): void
     {
         $path = $this->getViewPath();
 
@@ -154,7 +154,7 @@ class WidgetGenerator extends LaravelGeneratorCommand
     /**
      * @return string
      */
-    private function getViewStub()
+    private function getViewStub(): string
     {
         return 'Note that you can reference partials within "App\Widgets" folder like this: @include("Widgets::somePartial") ';
     }

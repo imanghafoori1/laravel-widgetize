@@ -10,7 +10,7 @@ class ContextAsNormalizer
      * @param object $widget
      * @return null
      */
-    public function normalizeContextAs($widget)
+    public function normalize($widget)
     {
         $contextAs = 'data';
         if (property_exists($widget, 'contextAs')) {

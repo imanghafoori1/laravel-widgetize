@@ -49,7 +49,7 @@ class Cache
      * @param string $form
      * @return string An MD5 string
      */
-    private function makeCacheKey(array $arg, $widget, $form)
+    private function makeCacheKey(array $arg, $widget, string $form): string
     {
         if (method_exists($widget, 'cacheKey')) {
             return $widget->cacheKey($arg);
@@ -74,7 +74,7 @@ class Cache
      * Determines cacheTagging is supported by the chosen laravel cache driver or not.
      * @return bool
      */
-    private function cacheDriverSupportsTags()
+    private function cacheDriverSupportsTags() : bool
     {
         return ! in_array(config('cache.default', 'file'), ['file', 'database']);
     }
@@ -91,7 +91,8 @@ class Cache
     }
 
     /**
-     * @param string[] $tags
+     * @param string[]|string $tags
+     * @return void
      */
     public function expireTaggedWidgets($tags)
     {

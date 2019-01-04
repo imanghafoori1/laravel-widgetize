@@ -29,10 +29,10 @@ class WidgetJsonifier
     }
 
     /**
-     * @param $widget object
+     * @param $widget string
      * @return \Illuminate\Foundation\Application|mixed
      */
-    private function makeWidgetObj($widget)
+    private function makeWidgetObj(string $widget)
     {
         $widget = app()->getNamespace().'Widgets\\'.$widget;
 

@@ -9,7 +9,7 @@ class Policies
      *
      * @return bool
      */
-    public function widgetShouldHaveDebugInfo()
+    public function widgetShouldHaveDebugInfo(): bool
     {
         return config('widgetize.debug_info') && env('APP_ENV', 'production') !== 'production';
     }
@@ -21,7 +21,7 @@ class Policies
      *
      * @return bool
      */
-    public function widgetShouldUseCache()
+    public function widgetShouldUseCache(): bool
     {
         return config('widgetize.enable_cache') && (! app()->environment('testing'));
     }
@@ -31,7 +31,7 @@ class Policies
      *
      * @return bool
      */
-    public function widgetShouldBeMinified()
+    public function widgetShouldBeMinified(): bool
     {
         return config('widgetize.minify_html') || app()->environment('production');
     }

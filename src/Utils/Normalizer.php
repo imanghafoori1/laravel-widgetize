@@ -3,6 +3,7 @@
 namespace Imanghafoori\Widgets\Utils;
 
 use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
+use Imanghafoori\Widgets\Utils\Normalizers\CacheTagsNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\TemplateNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\ContextAsNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
@@ -10,15 +11,10 @@ use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
 
 class Normalizer
 {
-    private $presenterNormalizer;
-
-    private $templateNormalizer;
-
-    private $cacheNormalizer;
-
-    private $controllerNormalizer;
-
-    private $contextAsNormalizer;
+    /**
+     * @var array
+     */
+    private $normalizers = [];
 
     /**
      * Normalizer constructor which accepts dependencies.
@@ -27,6 +23,7 @@ class Normalizer
      * @param CacheNormalizer $cacheNormalizer
      * @param PresenterNormalizer $presenterNormalizer
      * @param ControllerNormalizer $controllerNormalizer
+     * @param \Imanghafoori\Widgets\Utils\Normalizers\CacheTagsNormalizer $cacheTagsNormalizer
      * @param ContextAsNormalizer $contextAsNormalizer
      */
     public function __construct(
@@ -34,13 +31,19 @@ class Normalizer
         CacheNormalizer $cacheNormalizer,
         PresenterNormalizer $presenterNormalizer,
         ControllerNormalizer $controllerNormalizer,
+        CacheTagsNormalizer $cacheTagsNormalizer,
         ContextAsNormalizer $contextAsNormalizer
     ) {
-        $this->presenterNormalizer = $presenterNormalizer;
-        $this->controllerNormalizer = $controllerNormalizer;
-        $this->templateNormalizer = $templateNormalizer;
-        $this->cacheNormalizer = $cacheNormalizer;
-        $this->contextAsNormalizer = $contextAsNormalizer;
+        $this->normalizers[] = $presenterNormalizer;
+        $this->normalizers[] = $controllerNormalizer;
+        $this->normalizers[] = $templateNormalizer;
+        $this->normalizers[] = $cacheNormalizer;
+        $this->normalizers[] = $cacheTagsNormalizer;
+        $this->normalizers[] = $contextAsNormalizer;
+
+        $this->jsonNormalizer[] = $controllerNormalizer;
+        $this->jsonNormalizer[] = $cacheNormalizer;
+        $this->jsonNormalizer[] = $cacheTagsNormalizer;
     }
 
     /**
@@ -48,19 +51,16 @@ class Normalizer
      *
      * @param object $widget
      */
-    public function normalizeWidgetConfig($widget)
+    public function normalizeWidgetConfig($widget): void
     {
         // to avoid normalizing a widget multiple times unnecessarily :
         if (isset($widget->isNormalized)) {
             return;
         }
 
-        $this->controllerNormalizer->normalizeControllerMethod($widget);
-        $this->presenterNormalizer->normalizePresenterName($widget);
-        $this->templateNormalizer->normalizeTemplateName($widget);
-        $this->cacheNormalizer->normalizeCacheLifeTime($widget);
-        $this->cacheNormalizer->normalizeCacheTags($widget);
-        $this->contextAsNormalizer->normalizeContextAs($widget);
+        foreach ($this->normalizers as $normalizer){
+            $normalizer->normalize($widget);
+        }
         $widget->isNormalized = true;
     }
 
@@ -69,10 +69,10 @@ class Normalizer
      *
      * @param object $widget
      */
-    public function normalizeJsonWidget($widget)
+    public function normalizeJsonWidget($widget): void
     {
-        $this->controllerNormalizer->normalizeControllerMethod($widget);
-        $this->cacheNormalizer->normalizeCacheLifeTime($widget);
-        $this->cacheNormalizer->normalizeCacheTags($widget);
+        foreach ($this->normalizers as $normalizer){
+            $normalizer->normalize($widget);
+        }
     }
 }
