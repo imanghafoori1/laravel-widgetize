@@ -6,7 +6,6 @@ use Imanghafoori\Widgets\Utils\NormalizerContract;
 
 class CacheTagsNormalizer implements NormalizerContract
 {
-
     /**
      * ّFigures out what the cache tags should be.
      * @param object $widget
@@ -24,5 +23,4 @@ class CacheTagsNormalizer implements NormalizerContract
 
         throw new \InvalidArgumentException('Cache Tags must be of type Array with String elements.');
     }
-
 }

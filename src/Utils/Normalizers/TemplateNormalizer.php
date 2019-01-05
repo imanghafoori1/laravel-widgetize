@@ -4,7 +4,7 @@ namespace Imanghafoori\Widgets\Utils\Normalizers;
 
 use Imanghafoori\Widgets\Utils\NormalizerContract;
 
-class TemplateNormalizer  implements NormalizerContract
+class TemplateNormalizer implements NormalizerContract
 {
     /**
      * Figures out which template to render.

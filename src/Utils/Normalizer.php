@@ -3,8 +3,8 @@
 namespace Imanghafoori\Widgets\Utils;
 
 use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
-use Imanghafoori\Widgets\Utils\Normalizers\CacheTagsNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\TemplateNormalizer;
+use Imanghafoori\Widgets\Utils\Normalizers\CacheTagsNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\ContextAsNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
@@ -58,7 +58,7 @@ class Normalizer
             return;
         }
 
-        foreach ($this->normalizers as $normalizer){
+        foreach ($this->normalizers as $normalizer) {
             $normalizer->normalize($widget);
         }
         $widget->isNormalized = true;
@@ -71,7 +71,7 @@ class Normalizer
      */
     public function normalizeJsonWidget($widget): void
     {
-        foreach ($this->normalizers as $normalizer){
+        foreach ($this->normalizers as $normalizer) {
             $normalizer->normalize($widget);
         }
     }

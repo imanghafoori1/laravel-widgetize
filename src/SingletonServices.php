@@ -5,8 +5,8 @@ namespace Imanghafoori\Widgets;
 use Illuminate\Container\Container;
 use Imanghafoori\Widgets\Utils\Normalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\CacheNormalizer;
-use Imanghafoori\Widgets\Utils\Normalizers\CacheTagsNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\TemplateNormalizer;
+use Imanghafoori\Widgets\Utils\Normalizers\CacheTagsNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\ContextAsNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\PresenterNormalizer;
 use Imanghafoori\Widgets\Utils\Normalizers\ControllerNormalizer;
@@ -18,7 +18,7 @@ class SingletonServices
      *
      * @param $app
      */
-    private $singletonClasses  = [
+    private $singletonClasses = [
         Utils\HtmlMinifier::class,
         Utils\DebugInfo::class,
         Utils\Policies::class,
@@ -35,7 +35,6 @@ class SingletonServices
             });
         }
     }
-
 
     public function registerSingletons(Container $app)
     {

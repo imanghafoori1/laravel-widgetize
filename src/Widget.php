@@ -24,6 +24,5 @@ class Widget implements Renderable, Htmlable
      */
     public function render()
     {
-        return ;
     }
 }
