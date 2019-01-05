@@ -2,7 +2,9 @@
 
 namespace Imanghafoori\Widgets\Utils\Normalizers;
 
-class ControllerNormalizer
+use Imanghafoori\Widgets\Utils\NormalizerContract;
+
+class ControllerNormalizer  implements NormalizerContract
 {
     /**
      * Figures out which method should be called as the controller.

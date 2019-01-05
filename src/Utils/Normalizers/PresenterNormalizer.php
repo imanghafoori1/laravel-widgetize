@@ -2,7 +2,9 @@
 
 namespace Imanghafoori\Widgets\Utils\Normalizers;
 
-class PresenterNormalizer
+use Imanghafoori\Widgets\Utils\NormalizerContract;
+
+class PresenterNormalizer  implements NormalizerContract
 {
     /**
      * Figures out which method should be called as the presenter.

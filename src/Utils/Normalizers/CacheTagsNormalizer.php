@@ -2,7 +2,9 @@
 
 namespace Imanghafoori\Widgets\Utils\Normalizers;
 
-class CacheTagsNormalizer
+use Imanghafoori\Widgets\Utils\NormalizerContract;
+
+class CacheTagsNormalizer implements NormalizerContract
 {
 
     /**

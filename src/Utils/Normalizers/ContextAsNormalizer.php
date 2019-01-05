@@ -2,7 +2,9 @@
 
 namespace Imanghafoori\Widgets\Utils\Normalizers;
 
-class ContextAsNormalizer
+use Imanghafoori\Widgets\Utils\NormalizerContract;
+
+class ContextAsNormalizer  implements NormalizerContract
 {
     /**
      * Figures out what the variable name should be in view file.

@@ -2,7 +2,9 @@
 
 namespace Imanghafoori\Widgets\Utils\Normalizers;
 
-class CacheNormalizer
+use Imanghafoori\Widgets\Utils\NormalizerContract;
+
+class CacheNormalizer implements NormalizerContract
 {
     /**
      * ّFigures out how long the cache life time should be.
