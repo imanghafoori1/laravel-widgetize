@@ -23,7 +23,7 @@ class DebugInfo
      * @param string $html
      * @return string
      */
-    public function addIdentifierToHtml($widget,string $html): string
+    public function addIdentifierToHtml($widget, string $html): string
     {
         $this->widget = $widget;
         $this->html = $html;
