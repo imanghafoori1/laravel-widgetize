@@ -17,7 +17,7 @@ class WidgetJsonifier
             $widget = $this->makeWidgetObj($widget);
         }
 
-        app(Normalizer::class)->normalizeJsonWidget($widget);
+        app(Normalizer::class)->normalizeWidgetConfig($widget);
 
         try {
             $json = $this->generateJson($widget, ...$args);

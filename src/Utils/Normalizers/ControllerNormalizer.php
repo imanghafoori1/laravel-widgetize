@@ -11,7 +11,7 @@ class ControllerNormalizer implements NormalizerContract
      * @param object $widget
      * @return void
      */
-    public function normalize($widget)
+    public function normalize($widget): void
     {
         list($controllerMethod, $ctrlClass) = $this->determineDataMethod($widget);
 
@@ -24,7 +24,7 @@ class ControllerNormalizer implements NormalizerContract
     /**
      * @param string $ctrlClass
      */
-    private function checkControllerExists(string $ctrlClass)
+    private function checkControllerExists(string $ctrlClass): void
     {
         if (! class_exists($ctrlClass)) {
             throw new \InvalidArgumentException("Controller class: [{$ctrlClass}] not found.");
@@ -34,7 +34,7 @@ class ControllerNormalizer implements NormalizerContract
     /**
      * @param $ctrlClass
      */
-    private function checkDataMethodExists(string $ctrlClass)
+    private function checkDataMethodExists(string $ctrlClass): void
     {
         if (! method_exists($ctrlClass, 'data')) {
             throw new \InvalidArgumentException("'data' method not found on ".$ctrlClass);
@@ -45,7 +45,7 @@ class ControllerNormalizer implements NormalizerContract
      * @param object $widget
      * @return array [$controllerMethod, $ctrlClass]
      */
-    private function determineDataMethod($widget)
+    private function determineDataMethod($widget): array
     {
         // We decide to call data method on widget object by default.
         $controllerMethod = [$widget, 'data'];

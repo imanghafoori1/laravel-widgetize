@@ -12,7 +12,7 @@ class ContextAsNormalizer implements NormalizerContract
      * @param object $widget
      * @return null
      */
-    public function normalize($widget)
+    public function normalize($widget): void
     {
         $contextAs = 'data';
         if (property_exists($widget, 'contextAs')) {

@@ -11,7 +11,7 @@ class CacheNormalizer implements NormalizerContract
      * @param object $widget
      * @return null
      */
-    public function normalize($widget)
+    public function normalize($widget): void
     {
         if (! property_exists($widget, 'cacheLifeTime')) {
             $widget->cacheLifeTime = (int) (config('widgetize.default_cache_lifetime', 0));

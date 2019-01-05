@@ -13,7 +13,7 @@ class RouteMacros
         $this->registerJsonWidget();
     }
 
-    private function registerWidget()
+    private function registerWidget() : void
     {
         Route::macro('widget', function ($url, $widget, $name = null) {
             return Route::get($url, [
@@ -25,7 +25,7 @@ class RouteMacros
         });
     }
 
-    private function registerJsonWidget()
+    private function registerJsonWidget(): void
     {
         Route::macro('jsonWidget', function ($url, $widget, $name = null) {
             return Route::get($url, [

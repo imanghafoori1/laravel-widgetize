@@ -10,7 +10,7 @@ class Normalizer
     private $normalizers = [];
 
 
-    public function addNormalizer(NormalizerContract $normalizer)
+    public function addNormalizer(NormalizerContract $normalizer): void
     {
         $this->normalizers[] = $normalizer;
     }
@@ -31,17 +31,5 @@ class Normalizer
             $normalizer->normalize($widget);
         }
         $widget->isNormalized = true;
-    }
-
-    /**
-     * Figures out and sets json widget configs according to conventions.
-     *
-     * @param object $widget
-     */
-    public function normalizeJsonWidget($widget): void
-    {
-        foreach ($this->normalizers as $normalizer) {
-            $normalizer->normalize($widget);
-        }
     }
 }
