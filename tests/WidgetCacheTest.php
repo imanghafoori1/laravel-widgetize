@@ -121,7 +121,6 @@ class WidgetCacheTest extends TestCase
 
     public function test_the_cache_tags()
     {
-        //putenv('CACHE_DRIVER=array');
         config(['cache.default'=> 'file']);
         config(['widgetize.debug_info' => false]);
         config(['widgetize.enable_cache' => true]);
@@ -148,5 +147,9 @@ class WidgetCacheTest extends TestCase
 
         $this->assertEquals('<p>some text</p>', $result2);
         $this->assertEquals('<p>some text</p>', $result5);
+
+        //clean up
+        expire_widgets(['t2']);
+        expire_widgets(['t1']);
     }
 }
