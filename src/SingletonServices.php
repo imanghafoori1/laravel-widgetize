@@ -43,21 +43,14 @@ class SingletonServices
         });
 
         $app->singleton(Normalizer::class, function () {
-            $cacheNormalizer = new CacheNormalizer();
-            $tplNormalizer = new TemplateNormalizer();
-            $presenterNormalizer = new PresenterNormalizer();
-            $ctrlNormalizer = new ControllerNormalizer();
-            $contextAsNormalizer = new ContextAsNormalizer();
-            $cacheTagsNormalizer = new CacheTagsNormalizer();
-
-            return new Utils\Normalizer(
-                $tplNormalizer,
-                $cacheNormalizer,
-                $presenterNormalizer,
-                $ctrlNormalizer,
-                $cacheTagsNormalizer,
-                $contextAsNormalizer
-            );
+            $normalizer = new Utils\Normalizer();
+            $normalizer->addNormalizer(new CacheNormalizer());
+            $normalizer->addNormalizer(new TemplateNormalizer());
+            $normalizer->addNormalizer(new PresenterNormalizer());
+            $normalizer->addNormalizer(new ControllerNormalizer());
+            $normalizer->addNormalizer(new ContextAsNormalizer());
+            $normalizer->addNormalizer(new CacheTagsNormalizer());
+            return $normalizer;
         });
 
         $this->declareAsSingleton($app);
