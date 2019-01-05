@@ -50,6 +50,7 @@ class SingletonServices
             $normalizer->addNormalizer(new ControllerNormalizer());
             $normalizer->addNormalizer(new ContextAsNormalizer());
             $normalizer->addNormalizer(new CacheTagsNormalizer());
+
             return $normalizer;
         });
 
