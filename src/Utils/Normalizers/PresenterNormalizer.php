@@ -19,7 +19,6 @@ class PresenterNormalizer implements NormalizerContract
             $this->checkPresentMethodExists($presenter);
             $widget->presenter = $presenter.'@present';
         }
- 
     }
 
     /**

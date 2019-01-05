@@ -9,7 +9,6 @@ class Normalizer
      */
     private $normalizers = [];
 
-
     public function addNormalizer(NormalizerContract $normalizer): void
     {
         $this->normalizers[] = $normalizer;
