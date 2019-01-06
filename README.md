@@ -395,12 +395,6 @@ _a_ and _b_ parameters are passed to widget controller.
 `jsonWidget` will expose the cached data returned from the widget's controller.
 
 
-You can also :
-
-```php
-Route::view('/some-url-2', 'someView', 'theRouteName'); //loads resource/views/someView.blade.php with a GET
-```
-
 --------------------
 
 ### Q&A:How to reference widget controllers from routes ?
