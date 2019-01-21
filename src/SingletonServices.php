@@ -27,12 +27,19 @@ class SingletonServices
         Utils\WidgetRenderer::class,
     ];
 
+    private $normalizers = [
+        CacheNormalizer::class,
+        TemplateNormalizer::class,
+        PresenterNormalizer::class,
+        ControllerNormalizer::class,
+        ContextAsNormalizer::class,
+        CacheTagsNormalizer::class,
+    ];
+
     protected function declareAsSingleton(Container $app)
     {
         foreach ($this->singletonClasses as $class) {
-            $app->singleton($class, function () use ($class) {
-                return new $class;
-            });
+            $app->singleton($class);
         }
     }
 
@@ -43,15 +50,11 @@ class SingletonServices
         });
 
         $app->singleton(Normalizer::class, function () {
-            $normalizer = new Utils\Normalizer();
-            $normalizer->addNormalizer(new CacheNormalizer());
-            $normalizer->addNormalizer(new TemplateNormalizer());
-            $normalizer->addNormalizer(new PresenterNormalizer());
-            $normalizer->addNormalizer(new ControllerNormalizer());
-            $normalizer->addNormalizer(new ContextAsNormalizer());
-            $normalizer->addNormalizer(new CacheTagsNormalizer());
-
-            return $normalizer;
+            $mainNormalizer = new Utils\Normalizer();
+            foreach ($this->normalizers as $normalizer) {
+                $mainNormalizer->addNormalizer(new $normalizer);
+            }
+            return $mainNormalizer;
         });
 
         $this->declareAsSingleton($app);

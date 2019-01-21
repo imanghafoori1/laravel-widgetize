@@ -4,6 +4,9 @@ namespace Imanghafoori\Widgets\Utils;
 
 class Cache
 {
+    /**
+     * @var \Imanghafoori\Widgets\Utils\CacheTag
+     */
     private $_cacheTag;
 
     /**

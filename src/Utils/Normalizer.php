@@ -5,7 +5,7 @@ namespace Imanghafoori\Widgets\Utils;
 class Normalizer
 {
     /**
-     * @var array
+     * @var NormalizerContract[]
      */
     private $normalizers = [];
 
@@ -29,6 +29,7 @@ class Normalizer
         foreach ($this->normalizers as $normalizer) {
             $normalizer->normalize($widget);
         }
+
         $widget->isNormalized = true;
     }
 }

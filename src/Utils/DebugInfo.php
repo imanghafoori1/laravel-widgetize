@@ -63,7 +63,7 @@ class DebugInfo
     }
 
     /**
-     * @param $tpl
+     * @param string $tpl
      * @return string
      */
     private function getTplPath(string $tpl): string

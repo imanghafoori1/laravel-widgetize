@@ -80,7 +80,7 @@ class WidgetRenderer
         };
 
         // We first try to get the output from the cache before trying to run the expensive $expensivePhpCode...
-        if ($this->_policies->widgetShouldUseCache($widget->cacheLifeTime)) {
+        if ($this->_policies->widgetShouldUseCache()) {
             return app(Cache::class)->cacheResult($args, $expensivePhpCode, $widget);
         }
 
@@ -110,6 +110,7 @@ class WidgetRenderer
     /**
      * @param $widget object
      * @return string HTML output
+     * @throws \Throwable
      */
     private function renderTemplate($widget)
     {
