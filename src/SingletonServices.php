@@ -54,6 +54,7 @@ class SingletonServices
             foreach ($this->normalizers as $normalizer) {
                 $mainNormalizer->addNormalizer(new $normalizer);
             }
+
             return $mainNormalizer;
         });
 
