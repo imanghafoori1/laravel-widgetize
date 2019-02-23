@@ -1,7 +1,7 @@
 Laravel Widgetize
 =================
 
-<p style="text-align: center;">
+<p align="center">
     <img src="https://cloud.githubusercontent.com/assets/6961695/24345454/7d5c9e4c-12e5-11e7-8c22-015395dbb796.jpg" alt="widgetize_header"></img>
 </p>
 
@@ -36,7 +36,7 @@ Built with :heart: for every smart laravel developer
 * :flashlight: [Introduction](#introduction)
     - [What is a _widget object_ ?](#what-is-a-widget-object)
     - [When to use the _widget_ concept?](#when-to-use-the-widget-concept)
-    - :gem: [Package Features](#gem-package-features-gem)
+    - [Package Features](#gem-package-features-gem)
     - [Sample App](https://github.com/zigstum/laracasts-forum-widgets)
     
 * :wrench: [Installation](#wrench-installation-arrow_down)
