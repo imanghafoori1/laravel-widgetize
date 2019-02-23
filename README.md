@@ -13,7 +13,6 @@
 [![Build Status](https://travis-ci.org/imanghafoori1/laravel-widgetize.svg?branch=master)](https://travis-ci.org/imanghafoori1/laravel-widgetize)
 [![Awesome Laravel](https://img.shields.io/badge/Awesome-Laravel-brightgreen.svg)](https://github.com/chiraggude/awesome-laravel)
 [![Monthly Downloads](https://poser.pugx.org/imanghafoori/laravel-widgetize/d/monthly)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
-[![Daily Downloads](https://poser.pugx.org/imanghafoori/laravel-widgetize/d/daily)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![StyleCI](https://styleci.io/repos/80939052/shield?branch=master)](https://styleci.io/repos/80939052)
 [![Code Coverage](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/?branch=master)
 
