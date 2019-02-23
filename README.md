@@ -21,13 +21,13 @@ Laravel Widgetize
 
 <h2 align="center">
     
- :ribbon::ribbon: Widgetize : "_cleaner code_" :heavy_plus_sign: "_easy caching_" :ribbon::ribbon:
+ :ribbon::ribbon: "_cleaner code_" :heavy_plus_sign: "_easy caching_" :ribbon::ribbon:
 
 </h2>
 
-
-### Built with :heart: for every smart laravel developer
-
+<h4 align="center">
+Built with :heart: for every smart laravel developer
+<h4 align="center">
 
 ---------------------
 
