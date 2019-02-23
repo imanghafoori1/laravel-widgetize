@@ -27,7 +27,7 @@ Laravel Widgetize
 
 <h4 align="center">
 Built with :heart: for every smart laravel developer
-<h4 align="center">
+</h4>
 
 ---------------------
 
