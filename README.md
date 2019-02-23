@@ -18,8 +18,9 @@ Laravel Widgetize
 
 
 
-
-## :ribbon::ribbon::ribbon: Widgetize : "_cleaner code_" :heavy_plus_sign: "_easy caching_" :ribbon::ribbon::ribbon:
+<p align="center">
+## :ribbon::ribbon: Widgetize : "_cleaner code_" :heavy_plus_sign: "_easy caching_" :ribbon::ribbon:
+</p>
 
 ### Built with :heart: for every smart laravel developer
 
