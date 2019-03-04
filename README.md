@@ -1,5 +1,9 @@
+<h1 align="center">
+Laravel Widgetize
+</h1>
+
 <p align="center">
-    <img src="https://cloud.githubusercontent.com/assets/6961695/24345454/7d5c9e4c-12e5-11e7-8c22-015395dbb796.jpg" alt="widgetize_header"></img>
+    <img width="300px" src="https://cloud.githubusercontent.com/assets/6961695/24345454/7d5c9e4c-12e5-11e7-8c22-015395dbb796.jpg" alt="widgetize_header"></img>
 </p>
 
 
@@ -18,9 +22,6 @@
 
 </p>
 
-<h1 align="center">
-Laravel Widgetize
-</h1>
 
 
 <h2 align="center">
