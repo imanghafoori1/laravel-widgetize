@@ -94,8 +94,8 @@ class WidgetCacheTest extends TestCase
         $result2 = render_widget($widget2, 'sdfvsf');
 
         $this->assertEquals('<p>some text</p>', $result1);
-        $this->assertEquals($widget->cacheLifeTime, 20000);
-        $this->assertEquals($widget2->cacheLifeTime, 20000);
+        $this->assertEquals($widget->cacheLifeTime->d, 14);
+        $this->assertEquals($widget2->cacheLifeTime->d, 14);
     }
 
     public function test_cacheKey_method()
