@@ -19,8 +19,8 @@ class CacheNormalizer implements NormalizerContract
             $widget->cacheLifeTime = new \DateInterval('PT'.$M.'M');
         }
 
-        if(is_object($widget->cacheLifeTime) or $widget->cacheLifeTime === 0){
-            return ;
+        if (is_object($widget->cacheLifeTime) or $widget->cacheLifeTime === 0) {
+            return;
         }
 
         if ($widget->cacheLifeTime === 'forever' || $widget->cacheLifeTime < 0) {
