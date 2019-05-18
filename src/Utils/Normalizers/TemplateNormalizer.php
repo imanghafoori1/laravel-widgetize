@@ -15,7 +15,7 @@ class TemplateNormalizer implements NormalizerContract
     public function normalize($widget) : void
     {
         // class name without namespace.
-        $className = str_replace('App\\Widgets\\', '', get_class($widget));
+        $className = str_replace(app()->getNamespace().'Widgets\\', '', get_class($widget));
 
         // replace slashes with dots
         $className = str_replace(['\\', '/'], '.', $className);
