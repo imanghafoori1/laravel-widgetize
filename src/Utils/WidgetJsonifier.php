@@ -30,7 +30,7 @@ class WidgetJsonifier
 
     /**
      * @param $widget string
-     * @return \Illuminate\Foundation\Application|mixed
+     * @return object
      */
     private function makeWidgetObj(string $widget)
     {
