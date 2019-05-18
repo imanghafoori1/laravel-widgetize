@@ -13,7 +13,7 @@ class ControllerNormalizer implements NormalizerContract
      */
     public function normalize($widget): void
     {
-        list($controllerMethod, $ctrlClass) = $this->determineDataMethod($widget);
+        [$controllerMethod, $ctrlClass] = $this->determineDataMethod($widget);
 
         $this->checkControllerExists($ctrlClass);
         $this->checkDataMethodExists($ctrlClass);
