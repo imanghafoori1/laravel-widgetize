@@ -459,3 +459,11 @@ As always if you found this package useful and you want to encourage us to maint
 :gem: It allows you login with any password in local environment only.
 
 - https://github.com/imanghafoori1/laravel-anypass
+
+------------
+
+### Eloquent Relativity
+
+:gem: It allows you to decouple your eloquent models to reach a modular structure
+
+- https://github.com/imanghafoori1/eloquent-relativity
