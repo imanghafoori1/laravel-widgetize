@@ -18,11 +18,7 @@ Laravel Widgetize
 [![Awesome Laravel](https://img.shields.io/badge/Awesome-Laravel-brightgreen.svg)](https://github.com/chiraggude/awesome-laravel)
 [![Monthly Downloads](https://poser.pugx.org/imanghafoori/laravel-widgetize/d/monthly)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![Code Coverage](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/?branch=master)
-
-https://blockchain.com/btc/payment_request?address=15Vagc7dnvcVcSGRVEZfneQyLeW8dPHdCJ&amount=0.00011447&message=Donation
-<div id="coinwidget" data-icon="true" data-type="primary" data-wallet="1Gc317G5YdGm4Mx27RXpaa2vToFQR8J1bt" />
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ivandiazwm/coinwidget@0.1.1/builds/full.js" charset="utf-8"></script>
-</p>
+[![Donate Bitcoin](https://img.shields.io/badge/donate-$1-orange.svg)](https://blockchain.com/btc/payment_request?address=1MTPGWkNfBtT8mTith1Rf91MS4kucUX4c1&amount=0.00011451&message=Donatation&name=Iman)
 </p>
 
 
