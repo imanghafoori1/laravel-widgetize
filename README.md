@@ -41,7 +41,6 @@ Built with :heart: for every smart laravel developer
     - [What is a _widget object_ ?](#what-is-a-widget-object)
     - [When to use the _widget_ concept?](#when-to-use-the-widget-concept)
     - [Package Features](#gem-package-features-gem)
-    - [Sample App](https://github.com/zigstum/laracasts-forum-widgets)
     
 * :wrench: [Installation](#wrench-installation-arrow_down)
 * :earth_africa: [Global Configuration](#earth_africa-global-config)
