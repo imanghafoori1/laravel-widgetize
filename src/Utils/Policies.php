@@ -11,7 +11,7 @@ class Policies
      */
     public function widgetShouldHaveDebugInfo(): bool
     {
-        return config('widgetize.debug_info') && !app()->environment('production');
+        return config('widgetize.debug_info') && ! app()->environment('production');
     }
 
     /**
