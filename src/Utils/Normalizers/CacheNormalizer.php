@@ -16,10 +16,10 @@ class CacheNormalizer implements NormalizerContract
     {
         if (! property_exists($widget, 'cacheLifeTime')) {
             $M = config('widgetize.default_cache_lifetime', 0);
-            $widget->cacheLifeTime = $this->makeFromSeconds($M* 60);
+            $widget->cacheLifeTime = $this->makeFromSeconds($M * 60);
         }
 
-        if($widget->cacheLifeTime === 0) {
+        if ($widget->cacheLifeTime === 0) {
             $widget->cacheLifeTime = $this->makeFromSeconds(0);
         }
 
@@ -37,6 +37,6 @@ class CacheNormalizer implements NormalizerContract
 
     public function makeFromSeconds($s)
     {
-        return new \DateInterval('PT'.(string)ceil($s).'S');
+        return new \DateInterval('PT'.(string) ceil($s).'S');
     }
 }

@@ -9,7 +9,7 @@ class WidgetCacheTest extends TestCase
         putenv('CACHE_DRIVER=array');
         config(['widgetize.debug_info' => false]);
         config(['widgetize.enable_cache' => true]);
-        config(['widgetize.default_cache_lifetime' => 1/60]);
+        config(['widgetize.default_cache_lifetime' => 1 / 60]);
         app()['env'] = 'production';
         //assert
         View::shouldReceive('exists')->once()->andReturn(true);
