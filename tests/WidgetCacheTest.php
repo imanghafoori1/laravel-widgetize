@@ -9,7 +9,7 @@ class WidgetCacheTest extends TestCase
         putenv('CACHE_DRIVER=array');
         config(['widgetize.debug_info' => false]);
         config(['widgetize.enable_cache' => true]);
-        config(['widgetize.default_cache_lifetime' => 1]);
+        config(['widgetize.default_cache_lifetime' => 1/60]);
         app()['env'] = 'production';
         //assert
         View::shouldReceive('exists')->once()->andReturn(true);
@@ -27,6 +27,7 @@ class WidgetCacheTest extends TestCase
 
         $this->assertEquals('<p>some text</p>', $result2);
         $this->assertEquals('<p>some text</p>', $result5);
+        $this->assertEquals($widget->cacheLifeTime->s, 1);
     }
 
     public function test_caches_the_result_of_controller_method_and_views()
@@ -49,12 +50,15 @@ class WidgetCacheTest extends TestCase
 
         $this->assertEquals('<p>some text</p>', $result2);
         $this->assertEquals('<p>some text</p>', $result5);
+        $this->assertEquals($widget->cacheLifeTime->s, 90);
     }
 
     public function test_avoids_caching_when_lifetime_is_set_to_zero()
     {
         putenv('CACHE_DRIVER=array');
         config(['widgetize.enable_cache' => true]);
+        config(['widgetize.debug_info' => true]);
+
         config(['widgetize.default_cache_lifetime' => 1]);
         app()['env'] = 'production';
         //assert
@@ -70,9 +74,9 @@ class WidgetCacheTest extends TestCase
         $result3 = render_widget($widget);
         $result4 = render_widget($widget);
         $result5 = render_widget($widget);
-
-        //$this->assertEquals('<p>some text</p>', $result2);
-        //$this->assertEquals('<p>some text</p>', $result5);
+        $this->assertEquals($widget->cacheLifeTime->s, 0);
+        $this->assertEquals('<p>some text</p>', $result2);
+        $this->assertEquals('<p>some text</p>', $result5);
     }
 
     public function test_caches_the_result_forever_when_lifetime_is_negative()
@@ -93,8 +97,8 @@ class WidgetCacheTest extends TestCase
         $result2 = render_widget($widget2, 'sdfvsf');
 
         $this->assertEquals('<p>some text</p>', $result1);
-        $this->assertEquals($widget->cacheLifeTime->d, 14);
-        $this->assertEquals($widget2->cacheLifeTime->d, 14);
+        $this->assertEquals($widget->cacheLifeTime->s, 14 * 24 * 3600);
+        $this->assertEquals($widget2->cacheLifeTime->s, 14 * 24 * 3600);
     }
 
     public function test_cacheKey_method()

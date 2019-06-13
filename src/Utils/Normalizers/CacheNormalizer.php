@@ -15,19 +15,28 @@ class CacheNormalizer implements NormalizerContract
     public function normalize($widget): void
     {
         if (! property_exists($widget, 'cacheLifeTime')) {
-            $M = (int) (config('widgetize.default_cache_lifetime', 0));
-            $widget->cacheLifeTime = new \DateInterval('PT'.$M.'M');
+            $M = config('widgetize.default_cache_lifetime', 0);
+            $widget->cacheLifeTime = $this->makeFromSeconds($M* 60);
         }
 
-        if (is_object($widget->cacheLifeTime) or $widget->cacheLifeTime === 0) {
+        if($widget->cacheLifeTime === 0) {
+            $widget->cacheLifeTime = $this->makeFromSeconds(0);
+        }
+
+        if (is_object($widget->cacheLifeTime)) {
             return;
         }
 
         if ($widget->cacheLifeTime === 'forever' || $widget->cacheLifeTime < 0) {
             // 2 weeks which is long enough !
-            $widget->cacheLifeTime = new \DateInterval('P2W');
+            $widget->cacheLifeTime = $this->makeFromSeconds(1209600);
         } elseif (is_numeric($widget->cacheLifeTime)) {
-            $widget->cacheLifeTime = new \DateInterval('PT'.(string) ceil($widget->cacheLifeTime).'M');
+            $widget->cacheLifeTime = $this->makeFromSeconds($widget->cacheLifeTime * 60);
         }
+    }
+
+    public function makeFromSeconds($s)
+    {
+        return new \DateInterval('PT'.(string)ceil($s).'S');
     }
 }

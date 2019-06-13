@@ -37,7 +37,7 @@ class Cache
             $cache = $cache->tags($widgetObj->cacheTags);
         }
 
-        if ($widgetObj->cacheLifeTime === 0) {
+        if ($widgetObj->cacheLifeTime->s === 0) {
             return $phpCode();
         }
 
