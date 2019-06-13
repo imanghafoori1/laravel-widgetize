@@ -53,8 +53,9 @@ class DebugInfo
         if (! $this->policies->widgetShouldUseCache()) {
             return ' &#013; Cache: is globally turned off (You should put "enable_cache" => true in config\widgetize.php) ';
         }
+        $l = $this->widget->cacheLifeTime->i ?? 0;
 
-        return " &#013;Cache : {$this->widget->cacheLifeTime->i} (min) ";
+        return " &#013;Cache : {$l} (min) ";
     }
 
     private function addHtmlComments(): void
