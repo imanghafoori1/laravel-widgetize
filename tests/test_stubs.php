@@ -68,7 +68,6 @@ namespace {
 
     class Widget1
     {
-        //    public $cacheLifeTime = -1;
         public $template = 'hello';
 
         public function data()
@@ -88,8 +87,6 @@ namespace {
 
     class Widget2
     {
-        //    public $cacheLifeTime = 'forever';
-
         public function data()
         {
         }

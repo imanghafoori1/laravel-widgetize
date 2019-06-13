@@ -33,7 +33,7 @@ class WidgetCacheTest extends TestCase
     {
         putenv('CACHE_DRIVER=array');
         config(['widgetize.enable_cache' => true]);
-        config(['widgetize.default_cache_lifetime' => 1]);
+        config(['widgetize.default_cache_lifetime' => 1.5]);
         app()['env'] = 'production';
         //assert
         Cache::shouldReceive('remember')->times(5)->andReturn('<p>some text</p>');
@@ -88,7 +88,6 @@ class WidgetCacheTest extends TestCase
         //act
         $widget = new ForeverWidget();
         $widget2 = new ForeverWidget2();
-//        $widget2 = new Widget2();
 
         $result1 = render_widget($widget);
         $result2 = render_widget($widget2, 'sdfvsf');
