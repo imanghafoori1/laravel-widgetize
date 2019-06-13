@@ -28,7 +28,7 @@ class CacheNormalizer implements NormalizerContract
         }
 
         if ($widget->cacheLifeTime === 'forever' || $widget->cacheLifeTime < 0) {
-            // 2 weeks which is long enough !
+            // 1209600 seconds is 2 weeks, which is long enough !
             $widget->cacheLifeTime = $this->makeFromSeconds(1209600);
         } elseif (is_numeric($widget->cacheLifeTime)) {
             $widget->cacheLifeTime = $this->makeFromSeconds($widget->cacheLifeTime * 60);
