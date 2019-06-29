@@ -127,22 +127,24 @@ You can include `@widget('myWidget')` within your blade files and it will turn i
 
 -------------------
 
-#### Overview:What happens when your write @widget('SomeWidget') in your views (Long story, short)
+#### What happens when your write @widget('SomeWidget') in your views (Long story, short)
 
 
 Given that we have disabled caching in the widgetize config file...
 
-1 - It first looks for "SomeWidget" class to inspect it.
+1 - It first looks for "SomeWidget" class to get config from.
 
 2 - Then calls the widget's controller method and gets some data from it.
 
 3 - Using that data it "compiles" (in other word "renders") the blade file ($template). (to produce some html)
 
-4 - At last, (If caching is enabled for the widget) it puts a copy of the resulting html in cache, for future use and return it.
+4 -  (If caching is enabled for the widget) it puts a copy of the resulting html in cache, for future use.
+
+5 - At last, it returns the final HTML. (or maybe json)
 
 -------------------------
 
-### Overview:"Widgets" vs. "View Composers":
+### "Widgets" vs. "View Composers":
 
 You might think that "view composers" are already doing the job, so why "widgets" ?
 
