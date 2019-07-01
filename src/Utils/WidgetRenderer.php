@@ -104,9 +104,8 @@ class WidgetRenderer
                 // We make an object and call the `present` method on it.
                 // Piping the data through the presenter before sending it to view.
                 $viewData = \App::call($widget->presenter, [$viewData]);
-                
             }
-            
+
             return $viewData;
         };
 
