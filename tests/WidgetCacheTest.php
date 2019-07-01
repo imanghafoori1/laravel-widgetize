@@ -181,4 +181,33 @@ class WidgetCacheTest extends TestCase
         expire_widgets(['t2']);
         expire_widgets(['t1']);
     }
+
+    public function test_the_view_and_controller_are_rendered_only_once_when_cache_is_disabled()
+    {
+        putenv('CACHE_DRIVER=array');
+        config(['widgetize.debug_info' => false]);
+        config(['widgetize.enable_cache' => false]);
+        config(['widgetize.default_cache_lifetime' => 1 / 60]);
+        app()['env'] = 'production';
+        //assert
+        View::shouldReceive('exists')->once()->andReturn(true);
+        View::shouldReceive('make')->times(5)->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('render')->times(5)->andReturn('<p>some text</p>');
+        \App::shouldReceive('call')->times(5)->andReturn('foo');
+
+        //act
+        $widget = new Widget1();
+        $result1 = render_widget($widget);
+        $result2 = render_widget($widget);
+        $widget->cacheView = false;
+        $result3 = render_widget($widget);
+        $result4 = render_widget($widget);
+        $widget->cacheView = true;
+        $result5 = render_widget($widget);
+
+        $this->assertEquals('<p>some text</p>', $result2);
+        $this->assertEquals('<p>some text</p>', $result5);
+        $this->assertEquals($widget->cacheLifeTime->s, 1);
+    }
+
 }
