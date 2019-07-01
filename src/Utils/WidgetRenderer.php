@@ -75,16 +75,15 @@ class WidgetRenderer
         $expensivePhpCode = function () use ($widget, $args) {
             $this->makeDataForView($widget, $args);
 
-            // render the template with the resulting data.
             return $this->renderTemplate($widget);
         };
 
-        // We first try to get the output from the cache before trying to run the expensive $expensivePhpCode...
-        if ($this->_policies->widgetShouldUseCache() && $widget->cacheView) {
-            return app(Cache::class)->cacheResult($args, $expensivePhpCode, $widget);
+        if (! $widget->cacheView) {
+            return $expensivePhpCode();
         }
 
-        return $expensivePhpCode();
+        // We first try to get the output from the cache before trying to run the expensive $expensivePhpCode...
+        return app(Cache::class)->cacheResult($args, $expensivePhpCode, $widget);
     }
 
     /**
@@ -109,13 +108,11 @@ class WidgetRenderer
             return $viewData;
         };
 
-        if ($this->_policies->widgetShouldUseCache() && ! $widget->cacheView) {
-            $viewData = app(Cache::class)->cacheResult($args, $expensiveCode, $widget, 'dataProvider');
+        if ($widget->cacheView) {
+            $this->_viewData = $expensiveCode();
         } else {
-            $viewData = $expensiveCode();
+            $this->_viewData = app(Cache::class)->cacheResult($args, $expensiveCode, $widget, 'dataProvider');
         }
-
-        $this->_viewData = $viewData;
     }
 
     /**

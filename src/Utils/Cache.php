@@ -29,14 +29,14 @@ class Cache
      */
     public function cacheResult(array $args, callable $phpCode, $widgetObj, $form = 'HTML')
     {
-        $cache = app('cache');
+        if (! resolve(Policies::class)->widgetShouldUseCache() || $widgetObj->cacheLifeTime->s === 0) {
+            return $phpCode();
+        }
+
+        $cache = resolve('cache');
 
         if (! empty($widgetObj->cacheTags) && $this->cacheDriverSupportsTags()) {
             $cache = $cache->tags($widgetObj->cacheTags);
-        }
-
-        if ($widgetObj->cacheLifeTime->s === 0) {
-            return $phpCode();
         }
 
         $key = $this->makeCacheKey($args, $widgetObj, $form);
