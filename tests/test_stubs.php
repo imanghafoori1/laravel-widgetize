@@ -162,7 +162,6 @@ namespace {
 
         public function data()
         {
-
         }
     }
 }
