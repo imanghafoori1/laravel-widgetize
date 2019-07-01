@@ -305,7 +305,11 @@ So the entire widget lives in one folder:
 
 > If you do not want to put your _data_ method on your widget class, you can set `public $controller = App\Some\Class\MyController::class` and put your `public data` method on a dedicated class.(instead od having it on your widget class)
 
+or you may also refrence it like this : 
 
+`public $controller = [\App\Some\Class\MyRepo::class, 'myMethod'];`
+
+`public $controller = '\App\Some\Class\MyRepo@myMethod';`
 
 #### __public $presenter__ (string)
 
