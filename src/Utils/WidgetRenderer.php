@@ -109,7 +109,7 @@ class WidgetRenderer
             return $viewData;
         };
 
-        if (! $widget->cacheView) {
+        if ($this->_policies->widgetShouldUseCache() && ! $widget->cacheView) {
             $viewData = app(Cache::class)->cacheResult($args, $expensiveCode, $widget, 'dataProvider');
         } else {
             $viewData = $expensiveCode();
