@@ -153,4 +153,16 @@ namespace {
         {
         }
     }
+
+    class Widget8
+    {
+        public $template = 'hello';
+
+        public $cacheView = false;
+
+        public function data()
+        {
+
+        }
+    }
 }

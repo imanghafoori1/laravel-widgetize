@@ -30,6 +30,32 @@ class WidgetCacheTest extends TestCase
         $this->assertEquals($widget->cacheLifeTime->s, 1);
     }
 
+    public function test_the_controller_is_ran_only_once_when_cache_is_enabled_not_view()
+    {
+        putenv('CACHE_DRIVER=array');
+        config(['widgetize.debug_info' => false]);
+        config(['widgetize.enable_cache' => true]);
+        config(['widgetize.default_cache_lifetime' => 1 / 60]);
+        app()['env'] = 'production';
+        //assert
+        View::shouldReceive('exists')->once()->andReturn(true);
+        View::shouldReceive('make')->times(5)->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('render')->times(5)->andReturn('<p>some text</p>');
+        \App::shouldReceive('call')->once()->andReturn('foo');
+
+        //act
+        $widget = new Widget8();
+        $result1 = render_widget($widget);
+        $result2 = render_widget($widget);
+        $result3 = render_widget($widget);
+        $result4 = render_widget($widget);
+        $result5 = render_widget($widget);
+
+        $this->assertEquals('<p>some text</p>', $result2);
+        $this->assertEquals('<p>some text</p>', $result5);
+        $this->assertEquals($widget->cacheLifeTime->s, 1);
+    }
+
     public function test_caches_the_result_of_controller_method_and_views()
     {
         putenv('CACHE_DRIVER=array');
