@@ -209,5 +209,4 @@ class WidgetCacheTest extends TestCase
         $this->assertEquals('<p>some text</p>', $result5);
         $this->assertEquals($widget->cacheLifeTime->s, 1);
     }
-
 }
