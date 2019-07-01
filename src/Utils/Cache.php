@@ -29,8 +29,6 @@ class Cache
      */
     public function cacheResult(array $args, callable $phpCode, $widgetObj, $form = 'HTML')
     {
-        $key = $this->makeCacheKey($args, $widgetObj, $form);
-
         $cache = app('cache');
 
         if (! empty($widgetObj->cacheTags) && $this->cacheDriverSupportsTags()) {
@@ -40,6 +38,8 @@ class Cache
         if ($widgetObj->cacheLifeTime->s === 0) {
             return $phpCode();
         }
+
+        $key = $this->makeCacheKey($args, $widgetObj, $form);
 
         return $cache->remember($key, $widgetObj->cacheLifeTime, $phpCode);
     }
