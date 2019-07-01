@@ -129,7 +129,7 @@ class WidgetRenderer
         $this->html = view($widget->template, [$widget->contextAs => $this->_viewData])->render();
 
         // We try to minify the html before storing it in cache to save space.
-        if ($this->_policies->widgetShouldBeMinified()) {
+        if ($this->_policies->widgetShouldBeMinified($widget)) {
             $this->html = app(HtmlMinifier::class)->minify($this->html);
         }
 

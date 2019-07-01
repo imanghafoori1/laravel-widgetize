@@ -29,10 +29,13 @@ class Policies
     /**
      * Widget Should Be Minified or Not.
      *
+     * @param $widget
+     *
      * @return bool
      */
-    public function widgetShouldBeMinified(): bool
+    public function widgetShouldBeMinified($widget): bool
     {
-        return config('widgetize.minify_html') || app()->environment('production');
+        $conf = (config('widgetize.minify_html') || app()->environment('production'));
+        return $widget->minifyOutput ?? $conf;
     }
 }
