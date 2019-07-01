@@ -48,15 +48,21 @@ class ControllerNormalizer implements NormalizerContract
     private function determineDataMethod($widget): array
     {
         // We decide to call data method on widget object by default.
-        $controllerMethod = [$widget, 'data'];
-        $ctrlClass = get_class($widget);
-
         // If the user has explicitly declared controller class path on widget
         // then we decide to call data method on that instead.
-        if (property_exists($widget, 'controller')) {
-            $ctrlClass = $widget->controller;
-            $controllerMethod = ($ctrlClass).'@data';
+        if (! property_exists($widget, 'controller')) {
+            return [[$widget, 'data'], get_class($widget)];
         }
+
+        if (is_string($widget->controller)) {
+            if (! str_contains($widget->controller, '@')) {
+                return [$widget->controller.'@data', $widget->controller];
+            }
+            $widget->controller = explode('@', $widget->controller);
+        }
+
+        $ctrlClass = $widget->controller[0];
+        $controllerMethod = implode('@', $widget->controller);
 
         return [$controllerMethod, $ctrlClass];
     }

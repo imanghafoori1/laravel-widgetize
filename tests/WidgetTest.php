@@ -50,6 +50,30 @@ class WidgetTest extends TestCase
         render_widget($widget, ['arg1' => 'aaa', 'arg2' => 'bbb']);
     }
 
+    public function test_controller_method_is_called_on_some_other_class_2()
+    {
+        View::shouldReceive('exists')->once()->andReturn(true);
+        View::shouldReceive('make')->once()->with('hello', ['data' => 'bbaa'], [])->andReturn(app('view'));
+        View::shouldReceive('render')->once()->andReturn('<br>');
+
+        //act
+        $widget = new Widget4();
+        $widget->controller = 'Widget4Ctrl@meta';
+        render_widget($widget, ['arg1' => 'a', 'arg2' => 'bb']);
+    }
+
+    public function test_controller_method_is_called_on_some_other_class_3()
+    {
+        View::shouldReceive('exists')->once()->andReturn(true);
+        View::shouldReceive('make')->once()->with('hello', ['data' => 'bbaa'], [])->andReturn(app('view'));
+        View::shouldReceive('render')->once()->andReturn('<br>');
+
+        //act
+        $widget = new Widget4();
+        $widget->controller = ['Widget4Ctrl', 'meta'];
+        render_widget($widget, ['arg1' => 'a', 'arg2' => 'bb']);
+    }
+
     public function test_data_is_passed_to_data_method_from_view()
     {
         View::shouldReceive('exists')->once()->andReturn(true);

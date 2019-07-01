@@ -8,7 +8,7 @@ namespace DummyNamespace;
  *  |====== Remove this doc block if you don't need it ========
  *  |--------------------------------------------------------------------------
  *  | public $contextAs = '$data'; (Default is : '$data')
- *  | public $controller = \App\classPath\MyWidget::class; (optional)
+ *  | public $controller = '\App\classPath\MyWidget@myMethod'; (optional)
  *  | public $presenter = \App\classPath\WidgetPresenter::class; (optional)
  *  | public $minifyOutput = true; (use it to override the default value in config file)
  *  | public $cacheTags = []; (optional) (Available for all cache driver)

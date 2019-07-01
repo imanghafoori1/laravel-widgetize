@@ -114,6 +114,11 @@ namespace {
         {
             return $arg1.$arg2;
         }
+
+        public function meta($arg1, $arg2)
+        {
+            return $arg2.$arg1.$arg1;
+        }
     }
 
     class Widget5
