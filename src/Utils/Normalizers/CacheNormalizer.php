@@ -19,6 +19,10 @@ class CacheNormalizer implements NormalizerContract
             $widget->cacheLifeTime = $this->makeFromSeconds($M * 60);
         }
 
+        if (! property_exists($widget, 'cacheView')) {
+            $widget->cacheView = true;
+        }
+
         if ($widget->cacheLifeTime === 0) {
             $widget->cacheLifeTime = $this->makeFromSeconds(0);
         }

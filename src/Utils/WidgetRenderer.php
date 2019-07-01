@@ -80,7 +80,7 @@ class WidgetRenderer
         };
 
         // We first try to get the output from the cache before trying to run the expensive $expensivePhpCode...
-        if ($this->_policies->widgetShouldUseCache()) {
+        if ($this->_policies->widgetShouldUseCache() && $widget->cacheView) {
             return app(Cache::class)->cacheResult($args, $expensivePhpCode, $widget);
         }
 
@@ -95,13 +95,25 @@ class WidgetRenderer
      */
     private function makeDataForView($widget, array $args)
     {
-        // Here we call the data method on the widget class.
-        $viewData = \App::call($widget->controller, ...$args);
+        $expensiveCode = function () use ($widget, $args) {
 
-        if (($widget->presenter)) {
-            // We make an object and call the `present` method on it.
-            // Piping the data through the presenter before sending it to view.
-            $viewData = \App::call($widget->presenter, [$viewData]);
+            // Here we call the data method on the widget class.
+            $viewData = \App::call($widget->controller, ...$args);
+
+            if (($widget->presenter)) {
+                // We make an object and call the `present` method on it.
+                // Piping the data through the presenter before sending it to view.
+                $viewData = \App::call($widget->presenter, [$viewData]);
+                
+            }
+            
+            return $viewData;
+        };
+
+        if (! $widget->cacheView) {
+            $viewData = app(Cache::class)->cacheResult($args, $expensiveCode, $widget, 'dataProvider');
+        } else {
+            $viewData = $expensiveCode();
         }
 
         $this->_viewData = $viewData;
