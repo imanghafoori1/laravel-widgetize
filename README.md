@@ -48,6 +48,7 @@ Built with :heart: for every smart laravel developer
     - [public $template (optional)](#public-template-string)
     - [public $cacheLifeTime (optional)](#public-cachelifetime-int)
     - [public $cacheTags (optional)](#public-cachetags-array)
+    - [public $cacheView (optional)](#public-cache-view)
     - [public $controller (optional)](#public-controller-string) Advanced
     - [public $presenter (optional)](#public-presenter-string) Advanced
     - [public function extraCacheKeyDependency (optional)](#public-function-extracachekeydependency) Advanced
@@ -338,6 +339,9 @@ This causes all the widgets with 'someTag' or 'tag1' to be refreshed.
 
 __Note: Tagging feature works with ALL the laravel cache drivers including 'file' and 'database'.__
 
+#### __public $cacheView__
+
+> In case you want your view to be real-time but your controller results to be cached, set this to `false`. defalut value is `true`.
 
 
 #### __public function cacheKey__
