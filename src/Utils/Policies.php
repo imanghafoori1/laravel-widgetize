@@ -36,6 +36,7 @@ class Policies
     public function widgetShouldBeMinified($widget): bool
     {
         $conf = (config('widgetize.minify_html') || app()->environment('production'));
+
         return $widget->minifyOutput ?? $conf;
     }
 }

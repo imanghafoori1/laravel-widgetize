@@ -33,7 +33,6 @@ class WidgetMinificationTest extends TestCase
 
         $widgetOutput = '  <p>        </p>  ';
 
-
         View::shouldReceive('exists')->once()->andReturn(true);
         View::shouldReceive('make')->once()->with('hello', ['data' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn($widgetOutput);
