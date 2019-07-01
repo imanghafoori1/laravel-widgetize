@@ -48,7 +48,7 @@ Built with :heart: for every smart laravel developer
     - [public $template (optional)](#public-template-string)
     - [public $cacheLifeTime (optional)](#public-cachelifetime-int)
     - [public $cacheTags (optional)](#public-cachetags-array)
-    - [public $cacheView (optional)](#public-cache-view)
+    - [public $cacheView (optional)](#public-cacheview)
     - [public $controller (optional)](#public-controller-string) Advanced
     - [public $presenter (optional)](#public-presenter-string) Advanced
     - [public function extraCacheKeyDependency (optional)](#public-function-extracachekeydependency) Advanced
