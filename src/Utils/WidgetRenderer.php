@@ -30,6 +30,7 @@ class WidgetRenderer
         if (is_string($widget)) {
             $widget = $this->makeWidgetObj($widget);
         }
+        event('widgetize.rendering_widget', [$widget]);
 
         app(Normalizer::class)->normalizeWidgetConfig($widget);
 
@@ -40,6 +41,7 @@ class WidgetRenderer
         try {
             $html = $this->generateHtml($widget, ...$args);
         } catch (\Exception $e) {
+            dd($e);
             return app()->make(ExceptionHandler::class)->render(app('request'), $e)->send();
         }
 
@@ -123,7 +125,11 @@ class WidgetRenderer
     private function renderTemplate($widget)
     {
         // Here we render the view file to raw html.
-        $this->html = view($widget->template, [$widget->contextAs => $this->_viewData])->render();
+        try {
+            $this->html = view($widget->template, [$widget->contextAs => $this->_viewData])->render();
+        } catch (\Exception $e) {
+            dd($e);
+        }
 
         // We try to minify the html before storing it in cache to save space.
         if ($this->_policies->widgetShouldBeMinified($widget)) {
