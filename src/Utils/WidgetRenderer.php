@@ -2,9 +2,6 @@
 
 namespace Imanghafoori\Widgets\Utils;
 
-use Illuminate\Support\Str;
-use Illuminate\Contracts\Debug\ExceptionHandler;
-
 class WidgetRenderer
 {
     public $html;
@@ -39,13 +36,7 @@ class WidgetRenderer
             app('widgetize.debugger')->addMessage(['widget class:' => $widget, 'args:' => $args]);
         }
 
-        try {
-            $html = $this->generateHtml($widget, ...$args);
-        } catch (\Exception $e) {
-            return app()->make(ExceptionHandler::class)->render(app('request'), $e)->send();
-        }
-
-        return $html;
+        return $this->generateHtml($widget, ...$args);
     }
 
     /**
@@ -125,11 +116,7 @@ class WidgetRenderer
     private function renderTemplate($widget)
     {
         // Here we render the view file to raw html.
-        try {
-            $this->html = view($widget->template, [$widget->contextAs => $this->_viewData])->render();
-        } catch (\Exception $e) {
-            $this->printError($widget, $e);
-        }
+        $this->html = view($widget->template, [$widget->contextAs => $this->_viewData])->render();
 
         // We try to minify the html before storing it in cache to save space.
         if ($this->_policies->widgetShouldBeMinified($widget)) {
@@ -143,17 +130,5 @@ class WidgetRenderer
         }
 
         return $this->html;
-    }
-
-    /**
-     * @param            $widget
-     * @param \Exception $e
-     */
-    private function printError($widget, \Exception $e): void
-    {
-        if (Str::contains($e->getMessage(), 'Undefined variable:')) {
-            dump('You should use the "$'.$widget->contextAs.'" variable in your widget view to access controller data');
-        }
-        dd($e);
     }
 }
