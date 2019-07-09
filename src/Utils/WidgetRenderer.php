@@ -42,6 +42,7 @@ class WidgetRenderer
             $html = $this->generateHtml($widget, ...$args);
         } catch (\Exception $e) {
             dd($e);
+
             return app()->make(ExceptionHandler::class)->render(app('request'), $e)->send();
         }
 
