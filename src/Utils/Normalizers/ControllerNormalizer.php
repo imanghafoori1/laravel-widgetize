@@ -16,7 +16,7 @@ class ControllerNormalizer implements NormalizerContract
         [$controllerMethod, $ctrlClass] = $this->determineDataMethod($widget);
 
         $this->checkControllerExists($ctrlClass);
-        $this->checkDataMethodExists($ctrlClass);
+        $this->checkDataMethodExists($controllerMethod);
 
         $widget->controller = $controllerMethod;
     }
@@ -36,7 +36,8 @@ class ControllerNormalizer implements NormalizerContract
      */
     private function checkDataMethodExists(string $ctrlClass): void
     {
-        if (! method_exists($ctrlClass, 'data')) {
+        [$ctrlClass, $method] = explode('@', $ctrlClass);
+        if (! method_exists($ctrlClass, $method)) {
             throw new \InvalidArgumentException("'data' method not found on ".$ctrlClass);
         }
     }
