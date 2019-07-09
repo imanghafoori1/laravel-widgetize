@@ -2,8 +2,8 @@
 
 namespace Imanghafoori\Widgets\Utils;
 
-use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Support\Str;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 
 class WidgetRenderer
 {
@@ -42,7 +42,6 @@ class WidgetRenderer
         try {
             $html = $this->generateHtml($widget, ...$args);
         } catch (\Exception $e) {
-
             return app()->make(ExceptionHandler::class)->render(app('request'), $e)->send();
         }
 
