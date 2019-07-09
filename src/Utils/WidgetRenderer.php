@@ -129,10 +129,7 @@ class WidgetRenderer
         try {
             $this->html = view($widget->template, [$widget->contextAs => $this->_viewData])->render();
         } catch (\Exception $e) {
-            if (Str::contains($e->getMessage(), 'Undefined variable:')) {
-                dump('You should use the "$'.$widget->contextAs.'" variable in your widget view to access controller data');
-            }
-            dd($e);
+            $this->printError($widget, $e);
         }
 
         // We try to minify the html before storing it in cache to save space.
@@ -147,5 +144,17 @@ class WidgetRenderer
         }
 
         return $this->html;
+    }
+
+    /**
+     * @param            $widget
+     * @param \Exception $e
+     */
+    private function printError($widget, \Exception $e): void
+    {
+        if (Str::contains($e->getMessage(), 'Undefined variable:')) {
+            dump('You should use the "$'.$widget->contextAs.'" variable in your widget view to access controller data');
+        }
+        dd($e);
     }
 }
