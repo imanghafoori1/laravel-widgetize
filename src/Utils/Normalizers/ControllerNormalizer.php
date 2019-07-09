@@ -34,9 +34,13 @@ class ControllerNormalizer implements NormalizerContract
     /**
      * @param $ctrlClass
      */
-    private function checkDataMethodExists(string $ctrlClass): void
+    private function checkDataMethodExists($ctrlClass): void
     {
-        [$ctrlClass, $method] = explode('@', $ctrlClass);
+        if (is_string($ctrlClass)) {
+            $ctrlClass = explode('@', $ctrlClass);
+        }
+
+        [$ctrlClass, $method] = $ctrlClass;
         if (! method_exists($ctrlClass, $method)) {
             throw new \InvalidArgumentException("'data' method not found on ".$ctrlClass);
         }
