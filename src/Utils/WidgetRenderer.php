@@ -3,6 +3,7 @@
 namespace Imanghafoori\Widgets\Utils;
 
 use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Support\Str;
 
 class WidgetRenderer
 {
@@ -41,7 +42,6 @@ class WidgetRenderer
         try {
             $html = $this->generateHtml($widget, ...$args);
         } catch (\Exception $e) {
-            dd($e);
 
             return app()->make(ExceptionHandler::class)->render(app('request'), $e)->send();
         }
@@ -129,6 +129,9 @@ class WidgetRenderer
         try {
             $this->html = view($widget->template, [$widget->contextAs => $this->_viewData])->render();
         } catch (\Exception $e) {
+            if (Str::contains($e->getMessage(), 'Undefined variable:')) {
+                dump('You should use the "$'.$widget->contextAs.'" variable in your widget view to access controller data');
+            }
             dd($e);
         }
 
