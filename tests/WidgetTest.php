@@ -7,7 +7,7 @@ class WidgetTest extends TestCase
     public function test_presenter_method_is_called_with_data_from_controller()
     {
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('hello', ['data' => 'barfoo'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('hello', ['data' => 'barfoo', 'params' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<br>');
 
         //act
@@ -18,7 +18,7 @@ class WidgetTest extends TestCase
     public function test_default_view_name_is_figured_out_correctly()
     {
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('Widgets::Foo.Widget1View', ['data' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('Widgets::Foo.Widget1View', ['data' => 'foo', 'params' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<br>');
         \App::shouldReceive('call')->once()->andReturn('foo');
 
@@ -30,7 +30,7 @@ class WidgetTest extends TestCase
     public function test_context_as_is_passes_to_view_correctly()
     {
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('hello', ['myData' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('hello', ['myData' => 'foo', 'params' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<br>');
         \App::shouldReceive('call')->once()->andReturn('foo');
 
@@ -42,7 +42,7 @@ class WidgetTest extends TestCase
     public function test_controller_method_is_called_on_some_other_class()
     {
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('hello', ['data' => 'aaabbb'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('hello', ['data' => 'aaabbb', 'params' => ['arg1' => 'aaa', 'arg2' => 'bbb']], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<br>');
 
         //act
@@ -53,7 +53,7 @@ class WidgetTest extends TestCase
     public function test_controller_method_is_called_on_some_other_class_2()
     {
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('hello', ['data' => 'bbaa'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('hello', ['data' => 'bbaa', 'params' => ['arg1' => 'a', 'arg2' => 'bb']], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<br>');
 
         //act
@@ -65,7 +65,7 @@ class WidgetTest extends TestCase
     public function test_controller_method_is_called_on_some_other_class_3()
     {
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('hello', ['data' => 'bbaa'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('hello', ['data' => 'bbaa', 'params' => ['arg1' => 'a', 'arg2' => 'bb']], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<br>');
 
         //act
@@ -77,7 +77,7 @@ class WidgetTest extends TestCase
     public function test_data_is_passed_to_data_method_from_view()
     {
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('hello', ['data' => '222111'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('hello', ['data' => '222111', 'params' => ['foo' => '111', 'bar' => '222']], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<br>');
         //act
         $widget = new Widget6();
@@ -87,7 +87,7 @@ class WidgetTest extends TestCase
     public function test_data_is_passed_to_data_method_from_view_as_string()
     {
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('hello', ['data' => '222111'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('hello', ['data' => '222111', 'params' => ['foo' => '111', 'bar' => '222']], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<br>');
         //act
         render_widget('Foo\Widget6', ['foo' => '111', 'bar' => '222']);

@@ -13,7 +13,7 @@ class WidgetCacheTest extends TestCase
         app()['env'] = 'production';
         //assert
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('hello', ['data' => 'foo', 'params' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<p>some text</p>');
         \App::shouldReceive('call')->once()->andReturn('foo');
 
@@ -39,7 +39,7 @@ class WidgetCacheTest extends TestCase
         app()['env'] = 'production';
         //assert
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->times(5)->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->times(5)->with('hello', ['data' => 'foo', 'params' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->times(5)->andReturn('<p>some text</p>');
         \App::shouldReceive('call')->once()->andReturn('foo');
 
@@ -90,7 +90,7 @@ class WidgetCacheTest extends TestCase
         //assert
         Cache::shouldReceive('remember')->times(0);
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->times(5)->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->times(5)->with('hello', ['data' => 'foo', 'params' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->times(5)->andReturn('<p>some text</p>');
         \App::shouldReceive('call')->times(5)->andReturn('foo');
         //act
@@ -137,7 +137,7 @@ class WidgetCacheTest extends TestCase
         app()['env'] = 'production';
 
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('hello', ['data' => 'foo', 'params' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<p>some text</p>');
         \App::shouldReceive('call')->once()->andReturn('foo');
 
@@ -158,7 +158,7 @@ class WidgetCacheTest extends TestCase
 
         //assert
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->times(3)->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->times(3)->with('hello', ['data' => 'foo', 'params' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->times(3)->andReturn('<p>some text</p>');
         \App::shouldReceive('call')->times(3)->andReturn('foo');
 
@@ -191,7 +191,7 @@ class WidgetCacheTest extends TestCase
         app()['env'] = 'production';
         //assert
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->times(5)->with('hello', ['data' => 'foo'], [])->andReturn(app('view'));
+        View::shouldReceive('make')->times(5)->with('hello', ['data' => 'foo', 'params' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->times(5)->andReturn('<p>some text</p>');
         \App::shouldReceive('call')->times(5)->andReturn('foo');
 

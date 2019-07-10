@@ -68,7 +68,7 @@ class WidgetRenderer
         $expensivePhpCode = function () use ($widget, $args) {
             $this->makeDataForView($widget, $args);
 
-            return $this->renderTemplate($widget);
+            return $this->renderTemplate($widget, ...$args);
         };
 
         if (! $widget->cacheView) {
@@ -109,14 +109,16 @@ class WidgetRenderer
     }
 
     /**
-     * @param $widget object
-     * @return string HTML output
+     * @param      $widget object
+     * @param null $args
+     *
      * @throws \Throwable
+     * @return string HTML output
      */
-    private function renderTemplate($widget)
+    private function renderTemplate($widget, $args = null)
     {
         // Here we render the view file to raw html.
-        $this->html = view($widget->template, [$widget->contextAs => $this->_viewData])->render();
+        $this->html = view($widget->template, [$widget->contextAs => $this->_viewData, 'params' => $args])->render();
 
         // We try to minify the html before storing it in cache to save space.
         if ($this->_policies->widgetShouldBeMinified($widget)) {

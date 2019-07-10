@@ -15,7 +15,7 @@ class WidgetMinificationTest extends TestCase
         $minified = ' <p> </p> ';
 
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('hello', ['data' => null], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('hello', ['data' => null, 'params' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn($widgetOutput);
 
         //act
@@ -34,7 +34,7 @@ class WidgetMinificationTest extends TestCase
         $widgetOutput = '  <p>        </p>  ';
 
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('hello', ['data' => null], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('hello', ['data' => null, 'params' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn($widgetOutput);
 
         //act
@@ -54,7 +54,7 @@ class WidgetMinificationTest extends TestCase
         $minified = ' <p> </p> ';
 
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('hello', ['data' => null], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('hello', ['data' => null, 'params' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn($widgetOutput);
 
         //act
@@ -74,7 +74,7 @@ class WidgetMinificationTest extends TestCase
         $minified = ' <p> </p> ';
 
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('hello', ['data' => null], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('hello', ['data' => null, 'params' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn($html);
 
         //act
