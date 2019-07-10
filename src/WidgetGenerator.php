@@ -156,7 +156,11 @@ class WidgetGenerator extends LaravelGeneratorCommand
      */
     private function getViewStub(): string
     {
-        return 'Note that you can reference partials within "App\Widgets" folder like this: @include("Widgets::somePartial") ';
+        return 'Here you will have access to :
+'.PHP_EOL.PHP_EOL.'
+1 - "$data" (data from controller) and '.PHP_EOL.
+'2 - "$params" (data passed to controller from @widget call). '.PHP_EOL.'
+try : {!! dump($data, $params) !!} to see what you have.';
     }
 
     private function printStarUs()
