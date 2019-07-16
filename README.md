@@ -18,7 +18,6 @@ Laravel Widgetize
 [![Awesome Laravel](https://img.shields.io/badge/Awesome-Laravel-brightgreen.svg)](https://github.com/chiraggude/awesome-laravel)
 [![Monthly Downloads](https://poser.pugx.org/imanghafoori/laravel-widgetize/d/monthly)](https://packagist.org/packages/imanghafoori/laravel-widgetize)
 [![Code Coverage](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/imanghafoori1/laravel-widgetize/?branch=master)
-[![Donate Bitcoin](https://img.shields.io/badge/donate-$1-orange.svg)](https://blockchain.com/btc/payment_request?address=1MTPGWkNfBtT8mTith1Rf91MS4kucUX4c1&amount=0.00011451&message=Donatation&name=Iman)
 </p>
 
 
