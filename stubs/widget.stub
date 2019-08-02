@@ -21,7 +21,6 @@ class DummyClass
 {
    /**
     * You may call this widget in any blade files like this :
-    *
     * @widget('DummyClass', ['a' => 'someVal', 'b' => 'foo'])
     */
 	public function data($a, $b)
@@ -29,14 +28,14 @@ class DummyClass
 		return [];
 	}
 
-
    /**
     * If the widget output depends on query strings you should return key names.
     * otherwise you get undesired results out of the cache store. for example:
     * example.com/product?page=1 and you use the page number in your db query
+    * or if you want it to be separated for each user: return auth()->id();
     */
-	public function extraCacheKeyDependency()
+	public function extraCacheKeyDependency($args)
 	{
-        return [/*'page'*/];
+        return [/* request('page') */];
 	}
 }
