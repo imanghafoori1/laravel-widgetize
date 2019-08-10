@@ -442,6 +442,12 @@ As always if you found this package useful and you want to encourage us to maint
 ### More from the authors:
 
 
+###  Laravel middlewarize
+
+:gem: You can put middleware on any method calls.
+
+- https://github.com/imanghafoori1/laravel-middlewarize
+
 ### Laravel HeyMan
 
 :gem: It allows to write expressive code to authorize, validate and authenticate.
