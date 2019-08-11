@@ -442,7 +442,7 @@ As always if you found this package useful and you want to encourage us to maint
 ### More from the authors:
 
 
-###  Laravel middlewarize
+###  Laravel middlewarize (new*)
 
 :gem: You can put middleware on any method calls.
 
