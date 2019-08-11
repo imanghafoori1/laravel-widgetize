@@ -439,7 +439,7 @@ As always if you found this package useful and you want to encourage us to maint
 
 
 
-### More from the authors:
+## More from the author:
 
 
 ###  Laravel middlewarize (new*)
@@ -448,6 +448,8 @@ As always if you found this package useful and you want to encourage us to maint
 
 - https://github.com/imanghafoori1/laravel-middlewarize
 
+-------------
+
 ### Laravel HeyMan
 
 :gem: It allows to write expressive code to authorize, validate and authenticate.
@@ -455,7 +457,7 @@ As always if you found this package useful and you want to encourage us to maint
 - https://github.com/imanghafoori1/laravel-heyman
 
 
-------------
+--------------
 
 ### Laravel Terminator
 
@@ -475,7 +477,7 @@ As always if you found this package useful and you want to encourage us to maint
 
 ------------
 
-### Eloquent Relativity
+### Eloquent Relativity (new*)
 
 :gem: It allows you to decouple your eloquent models to reach a modular structure
 
