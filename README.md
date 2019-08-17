@@ -351,7 +351,12 @@ __Note: Tagging feature works with ALL the laravel cache drivers including 'file
 
 > If you want to explicitly define the cache key used to store the html result of your widget, you can implement this method.
 
-
+```php
+    public function cacheKey($args)
+    {
+        return 'user_widget_'.$args['user_id'];
+    }
+```
 
 #### __public function extraCacheKeyDependency__
 
