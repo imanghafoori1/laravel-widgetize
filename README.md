@@ -488,3 +488,13 @@ As always if you found this package useful and you want to encourage us to maint
 
 - https://github.com/imanghafoori1/eloquent-relativity
 
+----------------
+
+<p align="center">
+  
+    A man will never fail, unless he stops trying.
+    
+    "Albert Einstein"
+    
+</p>
+
