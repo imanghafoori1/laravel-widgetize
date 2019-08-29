@@ -156,11 +156,14 @@ class WidgetGenerator extends LaravelGeneratorCommand
      */
     private function getViewStub(): string
     {
-        return 'Here you will have access to :
+        return '{{--
+Here you will have access to :
 '.PHP_EOL.PHP_EOL.'
 1 - "$data" (data from controller) and '.PHP_EOL.
-'2 - "$params" (data passed to controller from @widget call). '.PHP_EOL.'
-try : {!! dump($data, $params) !!} to see what you have.';
+'2 - "$params" (data passed to @widget(\'name\', $params) call). '.PHP_EOL.'
+try : {!! dd($data, $params) !!} to see what you have.
+--}}
+';
     }
 
     private function printStarUs()
