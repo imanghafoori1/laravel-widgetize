@@ -123,7 +123,7 @@ class WidgetRenderer
         try {
             $this->html = view($widget->template, $data)->render();
         } catch (\Throwable $t) {
-            throw new \ErrorException('There was some error rendering '.get_class($widget).', template file: \''.$widget->template.'\' Error: '. $t->getMessage());
+            throw new \ErrorException('There was some error rendering '.get_class($widget).', template file: \''.$widget->template.'\' Error: '.$t->getMessage());
         }
 
         // We try to minify the html before storing it in cache to save space.
