@@ -118,7 +118,13 @@ class WidgetRenderer
     private function renderTemplate($widget, $args = null)
     {
         // Here we render the view file to raw html.
-        $this->html = view($widget->template, [$widget->contextAs => $this->_viewData, 'params' => $args])->render();
+        $data = [$widget->contextAs => $this->_viewData, 'params' => $args];
+
+        try {
+            $this->html = view($widget->template, $data)->render();
+        } catch (\Throwable $t) {
+            throw new \ErrorException('There was some error rendering '.get_class($widget).', template file: \''.$widget->template.'\' Error: '. $t->getMessage());
+        }
 
         // We try to minify the html before storing it in cache to save space.
         if ($this->_policies->widgetShouldBeMinified($widget)) {
