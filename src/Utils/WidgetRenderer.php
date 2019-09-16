@@ -28,6 +28,11 @@ class WidgetRenderer
         if (is_string($widget)) {
             $widget = $this->makeWidgetObj($widget);
         }
+
+        if (is_array($widget)) {
+            $widget = (object)$widget;
+        }
+
         event('widgetize.rendering_widget', [$widget]);
 
         app(Normalizer::class)->normalizeWidgetConfig($widget);
@@ -90,7 +95,7 @@ class WidgetRenderer
         $expensiveCode = function () use ($widget, $args) {
 
             // Here we call the data method on the widget class.
-            $viewData = \App::call($widget->controller, ...$args);
+            $viewData = isset($widget->controller) ? \App::call($widget->controller, ...$args) : [];
 
             if (($widget->presenter)) {
                 // We make an object and call the `present` method on it.

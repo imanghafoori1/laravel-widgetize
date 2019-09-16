@@ -70,7 +70,7 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget4();
-        $widget->controller = ['Widget4Ctrl', 'meta'];
+        $widget->controller = [new Widget4Ctrl, 'meta'];
         render_widget($widget, ['arg1' => 'a', 'arg2' => 'bb']);
     }
 
