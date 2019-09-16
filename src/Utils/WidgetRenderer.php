@@ -30,7 +30,7 @@ class WidgetRenderer
         }
 
         if (is_array($widget)) {
-            $widget = (object)$widget;
+            $widget = (object) $widget;
         }
 
         event('widgetize.rendering_widget', [$widget]);
