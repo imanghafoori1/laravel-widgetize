@@ -93,13 +93,10 @@ class WidgetRenderer
     private function makeDataForView($widget, array $args)
     {
         $expensiveCode = function () use ($widget, $args) {
+            $viewData = $this->callController($widget, $args);
 
-            // Here we call the data method on the widget class.
-            $viewData = isset($widget->controller) ? \App::call($widget->controller, ...$args) : [];
-
-            if (($widget->presenter)) {
-                // We make an object and call the `present` method on it.
-                // Piping the data through the presenter before sending it to view.
+            if ($widget->presenter) {
+                // Pipe the data through the presenter before sending it to view.
                 $viewData = \App::call($widget->presenter, [$viewData]);
             }
 
@@ -143,5 +140,19 @@ class WidgetRenderer
         }
 
         return $this->html;
+    }
+
+    private function callController($widget, array $args)
+    {
+        if (! isset($widget->controller)) {
+            $viewData = [];
+        } elseif (is_array($widget->controller) && is_string($widget->controller[0])) {
+            $viewData = call_user_func_array($widget->controller, $args);
+        } else {
+            // Here we call the data method on the widget class.
+            $viewData = \App::call($widget->controller, ...$args);
+        }
+
+        return $viewData;
     }
 }
