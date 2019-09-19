@@ -2,6 +2,8 @@
 
 namespace Imanghafoori\Widgets\Utils;
 
+use Illuminate\Support\Str;
+
 class WidgetRenderer
 {
     public $html;
@@ -15,7 +17,7 @@ class WidgetRenderer
      */
     public function __construct()
     {
-        $this->_policies = app(Policies::class);
+        $this->_policies = resolve(Policies::class);
     }
 
     /**
@@ -35,7 +37,7 @@ class WidgetRenderer
 
         event('widgetize.rendering_widget', [$widget]);
 
-        app(Normalizer::class)->normalizeWidgetConfig($widget);
+        resolve(Normalizer::class)->normalizeWidgetConfig($widget);
 
         if (app()->offsetExists('debugbar')) {
             app('widgetize.debugger')->addMessage(['widget class:' => $widget, 'args:' => $args]);
@@ -50,13 +52,13 @@ class WidgetRenderer
      */
     private function makeWidgetObj($widget)
     {
-        if (starts_with($widget, ['\\'])) {
-            return app($widget);
+        if (Str::startsWith($widget, ['\\'])) {
+            return resolve($widget);
         }
 
         $widget = app()->getNamespace().'Widgets\\'.$widget;
 
-        return app($widget);
+        return resolve($widget);
     }
 
     /**
@@ -81,7 +83,7 @@ class WidgetRenderer
         }
 
         // We first try to get the output from the cache before trying to run the expensive $expensivePhpCode...
-        return app(Cache::class)->cacheResult($args, $expensivePhpCode, $widget);
+        return resolve(Cache::class)->cacheResult($args, $expensivePhpCode, $widget);
     }
 
     /**
@@ -106,7 +108,7 @@ class WidgetRenderer
         if ($widget->cacheView) {
             $this->_viewData = $expensiveCode();
         } else {
-            $this->_viewData = app(Cache::class)->cacheResult($args, $expensiveCode, $widget, 'dataProvider');
+            $this->_viewData = resolve(Cache::class)->cacheResult($args, $expensiveCode, $widget, 'dataProvider');
         }
     }
 
@@ -130,13 +132,13 @@ class WidgetRenderer
 
         // We try to minify the html before storing it in cache to save space.
         if ($this->_policies->widgetShouldBeMinified($widget)) {
-            $this->html = app(HtmlMinifier::class)->minify($this->html);
+            $this->html = resolve(HtmlMinifier::class)->minify($this->html);
         }
 
         // We add some HTML comments before and after the widget output
         // So then, we will be able to easily identify the widget in browser's developer tool.
         if ($this->_policies->widgetShouldHaveDebugInfo()) {
-            $this->html = app(DebugInfo::class)->addIdentifierToHtml($widget, $this->html);
+            $this->html = resolve(DebugInfo::class)->addIdentifierToHtml($widget, $this->html);
         }
 
         return $this->html;
