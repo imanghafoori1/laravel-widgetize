@@ -2,6 +2,8 @@
 
 namespace Imanghafoori\Widgets\Utils;
 
+use Illuminate\Support\Str;
+
 class CacheTag
 {
     /**
@@ -13,7 +15,7 @@ class CacheTag
      * @param $tag string
      * @return string The old existing token or a brand new one.
      */
-    public function getTagToken(string $tag) : string
+    public function getTagToken(string $tag)
     {
         if (isset($this->tagTokens[$tag])) {
             return $this->tagTokens[$tag];
@@ -35,9 +37,9 @@ class CacheTag
      * @param $tag string
      * @return string
      */
-    public function generateNewToken(string $tag) : string
+    public function generateNewToken(string $tag)
     {
-        $token = str_random(7);
+        $token = Str::random(7);
         $this->setTokenInMemory($tag, $token);
         $this->persistToken($tag, $token);
 
@@ -50,7 +52,7 @@ class CacheTag
      * @param $token string
      * @return string
      */
-    private function setTokenInMemory(string $tag, string $token): string
+    private function setTokenInMemory(string $tag, string $token)
     {
         return $this->tagTokens[$tag] = $token;
     }
@@ -61,7 +63,7 @@ class CacheTag
      * @param $token string
      * @return void
      */
-    private function persistToken(string $tag, string $token): void
+    private function persistToken(string $tag, string $token)
     {
         \Cache::forever('9z10_o6cg_r'.$tag, $token);
     }
@@ -70,7 +72,7 @@ class CacheTag
      * @param $tag string
      * @return string|null
      */
-    private function getPersistedToken(string $tag): ?string
+    private function getPersistedToken(string $tag)
     {
         return \Cache::get('9z10_o6cg_r'.$tag, null);
     }
