@@ -2,9 +2,8 @@
 
 namespace Imanghafoori\Widgets\Utils;
 
-/**
- * Class DebugInfo.
- */
+use Illuminate\Support\Str;
+
 class DebugInfo
 {
     private $widget;
@@ -23,7 +22,7 @@ class DebugInfo
      * @param string $html
      * @return string
      */
-    public function addIdentifierToHtml($widget, string $html): string
+    public function addIdentifierToHtml($widget, string $html)
     {
         $this->widget = $widget;
         $this->html = $html;
@@ -48,7 +47,7 @@ class DebugInfo
      *
      * @return string
      */
-    private function cacheState(): string
+    private function cacheState()
     {
         if (! $this->policies->widgetShouldUseCache()) {
             return ' &#013; Cache: is globally turned off (You should put "enable_cache" => true in config\widgetize.php) ';
@@ -67,9 +66,9 @@ class DebugInfo
      * @param string $tpl
      * @return string
      */
-    private function getTplPath(string $tpl): string
+    private function getTplPath(string $tpl)
     {
-        if (str_contains($tpl, 'Widgets::')) {
+        if (Str::contains($tpl, 'Widgets::')) {
             $tpl = str_replace('Widgets::', app()->getNamespace().'Widgets\\', $tpl);
         }
 

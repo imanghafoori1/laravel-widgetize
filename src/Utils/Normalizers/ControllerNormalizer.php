@@ -2,6 +2,7 @@
 
 namespace Imanghafoori\Widgets\Utils\Normalizers;
 
+use Illuminate\Support\Str;
 use Imanghafoori\Widgets\Utils\NormalizerContract;
 
 class ControllerNormalizer implements NormalizerContract
@@ -62,7 +63,7 @@ class ControllerNormalizer implements NormalizerContract
         }
 
         if (is_string($widget->controller)) {
-            if (! str_contains($widget->controller, '@')) {
+            if (! Str::contains($widget->controller, '@')) {
                 return [$widget->controller.'@data', $widget->controller];
             }
             $widget->controller = explode('@', $widget->controller);
