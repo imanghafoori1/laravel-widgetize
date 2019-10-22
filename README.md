@@ -87,27 +87,20 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 - #### Clean up your Controllers Code
 - #### Minify HTML
 - #### Easily provide page partials for varnish or nginx for ESI caching
-
-
-And to show the information you need.. It is :
 - #### Integrated with laravel-debugbar package
-out of the box ! 
-
-
+- #### Renders your widget as HTML or as JSON
 
 ---------------
 
-### Overview:When to use this package?
+### Overview: When to use this package?
 
-This concept (this design pattern) really shines when you want to create crowded web pages with multiple sections (on sidebar, menu, carousels ...) and each widget needs separate sql queries and php logic to be provided with data for its template. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
+This concept (this design pattern) really shines when you want to create tall web pages with multiple sections (on sidebar, menu, carousels ...) and each widget needs separate sql queries and php logic to be provided with data for its template. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
 
 -----------------
 
-### Overview:What is a widget?
+### Overview: What is a widget?
 
 You can think of a widget as a blade partial (which know how to provide data for itself.)
-
-Or If you know `Drupal's Views` concept, they are very similar.
 
 You can include `@widget('myWidget')` within your blade files and it will turn into `HTML`!!! 
  
