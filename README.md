@@ -118,12 +118,17 @@ You can include `@widget('myWidget')` within your blade files and it will turn i
 
 ### :gem: Overview:Technical Package Features
 
-> 1. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
-> 2. It optionally `minifies` the output of the widget.
-> 3. It shows Debug info for your widgets as html title="" attributes.
-> 4. __php artisan make:widget__ command 
-> 5. It helps you to have a dedicated presenter class of each widget to clean up your views.
-> 6. It extends the Route facade with `Route::view` , `Route::jsonWidget` , `Route::widget`
+:small_blue_diamond: 1. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
+
+:small_blue_diamond: 2. It optionally `minifies` the output of the widget.
+
+:small_blue_diamond: 3. It shows Debug info for your widgets as html title="" attributes.
+
+:small_blue_diamond: 4. __php artisan make:widget__ command 
+
+:small_blue_diamond: 5. It helps you to have a dedicated presenter class of each widget to clean up your views.
+
+:small_blue_diamond: 6. It extends the Route facade with `Route::jsonWidget` , `Route::widget`
 
 -------------------
 
