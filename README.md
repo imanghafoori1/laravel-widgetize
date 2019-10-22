@@ -3,7 +3,7 @@ Laravel Widgetize
 </h1>
 
 <p align="center">
-    <img width="300px" src="https://cloud.githubusercontent.com/assets/6961695/24345454/7d5c9e4c-12e5-11e7-8c22-015395dbb796.jpg" alt="widgetize_header"></img>
+    <img width="400px" src="https://cloud.githubusercontent.com/assets/6961695/24345454/7d5c9e4c-12e5-11e7-8c22-015395dbb796.jpg" alt="widgetize_header"></img>
 </p>
 
 
@@ -71,8 +71,6 @@ More readings:
 
 
 
-
-
 This page may look long and boring to read at first, but bear with me!!!
 
 I bet if you read through it you won't get disappointed at the end.So let's Go... :horse_racing:
@@ -122,13 +120,13 @@ You can jump right-in and start using it.
 
 ---------------
 
-### Overview: When to use this package?
+### When to use this package?
 
 This concept (this design pattern) really shines when you want to create tall web pages with multiple sections (on sidebar, menu, carousels ...) and each widget needs separate sql queries and php logic to be provided with data for its template. Anyway installing it has minimal overhead since surprisingly it is just a small abstract class and Of course you can use it to __refactor your monster code and tame it__ into managable pieces or __boost the performance 4x-5x__ times faster! :dizzy:
 
 -----------------
 
-### Overview: What is a widget?
+### What is a widget?
 
 You can think of a widget as a blade partial (which know how to provide data for itself.)
 
@@ -139,13 +137,13 @@ You can include `@widget('myWidget')` within your blade files and it will turn i
 ------------------
 
 
-### :gem: Overview:Technical Package Features
+### :gem: Technical Features:
 
 :small_blue_diamond: 1. It optionally `caches the output` of each widget. (which give a very powerful, flexible and easy to use caching opportunity) You can set different cache config for each part of the page. Similar to `ESI` standard.
 
 :small_blue_diamond: 2. It optionally `minifies` the output of the widget.
 
-:small_blue_diamond: 3. It shows Debug info for your widgets as html title="" attributes.
+:small_blue_diamond: 3. It shows debug info for your widgets as html title="" attributes.
 
 :small_blue_diamond: 4. __php artisan make:widget__ command 
 
@@ -199,7 +197,7 @@ public function compose(View $view)
 ## :bulb: Sample Code:
 
 
-### Sample:How to make a Widget?
+### How to generate a widget?
 
 
 >__You can use : `php artisan make:widget MyWidget` to make your widget class.__
