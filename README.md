@@ -80,15 +80,45 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 
 -----------------------
 
+
+### Installation: :arrow_down:
+``` bash
+composer require imanghafoori/laravel-widgetize
+```
+
+:electric_plug: (For Laravel <=5.4) Next, you must add the service provider to `config/app.php` :electric_plug:
+
+```php
+'providers' => [
+    // for laravel 5.4 and below
+    Imanghafoori\Widgets\WidgetsServiceProvider::class,
+];
+```
+
+__Publish your config file__
+``` bash
+php artisan vendor:publish
+```
+
+ :fire: And you will be on fire!:fire:
+
+``` bash
+php artisan make:widget MySexyWidget
+```
+
+A lot of docs are included in the generated widget file so it is not needed to memorize or even read the rest of this page.
+You can jump right-in and start using it.
+
+
 ## Overview:
 
-### This package helps you in :
+### This package helps you in:
 - #### Page Partial Caching
 - #### Clean up your Controllers Code
 - #### Minify HTML
 - #### Easily provide page partials for varnish or nginx for ESI caching
 - #### Integrated with laravel-debugbar package
-- #### Renders your widget as HTML or as JSON
+- #### Renders your widget as HTML or JSON
 
 ---------------
 
@@ -125,7 +155,7 @@ You can include `@widget('myWidget')` within your blade files and it will turn i
 
 -------------------
 
-#### What happens when your write @widget('SomeWidget') in your views (Long story, short)
+#### What happens when your write @widget('SomeWidget') in your views
 
 
 Given that we have disabled caching in the widgetize config file...
@@ -210,7 +240,7 @@ App\Widgets\MyWidgetView.blade.php :
 Ok, Now it's done! We have a ready to use widget. let's use it...
 
 
-### Sample:Then how to use that widget ?
+### Then how to use that widget?
 
 In a normal day to day view (middle-end):
 ```blade
@@ -240,37 +270,6 @@ into the page.
 -----------------
 
 ## :book: Documentation:
-
-
-### Installation: :arrow_down:
-``` bash
-composer require imanghafoori/laravel-widgetize
-```
-
-:electric_plug: (For Laravel <=5.4) Next, you must add the service provider to `config/app.php` :electric_plug:
-
-```php
-'providers' => [
-    // for laravel 5.4 and below
-    Imanghafoori\Widgets\WidgetsServiceProvider::class,
-];
-```
-
-__Publish your config file__
-``` bash
-php artisan vendor:publish
-```
-
- :fire: And you will be on fire!:fire:
-
-``` bash
-php artisan make:widget MySexyWidget
-```
-
-A lot of docs are included in the generated widget file so it is not needed to memorize or even read the rest of this page.
-You can jump right-in and start using it.
-
-
 
 
 ### :earth_africa: Global Config:
@@ -442,7 +441,7 @@ As always if you found this package useful and you want to encourage us to maint
 ## More from the author:
 
 
-###  Laravel middlewarize (new*)
+###  Laravel middlewarize
 
 :gem: You can put middleware on any method calls.
 
@@ -477,7 +476,7 @@ As always if you found this package useful and you want to encourage us to maint
 
 ------------
 
-### Eloquent Relativity (new*)
+### Eloquent Relativity
 
 :gem: It allows you to decouple your eloquent models to reach a modular structure
 
