@@ -161,11 +161,8 @@ public function compose(View $view)
 }
 
 ```
-3- $view->with('count', $this->users->count()); 
-This exposes the $count to all views not just the partial.
-And this violates encapsulation.
 
-4- They offer no caching out of the box.
+3- They offer no caching out of the box.
 
 
 ----------------------
