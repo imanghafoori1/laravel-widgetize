@@ -2,9 +2,9 @@
 
 namespace Imanghafoori\Widgets;
 
+use DebugBar\DataCollector\MessagesCollector;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use DebugBar\DataCollector\MessagesCollector;
 
 class WidgetsServiceProvider extends ServiceProvider
 {
