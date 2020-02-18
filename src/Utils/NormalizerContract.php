@@ -4,5 +4,5 @@ namespace Imanghafoori\Widgets\Utils;
 
 interface NormalizerContract
 {
-    public function normalize($widget) : void;
+    public function normalize($widget): void;
 }

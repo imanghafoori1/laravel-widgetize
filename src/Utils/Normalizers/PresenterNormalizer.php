@@ -11,7 +11,7 @@ class PresenterNormalizer implements NormalizerContract
      * @param object $widget
      * @return void
      */
-    public function normalize($widget) : void
+    public function normalize($widget): void
     {
         $presenter = $this->figureOutPresenterClass($widget);
 
@@ -24,7 +24,7 @@ class PresenterNormalizer implements NormalizerContract
     /**
      * @param string $presenter
      */
-    private function checkPresentMethodExists($presenter) : void
+    private function checkPresentMethodExists($presenter): void
     {
         if (! method_exists($presenter, 'present')) {
             throw new \InvalidArgumentException("'present' method not found on : ".$presenter);

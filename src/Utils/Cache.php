@@ -77,7 +77,7 @@ class Cache
      * Determines cacheTagging is supported by the chosen laravel cache driver or not.
      * @return bool
      */
-    private function cacheDriverSupportsTags() : bool
+    private function cacheDriverSupportsTags(): bool
     {
         return ! in_array(config('cache.default', 'file'), ['file', 'database']);
     }
