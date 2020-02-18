@@ -12,7 +12,7 @@ class TemplateNormalizer implements NormalizerContract
      * @param object $widget
      * @return void
      */
-    public function normalize($widget) : void
+    public function normalize($widget): void
     {
         // class name without namespace.
         $className = str_replace(app()->getNamespace().'Widgets\\', '', get_class($widget));
