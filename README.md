@@ -485,7 +485,7 @@ As always if you found this package useful and you want to encourage us to maint
 
 ### 🍌 Reward me a banana 🍌
 
-so that I will have energy to start the next package for you.
+Send me as much as a banana costs in your region:
 
 - Dodge Coin: DJEZr6GJ4Vx37LGF3zSng711AFZzmJTouN
 - LiteCoin: ltc1q82gnjkend684c5hvprg95fnja0ktjdfrhcu4c4
@@ -495,9 +495,13 @@ so that I will have energy to start the next package for you.
 
 --------------
 
+- Contact me after donation:
+
+https://t.me/imanghafoori
+
 <p align="center">
   
-    A man will never fail, unless he stops trying.
+    I speak to everyone in the same way, whether he is the garbage man or the president of the university.
     
     "Albert Einstein"
     
