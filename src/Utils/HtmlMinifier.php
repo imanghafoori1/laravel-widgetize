@@ -8,7 +8,7 @@ namespace Imanghafoori\Widgets\Utils;
 class HtmlMinifier
 {
     private $replace = [
-        '<!--(.*?)-->' => '', //remove comments
+        '/<!--[\s\S]*?-->/' => '', //remove comments
         "/<\?php/" => '<?php ',
         "/\n([\S])/" => '$1',
         "/\r/" => '', // remove carriage return
