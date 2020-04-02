@@ -474,11 +474,11 @@ As always if you found this package useful and you want to encourage us to maint
 
 ------------
 
-### Eloquent Relativity
+### Laravel Self Test
 
-:gem: It allows you to decouple your eloquent models to reach a modular structure
+:gem: It automatically checks your laravel application
 
-- https://github.com/imanghafoori1/eloquent-relativity
+- https://github.com/imanghafoori1/laravel-self-test
 
 
 ----------------
