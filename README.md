@@ -439,6 +439,14 @@ As always if you found this package useful and you want to encourage us to maint
 ## More from the author:
 
 
+### Laravel Microscope
+
+:gem: It automatically find bugs in your laravel app
+
+- https://github.com/imanghafoori1/laravel-microscope
+
+-------------
+
 ###  Laravel middlewarize
 
 :gem: You can put middleware on any method calls.
@@ -471,14 +479,6 @@ As always if you found this package useful and you want to encourage us to maint
 :gem: It allows you login with any password in local environment only.
 
 - https://github.com/imanghafoori1/laravel-anypass
-
-------------
-
-### Laravel Self Test
-
-:gem: It automatically checks your laravel application
-
-- https://github.com/imanghafoori1/laravel-self-test
 
 
 ----------------
