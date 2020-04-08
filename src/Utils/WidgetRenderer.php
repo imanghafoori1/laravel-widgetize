@@ -105,11 +105,7 @@ class WidgetRenderer
             return $viewData;
         };
 
-        if ($widget->cacheView) {
-            $this->_viewData = $expensiveCode();
-        } else {
-            $this->_viewData = resolve(Cache::class)->cacheResult($args, $expensiveCode, $widget, 'dataProvider');
-        }
+        $this->_viewData = resolve(Cache::class)->cacheResult($args, $expensiveCode, $widget, 'dataProvider');
     }
 
     /**
