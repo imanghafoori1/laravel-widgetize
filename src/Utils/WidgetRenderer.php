@@ -107,6 +107,7 @@ class WidgetRenderer
 
         if ($widget->cacheView == false) {
             $this->_viewData = $expensiveCode();
+
             return;
         }
 
