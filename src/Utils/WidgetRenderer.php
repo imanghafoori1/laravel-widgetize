@@ -6,6 +6,8 @@ use Illuminate\Support\Str;
 
 class WidgetRenderer
 {
+    use SlotRenderer;
+    
     public $html;
 
     private $_viewData;
@@ -74,6 +76,8 @@ class WidgetRenderer
         // Everything inside this function is executed only when the cache is not available.
         $expensivePhpCode = function () use ($widget, $args) {
             $this->makeDataForView($widget, $args);
+
+            $this->assignSlots();
 
             return $this->renderTemplate($widget, ...$args);
         };
