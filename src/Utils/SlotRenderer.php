@@ -2,7 +2,7 @@
 
 namespace Imanghafoori\Widgets\Utils;
 
-trait SlotRenderer 
+trait SlotRenderer
 {
 	protected $slotName;
 
@@ -10,7 +10,7 @@ trait SlotRenderer
 
 	public function startSlot($name)
 	{
-		if(ob_start()){
+		if (ob_start()) {
 			$this->slotName = $name;
 		}
 	}
@@ -25,12 +25,12 @@ trait SlotRenderer
 		return !empty($this->slots);
 	}
 
-    /**
-     * Assign slots to $_viewData
-     */
-    private function assignSlots()
-    {
-        if($this->hasSlot())
-            $this->_viewData = array_merge($this->_viewData, $this->slots);
-    }
+	/**
+	 * Assign slots to $_viewData
+	 */
+	private function assignSlots()
+	{
+		if ($this->hasSlot())
+			$this->_viewData = array_merge($this->_viewData, $this->slots);
+	}
 }

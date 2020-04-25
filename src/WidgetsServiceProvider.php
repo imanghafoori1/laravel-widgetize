@@ -19,11 +19,11 @@ class WidgetsServiceProvider extends ServiceProvider
     {
         $this->_registerDebugbar();
         $this->publishes([
-            __DIR__.'/config/config.php' => config_path('widgetize.php'),
+            __DIR__ . '/config/config.php' => config_path('widgetize.php'),
         ]);
 
         $this->defineDirectives();
-        $this->loadViewsFrom($this->app->basePath().'/app/Widgets/', 'Widgets');
+        $this->loadViewsFrom($this->app->basePath() . '/app/Widgets/', 'Widgets');
     }
 
     /**
@@ -42,7 +42,7 @@ class WidgetsServiceProvider extends ServiceProvider
 
         Blade::directive('widget', function ($expression) use ($omitParenthesis) {
             $expression = $omitParenthesis ? $expression : "($expression)";
-            if(strpos($expression, 'slotable') == false){
+            if (strpos($expression, 'slotable') == false) {
                 return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->renderWidget{$expression}; ?>";
             }
             $this->expression = preg_replace('/\bslotable\b/u', '', $expression);
@@ -50,7 +50,7 @@ class WidgetsServiceProvider extends ServiceProvider
 
         $this->defineSlotDirectives($omitParenthesis);
 
-        Blade::directive('endwidget', function(){
+        Blade::directive('endwidget', function () {
             $expression = $this->expression;
             return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->renderWidget{$expression}; ?>";
         });
@@ -68,12 +68,12 @@ class WidgetsServiceProvider extends ServiceProvider
      */
     private function defineSlotDirectives($omitParenthesis)
     {
-        Blade::directive('slot', function($slotName) use ($omitParenthesis) {
+        Blade::directive('slot', function ($slotName) use ($omitParenthesis) {
             $slotName = $omitParenthesis ? $slotName : "($slotName)";
             return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->startSlot{$slotName};?>";
         });
 
-        Blade::directive('endslot', function(){
+        Blade::directive('endslot', function () {
             $contentKey = '$content';
             return "<?php 
                         $contentKey = ob_get_clean();
@@ -89,7 +89,7 @@ class WidgetsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/config/config.php', 'widgetize');
+        $this->mergeConfigFrom(__DIR__ . '/config/config.php', 'widgetize');
         $this->commands('command.imanghafoori.widget');
         app(RouteMacros::class)->registerMacros();
         app(SingletonServices::class)->registerSingletons($this->app);
@@ -97,7 +97,7 @@ class WidgetsServiceProvider extends ServiceProvider
 
     private function _registerDebugbar()
     {
-        if (! $this->app->offsetExists('debugbar')) {
+        if (!$this->app->offsetExists('debugbar')) {
             return;
         }
 
