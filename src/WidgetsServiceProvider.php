@@ -8,6 +8,8 @@ use Illuminate\Support\ServiceProvider;
 
 class WidgetsServiceProvider extends ServiceProvider
 {
+    private $expression;
+
     /**
      * Bootstrap any application services.
      *
@@ -26,7 +28,7 @@ class WidgetsServiceProvider extends ServiceProvider
 
     /**
      * | ------------------------------------------ |
-     * |         Define Blade Directive             |
+     * |         Define Blade Directives            |
      * | ------------------------------------------ |
      * | When you call @ widget from your views     |
      * | The only thing that happens is that the    |
@@ -40,8 +42,43 @@ class WidgetsServiceProvider extends ServiceProvider
 
         Blade::directive('widget', function ($expression) use ($omitParenthesis) {
             $expression = $omitParenthesis ? $expression : "($expression)";
+            if(strpos($expression, 'slotable') == false){
+                return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->renderWidget{$expression}; ?>";
+            }
+            $this->expression = preg_replace('/\bslotable\b/u', '', $expression);
+        });
 
+        $this->defineSlotDirectives($omitParenthesis);
+
+        Blade::directive('endwidget', function(){
+            $expression = $this->expression;
             return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->renderWidget{$expression}; ?>";
+        });
+    }
+
+    /**
+     * | ------------------------------------------ |
+     * |       Define Wdgetize Slots Directives     |
+     * | ------------------------------------------ |
+     * | When you call @ slot from your widget      |
+     * | The only thing that happens is that the    |
+     * | `renderSlot` method Gets called on the     |
+     * | `Utils\SlotRenderer` trait                 |
+     * | ------------------------------------------ |.
+     */
+    private function defineSlotDirectives($omitParenthesis)
+    {
+        Blade::directive('slot', function($slotName) use ($omitParenthesis) {
+            $slotName = $omitParenthesis ? $slotName : "($slotName)";
+            return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->startSlot{$slotName};?>";
+        });
+
+        Blade::directive('endslot', function(){
+            $contentKey = '$content';
+            return "<?php 
+                        $contentKey = ob_get_clean();
+                        echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->renderSlot($contentKey);
+                    ?>";
         });
     }
 
