@@ -78,7 +78,7 @@ class WidgetRenderer
             return $this->renderTemplate($widget, ...$args);
         };
 
-        if ($widget->cacheView == false) {
+        if (! $widget->cacheView) {
             return $expensivePhpCode();
         }
 
@@ -105,14 +105,11 @@ class WidgetRenderer
             return $viewData;
         };
 
-        if ($widget->cacheView == false) {
+        if ($widget->cacheView) {
             $this->_viewData = $expensiveCode();
-
-            return;
+        } else {
+            $this->_viewData = resolve(Cache::class)->cacheResult($args, $expensiveCode, $widget, 'dataProvider');
         }
-
-        // We first try to get the output from the cache before trying to run the expensive $expensiveCode...
-        $this->_viewData = resolve(Cache::class)->cacheResult($args, $expensiveCode, $widget, 'dataProvider');
     }
 
     /**
