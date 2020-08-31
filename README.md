@@ -480,28 +480,11 @@ As always if you found this package useful and you want to encourage us to maint
 
 - https://github.com/imanghafoori1/laravel-anypass
 
-
-----------------
-
-### 🍌 Reward me a banana 🍌
-
-Send me as much as a banana costs in your region:
-
-- Dodge Coin: DJEZr6GJ4Vx37LGF3zSng711AFZzmJTouN
-- LiteCoin: ltc1q82gnjkend684c5hvprg95fnja0ktjdfrhcu4c4
-- BitCoin: bc1q53dys3jkv0h4vhl88yqhqzyujvk35x8wad7uf9
-- Ripple: rJwrb2v1TR6rAHRWwcYvNZxjDN2bYpYXhZ
-- Etherium: 0xa4898246820bbC8f677A97C2B73e6DBB9510151e
-
 --------------
-
-- Contact me after donation:
-
-https://t.me/imanghafoori
 
 <p align="center">
   
-    I speak to everyone in the same way, whether he is the garbage man or the president of the university.
+    Great spirits have always encountered violent opposition from mediocre minds.
     
     "Albert Einstein"
     
