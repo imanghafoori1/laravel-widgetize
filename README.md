@@ -57,6 +57,8 @@ Built with :heart: for every smart laravel developer
 * :bulb: [Usage and Example](#bulb-example)
     - [How to make a widget class](#how-to-make-a-widget)
     - [How to use a widget class](#how-to-use-a-widget-class)
+    - [How to define a slot](#how-to-define-a-slot)
+    - [How to use the slot](#how-to-use-the-slot)
    
 More readings:
 * :shipit: [Some Theory for Experts](#)
@@ -263,6 +265,46 @@ All of us, more or less have some ajax experience. One scenario is to lazy load 
 the page has been fully loaded.
 You can think of @widget() as an ajax call from "middle-end" to the "back-end" to load a piece of HTML
 into the page.
+```
+
+
+
+---------------------
+
+### How to define a slot?
+
+> To use the slot, you should pass 'slotable' parameter to the widget and close its directive(``` @endwidget ```). Then define your slot middle of it. Look at the syntax:
+
+```blade
+@widget('MyWidget', 'slotable')
+    @slot('message')
+        <h1>Hello {{ auth()->user()->username }} </h1>
+    @endslot
+@endwidget
+```
+
+> also, you can pass your data:
+
+```blade
+@widget('MyWidget', [$a, $b], 'slotable')
+...
+```
+
+> or
+
+```blade
+@widget('MyWidget', 'slotable', [$a, $b])
+...
+```
+
+### How to use the slot?
+
+App\Widgets\MyWidgetView.blade.php :
+
+```blade
+<div class="message">
+    {!! $message !!}}
+</div>
 ```
 
 -----------------
@@ -483,10 +525,10 @@ As always if you found this package useful and you want to encourage us to maint
 --------------
 
 <p align="center">
-  
+
     Great spirits have always encountered violent opposition from mediocre minds.
     
     "Albert Einstein"
-    
+
 </p>
 
