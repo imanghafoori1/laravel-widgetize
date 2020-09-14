@@ -46,8 +46,7 @@ class WidgetsServiceProvider extends ServiceProvider
                 return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->renderWidget{$expression}; ?>";
             }
 
-            $expression = preg_replace("/, 'slotable'|,'slotable'/", '', $expression);
-            $this->expression = $expression;
+            $this->expression = preg_replace("/, 'slotable'|,'slotable'/", '', $expression);
         });
 
         $this->defineSlotDirectives($omitParenthesis);
