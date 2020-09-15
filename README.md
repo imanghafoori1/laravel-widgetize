@@ -57,6 +57,7 @@ Built with :heart: for every smart laravel developer
 * :bulb: [Usage and Example](#bulb-example)
     - [How to make a widget class](#how-to-make-a-widget)
     - [How to use a widget class](#how-to-use-a-widget-class)
+    - [What is a slot?](#what's-a-slot-and-how-it-helps-me?)
     - [How to define a slot](#how-to-define-a-slot)
     - [How to use the slot](#how-to-use-the-slot)
    
@@ -270,6 +271,9 @@ into the page.
 
 
 ---------------------
+### What's a slot and how it helps me?
+
+Slots help you position your HTML or blade code in a widget, and allow the parent widget to arrange it, and improves your widget reusability.
 
 ### How to define a slot?
 
