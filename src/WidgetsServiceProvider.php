@@ -42,16 +42,17 @@ class WidgetsServiceProvider extends ServiceProvider
 
         Blade::directive('widget', function ($expression) use ($omitParenthesis) {
             $expression = $omitParenthesis ? $expression : "($expression)";
-            if (strpos($expression, 'slotable') == false) {
-                return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->renderWidget{$expression}; ?>";
-            }
 
-            $this->expression = preg_replace("/, 'slotable'|,'slotable'/", '', $expression);
+            return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->renderWidget{$expression}; ?>";
+        });
+
+        Blade::directive('slotWidget', function ($expression) use ($omitParenthesis)  {
+            $this->expression = $omitParenthesis ? $expression : "($expression)";
         });
 
         $this->defineSlotDirectives($omitParenthesis);
 
-        Blade::directive('endwidget', function () {
+        Blade::directive('endSlotWidget', function () {
             $expression = $this->expression;
             return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->renderWidget{$expression}; ?>";
         });
@@ -74,7 +75,7 @@ class WidgetsServiceProvider extends ServiceProvider
             return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->startSlot{$slotName};?>";
         });
 
-        Blade::directive('endslot', function () {
+        Blade::directive('endSlot', function () {
             $contentKey = '$content';
             return "<?php 
                         $contentKey = ob_get_clean();

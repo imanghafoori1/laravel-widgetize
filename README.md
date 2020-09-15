@@ -280,24 +280,17 @@ Slots help you position your HTML or blade code in a widget, and allow the paren
 > To use the slot, you should pass 'slotable' parameter to the widget and close its directive(``` @endwidget ```). Then define your slot middle of it. Look at the syntax:
 
 ```blade
-@widget('MyWidget', 'slotable')
+@slotWidget('MyWidget')
     @slot('message')
         <h1>Hello {{ auth()->user()->username }} </h1>
-    @endslot
-@endwidget
+    @endSlot
+@endSlotWidget
 ```
 
 > also, you can pass your data:
 
 ```blade
-@widget('MyWidget', [$a, $b], 'slotable')
-...
-```
-
-> or
-
-```blade
-@widget('MyWidget', 'slotable', [$a, $b])
+@slotWidget('MyWidget', [$a, $b])
 ...
 ```
 
