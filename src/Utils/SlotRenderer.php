@@ -31,11 +31,21 @@ trait SlotRenderer
     }
 
     /**
+     * check if widget has any slots
+     * 
+     * @return Boolean
+     */
+    public function hasSlots()
+    {
+        return !empty($this->slots);
+    }
+
+    /**
      * get and clean current slots
      * 
      * @return Array $slots
      */
-    private function getSlots()
+    public function getSlots()
     {
         $slots = $this->slots;
 

@@ -124,7 +124,10 @@ class WidgetRenderer
     private function renderTemplate($widget, $args = null)
     {
         // Here we render the view file to raw html.
-        $data = ['slots' => $this->getSlots(), $widget->contextAs => $this->_viewData, 'params' => $args];
+        $data = [$widget->contextAs => $this->_viewData, 'params' => $args];
+
+        // add slots if exists
+        $this->hasSlots() && $data['slots'] = $this->getSlots();
 
         try {
             $this->html = view($widget->template, $data)->render();
