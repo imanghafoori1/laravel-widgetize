@@ -32,5 +32,7 @@ trait SlotRenderer
     {
         if ($this->hasSlot())
             $this->_viewData = array_merge($this->_viewData, $this->slots);
+
+        $this->slots = [];
     }
 }
