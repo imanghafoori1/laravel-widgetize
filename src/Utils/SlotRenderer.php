@@ -8,6 +8,11 @@ trait SlotRenderer
 
     protected $slots = [];
 
+    /**
+     * Start output buffer to get content of slot and set slot name
+     * 
+     * @param String $name
+     */
     public function startSlot($name)
     {
         if (ob_start()) {
@@ -15,24 +20,27 @@ trait SlotRenderer
         }
     }
 
+    /**
+     * get slot content from widget block
+     * 
+     * @param String $data
+     */
     public function renderSlot($data)
     {
         $this->slots[$this->slotName] = $data ?? "";
     }
 
-    public function hasSlot()
-    {
-        return !empty($this->slots);
-    }
-
     /**
-     * Assign slots to $_viewData
+     * get and clean current slots
+     * 
+     * @return Array $slots
      */
-    private function assignSlots()
+    private function getSlots()
     {
-        if ($this->hasSlot())
-            $this->_viewData = array_merge($this->_viewData, $this->slots);
+        $slots = $this->slots;
 
         $this->slots = [];
+
+        return $slots;
     }
 }

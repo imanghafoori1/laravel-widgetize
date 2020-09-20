@@ -77,8 +77,6 @@ class WidgetRenderer
         $expensivePhpCode = function () use ($widget, $args) {
             $this->makeDataForView($widget, $args);
 
-            $this->assignSlots();
-
             return $this->renderTemplate($widget, ...$args);
         };
 
@@ -126,7 +124,7 @@ class WidgetRenderer
     private function renderTemplate($widget, $args = null)
     {
         // Here we render the view file to raw html.
-        $data = [$widget->contextAs => $this->_viewData, 'params' => $args];
+        $data = ['slots' => $this->getSlots(), $widget->contextAs => $this->_viewData, 'params' => $args];
 
         try {
             $this->html = view($widget->template, $data)->render();
