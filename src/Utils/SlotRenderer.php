@@ -15,9 +15,8 @@ trait SlotRenderer
      */
     public function startSlot($name)
     {
-        if (ob_start()) {
+        if (ob_start())
             $this->slotName = $name;
-        }
     }
 
     /**
@@ -25,9 +24,9 @@ trait SlotRenderer
      * 
      * @param String $data
      */
-    public function renderSlot($data)
+    public function renderSlot($data = "")
     {
-        $this->slots[$this->slotName] = $data ?? "";
+        $this->slots[$this->slotName] = $data;
     }
 
     /**
