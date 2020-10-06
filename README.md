@@ -271,13 +271,13 @@ into the page.
 
 
 ---------------------
-### What's a slot and how it helps me?
+### What is the slot?
 
 Slots help you position your HTML or blade code in a widget, and allow the parent widget to arrange it, and improves your widget reusability.
 
 ### How to define a slot?
 
-> To use the slot, you should pass 'slotable' parameter to the widget and close its directive(``` @endwidget ```). Then define your slot middle of it. Look at the syntax:
+> To use the slot, you should use ``` @slotWidget ``` instead of ``` @widget ``` and close the directive ``` @endSlotWidget ```, Then define your slot middle of it. Look at the syntax:
 
 ```blade
 @slotWidget('MyWidget')
