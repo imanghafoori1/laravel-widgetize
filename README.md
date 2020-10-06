@@ -300,7 +300,7 @@ App\Widgets\MyWidgetView.blade.php :
 
 ```blade
 <div class="message">
-    {!! $slots['message'] !!}}
+    {!! $slots['message'] !!}
 </div>
 ```
 
