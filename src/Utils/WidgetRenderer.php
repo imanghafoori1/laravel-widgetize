@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 class WidgetRenderer
 {
     use SlotRenderer;
-    
+
     public $html;
 
     private $_viewData;
