@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\View;
-use \Imanghafoori\Widgets\Utils\WidgetRenderer;
+use Imanghafoori\Widgets\Utils\WidgetRenderer;
 
 require_once 'test_stubs.php';
 
@@ -23,7 +23,7 @@ class SlotWidgetTest extends TestCase
         $this->assertEquals(false, $renderer->hasSlots());
 
         $renderer->startSlot('message');
-        $renderer->renderSlot("<h1> test set slot </h1>");
+        $renderer->renderSlot('<h1> test set slot </h1>');
         ob_end_clean();
 
         $this->assertEquals(true, $renderer->hasSlots());
@@ -32,7 +32,7 @@ class SlotWidgetTest extends TestCase
     public function test_get_then_remove_current_slots()
     {
         $slotName = 'message';
-        $slotContent = "<h1> test set and clean slot </h1>";
+        $slotContent = '<h1> test set and clean slot </h1>';
 
         $renderer = $this->renderer;
 
@@ -87,8 +87,8 @@ class SlotWidgetTest extends TestCase
 
         $slots = [
             'header_links' => "<a href='#'> login </a>",
-            'message' => "<h1> this is my message </h1>",
-            'footer_links' => "<a href='#'> about us </a>"
+            'message' => '<h1> this is my message </h1>',
+            'footer_links' => "<a href='#'> about us </a>",
         ];
 
         View::shouldReceive('exists')->once()->andReturn(true);
@@ -96,10 +96,10 @@ class SlotWidgetTest extends TestCase
             ->with('hello', ['data' => 'bbaa', 'params' => ['arg1' => 'a', 'arg2' => 'bb'], 'slots' => $slots], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn(implode(',', array_values($slots)));
 
-        foreach($slots as $name => $content) {
+        foreach ($slots as $name => $content) {
             $renderer->startSlot($name);
             $renderer->renderSlot($content);
-            ob_end_clean(); 
+            ob_end_clean();
         }
 
         //act
