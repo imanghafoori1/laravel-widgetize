@@ -8,6 +8,8 @@ use Illuminate\Support\ServiceProvider;
 
 class WidgetsServiceProvider extends ServiceProvider
 {
+    private $expression;
+
     /**
      * Bootstrap any application services.
      *
@@ -17,16 +19,16 @@ class WidgetsServiceProvider extends ServiceProvider
     {
         $this->_registerDebugbar();
         $this->publishes([
-            __DIR__.'/config/config.php' => config_path('widgetize.php'),
+            __DIR__ . '/config/config.php' => config_path('widgetize.php'),
         ]);
 
         $this->defineDirectives();
-        $this->loadViewsFrom($this->app->basePath().'/app/Widgets/', 'Widgets');
+        $this->loadViewsFrom($this->app->basePath() . '/app/Widgets/', 'Widgets');
     }
 
     /**
      * | ------------------------------------------ |
-     * |         Define Blade Directive             |
+     * |         Define Blade Directives            |
      * | ------------------------------------------ |
      * | When you call @ widget from your views     |
      * | The only thing that happens is that the    |
@@ -43,6 +45,43 @@ class WidgetsServiceProvider extends ServiceProvider
 
             return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->renderWidget{$expression}; ?>";
         });
+
+        Blade::directive('slotWidget', function ($expression) use ($omitParenthesis)  {
+            $this->expression = $omitParenthesis ? $expression : "($expression)";
+        });
+
+        $this->defineSlotDirectives($omitParenthesis);
+
+        Blade::directive('endSlotWidget', function () {
+            $expression = $this->expression;
+            return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->renderWidget{$expression}; ?>";
+        });
+    }
+
+    /**
+     * | ------------------------------------------ |
+     * |       Define Wdgetize Slots Directives     |
+     * | ------------------------------------------ |
+     * | When you call @ slot from your widget      |
+     * | The only thing that happens is that the    |
+     * | `renderSlot` method Gets called on the     |
+     * | `Utils\SlotRenderer` trait                 |
+     * | ------------------------------------------ |.
+     */
+    private function defineSlotDirectives($omitParenthesis)
+    {
+        Blade::directive('slot', function ($slotName) use ($omitParenthesis) {
+            $slotName = $omitParenthesis ? $slotName : "($slotName)";
+            return "<?php echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->startSlot{$slotName};?>";
+        });
+
+        Blade::directive('endSlot', function () {
+            $contentKey = '$content';
+            return "<?php 
+                        $contentKey = ob_get_clean();
+                        echo app(\\Imanghafoori\\Widgets\\Utils\\WidgetRenderer::class)->renderSlot($contentKey);
+                    ?>";
+        });
     }
 
     /**
@@ -52,7 +91,7 @@ class WidgetsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/config/config.php', 'widgetize');
+        $this->mergeConfigFrom(__DIR__ . '/config/config.php', 'widgetize');
         $this->commands('command.imanghafoori.widget');
         app(RouteMacros::class)->registerMacros();
         app(SingletonServices::class)->registerSingletons($this->app);
@@ -60,7 +99,7 @@ class WidgetsServiceProvider extends ServiceProvider
 
     private function _registerDebugbar()
     {
-        if (! $this->app->offsetExists('debugbar')) {
+        if (!$this->app->offsetExists('debugbar')) {
             return;
         }
 

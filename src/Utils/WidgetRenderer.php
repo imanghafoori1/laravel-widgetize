@@ -6,6 +6,8 @@ use Illuminate\Support\Str;
 
 class WidgetRenderer
 {
+    use SlotRenderer;
+    
     public $html;
 
     private $_viewData;
@@ -123,6 +125,9 @@ class WidgetRenderer
     {
         // Here we render the view file to raw html.
         $data = [$widget->contextAs => $this->_viewData, 'params' => $args];
+
+        // add slots if exists
+        $this->hasSlots() && $data['slots'] = $this->getSlots();
 
         try {
             $this->html = view($widget->template, $data)->render();
