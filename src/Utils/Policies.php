@@ -11,7 +11,7 @@ class Policies
      */
     public function widgetShouldHaveDebugInfo(): bool
     {
-        return config('widgetize.debug_info') && ! app()->environment('production');
+        return config('widgetize.debug_info') && !app()->environment('production');
     }
 
     /**
@@ -23,7 +23,7 @@ class Policies
      */
     public function widgetShouldUseCache(): bool
     {
-        return config('widgetize.enable_cache') && (! app()->environment('testing'));
+        return config('widgetize.enable_cache') && (!app()->environment('testing'));
     }
 
     /**
@@ -38,5 +38,11 @@ class Policies
         $conf = (config('widgetize.minify_html') || app()->environment('production'));
 
         return $widget->minifyOutput ?? $conf;
+    }
+
+    public function widgetShouldBeExtracted($widget): bool
+    {
+        $conf = config('widgetize.extract_data');
+        return /* $widget->extract_data ?? */ $conf;
     }
 }

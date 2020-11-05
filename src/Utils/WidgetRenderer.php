@@ -58,7 +58,7 @@ class WidgetRenderer
             return resolve($widget);
         }
 
-        $widget = app()->getNamespace().'Widgets\\'.$widget;
+        $widget = app()->getNamespace() . 'Widgets\\' . $widget;
 
         return resolve($widget);
     }
@@ -80,7 +80,7 @@ class WidgetRenderer
             return $this->renderTemplate($widget, ...$args);
         };
 
-        if (! $widget->cacheView) {
+        if (!$widget->cacheView) {
             return $expensivePhpCode();
         }
 
@@ -124,7 +124,11 @@ class WidgetRenderer
     private function renderTemplate($widget, $args = null)
     {
         // Here we render the view file to raw html.
-        $data = [$widget->contextAs => $this->_viewData, 'params' => $args];
+        if ($this->_policies->widgetShouldBeExtracted($widget)) {
+            $data = $this->_viewData + ['params' => $args];
+        } else {
+            $data = [$widget->contextAs => $this->_viewData, 'params' => $args];
+        }
 
         // add slots if exists
         $this->hasSlots() && $data['slots'] = $this->getSlots();
@@ -132,7 +136,7 @@ class WidgetRenderer
         try {
             $this->html = view($widget->template, $data)->render();
         } catch (\Throwable $t) {
-            throw new \ErrorException('There was some error rendering '.get_class($widget).', template file: \''.$widget->template.'\' Error: '.$t->getMessage());
+            throw new \ErrorException('There was some error rendering ' . get_class($widget) . ', template file: \'' . $widget->template . '\' Error: ' . $t->getMessage());
         }
 
         // We try to minify the html before storing it in cache to save space.
@@ -151,7 +155,7 @@ class WidgetRenderer
 
     private function callController($widget, array $args)
     {
-        if (! isset($widget->controller)) {
+        if (!isset($widget->controller)) {
             $viewData = [];
         } elseif (is_array($widget->controller) && is_string($widget->controller[0])) {
             $viewData = call_user_func_array($widget->controller, $args);

@@ -40,4 +40,6 @@ return [
     |
     */
     'debug_info' => true,
+
+    'extract_data' => false,
 ];
