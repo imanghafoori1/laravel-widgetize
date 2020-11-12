@@ -344,7 +344,7 @@ or you may also refrence it like this :
 #### __public $presenter__ (string)
 
 > If you do not want to put your _present_ method on your widget class, you can set
-`public $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data retured from your controller is first piped to your presenter and then to your view.(So if you specify a presenter your view file gets its data from the presenter and not the controller.)
+`public $presenter = App\Some\Class\MyPresenter::class` and put your `public present` method on a dedicated class.The data returned from your controller is first piped to your presenter and then to your view.(So if you specify a presenter your view file gets its data from the presenter and not the controller.)
 
 
 
