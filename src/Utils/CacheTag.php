@@ -34,6 +34,7 @@ class CacheTag
 
     /**
      * Generates a brand new token.
+     *
      * @param $tag string
      * @return string
      */
@@ -48,6 +49,7 @@ class CacheTag
 
     /**
      * Set token in Memory for fast access within the same request.
+     *
      * @param $tag string
      * @param $token string
      * @return string
@@ -59,6 +61,7 @@ class CacheTag
 
     /**
      * Save token to disk for later requests.
+     *
      * @param $tag string
      * @param $token string
      * @return void

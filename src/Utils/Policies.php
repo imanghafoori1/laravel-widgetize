@@ -30,7 +30,6 @@ class Policies
      * Widget Should Be Minified or Not.
      *
      * @param $widget
-     *
      * @return bool
      */
     public function widgetShouldBeMinified($widget): bool

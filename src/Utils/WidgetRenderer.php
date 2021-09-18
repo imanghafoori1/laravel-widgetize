@@ -24,7 +24,7 @@ class WidgetRenderer
 
     /**
      * @param $widget object|string
-     * @param array $args
+     * @param  array  $args
      * @return string
      */
     public function renderWidget($widget, ...$args)
@@ -67,8 +67,7 @@ class WidgetRenderer
      * It tries to get the html from cache if possible, otherwise generates it.
      *
      * @param $widget object
-     * @param array ...$args
-     *
+     * @param  array  ...$args
      * @return string
      */
     private function generateHtml($widget, ...$args)
@@ -91,7 +90,6 @@ class WidgetRenderer
     /**
      * @param $widget object
      * @param $args array
-     *
      * @return null
      */
     private function makeDataForView($widget, array $args)
@@ -115,11 +113,11 @@ class WidgetRenderer
     }
 
     /**
-     * @param      $widget object
-     * @param null $args
+     * @param  $widget  object
+     * @param  null  $args
+     * @return string HTML output
      *
      * @throws \Throwable
-     * @return string HTML output
      */
     private function renderTemplate($widget, $args = null)
     {

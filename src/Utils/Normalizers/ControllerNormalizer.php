@@ -9,7 +9,8 @@ class ControllerNormalizer implements NormalizerContract
 {
     /**
      * Figures out which method should be called as the controller.
-     * @param object $widget
+     *
+     * @param  object  $widget
      * @return void
      */
     public function normalize($widget): void
@@ -25,7 +26,7 @@ class ControllerNormalizer implements NormalizerContract
     }
 
     /**
-     * @param string $ctrlClass
+     * @param  string  $ctrlClass
      */
     private function checkControllerExists(string $ctrlClass): void
     {
@@ -50,7 +51,7 @@ class ControllerNormalizer implements NormalizerContract
     }
 
     /**
-     * @param object $widget
+     * @param  object  $widget
      * @return array [$controllerMethod, $ctrlClass]
      */
     private function determineDataMethod($widget): array

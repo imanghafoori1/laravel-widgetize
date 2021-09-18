@@ -8,7 +8,8 @@ class CacheTagsNormalizer implements NormalizerContract
 {
     /**
      * ّFigures out what the cache tags should be.
-     * @param object $widget
+     *
+     * @param  object  $widget
      * @return void
      */
     public function normalize($widget): void
@@ -24,7 +25,7 @@ class CacheTagsNormalizer implements NormalizerContract
 
     /**
      * @param $widget
-     * @param null $tag
+     * @param  null  $tag
      */
     private function errorOut($widget, $tag = null): void
     {

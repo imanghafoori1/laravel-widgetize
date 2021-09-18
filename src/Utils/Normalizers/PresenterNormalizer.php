@@ -8,7 +8,8 @@ class PresenterNormalizer implements NormalizerContract
 {
     /**
      * Figures out which method should be called as the presenter.
-     * @param object $widget
+     *
+     * @param  object  $widget
      * @return void
      */
     public function normalize($widget): void
@@ -22,7 +23,7 @@ class PresenterNormalizer implements NormalizerContract
     }
 
     /**
-     * @param string $presenter
+     * @param  string  $presenter
      */
     private function checkPresentMethodExists($presenter): void
     {
@@ -32,7 +33,7 @@ class PresenterNormalizer implements NormalizerContract
     }
 
     /**
-     * @param string $presenter
+     * @param  string  $presenter
      */
     private function checkPresenterExists($presenter): void
     {

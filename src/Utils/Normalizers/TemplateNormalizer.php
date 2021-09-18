@@ -9,7 +9,7 @@ class TemplateNormalizer implements NormalizerContract
     /**
      * Figures out which template to render.
      *
-     * @param object $widget
+     * @param  object  $widget
      * @return void
      */
     public function normalize($widget): void

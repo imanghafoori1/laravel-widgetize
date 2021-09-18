@@ -18,8 +18,8 @@ class DebugInfo
     }
 
     /**
-     * @param object $widget
-     * @param string $html
+     * @param  object  $widget
+     * @param  string  $html
      * @return string
      */
     public function addIdentifierToHtml($widget, string $html)
@@ -63,7 +63,7 @@ class DebugInfo
     }
 
     /**
-     * @param string $tpl
+     * @param  string  $tpl
      * @return string
      */
     private function getTplPath(string $tpl)
