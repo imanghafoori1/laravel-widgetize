@@ -20,11 +20,10 @@ class Cache
     /**
      * Caches the widget output.
      *
-     * @param array $args
-     * @param callable $phpCode
-     * @param object $widgetObj
-     *
-     * @param string $form
+     * @param  array  $args
+     * @param  callable  $phpCode
+     * @param  object  $widgetObj
+     * @param  string  $form
      * @return null
      */
     public function cacheResult(array $args, callable $phpCode, $widgetObj, $form = 'HTML')
@@ -47,9 +46,9 @@ class Cache
     /**
      * Creates a unique cache key for each possible output.
      *
-     * @param array $arg
-     * @param object $widget
-     * @param string $form
+     * @param  array  $arg
+     * @param  object  $widget
+     * @param  string  $form
      * @return string An MD5 string
      */
     private function makeCacheKey(array $arg, $widget, string $form): string
@@ -75,6 +74,7 @@ class Cache
 
     /**
      * Determines cacheTagging is supported by the chosen laravel cache driver or not.
+     *
      * @return bool
      */
     private function cacheDriverSupportsTags(): bool
@@ -83,7 +83,7 @@ class Cache
     }
 
     /**
-     * @param string[] $cacheTags
+     * @param  string[]  $cacheTags
      * @return string[]
      */
     private function getTagTokens(array $cacheTags)
@@ -94,7 +94,7 @@ class Cache
     }
 
     /**
-     * @param string[]|string $tags
+     * @param  string[]|string  $tags
      * @return void
      */
     public function expireTaggedWidgets($tags)

@@ -17,7 +17,7 @@ class Normalizer
     /**
      * Figures out and sets the widget configs according to conventions.
      *
-     * @param object $widget
+     * @param  object  $widget
      */
     public function normalizeWidgetConfig($widget): void
     {

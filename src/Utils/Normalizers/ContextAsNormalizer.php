@@ -9,7 +9,7 @@ class ContextAsNormalizer implements NormalizerContract
     /**
      * Figures out what the variable name should be in view file.
      *
-     * @param object $widget
+     * @param  object  $widget
      * @return void
      */
     public function normalize($widget): void

@@ -11,7 +11,7 @@ trait SlotRenderer
     /**
      * Start output buffer to get content of slot and set slot name.
      *
-     * @param string $name
+     * @param  string  $name
      */
     public function startSlot($name)
     {
@@ -23,7 +23,7 @@ trait SlotRenderer
     /**
      * get slot content from widget block.
      *
-     * @param string $data
+     * @param  string  $data
      */
     public function renderSlot($data = '')
     {

@@ -8,7 +8,7 @@ class WidgetJsonifier
 {
     /**
      * @param $widget object|string
-     * @param array $args
+     * @param  array  $args
      * @return string
      */
     public function jsonResponse($widget, ...$args)
@@ -43,8 +43,7 @@ class WidgetJsonifier
      * It tries to get the html from cache if possible, otherwise generates it.
      *
      * @param $widget object
-     * @param array ...$args
-     *
+     * @param  array  ...$args
      * @return string
      */
     private function generateJson($widget, ...$args)

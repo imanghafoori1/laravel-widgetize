@@ -9,7 +9,7 @@ class CacheNormalizer implements NormalizerContract
     /**
      * ّFigures out how long the cache life time should be.
      *
-     * @param object $widget
+     * @param  object  $widget
      * @return void
      */
     public function normalize($widget): void
