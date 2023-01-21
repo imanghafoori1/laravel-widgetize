@@ -8,6 +8,10 @@ matrix:
       env: LARAVEL_VERSION=7.*
     - php: 8.0
       env: LARAVEL_VERSION=8.*
+    - php: 8.1
+      env: LARAVEL_VERSION=9.*
+    - php: 8.2
+      env: LARAVEL_VERSION=10.*
     - php: 7.3
       env: LARAVEL_VERSION=8.*
     - php: 7.1
