@@ -472,6 +472,9 @@ If you discover any security related issues, please use the `security tab` inste
 ### :star: Your Stars Make Us Do More :star:
 As always if you found this package useful and you want to encourage us to maintain and work on it. Just press the star button to declare your willing.
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=imanghafoori1/laravel-widgetize&type=Date)](https://star-history.com/#imanghafoori1/laravel-widgetize&Date)
 
 
 ## More from the author:
@@ -527,4 +530,5 @@ As always if you found this package useful and you want to encourage us to maint
     "Albert Einstein"
 
 </p>
+
 
