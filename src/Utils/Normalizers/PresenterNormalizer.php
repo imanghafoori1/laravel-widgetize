@@ -43,7 +43,7 @@ class PresenterNormalizer implements NormalizerContract
     }
 
     /**
-     * @param $widget
+     * @param  $widget
      * @return string
      */
     private function figureOutPresenterClass($widget): string

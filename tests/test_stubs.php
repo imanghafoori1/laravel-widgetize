@@ -17,11 +17,9 @@ namespace App\Widgets\Foo {
             return $bar.$foo;
         }
     }
-
 }
 
 namespace {
-
     class ForeverWidget
     {
         public $cacheLifeTime = -1;

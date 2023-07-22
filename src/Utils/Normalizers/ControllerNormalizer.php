@@ -36,7 +36,7 @@ class ControllerNormalizer implements NormalizerContract
     }
 
     /**
-     * @param $ctrlClass
+     * @param  $ctrlClass
      */
     private function checkDataMethodExists($ctrlClass): void
     {
