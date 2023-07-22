@@ -7,7 +7,7 @@ use Illuminate\Contracts\Debug\ExceptionHandler;
 class WidgetJsonifier
 {
     /**
-     * @param $widget object|string
+     * @param  $widget  object|string
      * @param  array  $args
      * @return string
      */
@@ -29,7 +29,7 @@ class WidgetJsonifier
     }
 
     /**
-     * @param $widget string
+     * @param  $widget  string
      * @return object
      */
     private function makeWidgetObj(string $widget)
@@ -42,7 +42,7 @@ class WidgetJsonifier
     /**
      * It tries to get the html from cache if possible, otherwise generates it.
      *
-     * @param $widget object
+     * @param  $widget  object
      * @param  array  ...$args
      * @return string
      */

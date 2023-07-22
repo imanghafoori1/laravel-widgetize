@@ -24,7 +24,7 @@ class CacheTagsNormalizer implements NormalizerContract
     }
 
     /**
-     * @param $widget
+     * @param  $widget
      * @param  null  $tag
      */
     private function errorOut($widget, $tag = null): void
@@ -34,7 +34,7 @@ class CacheTagsNormalizer implements NormalizerContract
     }
 
     /**
-     * @param $widget
+     * @param  $widget
      */
     protected function checkTagForString($widget): void
     {

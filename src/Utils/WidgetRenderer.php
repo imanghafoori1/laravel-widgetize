@@ -23,7 +23,7 @@ class WidgetRenderer
     }
 
     /**
-     * @param $widget object|string
+     * @param  $widget  object|string
      * @param  array  $args
      * @return string
      */
@@ -49,7 +49,7 @@ class WidgetRenderer
     }
 
     /**
-     * @param $widget object
+     * @param  $widget  object
      * @return \Illuminate\Foundation\Application|mixed
      */
     private function makeWidgetObj($widget)
@@ -66,7 +66,7 @@ class WidgetRenderer
     /**
      * It tries to get the html from cache if possible, otherwise generates it.
      *
-     * @param $widget object
+     * @param  $widget  object
      * @param  array  ...$args
      * @return string
      */
@@ -88,8 +88,8 @@ class WidgetRenderer
     }
 
     /**
-     * @param $widget object
-     * @param $args array
+     * @param  $widget  object
+     * @param  $args  array
      * @return null
      */
     private function makeDataForView($widget, array $args)
