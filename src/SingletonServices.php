@@ -16,7 +16,7 @@ class SingletonServices
     /**
      * Register classes as singletons.
      *
-     * @param $app
+     * @param  $app
      */
     private $singletonClasses = [
         Utils\HtmlMinifier::class,
