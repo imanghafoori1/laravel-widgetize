@@ -61,7 +61,7 @@ class WidgetsServiceProvider extends ServiceProvider
 
     /**
      * | ------------------------------------------ |
-     * |       Define Wdgetize Slots Directives     |
+     * |      Define Widgetize Slots Directives     |
      * | ------------------------------------------ |
      * | When you call @ slot from your widget      |
      * | The only thing that happens is that the    |
