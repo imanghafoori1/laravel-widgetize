@@ -2,9 +2,8 @@
 
 namespace Tests;
 
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Cache;
-
+use Illuminate\Support\Facades\View;
 
 class WidgetCacheTest extends TestCase
 {
