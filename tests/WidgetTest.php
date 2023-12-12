@@ -1,6 +1,9 @@
 <?php
 
-require_once 'test_stubs.php';
+namespace Tests;
+
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Response;
 
 class WidgetTest extends TestCase
 {
@@ -18,12 +21,12 @@ class WidgetTest extends TestCase
     public function test_default_view_name_is_figured_out_correctly()
     {
         View::shouldReceive('exists')->once()->andReturn(true);
-        View::shouldReceive('make')->once()->with('Widgets::Foo.Widget1View', ['data' => 'foo', 'params' => null], [])->andReturn(app('view'));
+        View::shouldReceive('make')->once()->with('Widgets::Tests.Widget1View', ['data' => 'foo', 'params' => null], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<br>');
         \App::shouldReceive('call')->once()->andReturn('foo');
 
         //act
-        $widget = new \App\Widgets\Foo\Widget1();
+        $widget = new Widget1();
         render_widget($widget);
     }
 
@@ -58,7 +61,7 @@ class WidgetTest extends TestCase
 
         //act
         $widget = new Widget4();
-        $widget->controller = 'Widget4Ctrl@meta';
+        $widget->controller = 'Tests\Widget4Ctrl@meta';
         render_widget($widget, ['arg1' => 'a', 'arg2' => 'bb']);
     }
 
@@ -90,7 +93,7 @@ class WidgetTest extends TestCase
         View::shouldReceive('make')->once()->with('hello', ['data' => '222111', 'params' => ['foo' => '111', 'bar' => '222']], [])->andReturn(app('view'));
         View::shouldReceive('render')->once()->andReturn('<br>');
         //act
-        render_widget('Foo\Widget6', ['foo' => '111', 'bar' => '222']);
+        render_widget('\Tests\Widget6', ['foo' => '111', 'bar' => '222']);
     }
 
     public function test_json_widgets()
@@ -108,7 +111,94 @@ class WidgetTest extends TestCase
         Response::shouldReceive('json')->once()->with('222111', 200)->andReturn('123');
         View::shouldReceive('exists')->once()->andReturn(true);
         //act
-        $a = json_widget('Foo\Widget6', ['foo' => '111', 'bar' => '222']);
+        $a = json_widget('\Tests\Widget6', ['foo' => '111', 'bar' => '222']);
         $this->assertEquals('123', $a);
+    }
+}
+
+
+class Widget6
+{
+    public $template = 'hello';
+
+    public function data($foo, $bar)
+    {
+        return $bar.$foo;
+    }
+}
+
+class Widget5
+{
+    public $template = 'hello';
+    public $presenter = 'Tests\Widget5Presenter';
+
+    public function data()
+    {
+        return 'foo';
+    }
+}
+
+class Widget4
+{
+    public $template = 'hello';
+    public $controller = 'Tests\Widget4Ctrl';
+}
+
+class Widget13
+{
+    public $template = 'hello';
+
+    public function data()
+    {
+    }
+}
+
+
+class Widget66
+{
+    public $template = 'hello';
+
+    public function data($foo, $bar)
+    {
+        return $bar.$foo;
+    }
+}
+
+class Widget4Ctrl
+{
+    public function data($arg1, $arg2)
+    {
+        return $arg1.$arg2;
+    }
+
+    public function meta($arg1, $arg2)
+    {
+        return $arg2.$arg1.$arg1;
+    }
+}
+
+class Widget3
+{
+    public $template = 'hello';
+    public $contextAs = '$myData';
+
+    public function data()
+    {
+    }
+}
+
+class Widget1
+{
+    public function data()
+    {
+    }
+}
+
+
+class Widget5Presenter
+{
+    public function present($data)
+    {
+        return 'bar'.$data;
     }
 }
