@@ -41,6 +41,10 @@ jobs:
             laravel: ^6.0
           - php: 8.1
             laravel: ^7.0
+          - php: 8.2
+            laravel: ^7.0
+          - php: 8.2
+            laravel: ^6.0
 
     name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
 

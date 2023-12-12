@@ -15,7 +15,9 @@
         "laravel/framework":"~5.1|6.*|7.*|8.*|9.*|10.*"
     },
     "autoload-dev": {
-        "classmap": ["tests/TestCase.php"]
+        "psr-4": {
+            "Tests\\": "tests"
+        }
     },
     "require-dev": {
         "orchestra/testbench": "~3.0|~4.0|~5.0|~6.0|~7.0|~8.0",

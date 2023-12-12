@@ -1,9 +1,10 @@
 <?php
 
+namespace Tests;
+
 use Illuminate\Support\Facades\View;
 use Imanghafoori\Widgets\Utils\WidgetRenderer;
 
-require_once 'test_stubs.php';
 
 class SlotWidgetTest extends TestCase
 {
@@ -76,8 +77,8 @@ class SlotWidgetTest extends TestCase
         ob_end_clean();
 
         //act
-        $widget = new Widget4();
-        $widget->controller = 'Widget4Ctrl@meta';
+        $widget = new Widget4Slot();
+        $widget->controller = 'Tests\Widget764Ctrl@meta';
         $renderer->renderWidget($widget, ['arg1' => 'a', 'arg2' => 'bb']);
     }
 
@@ -103,8 +104,27 @@ class SlotWidgetTest extends TestCase
         }
 
         //act
-        $widget = new Widget4();
-        $widget->controller = 'Widget4Ctrl@meta';
+        $widget = new Widget4Slot();
+        $widget->controller = 'Tests\Widget764Ctrl@meta';
         $renderer->renderWidget($widget, ['arg1' => 'a', 'arg2' => 'bb']);
+    }
+}
+
+class Widget4Slot
+{
+    public $template = 'hello';
+    public $controller = 'Widget764Ctrl';
+}
+
+class Widget764Ctrl
+{
+    public function data($arg1, $arg2)
+    {
+        return $arg1.$arg2;
+    }
+
+    public function meta($arg1, $arg2)
+    {
+        return $arg2.$arg1.$arg1;
     }
 }

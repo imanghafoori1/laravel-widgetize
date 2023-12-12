@@ -1,6 +1,10 @@
 <?php
 
-require_once 'test_stubs.php';
+namespace Tests;
+
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Cache;
+
 
 class WidgetCacheTest extends TestCase
 {
@@ -18,7 +22,7 @@ class WidgetCacheTest extends TestCase
         \App::shouldReceive('call')->once()->andReturn('foo');
 
         //act
-        $widget = new Widget1();
+        $widget = new Widget123();
         $result1 = render_widget($widget);
         $result2 = render_widget($widget);
         $result3 = render_widget($widget);
@@ -67,7 +71,7 @@ class WidgetCacheTest extends TestCase
         View::shouldReceive('exists')->once()->andReturn(true);
 
         //act
-        $widget = new Widget1();
+        $widget = new Widget123();
         $result1 = render_widget($widget);
         $result2 = render_widget($widget);
         $result3 = render_widget($widget);
@@ -196,7 +200,7 @@ class WidgetCacheTest extends TestCase
         \App::shouldReceive('call')->times(5)->andReturn('foo');
 
         //act
-        $widget = new Widget1();
+        $widget = new Widget123();
         $result1 = render_widget($widget);
         $result2 = render_widget($widget);
         $widget->cacheView = false;
@@ -208,5 +212,80 @@ class WidgetCacheTest extends TestCase
         $this->assertEquals('<p>some text</p>', $result2);
         $this->assertEquals('<p>some text</p>', $result5);
         $this->assertEquals($widget->cacheLifeTime->s, 1);
+    }
+}
+
+class ForeverWidget
+{
+    public $cacheLifeTime = -1;
+    public $template = 'hello';
+
+    public function data()
+    {
+    }
+}
+
+class ForeverWidget2
+{
+    public $cacheLifeTime = 'forever';
+    public $template = 'hello';
+
+    public function data()
+    {
+    }
+}
+
+class CustomCacheKeyWidget
+{
+    public $cacheLifeTime = -1;
+    public $template = 'hello';
+
+    public function data()
+    {
+    }
+
+    public function cacheKey()
+    {
+        return 'abcde';
+    }
+}
+
+class TaggedWidget
+{
+    public $template = 'hello';
+    public $cacheTags = ['t1', 't2'];
+
+    public function data()
+    {
+    }
+}
+
+class Widget123
+{
+    public $template = 'hello';
+
+    public function data()
+    {
+    }
+}
+
+class Widget8
+{
+    public $template = 'hello';
+
+    public $cacheView = false;
+
+    public function data()
+    {
+    }
+}
+
+class ZeroLifeTimeWidget
+{
+    public $cacheLifeTime = 0;
+    public $template = 'hello';
+
+    public function data()
+    {
     }
 }
