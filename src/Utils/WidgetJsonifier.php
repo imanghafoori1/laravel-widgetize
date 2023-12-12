@@ -34,7 +34,9 @@ class WidgetJsonifier
      */
     private function makeWidgetObj(string $widget)
     {
-        $widget = app()->getNamespace().'Widgets\\'.$widget;
+        if ($widget[0] !== '\\') {
+            $widget = app()->getNamespace().'Widgets\\'.$widget;
+        }
 
         return app($widget);
     }
