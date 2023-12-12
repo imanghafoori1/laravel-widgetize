@@ -1,6 +1,9 @@
 <?php
 
-require_once 'test_stubs.php';
+namespace Tests;
+
+use Illuminate\Support\Facades\View;
+
 
 class WidgetMinificationTest extends TestCase
 {
@@ -81,5 +84,15 @@ class WidgetMinificationTest extends TestCase
         $widget = new Widget7();
         $html = render_widget($widget);
         $this->assertEquals($minified, $html);
+    }
+}
+
+
+class Widget7
+{
+    public $template = 'hello';
+
+    public function data()
+    {
     }
 }
