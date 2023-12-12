@@ -2,8 +2,8 @@
 
 namespace Imanghafoori\Widgets\Utils;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class CacheTag
 {
