@@ -2,6 +2,7 @@
 
 namespace Imanghafoori\Widgets\Utils\Normalizers;
 
+use DateInterval;
 use Imanghafoori\Widgets\Utils\NormalizerContract;
 
 class CacheNormalizer implements NormalizerContract
@@ -41,6 +42,6 @@ class CacheNormalizer implements NormalizerContract
 
     public function makeFromSeconds($s)
     {
-        return new \DateInterval('PT'.(string) ceil($s).'S');
+        return new DateInterval('PT'.ceil($s).'S');
     }
 }

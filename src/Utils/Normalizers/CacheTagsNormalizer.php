@@ -3,6 +3,7 @@
 namespace Imanghafoori\Widgets\Utils\Normalizers;
 
 use Imanghafoori\Widgets\Utils\NormalizerContract;
+use InvalidArgumentException;
 
 class CacheTagsNormalizer implements NormalizerContract
 {
@@ -30,7 +31,7 @@ class CacheTagsNormalizer implements NormalizerContract
     private function errorOut($widget, $tag = null): void
     {
         $tag = $tag ? ' '.$tag.'is not string' : '';
-        throw new \InvalidArgumentException('Cache Tags on "'.get_class($widget).'" must be of type Array with String elements.'.$tag);
+        throw new InvalidArgumentException('Cache Tags on "'.get_class($widget).'" must be of type Array with String elements.'.$tag);
     }
 
     /**

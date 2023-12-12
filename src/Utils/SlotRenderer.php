@@ -4,8 +4,14 @@ namespace Imanghafoori\Widgets\Utils;
 
 trait SlotRenderer
 {
+    /**
+     * @var string
+     */
     protected $slotName;
 
+    /**
+     * @var array<string, string>
+     */
     protected $slots = [];
 
     /**
@@ -43,7 +49,7 @@ trait SlotRenderer
     /**
      * get and clean current slots.
      *
-     * @return array $slots
+     * @return array<string, string>
      */
     public function getSlots()
     {

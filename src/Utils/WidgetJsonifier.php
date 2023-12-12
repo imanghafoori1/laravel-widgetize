@@ -2,7 +2,9 @@
 
 namespace Imanghafoori\Widgets\Utils;
 
+use Exception;
 use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Support\Facades\App;
 
 class WidgetJsonifier
 {
@@ -21,7 +23,7 @@ class WidgetJsonifier
 
         try {
             $json = $this->generateJson($widget, ...$args);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return app()->make(ExceptionHandler::class)->render(app('request'), $e)->send();
         }
 
@@ -52,7 +54,7 @@ class WidgetJsonifier
     {
         // Everything inside this function is executed only when the cache is not available.
         $expensivePhpCode = function () use ($widget, $args) {
-            $data = \App::call($widget->controller, ...$args);
+            $data = App::call($widget->controller, ...$args);
 
             // render the template with the resulting data.
             return response()->json($data, 200);

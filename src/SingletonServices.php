@@ -16,7 +16,7 @@ class SingletonServices
     /**
      * Register classes as singletons.
      *
-     * @param  $app
+     * @var  $singletonClasses class-string[]
      */
     private $singletonClasses = [
         Utils\HtmlMinifier::class,
@@ -27,6 +27,9 @@ class SingletonServices
         Utils\WidgetRenderer::class,
     ];
 
+    /**
+     * @var class-string[]
+     */
     private $normalizers = [
         CacheNormalizer::class,
         TemplateNormalizer::class,

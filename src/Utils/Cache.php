@@ -2,6 +2,8 @@
 
 namespace Imanghafoori\Widgets\Utils;
 
+use Illuminate\Support\Facades\Cache as LaravelCache;
+
 class Cache
 {
     /**
@@ -100,7 +102,7 @@ class Cache
     public function expireTaggedWidgets($tags)
     {
         if ($this->cacheDriverSupportsTags()) {
-            return \Cache::tags($tags)->flush();
+            return LaravelCache::tags($tags)->flush();
         }
 
         foreach ((array) $tags as $tag) {

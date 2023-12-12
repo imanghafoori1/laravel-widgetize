@@ -2,7 +2,10 @@
 
 namespace Imanghafoori\Widgets\Utils;
 
+use ErrorException;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
+use Throwable;
 
 class WidgetRenderer
 {
@@ -100,7 +103,7 @@ class WidgetRenderer
             if ($widget->presenter) {
                 // Pipe the data through the presenter before sending it to view.
                 [$class, $method] = explode('@', $widget->presenter);
-                $presenterObj = \App::make($class);
+                $presenterObj = App::make($class);
                 $viewData = $presenterObj->{$method}($viewData);
             }
 
@@ -131,8 +134,8 @@ class WidgetRenderer
 
         try {
             $this->html = view($widget->template, $data)->render();
-        } catch (\Throwable $t) {
-            throw new \ErrorException('There was some error rendering '.get_class($widget).', template file: \''.$widget->template.'\' Error: '.$t->getMessage());
+        } catch (Throwable $t) {
+            throw new ErrorException('There was some error rendering '.get_class($widget).', template file: \''.$widget->template.'\' Error: '.$t->getMessage());
         }
 
         // We try to minify the html before storing it in cache to save space.
@@ -157,7 +160,7 @@ class WidgetRenderer
             $viewData = call_user_func_array($widget->controller, $args);
         } else {
             // Here we call the data method on the widget class.
-            $viewData = \App::call($widget->controller, ...$args);
+            $viewData = App::call($widget->controller, ...$args);
         }
 
         return $viewData;

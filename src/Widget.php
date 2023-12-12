@@ -15,6 +15,7 @@ class Widget implements Renderable, Htmlable
     public function toHtml()
     {
         // TODO: Implement toHtml() method.
+        return '';
     }
 
     /**
@@ -24,5 +25,6 @@ class Widget implements Renderable, Htmlable
      */
     public function render()
     {
+        return '';
     }
 }

@@ -3,6 +3,7 @@
 namespace Imanghafoori\Widgets\Utils\Normalizers;
 
 use Imanghafoori\Widgets\Utils\NormalizerContract;
+use InvalidArgumentException;
 
 class PresenterNormalizer implements NormalizerContract
 {
@@ -28,7 +29,7 @@ class PresenterNormalizer implements NormalizerContract
     private function checkPresentMethodExists($presenter): void
     {
         if (! method_exists($presenter, 'present')) {
-            throw new \InvalidArgumentException("'present' method not found on : ".$presenter);
+            throw new InvalidArgumentException("'present' method not found on : ".$presenter);
         }
     }
 
@@ -38,7 +39,7 @@ class PresenterNormalizer implements NormalizerContract
     private function checkPresenterExists($presenter): void
     {
         if (! class_exists($presenter)) {
-            throw new \InvalidArgumentException("Presenter Class [{$presenter}] not found.");
+            throw new InvalidArgumentException("Presenter Class [{$presenter}] not found.");
         }
     }
 

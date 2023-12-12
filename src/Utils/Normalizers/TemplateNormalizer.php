@@ -3,6 +3,7 @@
 namespace Imanghafoori\Widgets\Utils\Normalizers;
 
 use Imanghafoori\Widgets\Utils\NormalizerContract;
+use InvalidArgumentException;
 
 class TemplateNormalizer implements NormalizerContract
 {
@@ -25,7 +26,7 @@ class TemplateNormalizer implements NormalizerContract
         }
 
         if (! view()->exists($widget->template)) {
-            throw new \InvalidArgumentException("View file \"{$widget->template}\" not found by: '".get_class($widget)." '");
+            throw new InvalidArgumentException("View file \"{$widget->template}\" not found by: '".get_class($widget)." '");
         }
     }
 }

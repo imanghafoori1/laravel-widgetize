@@ -23,7 +23,7 @@ class Policies
      */
     public function widgetShouldUseCache(): bool
     {
-        return config('widgetize.enable_cache') && (! app()->environment('testing'));
+        return config('widgetize.enable_cache') && ! app()->environment('testing');
     }
 
     /**

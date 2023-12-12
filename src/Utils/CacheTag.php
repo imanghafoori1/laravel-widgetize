@@ -3,6 +3,7 @@
 namespace Imanghafoori\Widgets\Utils;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 
 class CacheTag
 {
@@ -33,7 +34,7 @@ class CacheTag
     }
 
     /**
-     * Generates a brand new token.
+     * Generates a brand-new token.
      *
      * @param  $tag  string
      * @return string
@@ -68,7 +69,7 @@ class CacheTag
      */
     private function persistToken(string $tag, string $token)
     {
-        \Cache::forever('9z10_o6cg_r'.$tag, $token);
+        Cache::forever('9z10_o6cg_r'.$tag, $token);
     }
 
     /**
@@ -77,6 +78,6 @@ class CacheTag
      */
     private function getPersistedToken(string $tag)
     {
-        return \Cache::get('9z10_o6cg_r'.$tag, null);
+        return Cache::get('9z10_o6cg_r'.$tag, null);
     }
 }

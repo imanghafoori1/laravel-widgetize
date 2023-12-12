@@ -4,6 +4,7 @@ namespace Imanghafoori\Widgets\Utils\Normalizers;
 
 use Illuminate\Support\Str;
 use Imanghafoori\Widgets\Utils\NormalizerContract;
+use InvalidArgumentException;
 
 class ControllerNormalizer implements NormalizerContract
 {
@@ -31,7 +32,7 @@ class ControllerNormalizer implements NormalizerContract
     private function checkControllerExists(string $ctrlClass): void
     {
         if (! class_exists($ctrlClass)) {
-            throw new \InvalidArgumentException("Controller class: [{$ctrlClass}] not found.");
+            throw new InvalidArgumentException("Controller class: [{$ctrlClass}] not found.");
         }
     }
 
