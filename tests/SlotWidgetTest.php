@@ -9,7 +9,7 @@ class SlotWidgetTest extends TestCase
 {
     private $renderer;
 
-    public function setup()
+    public function setup(): void
     {
         parent::setUp();
 
