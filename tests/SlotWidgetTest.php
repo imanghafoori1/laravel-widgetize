@@ -5,7 +5,6 @@ namespace Tests;
 use Illuminate\Support\Facades\View;
 use Imanghafoori\Widgets\Utils\WidgetRenderer;
 
-
 class SlotWidgetTest extends TestCase
 {
     private $renderer;

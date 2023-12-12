@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\View;
 
 class WidgetTest extends TestCase
 {
@@ -116,7 +116,6 @@ class WidgetTest extends TestCase
     }
 }
 
-
 class Widget6
 {
     public $template = 'hello';
@@ -152,7 +151,6 @@ class Widget13
     {
     }
 }
-
 
 class Widget66
 {
@@ -193,7 +191,6 @@ class Widget1
     {
     }
 }
-
 
 class Widget5Presenter
 {

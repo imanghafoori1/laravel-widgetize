@@ -4,7 +4,6 @@ namespace Tests;
 
 use Illuminate\Support\Facades\View;
 
-
 class WidgetMinificationTest extends TestCase
 {
     public function test_minifies_the_output()
@@ -86,7 +85,6 @@ class WidgetMinificationTest extends TestCase
         $this->assertEquals($minified, $html);
     }
 }
-
 
 class Widget7
 {
