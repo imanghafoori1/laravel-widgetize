@@ -99,7 +99,9 @@ class WidgetRenderer
 
             if ($widget->presenter) {
                 // Pipe the data through the presenter before sending it to view.
-                $viewData = \App::call($widget->presenter, [$viewData]);
+                [$class, $method] = explode('@', $widget->presenter);
+                $presenterObj = \App::make($class);
+                $viewData = $presenterObj->{$method}($viewData);
             }
 
             return $viewData;
