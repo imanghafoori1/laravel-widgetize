@@ -40,14 +40,16 @@ jobs:
             laravel: ^10.0
           - php: 8.1
             laravel: ^6.0
+          - php: 8.0
+            laravel: ^7.0
           - php: 8.1
             laravel: ^7.0
           - php: 8.2
             laravel: ^7.0
-          - php: 8.2
-            laravel: ^6.0
           - php: 8.3
             laravel: ^7.0
+          - php: 8.2
+            laravel: ^6.0
           - php: 8.3
             laravel: ^6.0
 
