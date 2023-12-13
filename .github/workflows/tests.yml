@@ -14,10 +14,11 @@ on:
 jobs:
   test:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: true
       matrix:
+        os: [ubuntu-latest, windows-latest]
         php: [7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
         laravel: [^6.0, ^7.0, ^8.0, ^9.0, ^10.0]
         exclude:
@@ -50,7 +51,7 @@ jobs:
           - php: 8.3
             laravel: ^6.0
 
-    name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
+    name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - OS ${{ matrix.os }}
 
     steps:
         - name: Checkout code
@@ -67,5 +68,5 @@ jobs:
           run: |
               composer require "laravel/framework=${{ matrix.laravel }}" --no-update
               composer update --prefer-dist --no-interaction --no-progress
-        - name: Execute tests
+        - name: Run tests
           run: vendor/bin/phpunit

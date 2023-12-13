@@ -5,12 +5,9 @@
         bootstrap="vendor/autoload.php"
         colors="true"
         processIsolation="false"
-        beStrictAboutTestsThatDoNotTestAnything="false"
         stopOnError="false"
         stopOnFailure="false"
         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
-        cacheDirectory=".phpunit.cache"
-        backupStaticProperties="false"
 >
   <testsuites>
     <testsuite name="Package Test Suite">
