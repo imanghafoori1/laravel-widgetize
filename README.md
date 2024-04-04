@@ -42,7 +42,7 @@ Built with :heart: for every smart laravel developer
     - [When to use the _widget_ concept?](#when-to-use-the-widget-concept)
     - [Package Features](#gem-package-features-gem)
     
-* :wrench: [Installation](#wrench-installation-arrow_down)
+* :wrench: [Installation](#installation-arrow_down)
 * :earth_africa: [Global Configuration](#earth_africa-global-config)
 * :blue_car: [Per Widget Configuration](#blue_car-per-widget-config)
     - [public $template (optional)](#public-template-string)
@@ -83,7 +83,7 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 -----------------------
 
 
-### Installation: :arrow_down:
+### Installation :arrow_down:
 ``` bash
 composer require imanghafoori/laravel-widgetize
 ```
