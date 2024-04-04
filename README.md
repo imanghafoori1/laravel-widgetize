@@ -40,7 +40,7 @@ Built with :heart: for every smart laravel developer
 * :flashlight: [Introduction](#introduction)
     - [What is a _widget object_ ?](#what-is-a-widget-object)
     - [When to use the _widget_ concept?](#when-to-use-the-widget-concept)
-    - [Package Features](#gem-package-features-gem)
+    - [Technical Features](#gem-technical-features)
     
 * :wrench: [Installation](#installation-arrow_down)
 * :earth_africa: [Global Configuration](#earth_africa-global-config)
