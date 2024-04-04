@@ -83,7 +83,7 @@ I bet if you read through it you won't get disappointed at the end.So let's Go..
 -----------------------
 
 
-### Installation :arrow_down:
+### Installation: :arrow_down:
 ``` bash
 composer require imanghafoori/laravel-widgetize
 ```
