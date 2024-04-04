@@ -37,12 +37,12 @@ Built with :heart: for every smart laravel developer
 
 
 
-* :flashlight: [Introduction](#introduction)
-    - [What is a _widget object_ ?](#what-is-a-widget-object)
-    - [When to use the _widget_ concept?](#when-to-use-the-widget-concept)
-    - [Package Features](#gem-package-features-gem)
+* :flashlight: [Overview](#overview)
+    - [What is a _widget object_ ?](#this-package-helps-you-in)
+    - [When to use the _widget_ concept?](#when-to-use-this-package)
+    - [Technical Features](#gem-technical-features)
     
-* :wrench: [Installation](#wrench-installation-arrow_down)
+* :wrench: [Installation](#installation-arrow_down)
 * :earth_africa: [Global Configuration](#earth_africa-global-config)
 * :blue_car: [Per Widget Configuration](#blue_car-per-widget-config)
     - [public $template (optional)](#public-template-string)
