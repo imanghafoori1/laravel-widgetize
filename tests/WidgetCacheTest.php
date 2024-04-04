@@ -153,7 +153,7 @@ class WidgetCacheTest extends TestCase
 
     public function test_the_cache_tags()
     {
-        config(['cache.default'=> 'file']);
+        config(['cache.default' => 'file']);
         config(['widgetize.debug_info' => false]);
         config(['widgetize.enable_cache' => true]);
         config(['widgetize.default_cache_lifetime' => 1]);
