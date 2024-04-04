@@ -39,7 +39,7 @@ Built with :heart: for every smart laravel developer
 
 * :flashlight: [Introduction](#introduction)
     - [What is a _widget object_ ?](#what-is-a-widget-object)
-    - [When to use the _widget_ concept?](#when-to-use-the-widget-concept)
+    - [When to use the _widget_ concept?](#when-to-use-this-package)
     - [Technical Features](#gem-technical-features)
     
 * :wrench: [Installation](#installation-arrow_down)
