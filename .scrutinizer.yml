@@ -8,8 +8,6 @@ build:
         override:
             -
                 command: 'vendor/bin/phpunit'
-                coverage:
-                    format: 'clover'
 checks:
     php:
         code_rating: true
