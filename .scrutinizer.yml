@@ -9,7 +9,6 @@ build:
             -
                 command: 'vendor/bin/phpunit'
                 coverage:
-                    file: 'some-file'
                     format: 'clover'
 checks:
     php:
