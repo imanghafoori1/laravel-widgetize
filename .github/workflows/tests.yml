@@ -89,6 +89,7 @@ jobs:
           with:
             bootstrap: vendor/autoload.php
             configuration: phpunit.xml.dist
+            version: composer
             php_version: ${{ matrix.php }}
             php_extensions: xdebug
             args: tests --coverage-clover ./coverage.xml
