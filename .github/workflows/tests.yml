@@ -86,11 +86,10 @@ jobs:
           uses: php-actions/phpunit@v3
           env:
             XDEBUG_MODE: coverage
-            ACTION_CONFIGURATION: phpunit.xml.dist
-            ACTION_PHP_VERSION: ${{ matrix.php }}
           with:
             bootstrap: vendor/autoload.php
             configuration: phpunit.xml.dist
+            ACTION_PHP_VERSION: ${{ matrix.php }}
             ACTION_CONFIGURATION: phpunit.xml.dist
             php_extensions: xdebug
             args: tests --coverage-clover ./coverage.xml
