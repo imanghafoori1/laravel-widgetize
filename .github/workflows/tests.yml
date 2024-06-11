@@ -75,11 +75,26 @@ jobs:
           with:
               php-version: ${{ matrix.php }}
               extensions: mbstring, exif, iconv, tokenizer, fileinfo
-              coverage: none
+              coverage: pcov
 
         - name: Install dependencies
           run: |
               composer require "laravel/framework=${{ matrix.laravel }}" --no-update
               composer update --prefer-dist --no-interaction --no-progress
-        - name: Run tests
-          run: vendor/bin/phpunit
+
+        - name: PHPUnit Tests
+          uses: php-actions/phpunit@v3
+          env:
+            XDEBUG_MODE: coverage
+          with:
+            bootstrap: vendor/autoload.php
+            configuration: phpunit.xml
+            php_extensions: xdebug
+            args: tests --coverage-clover ./coverage.xml
+
+        - name: Upload to Codecov
+          uses: codecov/codecov-action@v2
+          with:
+            token: ${{ secrets.CODECOV_TOKEN }}
+            files: ./coverage.xml
+            verbose: true
