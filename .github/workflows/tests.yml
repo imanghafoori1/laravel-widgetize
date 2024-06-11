@@ -87,6 +87,7 @@ jobs:
           env:
             XDEBUG_MODE: coverage
             ACTION_CONFIGURATION: phpunit.xml.dist
+            ACTION_PHP_VERSION: ${{ matrix.php }}
           with:
             bootstrap: vendor/autoload.php
             configuration: phpunit.xml.dist
