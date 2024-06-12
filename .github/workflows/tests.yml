@@ -84,7 +84,7 @@ jobs:
 
         - name: PHPUnit
           run: |
-            ./vendor/bin/phpunit --stop-on-failure --coverage-php=coverage.php
+            ./vendor/bin/phpunit --stop-on-failure --coverage-clover=coverage.xml
           env:
             XDEBUG_MODE: coverage
 
