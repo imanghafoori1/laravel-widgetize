@@ -87,13 +87,6 @@ jobs:
             ./vendor/bin/phpunit --stop-on-failure --coverage-clover ./coverage.xml
           env:
             XDEBUG_MODE: coverage
-
-        - name: Upload to Codecov
-          uses: codecov/codecov-action@v3
-          with:
-            token: ${{ secrets.CODECOV_TOKEN }}
-            files: ./coverage.xml
-            verbose: true
-          env:
-            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-
+      
+        - name: Upload Scrutinizer coverage
+          uses: sudo-bot/action-scrutinizer@latest
