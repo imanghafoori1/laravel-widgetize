@@ -89,9 +89,11 @@ jobs:
             XDEBUG_MODE: coverage
 
         - name: Upload to Codecov
-          uses: codecov/codecov-action@v2
+          uses: codecov/codecov-action@v4
           with:
             token: ${{ secrets.CODECOV_TOKEN }}
             files: ./coverage.xml
             verbose: true
-            version: "v0.1.6"
+            version: "v0.1.15"
+          env:
+            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
