@@ -93,7 +93,7 @@ jobs:
             php_version: ${{ matrix.php }}
             php_extensions: "xdebug"
             args: "tests --coverage-clover ./coverage.xml"
-            extensions: coverage_html, coverage_php, coverage_clover
+            extensions: coverage_php
 
         - name: Upload to Codecov
           uses: codecov/codecov-action@v2
