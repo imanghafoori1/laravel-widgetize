@@ -94,3 +94,4 @@ jobs:
             token: ${{ secrets.CODECOV_TOKEN }}
             files: ./coverage.xml
             verbose: true
+            version: "v0.1.15"
