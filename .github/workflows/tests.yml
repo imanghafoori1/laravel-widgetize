@@ -74,7 +74,7 @@ jobs:
           uses: shivammathur/setup-php@v2
           with:
               php-version: ${{ matrix.php }}
-              extensions: mbstring, exif, iconv, tokenizer, fileinfo
+              extensions: mbstring, exif, iconv, tokenizer, fileinfo, pcov, xdebug
               coverage: pcov
 
         - name: Install dependencies
@@ -84,7 +84,7 @@ jobs:
 
         - name: PHPUnit
           run: |
-            ./vendor/bin/phpunit --stop-on-failure --coverage-clover=coverage.xml
+            ./vendor/bin/phpunit --stop-on-failure --coverage-clover=./coverage.xml
           env:
             XDEBUG_MODE: coverage
 
