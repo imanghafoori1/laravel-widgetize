@@ -74,8 +74,8 @@ jobs:
           uses: shivammathur/setup-php@v2
           with:
               php-version: ${{ matrix.php }}
-              extensions: mbstring, exif, iconv, tokenizer, fileinfo, pcov, xdebug
-              coverage: pcov
+              extensions: mbstring, exif, iconv, tokenizer, fileinfo, xdebug
+              coverage: xdebug
 
         - name: Install dependencies
           run: |
