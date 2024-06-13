@@ -69,7 +69,8 @@ jobs:
     steps:
         - name: Checkout code
           uses: actions/checkout@v2
-
+          with:
+            fetch-depth: 3
         - name: Setup PHP
           uses: shivammathur/setup-php@v2
           with:
@@ -92,4 +93,4 @@ jobs:
           uses: sudo-bot/action-scrutinizer@latest
           if: github.repository == 'imanghafoori1/laravel-widgetize'
           with:
-            cli-args: "--format=php-clover ./coverage.xml --revision=master"
+            cli-args: "--format=php-clover ./coverage.xml --revision=${{ github.event.pull_request.head.sha || github.sha }}"
