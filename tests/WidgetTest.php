@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use Imanghafoori\Widgets\Widget;
