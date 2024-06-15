@@ -4,6 +4,9 @@ namespace Imanghafoori\Widgets;
 
 use Illuminate\Support\Facades\Route;
 
+/**
+ * @codeCoverageIgnore
+ */
 class RouteMacros
 {
     public function registerMacros()

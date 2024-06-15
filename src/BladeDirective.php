@@ -4,6 +4,9 @@ namespace Imanghafoori\Widgets;
 
 use Illuminate\Support\Facades\Blade;
 
+/**
+ * @codeCoverageIgnore
+ */
 class BladeDirective
 {
     private static $expression;

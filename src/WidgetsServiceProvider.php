@@ -5,6 +5,9 @@ namespace Imanghafoori\Widgets;
 use DebugBar\DataCollector\MessagesCollector;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * @codeCoverageIgnore
+ */
 class WidgetsServiceProvider extends ServiceProvider
 {
     /**

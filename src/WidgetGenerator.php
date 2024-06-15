@@ -5,6 +5,9 @@ namespace Imanghafoori\Widgets;
 use Illuminate\Console\GeneratorCommand as LaravelGeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
 
+/**
+ * @codeCoverageIgnore
+ */
 class WidgetGenerator extends LaravelGeneratorCommand
 {
     /**
