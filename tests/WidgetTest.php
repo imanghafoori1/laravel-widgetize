@@ -2,8 +2,11 @@
 
 namespace Tests;
 
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
+use Imanghafoori\Widgets\Widget;
 
 class WidgetTest extends TestCase
 {
@@ -104,6 +107,13 @@ class WidgetTest extends TestCase
         $widget = new Widget6();
         $a = json_widget($widget, ['foo' => '111', 'bar' => '222']);
         $this->assertEquals('123', $a);
+    }
+
+    public function test_widget_renderable_and_htmlable()
+    {
+        $widget = new Widget();
+        $this->assertInstanceOf(Htmlable::class, $widget);
+        $this->assertInstanceOf(Renderable::class, $widget);
     }
 
     public function test_json_widgets_as_string()
