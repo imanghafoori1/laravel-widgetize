@@ -18,7 +18,7 @@ Laravel Widgetize
 [![Monthly Downloads](https://poser.pugx.org/imanghafoori/laravel-widgetize/d/monthly)](https://packagist.org/packages/imanghafoori/laravel-widgetize/stats)
 [![Coverage Status](https://coveralls.io/repos/github/imanghafoori1/laravel-widgetize/badge.svg?branch=master)](https://coveralls.io/github/imanghafoori1/laravel-widgetize?branch=master)
 [![tests](https://github.com/imanghafoori1/laravel-widgetize/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/imanghafoori1/laravel-widgetize/actions/workflows/tests.yml)
-[![Imports](https://github.com/imanghafoori1/laravel-widgetize/actions/workflows/imports.yml/badge.svg?branch=master)](https://github.com/imanghafoori1/laravel-widgetize/actions/workflows/imports.yml)
+[![Check Imports](https://github.com/imanghafoori1/laravel-widgetize/actions/workflows/imports.yml/badge.svg?branch=master)](https://github.com/imanghafoori1/laravel-widgetize/actions/workflows/imports.yml)
 </p>
 
 
